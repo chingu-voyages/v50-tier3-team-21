@@ -27,6 +27,12 @@ Meeting Agenda templates (located in the `/docs` directory in this repo):
 - Meeting - Sprint Retrospective, Review, and Planning --> ./docs/meeting-sprint_retrospective_review_and_planning.docx
 - Meeting - Sprint Open Topic Session --> ./docs/meeting-sprint_open_topic_session.docx
 
+## Tech Used
+
+- Stack:
+  - Frontend: React, Tailwind
+  - Backend: NodeJS, Express, PostgreSQL
+
 ## Our Team
 
 Everyone on your team should add their name along with a link to their GitHub

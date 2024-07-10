@@ -15,15 +15,11 @@ module.exports = (sequelize, DataTypes) => {
                 notEmpty: true
             }
         },
-        restaurantID: {
+        restaurantId: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            validate: {
-                notEmpty: true
-           
-            },
             references: {
-                model: 'Restaurant',
+                model: 'Restaurants',
                 key: 'id'
             },
             onDelete: 'CASCADE',
@@ -33,11 +29,8 @@ module.exports = (sequelize, DataTypes) => {
             // foreign key from category
             type: DataTypes.INTEGER,
             allowNull: false,
-            validate: {
-                notEmpty: true
-            },
             references: {
-                model: 'Category',
+                model: 'Categories',
                 key: 'id'
             },
             onDelete: 'CASCADE',

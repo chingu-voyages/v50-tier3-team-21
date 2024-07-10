@@ -1,13 +1,13 @@
-// check api data
-const apiURL = "https://menus-api.vercel.app/";
+const db = require('../models');
 
-fetch(apiURL)
-  .then(response => response.json())
-  .then(foods => {
-    // Restaurants dictionary
+const apiURL = 'https://menus-api.vercel.app/';
+
+const fetchApiData = async () => {
+  try {
+    const response = await fetch(apiURL);
+    const foods = await response.json();
+
     const restaurants = {};
-
-    // Food keys
     const foodKeys = Object.keys(foods.pagination);
     let foodItems = [];
     let count = 0;
@@ -16,104 +16,79 @@ fetch(apiURL)
       foods[foodKey].forEach(food => {
         count++;
 
-        // Count restaurants
         if (!restaurants[food.name]) {
           restaurants[food.name] = 1;
         } else {
           restaurants[food.name]++;
         }
 
-        // Add to unique food items
         const foodItemKey = `${food.dsc}-${food.name}`;
         if (!foodItems.includes(foodItemKey)) {
           foodItems.push(foodItemKey);
         }
-
-        // Uncomment the line below to print food details
-        // console.log(`${food.name} -> $${food.price} @ -->${food.country}<`);
       });
     });
 
-    // Results
-    const report ={
-      numberOfFoodItems: foodItems.length,
-      numberOfRestaurants: Object.keys(restaurants).length,
-      numberOfCategories:foodKeys.length,
-    }
-    console.table(report);
-  })
-  .catch(error => {
-    console.log("Error:", error);
-  });
+    return {
+      apiFoodCount: count,
+      apiUniqueFoodItems: foodItems.length,
+      apiRestaurants: Object.keys(restaurants).length,
+      apiFoodCategories: foodKeys.length,
+    };
+  } catch (error) {
+    console.log('Error:', error);
+    return null;
+  }
+};
 
+const fetchDbData = async () => {
+  await db.sequelize.sync();
+  
+  const report = {};
 
-const db = require("../models");
+  const foodItems = await db.FoodItem.findAll();
+  const foodItemsMap = foodItems.reduce((map, foodItem) => {
+    const key = `${foodItem.name}-${foodItem.restaurantId}`;
+    map[key] = map[key] || [];
+    map[key].push(foodItem);
+    return map;
+  }, {});
 
-const report = {};
+  const duplicateFoodItems = Object.values(foodItemsMap).filter(items => items.length > 1);
 
-db.sequelize.sync().then(() => {
-  // check fooditems if there are duplicates
- const foodItemsPromise =db.FoodItem.findAll().then((foodItems) => {
-   // check if there are duplicates - only if name and restaurantId are the same
+  report.numberOfFoodItems = foodItems.length;
+  report.duplicateFoodItems = duplicateFoodItems.length > 0;
+
+  const restaurants = await db.Restaurant.findAll();
+  const restaurantNames = restaurants.map(restaurant => restaurant.name);
+  const duplicateRestaurants = restaurantNames.filter((name, index, self) => self.indexOf(name) !== index);
+
+  report.numberOfRestaurants = restaurants.length;
+  report.duplicateRestaurants = duplicateRestaurants.length > 0;
+
+  const categories = await db.Category.findAll();
+  const categoryNames = categories.map(category => category.name);
+  const duplicateCategories = categoryNames.filter((name, index, self) => self.indexOf(name) !== index);
+
+  report.numberOfCategories = categories.length;
+  report.duplicateCategories = duplicateCategories.length > 0;
+
+  return report;
+};
+
+const main = async () => {
+  const apiData = await fetchApiData();
+  const dbData = await fetchDbData();
+
+  if (apiData && dbData) {
     
-    const foodItemsMap = foodItems.reduce((map, foodItem) => {
-      map[`${foodItem.name}-${foodItem.restaurantId}`] = foodItem;
-      return map;
-    }, {});
+      console.table(apiData),
+      console.table(dbData)
+  } else {
+    console.log('Failed to fetch all data.');
+  }
+};
 
-    const foodItemNames = Object.keys(foodItemsMap);
-    const foodItemNamesSet = new Set(foodItemNames);
-    // add number of items to report
-    report.numberOfFoodItems = foodItems.length;
-
-    if (foodItemNames.length !== foodItemNamesSet.size) {
-      console.log("There are duplicates in food items.");
-    } else {
-      console.log("There are no duplicates in food items.");
-    }
-
-    // check restaurants if there are duplicates
-    const restaurantsPromise = db.Restaurant.findAll().then((restaurants) => {
-      const restaurantsMap = restaurants.reduce((map, restaurant) => {
-        map[restaurant.name] = restaurant;
-        return map;
-      }, {});
-      const restaurantNames = Object.keys(restaurantsMap);
-      const restaurantNamesSet = new Set(restaurantNames);
-
-      // add number of items to report
-      report.numberOfRestaurants = restaurantNames.length;
-
-      if (restaurantNames.length !== restaurantNamesSet.size) {
-        console.log("There are duplicates in restaurants.");
-      } else {
-        console.log("There are no duplicates in restaurants.");
-      }
-    });
-
-    // check categories if there are duplicates
-    const categoriesPromise = db.Category.findAll().then((categories) => {
-      const categoryNames = categories.map((category) => category.name);
-      const categoryNamesSet = new Set(categoryNames);
-
-      // add number of items to report
-      report.numberOfCategories = categoryNames.length;
-
-      if (categoryNames.length !== categoryNamesSet.size) {
-        console.log("There are duplicates in categories.");
-      } else {
-        console.log("There are no duplicates in categories.");
-      }
-    });
-
-
-  // Wait for all promises to complete
-  Promise.all([foodItemsPromise, restaurantsPromise, categoriesPromise])
-    .then(() => {
-      console.table(report);
-    })
-    .catch((error) => {
-      console.log("Error:", error);
-    });
-});
+main().catch(error => {
+  console.log('Error:', error);
 });

@@ -3,17 +3,10 @@ module.exports = (sequelize, DataTypes) => {
         name: {
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true,
-            validate: {
-                notEmpty: true
-            }
         },
         imageUrl: {
             type: DataTypes.STRING,
             allowNull: false,
-            validate: {
-                notEmpty: true
-            }
         },
         restaurantId: {
             type: DataTypes.INTEGER,
@@ -25,21 +18,19 @@ module.exports = (sequelize, DataTypes) => {
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE'
         },
-        category: {
-            // foreign key from category
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'Categories',
-                key: 'id'
-            },
-            onDelete: 'CASCADE',
-            onUpdate: 'CASCADE'
-        },
         price: {
             type: DataTypes.FLOAT,
             allowNull: false
         }
     });
+
+    FoodItem.associate = (models) => {
+        FoodItem.belongsToMany(models.Category, {
+            through: 'FoodItemCategory',
+            foreignKey: 'foodItemId',
+            otherKey: 'categoryId'
+        });
+    };
+
     return FoodItem;
 }

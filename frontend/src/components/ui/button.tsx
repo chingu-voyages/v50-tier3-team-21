@@ -9,7 +9,7 @@ interface ButtonProps extends  ButtonHTMLAttributes<HTMLButtonElement>{
 export const Button = ({label,...props}: ButtonProps) => {
     return (
         <button {...props}>
-            { props }
+            { label }
         </button>
     )
 

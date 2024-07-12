@@ -49,3 +49,5 @@ coding!
 - Tomislav Dukez #4: [GitHub](https://github.com/tomdu3) / [LinkedIn](https://linkedin.com/in/tomislav-dukez)
 
 - Riry Nomenjanahary  #n: [GitHub](https://github.com/TiaDev7474) / [LinkedIn](https://linkedin.com/in/riry-nomenjanahary-a47a85264)
+
+- Albert Ngodi  #n: [GitHub](https://github.com/ngodi) / [LinkedIn](https://linkedin.com/in/albertngodi)

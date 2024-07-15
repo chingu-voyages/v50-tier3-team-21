@@ -1,4 +1,12 @@
 const db = require('../models'); // Make sure to require your models
+const jwt = require('jsonwebtoken');
+
+const generateToken = (payload) => {
+    return jwt.sign(
+        payload, process.env.JWT_SECRET,{
+            expiresIn: process.env.JWT_EXPIRES_IN
+        });
+}
 
 const signup = async (req, res, next) => {
    const body = req.body;
@@ -18,7 +26,15 @@ const signup = async (req, res, next) => {
          confirmPassword: body.confirmPassword
       });
 
-      if (!newUser) {
+      const result = newUser.toJSON();
+      delete result.password;
+      delete result.deletedAt;
+
+      result.token = generateToken({
+        id: result.id
+      })
+
+      if (!result) {
          return res.status(400).json({
             status: 'fail',
             message: 'Failed to create user',
@@ -28,7 +44,7 @@ const signup = async (req, res, next) => {
       return res.status(201).json({
          status: 'success',
          message: 'User created successfully',
-         data: newUser
+         data: result,
       });
    } catch (error) {
       console.error(error);

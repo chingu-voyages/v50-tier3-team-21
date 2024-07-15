@@ -64,14 +64,12 @@ export const SignupForm = () => {
             <PasswordField<SignUpSchemaType>
                 placeholder="Password"
                 name="password"
-                label="Enter your Password"
                 isRequired={true}
                 register={register}
                 error={errors.password}
             />
             <PasswordField<SignUpSchemaType>
                 placeholder="Confirm Password"
-                label="Confirm your Password"
                 name="confirmPassword"
                 isRequired={true}
                 register={register}

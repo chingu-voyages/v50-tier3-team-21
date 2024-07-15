@@ -13,7 +13,8 @@ const withPasswordToggle = <T,>(Component: React.ComponentType<FormFieldProps<T 
            setShowPassword((prev) => !prev);
        };
        return (
-           <div className="flex justify-start items-end">
+           <div className="flex justify-start items-end border rounded-lg">
+
                <Component {...props}
                   type={showPassword ? 'text': 'password'}
                   className="bg-transparent focus:outline-0"

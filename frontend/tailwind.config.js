@@ -9,6 +9,9 @@ module.exports = {
         dark: "#291E43",
         danger: "#F70000",
       },
+      fontFamily: {
+        sans: ["Inter", "sans-serif"],
+      },
     },
   },
   plugins: [],

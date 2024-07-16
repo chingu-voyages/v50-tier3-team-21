@@ -31,7 +31,8 @@ export const FormField = <T, key extends keyof T> ({
                   className="text-[1em]"
               >
                   { label }
-              </label>}
+              </label>
+          }
           <input
               id={name as string}
               type={type}

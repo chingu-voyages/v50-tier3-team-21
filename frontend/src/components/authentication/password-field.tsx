@@ -1,5 +1,6 @@
 import React , {useState} from "react";
 import {FormField , FormFieldProps} from "./form-field.tsx";
+import {EyeIcon , EyeOffIcon} from "../ui";
 
 
 interface PasswordFieldProps<T> extends  Omit<FormFieldProps<T , keyof T> , 'type'> {}
@@ -14,7 +15,6 @@ const withPasswordToggle = <T,>(Component: React.ComponentType<FormFieldProps<T 
        };
        return (
            <div className="flex justify-start items-end border rounded-lg">
-
                <Component {...props}
                   type={showPassword ? 'text': 'password'}
                   className="bg-transparent focus:outline-0"
@@ -24,11 +24,12 @@ const withPasswordToggle = <T,>(Component: React.ComponentType<FormFieldProps<T 
                    type={"button"}
                     className="flex justify-center items-center"
                >
-                   { showPassword ? 'hide': 'show'}
+                   { showPassword ? <EyeIcon />:  <EyeOffIcon /> }
                </button>
            </div>
        )
    }
 }
+
 
 export const PasswordField = withPasswordToggle(FormField);

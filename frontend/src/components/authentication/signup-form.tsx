@@ -19,7 +19,7 @@ export const SignupForm = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-3">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-4">
            <FormField<SignUpSchemaType, 'email'>
                type="email"
                placeholder="Your email address"
@@ -29,7 +29,7 @@ export const SignupForm = () => {
                register={register}
                error={errors.email}
            />
-            <div className="w-full flex justify-center items-center gap-2">
+            <div className="w-full flex flex-col md:flex-row justify-center items-center gap-2">
                 <FormField<SignUpSchemaType, 'firstname'>
                     type="text"
                     placeholder="First name"

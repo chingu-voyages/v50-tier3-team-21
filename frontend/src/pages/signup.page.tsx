@@ -35,8 +35,8 @@ export const AuthFooter = ({isSignUp}: { isSignUp: boolean}) => {
             { isSignUp ?  'Have an Account ?' : "Don't have an account ?" }
             <Link
                 to={ isSignUp ? '/auth/signin': '/auth/signup'}
-               className="text-blue-500 ml-2">
-                { isSignUp ? "Sign In": "Sign Up"}
+               className="text-secondary ml-2 font-bold ">
+                { isSignUp ? "SIGN IN": "SIGN UP"}
             </Link>
         </p>
     )

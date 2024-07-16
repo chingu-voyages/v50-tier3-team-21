@@ -1,4 +1,6 @@
 import {FieldError , UseFormRegister} from "react-hook-form";
+import React from "react";
+import {FormLabel} from "./form-label.tsx";
 
 export  interface FormFieldProps<T, Key extends keyof T>{
     type: string,
@@ -9,7 +11,7 @@ export  interface FormFieldProps<T, Key extends keyof T>{
     register: UseFormRegister<T>
     error: FieldError | undefined,
     valueAsNumber?: boolean | undefined,
-    className?: string
+    className?: string,
 }
 export const FormField = <T, key extends keyof T> ({
                               type,
@@ -23,22 +25,16 @@ export const FormField = <T, key extends keyof T> ({
                               error
 }: FormFieldProps<T, key>) => {
    return (
-      <div className="w-full flex flex-col gap-2">
+      <div className="w-full flex flex-col gap-1">
           {
-              label &&
-              <label
-                  htmlFor={name}
-                  className="text-[1em]"
-              >
-                  { label }
-              </label>
+              label && <FormLabel label={label} htmlFor={name} />
           }
           <input
               id={name as string}
               type={type}
               placeholder={placeholder}
               {...register(name)}
-              className={`${className}  px-3 py-2.5 rounded-lg placeholder:font-light placeholder:text-[0.8em] focus:outline-0`}
+              className={`${className}  px-3 py-2 border-2 rounded-lg placeholder:font-light placeholder:text-[0.8em] focus:outline-0`}
           />
           {
               error &&

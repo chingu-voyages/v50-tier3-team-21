@@ -19,7 +19,7 @@ export const SignupForm = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-5 py-5">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-3">
            <FormField<SignUpSchemaType, 'email'>
                type="email"
                placeholder="Your email address"
@@ -62,6 +62,7 @@ export const SignupForm = () => {
                 error={errors.lastname}
             />
             <PasswordField<SignUpSchemaType>
+                label="Enter your Password"
                 placeholder="Password"
                 name="password"
                 isRequired={true}
@@ -69,13 +70,14 @@ export const SignupForm = () => {
                 error={errors.password}
             />
             <PasswordField<SignUpSchemaType>
+                label="Confirm your Password"
                 placeholder="Confirm Password"
                 name="confirmPassword"
                 isRequired={true}
                 register={register}
                 error={errors.confirmPassword}
             />
-            <PrimaryButton  isLoading={false} type={"submit"}>
+            <PrimaryButton   isLoading={false} type={"submit"}>
                 SIGN UP
             </PrimaryButton>
         </form>

@@ -18,9 +18,9 @@ export default function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<div> Hello world from Hungry hippo </div>}/>
-                <Route path="/auth" element={<AuthLayout />} >
-                    <Route index={true}  path='signup' element={<SignupPage />} />
-                    <Route path="login" element={<LoginPage />} />
+                <Route  element={<AuthLayout />} >
+                    <Route path='/auth/signup' element={<SignupPage />} />
+                    <Route path="/auth/signin" element={<LoginPage />} />
                 </Route>
                 <Route path='/404' element={<NotFoundPage />} />
                 <Route path='*' element={<Navigate to="/404" replace />} />

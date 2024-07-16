@@ -7,6 +7,7 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {FormField} from "./form-field.tsx";
 import {PasswordField} from "./password-field.tsx";
 import PrimaryButton from "../ui/button.tsx";
+import {Link} from "react-router-dom";
 
 export const LoginForm = () => {
     const {
@@ -20,7 +21,7 @@ export const LoginForm = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-5">
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-3">
             <FormField<LoginSchemaType, 'email'>
                 type="email"
                 placeholder="Your email address"
@@ -38,7 +39,11 @@ export const LoginForm = () => {
                 register={register}
                 error={errors.password}
             />
-
+            <div className='flex justify-end items-center mb-4'>
+               <Link to='/auth' className="text-secondary" >
+                   Forgot password ?
+               </Link>
+            </div>
             <PrimaryButton  isLoading={false} type={"submit"}>
                 LOGIN
             </PrimaryButton>

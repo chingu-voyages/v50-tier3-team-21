@@ -3,11 +3,13 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 // generate token function from .env settings
-const generateToken = (payload) => {
-  return jwt.sign(payload, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN,
-  });
-};
+const generateToken = (payload, expiresIn) => {
+   return jwt.sign(
+      payload,
+      process.env.JWT_SECRET,
+      { expiresIn }
+   );
+}
 
 const refreshToken = async (req, res, next) => {
   // get refresh token from cookies
@@ -109,6 +111,7 @@ const signup = async (req, res, next) => {
 const login = async (req, res, next) => {
   const { username, email, password } = req.body;
 
+  // check if username or email and password are provided
   if ((!username && !email) || !password) {
     return res.status(400).json({
       status: "fail",
@@ -117,6 +120,7 @@ const login = async (req, res, next) => {
   }
 
   try {
+    // check if user exists
     const condition = username ? { username } : { email };
 
     const result = await db.User.findOne({
@@ -130,13 +134,7 @@ const login = async (req, res, next) => {
       });
     }
 
-    if (!result) {
-      return res.status(401).json({
-        status: "fail",
-        message: "Incorrect email or username",
-      });
-    }
-
+    // compare passwords
     const isMatch = await bcrypt.compare(password, result.password);
 
     if (!isMatch) {
@@ -146,15 +144,33 @@ const login = async (req, res, next) => {
       });
     }
 
-    const token = generateToken({
-      id: result.id,
-    });
+
+     const token = generateToken(
+      { id: result.id },
+      process.env.JWT_EXPIRES_IN
+   );
+     const refreshToken = generateToken(
+      { id: result.id },
+      process.env.JWT_REFRESH_EXPIRES_IN
+   );
+
+   res.cookie(
+      'token', token, {
+         httpOnly: true,
+         secure: true, // TODO: process.env.NODE_ENV === 'production'
+   });
+        res.cookie(
+         'refreshToken',
+         refreshToken, {
+            httpOnly: true,
+            secure: true  // TODO: process.env.NODE_ENV === 'production'
+         });
 
     return res.status(200).json({
       status: "success",
       message: "User logged in successfully",
-      token,
     });
+    
   } catch (error) {
     console.error(error);
     return res.status(500).json({
@@ -165,13 +181,18 @@ const login = async (req, res, next) => {
   }
 };
 
+
+// logout controller
 const logout = async (req, res, next) => {
-  return res.status(200).json({
-    status: "success",
-    message: "User logged out successfully",
-  });
+   res.clearCookie('token');
+   res.clearCookie('refreshToken');
+   res.status(200).json({
+       status: 'success',
+       message: 'User logged out successfully',
+   });
 };
 
+// profile controller
 const profile = async (req, res, next) => {
   return res.status(200).json({
     status: "success",
@@ -179,6 +200,7 @@ const profile = async (req, res, next) => {
   });
 };
 
+// authorization middleware
 const protect = async (req, res, next) => {
   return res.status(200).json({
     status: "success",

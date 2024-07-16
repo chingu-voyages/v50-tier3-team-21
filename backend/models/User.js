@@ -26,17 +26,6 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     },
-    confirmPassword: {
-      type: DataTypes.VIRTUAL,
-      set(value) {
-        if (value === this.password) {
-          const hash = bcrypt.hashSync(value, 10);
-          this.setDataValue("password", hash);
-        } else {
-          throw new Error("The passwords don't match.");
-        }
-      },
-    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -63,6 +52,20 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
+  });
+
+  User.beforeCreate(async (user) => {
+    if (user.password) {
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(user.password, salt);
+    }
+  });
+
+  User.beforeUpdate(async (user) => {
+    if (user.password) {
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(user.password, salt);
+    }
   });
 
   return User;

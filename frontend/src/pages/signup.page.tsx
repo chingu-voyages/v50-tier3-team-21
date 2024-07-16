@@ -5,8 +5,8 @@ import {Link} from "react-router-dom";
 
 export const SignupPage = () => {
    return (
-       <div className="w-full flex justify-center items-center px-6 py-6">
-           <aside className="sm:w-full flex flex-col gap-5 md:max-w-md bg-white shadow-md p-6 rounded-3xl">
+       <div className="w-full h-screen md:h-full flex justify-center items-center md:px-6 py-6">
+           <aside className="w-full flex flex-col gap-5 md:max-w-md bg-white shadow-md p-6 rounded-3xl">
                <AuthHeader title="Sign Up" />
                <SignupForm />
                <AuthFooter isSignUp={true} />

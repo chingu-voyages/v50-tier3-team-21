@@ -59,54 +59,53 @@ const refreshToken = async (req, res, next) => {
 
 // signup controller
 const signup = async (req, res, next) => {
-  const body = req.body;
-  console.log(body);
+  const { username, email, password, confirmPassword } = req.body;
 
-  // password length validation
-  if (body.password.length < 7) {
-    return res.status(400).json({
-      status: "fail",
-      message: "Password must be at least 7 characters long",
-    });
-  }
-  // attempt to create user in db (unsuccessful if doesn't pass validations)
-  try {
-    const newUser = await db.User.create({
-      username: body.username,
-      email: body.email,
-      password: body.password,
-      confirmPassword: body.confirmPassword,
-    });
-
-    const result = newUser.toJSON();
-    delete result.password;
-    delete result.deletedAt;
-
-    result.token = generateToken({
-      id: result.id,
-    });
-
-    if (!result) {
+  if (password.length < 7) {
       return res.status(400).json({
-        status: "fail",
-        message: "Failed to create user",
+          status: 'fail',
+          message: 'Password must be at least 7 characters long',
       });
-    }
-
-    return res.status(201).json({
-      status: "success",
-      message: "User created successfully",
-      data: result,
-    });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({
-      status: "fail",
-      message: "Failed to create user",
-      error: error.message,
-    });
   }
-};
+
+  if (password !== confirmPassword) {
+      return res.status(400).json({
+          status: 'fail',
+          message: 'Passwords do not match',
+      });
+  }
+
+  try {
+      const newUser = await db.User.create({
+          username,
+          email,
+          password
+      });
+
+      const result = newUser.toJSON();
+      delete result.password;
+
+      const token = generateToken({ id: result.id }, process.env.JWT_EXPIRES_IN);
+      const refreshToken = generateToken({ id: result.id }, process.env.JWT_REFRESH_EXPIRES_IN);
+
+      res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+      res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+
+      return res.status(201).json({
+          status: 'success',
+          message: 'User created successfully',
+          data: result,
+      });
+  } catch (error) {
+      console.error(error);
+      return res.status(500).json({
+          status: 'fail',
+          message: 'Failed to create user',
+          error: error.message,
+      });
+  }
+}
+
 
 const login = async (req, res, next) => {
   const { username, email, password } = req.body;

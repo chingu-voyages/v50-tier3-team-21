@@ -194,10 +194,30 @@ const logout = async (req, res, next) => {
 
 // profile controller
 const profile = async (req, res, next) => {
-  return res.status(200).json({
-    status: "success",
-    message: "User profile retrieved successfully",
-  });
+   try {
+      const user = await db.User.findByPk(req.user.id, {
+          attributes: { exclude: ['password'] }
+      });
+
+      if (!user) {
+          return res.status(404).json({
+              status: 'fail',
+              message: 'User not found',
+          });
+      }
+
+      return res.status(200).json({
+          status: 'success',
+          data: user,
+      });
+  } catch (error) {
+      console.error(error);
+      return res.status(500).json({
+          status: 'fail',
+          message: 'Failed to fetch user profile',
+          error: error.message,
+      });
+  }
 };
 
 // authorization middleware

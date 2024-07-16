@@ -2,6 +2,7 @@ const db = require('../models'); // Make sure to require your models
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
+// generate token function from .env settings
 const generateToken = (payload) => {
     return jwt.sign(
         payload, process.env.JWT_SECRET,{
@@ -9,16 +10,21 @@ const generateToken = (payload) => {
         });
 }
 
+
+
+// signup controller
 const signup = async (req, res, next) => {
    const body = req.body;
    console.log(body);
+
+   // password length validation
    if (body.password.length < 7) {
     return res.status(400).json({
        status: 'fail',
        message: 'Password must be at least 7 characters long',
     });
  }
-
+   // attempt to create user in db (unsuccessful if doesn't pass validations)
    try {
       const newUser = await db.User.create({
          username: body.username,
@@ -105,9 +111,7 @@ const login = async (req, res, next) => {
       return res.status(200).json({
          status: 'success',
          message: 'User logged in successfully',
-         data: {
-            token
-         },
+         token
       });
 
     } catch (error) {
@@ -120,4 +124,31 @@ const login = async (req, res, next) => {
    }
 }
 
-module.exports = { signup, login };
+   const logout = async (req, res, next) => {
+      return res.status(200).json({
+         status: 'success',
+         message: 'User logged out successfully',
+      })
+   }
+
+   const profile = async (req, res, next) => {
+      return res.status(200).json({
+         status: 'success',
+         message: 'User profile retrieved successfully',
+      })
+   }
+
+   const refreshToken = async (req, res, next) => {
+      return res.status(200).json({
+         status: 'success',
+         message: 'Token refreshed successfully',
+      })
+   }
+
+   const protect = async (req, res, next) => {
+      return res.status(200).json({
+         status: 'success',
+         message: 'User protected successfully',
+      })
+   }
+module.exports = { signup, login, profile, logout, refreshToken, protect };

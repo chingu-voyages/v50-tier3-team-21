@@ -9,3 +9,8 @@ JWT_SECRET='secret'  # change this!!!
 JWT_EXPIRES_IN='30s'
 JWT_REFRESH_SECRET='refreshsecret'
 JWT_REFRESH_EXPIRES_IN='1d'
+
+# server settings
+PORT=3000
+NODE_ENV='production'
+FRONTEND_URL='http://localhost:5173'

@@ -1,8 +1,8 @@
-const db = require("../models"); // Make sure to require your models
+const db = require("../models"); // Ensure models are required correctly
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-// generate token function from .env settings
+// Token generation helper function
 const generateToken = (payload, expiresIn) => {
    return jwt.sign(
       payload,
@@ -12,10 +12,11 @@ const generateToken = (payload, expiresIn) => {
 }
 
 const refreshToken = async (req, res, next) => {
-  // get refresh token from cookies
+
+  // Get refresh token from cookies
   const { refreshToken: oldRefreshToken } = req.cookies;
 
-  // check if there is a refresh token
+  // Check if there is a refresh token
   if (!oldRefreshToken) {
     return res.status(401).json({
       status: "fail",
@@ -23,7 +24,7 @@ const refreshToken = async (req, res, next) => {
     });
   }
 
-  // verify old refresh token
+  // Verify old refresh token
   jwt.verify(oldRefreshToken, process.env.JWT_REFRESH_SECRET, (err, decoded) => {
     if (err) {
       return res.status(401).json({
@@ -32,7 +33,7 @@ const refreshToken = async (req, res, next) => {
       });
     }
 
-    // generate new refresh token
+    // Generate new tokens
     const newToken = generateToken(
       { id: decoded.id },
       process.env.JWT_EXPIRES_IN
@@ -42,13 +43,14 @@ const refreshToken = async (req, res, next) => {
       process.env.JWT_REFRESH_EXPIRES_IN
     );
 
+    // Set new token and refreshToken in cookies
     res.cookie("token", newToken, {
       httpOnly: true,
-      secure: true, // TODO: process.env.NODE_ENV === 'production'
+      secure: process.env.NODE_ENV === 'production',
     });
     res.cookie("refreshToken", newRefreshToken, {
       httpOnly: true,
-      secure: true, // TODO: process.env.NODE_ENV === 'production'
+      secure: process.env.NODE_ENV === 'production',
     });
 
     res.status(200).json({
@@ -57,7 +59,7 @@ const refreshToken = async (req, res, next) => {
   });
 };
 
-// signup controller
+// Signup controller
 const signup = async (req, res, next) => {
   const { username, email, password, confirmPassword } = req.body;
 
@@ -106,11 +108,11 @@ const signup = async (req, res, next) => {
   }
 }
 
-
+// Login controller
 const login = async (req, res, next) => {
   const { username, email, password } = req.body;
 
-  // check if username or email and password are provided
+  // Check if username or email and password are provided
   if ((!username && !email) || !password) {
     return res.status(400).json({
       status: "fail",
@@ -119,7 +121,7 @@ const login = async (req, res, next) => {
   }
 
   try {
-    // check if user exists
+    // Check if user exists
     const condition = username ? { username } : { email };
 
     const result = await db.User.findOne({
@@ -133,7 +135,7 @@ const login = async (req, res, next) => {
       });
     }
 
-    // compare passwords
+    // Compare passwords
     const isMatch = await bcrypt.compare(password, result.password);
 
     if (!isMatch) {
@@ -143,33 +145,29 @@ const login = async (req, res, next) => {
       });
     }
 
-
-     const token = generateToken(
+    const token = generateToken(
       { id: result.id },
       process.env.JWT_EXPIRES_IN
-   );
-     const refreshToken = generateToken(
+    );
+    const refreshToken = generateToken(
       { id: result.id },
       process.env.JWT_REFRESH_EXPIRES_IN
-   );
+    );
 
-   res.cookie(
-      'token', token, {
-         httpOnly: true,
-         secure: true, // TODO: process.env.NODE_ENV === 'production'
-   });
-        res.cookie(
-         'refreshToken',
-         refreshToken, {
-            httpOnly: true,
-            secure: true  // TODO: process.env.NODE_ENV === 'production'
-         });
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+    });
+    res.cookie('refreshToken', refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+    });
 
     return res.status(200).json({
       status: "success",
       message: "User logged in successfully",
     });
-    
+
   } catch (error) {
     console.error(error);
     return res.status(500).json({
@@ -178,10 +176,9 @@ const login = async (req, res, next) => {
       error: error.message,
     });
   }
-};
+}
 
-
-// logout controller
+// Logout controller
 const logout = async (req, res, next) => {
    res.clearCookie('token');
    res.clearCookie('refreshToken');
@@ -191,7 +188,7 @@ const logout = async (req, res, next) => {
    });
 };
 
-// profile controller
+// Profile controller
 const profile = async (req, res, next) => {
    try {
       const user = await db.User.findByPk(req.user.id, {
@@ -219,7 +216,7 @@ const profile = async (req, res, next) => {
   }
 };
 
-// authorization middleware
+// Authorization middleware
 const protect = (req, res, next) => {
    const token = req.cookies.token;
 

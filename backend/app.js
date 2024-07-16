@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(cookieParser());
-app.use('/api/v1/auth', authRouter);
+app.use('/api/auth', authRouter);
 
 // Sync database
 db.sequelize.sync().then((req) => {  

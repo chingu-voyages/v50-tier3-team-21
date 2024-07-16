@@ -5,6 +5,7 @@ PGUSER='your-database-username'
 PGPASSWORD='your-database-password'
 
 # JWT settings
-JWT_SECRET=your_jwt_secret
-JWT_EXPIRES_IN='1h'
+JWT_SECRET='secret'  # change this!!!
+JWT_EXPIRES_IN='30s'
+JWT_REFRESH_SECRET='refreshsecret'
 JWT_REFRESH_EXPIRES_IN='1d'

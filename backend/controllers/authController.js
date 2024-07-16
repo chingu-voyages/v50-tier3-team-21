@@ -24,7 +24,7 @@ const refreshToken = async (req, res, next) => {
   }
 
   // verify old refresh token
-  jwt.verify(oldRefreshToken, process.env.JWT_SECRET, (err, decoded) => {
+  jwt.verify(oldRefreshToken, process.env.JWT_REFRESH_SECRET, (err, decoded) => {
     if (err) {
       return res.status(401).json({
         status: "fail",
@@ -221,10 +221,27 @@ const profile = async (req, res, next) => {
 };
 
 // authorization middleware
-const protect = async (req, res, next) => {
-  return res.status(200).json({
-    status: "success",
-    message: "User protected successfully",
-  });
-};
+const protect = (req, res, next) => {
+   const token = req.cookies.token;
+
+   if (!token) {
+       return res.status(401).json({
+           status: 'fail',
+           message: 'Access denied. No token provided.',
+       });
+   }
+
+   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+       if (err) {
+           return res.status(401).json({
+               status: 'fail',
+               message: 'Invalid token',
+           });
+       }
+
+       req.user = decoded;
+       next();
+   });
+}
+
 module.exports = { signup, login, profile, logout, refreshToken, protect };

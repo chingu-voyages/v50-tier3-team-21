@@ -12,17 +12,20 @@ interface UserType {
 interface ProfileFormProps {
   balance: number;
   user: UserType;
-  setUser: (user: UserType) => void
+  setUser: (user: UserType) => void;
 }
 
-export const ProfileForm: React.FC<ProfileFormProps> = ({ balance, user, setUser }) => {
+export const ProfileForm: React.FC<ProfileFormProps> = ({
+  balance,
+  user,
+  setUser,
+}) => {
   const [formData, setFormData] = useState<UserType>(user);
-  const [isEditing, setIsEditing] = useState(false);
-  
+
   const { username, password, email, firstName, lastName } = user;
 
   // temp styles
-  const styles = "border border-black p-1 rounded m-1";
+  const styles = "border border-black m-1 p-3 rounded-lg text-sm text-red my-5";
 
   // update formData on input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,110 +33,78 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ balance, user, setUser
     console.log(formData);
   };
 
-  // toggle isEditing
-  const toggleEdit = () => setIsEditing((prev) => !prev);
-
   // on submit, edited profile will be saved in database
   const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+    e.preventDefault();
     const editedUser = formData;
 
-
     //make API call to PUT edited user in database...something like: editUser(userId, editedUser)
-    setUser(editedUser)
+    setUser(editedUser);
     alert("Profile Changed!");
-    setIsEditing(false);
   };
   return (
     <>
-      <div className="bg-white rounded-md w-7/12 p-10">
+      <div className="w-full">
         <form onSubmit={handleSave}>
-          <div>
-            <label htmlFor="username">
-              Username:{" "}
-              {isEditing ? (
-                <input
-                  type="text"
-                  name="username"
-                  id="username"
-                  value={formData.username}
-                  onChange={handleChange}
-                  className={`${styles} text-gray-400`}
-                  disabled
-                />
-              ) : (
-                <span>{username}</span>
-              )}
-            </label>
+          <div className="flex flex-col">
+            <label htmlFor="username" className="text-sm">Username</label>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              value={formData.username}
+              onChange={handleChange}
+              className={`${styles} text-gray-400`}
+              disabled
+            />
           </div>
-          <div>
-            <label htmlFor="email">
-              Email:{" "}
-              {isEditing ? (
-                <input
-                  type="text"
-                  name="email"
-                  id="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className={`${styles} text-gray-400`}
-                  disabled
-                />
-              ) : (
-                <span>{email}</span>
-              )}
-            </label>
+          <div className="flex flex-col">
+            <label htmlFor="email" className="text-sm">Email </label>
+            <input
+              type="text"
+              name="email"
+              id="email"
+              value={formData.email}
+              onChange={handleChange}
+              className={`${styles} text-gray-400`}
+              disabled
+            />
           </div>
-          <div>
-            <label htmlFor="firstName">
-              First Name:{" "}
-              {isEditing ? (
-                <input
-                  type="text"
-                  name="firstName"
-                  id="firstName"
-                  value={formData.firstName}
-                  onChange={handleChange}
-                  className={styles}
-                />
-              ) : (
-                <span>{firstName}</span>
-              )}
-            </label>
+          <div className="flex flex-col">
+            <label htmlFor="firstName" className="text-sm">First Name</label>
+            <input
+              type="text"
+              name="firstName"
+              id="firstName"
+              placeholder="First Name"
+              value={formData.firstName}
+              onChange={handleChange}
+              className={styles}
+            />
           </div>
-          <div>
-            <label htmlFor="lastName">
-              Last Name:{" "}
-              {isEditing ? (
-                <input
-                  type="text"
-                  name="lastName"
-                  id="lastName"
-                  value={formData.lastName}
-                  onChange={handleChange}
-                  className={styles}
-                />
-              ) : (
-                <span>{lastName}</span>
-              )}
-            </label>
+          <div className="flex flex-col">
+            <label htmlFor="lastName" className="text-sm">Last Name:</label>
+            <input
+              type="text"
+              name="lastName"
+              id="lastName"
+              placeholder="Last Name"
+              value={formData.lastName}
+              onChange={handleChange}
+              className={styles}
+            />
           </div>
-          <div>
-            <label htmlFor="password">
-              Password:{" "}
-              {isEditing ? (
-                <input
-                  type="text"
-                  name="password"
-                  id="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  className={styles}
-                />
-              ) : (
-                <span>{password}</span>
-              )}
-            </label>
+          <div className="flex flex-col">
+            <label htmlFor="password" className="text-sm">Password:</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              className={styles}
+            />
           </div>
           <div>
             <p>
@@ -141,16 +112,13 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ balance, user, setUser
               <span className="font-bold text-lg">{balance.toString()}</span>
             </p>
           </div>
-          {!isEditing ? (
-            <PrimaryButton onClick={toggleEdit}>Edit Profile</PrimaryButton>
-          ) : (
-            <div>
-              <PrimaryButton type="submit">Save</PrimaryButton>
-              <PrimaryButton type="button" onClick={toggleEdit}>
-                Cancel
-              </PrimaryButton>
-            </div>
-          )}
+
+          <div className="flex justify-between w-full">
+            <PrimaryButton type="button" className="bg-white border-primary text-primary uppercase">
+              Discard Changes
+            </PrimaryButton>
+            <PrimaryButton type="submit">Save Changes</PrimaryButton>
+          </div>
         </form>
       </div>
     </>

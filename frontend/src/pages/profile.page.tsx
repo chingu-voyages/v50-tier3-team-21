@@ -30,7 +30,7 @@ export const ProfilePage = () => {
       setTimeout(() => setUser(exampleUser), 800);
     }
     getUser();
-  });
+  }, [user]);
 
   // make api request to get balance for user based on userId
   useEffect(() => {
@@ -40,13 +40,13 @@ export const ProfilePage = () => {
       setTimeout(() => setBalance(48.09), 1000);
     }
     getBalance();
-  });
+  }, []);
 
   return (
     <div className="bg-primary h-dvh">
       <h1>Profile Page</h1>
       {user ? (
-        <ProfileForm balance={balance} user={user} />
+        <ProfileForm balance={balance} user={user} setUser={setUser} />
       ) : (
         <div>Loading...</div>
       )}

@@ -12,11 +12,13 @@ interface UserType {
 interface ProfileFormProps {
   balance: number;
   user: UserType;
+  setUser: (user: UserType) => void
 }
 
-export const ProfileForm: React.FC<ProfileFormProps> = ({ balance, user }) => {
+export const ProfileForm: React.FC<ProfileFormProps> = ({ balance, user, setUser }) => {
   const [formData, setFormData] = useState<UserType>(user);
   const [isEditing, setIsEditing] = useState(false);
+  
   const { username, password, email, firstName, lastName } = user;
 
   // temp styles
@@ -35,10 +37,11 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ balance, user }) => {
   const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const editedUser = formData;
-    console.log(`New user info: ${editedUser}`);
-    alert("Profile Changed!");
+
 
     //make API call to PUT edited user in database...something like: editUser(userId, editedUser)
+    setUser(editedUser)
+    alert("Profile Changed!");
     setIsEditing(false);
   };
   return (
@@ -53,7 +56,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ balance, user }) => {
                   type="text"
                   name="username"
                   id="username"
-                  value={formData.username || user.username}
+                  value={formData.username}
                   onChange={handleChange}
                   className={`${styles} text-gray-400`}
                   disabled
@@ -71,7 +74,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ balance, user }) => {
                   type="text"
                   name="email"
                   id="email"
-                  value={formData.email || user.email}
+                  value={formData.email}
                   onChange={handleChange}
                   className={`${styles} text-gray-400`}
                   disabled
@@ -106,7 +109,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ balance, user }) => {
                   type="text"
                   name="lastName"
                   id="lastName"
-                  value={formData.lastName || user.lastName}
+                  value={formData.lastName}
                   onChange={handleChange}
                   className={styles}
                 />
@@ -123,7 +126,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ balance, user }) => {
                   type="text"
                   name="password"
                   id="password"
-                  value={formData.password || user.password}
+                  value={formData.password}
                   onChange={handleChange}
                   className={styles}
                 />

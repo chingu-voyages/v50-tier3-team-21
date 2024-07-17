@@ -7,6 +7,7 @@ interface UserType {
   email: string;
   firstName: string;
   lastName: string;
+  contact: string;
 }
 
 // example of the user Object fetched from database
@@ -16,6 +17,7 @@ let exampleUser: UserType = {
   email: "myemail@gmail.com",
   firstName: "greg",
   lastName: "minezzi",
+  contact: "123456789"
 };
 
 export const ProfilePage = () => {

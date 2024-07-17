@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import PrimaryButton from "../ui/button";
 import { useForm, SubmitHandler } from "react-hook-form";
 
@@ -9,6 +9,7 @@ interface UserType {
   email: string;
   firstName: string;
   lastName: string;
+  contact: string;
 }
 
 interface ProfileFormProps {
@@ -22,7 +23,12 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
   user,
   setUser,
 }) => {
-  const { register, handleSubmit, setValue } = useForm<UserType>();
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm<UserType>();
 
   // prefill form with user data, recall if user changes
   useEffect(() => {
@@ -30,11 +36,12 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
     setValue("email", user.email);
     setValue("firstName", user.firstName);
     setValue("lastName", user.lastName);
+    setValue("contact", user.contact);
     setValue("password", user.password);
   }, [user, setValue]);
 
   // on submit, edited profile will be saved in database
-  const handleSave: SubmitHandler<UserType> = data => {
+  const handleSave: SubmitHandler<UserType> = (data) => {
     console.log(data);
     const editedUser = data;
 
@@ -77,43 +84,83 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
               disabled
             />
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col relative">
             <label htmlFor="firstName" className="text-sm">
               First Name
             </label>
             <input
-              {...register("firstName")}
+              {...register("firstName", { required: "Name is requried" })}
               type="text"
               id="firstName"
               {...register("firstName")}
               placeholder="First Name"
               className={styles}
             />
+            {errors.firstName && (
+              <span className="text-danger absolute bottom-0 text-xs right-0">
+                {errors.firstName.message}
+              </span>
+            )}
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col relative">
             <label htmlFor="lastName" className="text-sm">
               Last Name:
             </label>
             <input
-              {...register("lastName")}
+              {...register("lastName", { required: "Last name is requried" })}
               type="text"
               id="lastName"
               {...register("lastName")}
               placeholder="Last Name"
               className={styles}
             />
+            {errors.lastName && (
+              <span className="text-danger absolute bottom-0 text-xs right-0">
+                {errors.lastName.message}
+              </span>
+            )}
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col relative">
+            <label htmlFor="contact" className="text-sm">
+              Contact:
+            </label>
+            <input
+              {...register("contact", {
+                required: "Contact number is requried",
+                pattern: {
+                  value: /^\d{10}$/,
+                  message: "Phone number must be 10 digits",
+                },
+              })}
+              type="tel"
+              id="contact"
+              {...register("contact")}
+              placeholder="555-555-1234"
+              className={styles}
+            />
+            {errors.contact && (
+              <span className="text-danger absolute bottom-0 text-xs right-0">
+                {errors.contact.message}
+              </span>
+            )}
+          </div>
+          <div className="flex flex-col relative">
             <label htmlFor="password" className="text-sm">
               Password:
             </label>
             <input
               type="password"
               id="password"
-              {...register("password")}
+              {...register("password", { required: "Password is requried" })}
               placeholder="Password"
               className={styles}
+              minLength={8}
             />
+            {errors.password && (
+              <span className="text-danger absolute bottom-0 text-xs right-0">
+                {errors.password.message}
+              </span>
+            )}
           </div>
           <div>
             <p>
@@ -125,6 +172,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
             <PrimaryButton
               type="button"
               className="bg-white border-primary text-primary uppercase"
+              onClick={() => history.back()}
             >
               Discard Changes
             </PrimaryButton>

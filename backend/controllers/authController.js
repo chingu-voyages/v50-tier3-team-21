@@ -27,7 +27,6 @@ const refreshToken = async (req, res, next) => {
 
   // Verify old refresh token
   jwt.verify(oldRefreshToken, process.env.JWT_SECRET, (err, decoded) => {
-  jwt.verify(oldRefreshToken, process.env.JWT_SECRET, (err, decoded) => {
     if (err) {
       return res.status(401).json({
         status: "fail",
@@ -88,7 +87,7 @@ const signup = async (req, res, next) => {
           password,
           contact,
           firstName,
-          lastName,
+          lastName
       });
 
       const result = newUser.toJSON();

@@ -22,8 +22,6 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
 }) => {
   const [formData, setFormData] = useState<UserType>(user);
 
-  const { username, password, email, firstName, lastName } = user;
-
   // temp styles
   const styles = "border border-black m-1 p-3 rounded-lg text-sm text-red my-5";
 

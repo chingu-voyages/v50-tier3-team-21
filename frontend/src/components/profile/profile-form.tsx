@@ -23,7 +23,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
   const [formData, setFormData] = useState<UserType>(user);
 
   // temp styles
-  const styles = "border border-black m-1 p-3 rounded-lg text-sm text-red my-5";
+  const styles = "border border-black m-1 p-3 rounded-lg text-sm text-red my-5  active:outline-secondary focus:outline-primary";
 
   // update formData on input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

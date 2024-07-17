@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ProfileForm } from "../components/authentication/profile-form";
+import { ProfileForm } from "../components/profile/profile-form";
 
 interface UserType {
   username: string;
@@ -44,7 +44,6 @@ export const ProfilePage = () => {
 
   return (
     <div className="bg-white flex flex-col w-full gap-5 px-5 md:px-10 max-w-[1290px] m-auto">
-      <header className="h-24">header</header>
       <h1 className="text-lg font-bold">Profile</h1>
 
       <div className="md:flex md:gap-24">

@@ -52,6 +52,20 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
+    contact: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      validate: {
+        is: {
+          args: /^\+?[1-9]\d{1,14}$/,
+          msg: "Must be a valid phone number"
+        },
+        notEmpty: {
+          args: true,
+          msg: "Contact number cannot be empty."
+        }
+      }
+    }
   });
 
   User.beforeCreate(async (user) => {

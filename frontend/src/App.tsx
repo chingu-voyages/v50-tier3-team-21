@@ -12,6 +12,7 @@ import {
     SignupPage
 } from "./pages";
 import {AppProvider} from "./provider/app.provider.tsx";
+import {MainLayout} from "./layouts/main.layout.tsx";
 
 //Todo: define routes in separate file
 export default function App() {
@@ -19,7 +20,10 @@ export default function App() {
         <AppProvider>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<div> Hello world from Hungry hippo </div>}/>
+                    <Route path="/" element={<MainLayout />}>
+                        <Route index element={<div> Hello world from Hungry hippo </div>}/>
+                    </Route>
+
                     <Route  element={<AuthLayout />} >
                         <Route path='/auth/signup' element={<SignupPage />} />
                         <Route path="/auth/signin" element={<LoginPage />} />

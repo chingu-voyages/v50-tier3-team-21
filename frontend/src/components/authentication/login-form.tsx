@@ -8,6 +8,9 @@ import {FormField} from "./form-field.tsx";
 import {PasswordField} from "./password-field.tsx";
 import PrimaryButton from "../ui/button.tsx";
 import {Link} from "react-router-dom";
+import {useAuth} from "../../hooks/auth.hook.ts";
+import {useLoginWithPasswordAndEmail} from "../../services/api/authentication/mutation.tsx";
+import {data} from "autoprefixer";
 
 export const LoginForm = () => {
     const {
@@ -15,11 +18,14 @@ export const LoginForm = () => {
         handleSubmit,
         formState: { errors}
     } = useForm<LoginSchemaType>({ resolver: zodResolver(LoginSchema)})
-
+    const { loggedIn: handleLoggedIn } = useAuth();
+    const { mutate: loginWithPasswordAndEmail , isSuccess, isError, isPending, data: response} = useLoginWithPasswordAndEmail()
     const onSubmit = async (data: LoginSchemaType) => {
-        console.log(data)
+        loginWithPasswordAndEmail(data);
     }
-
+    if(isSuccess) {
+        handleLoggedIn();
+    }
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-3">
             <FormField<LoginSchemaType, 'email'>
@@ -44,7 +50,7 @@ export const LoginForm = () => {
                    Forgot password ?
                </Link>
             </div>
-            <PrimaryButton  isLoading={false} type={"submit"}>
+            <PrimaryButton  isLoading={isPending} type={"submit"}>
                 LOGIN
             </PrimaryButton>
         </form>

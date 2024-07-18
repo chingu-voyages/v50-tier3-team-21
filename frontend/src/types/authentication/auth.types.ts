@@ -4,8 +4,8 @@ export const SignUpSchema = z.object({
     email: z.coerce.string({
         required_error: "Email address is required",
     }).email({ message: "Please enter a valid email address"}),
-    firstname: z.string(),
-    lastname: z.string(),
+    firstName: z.string(),
+    lastName: z.string(),
     contact: z.coerce.string().refine((val) => {
         const phoneNumberRegex = /^[0-9]{10}$/;
         return phoneNumberRegex.test(val);

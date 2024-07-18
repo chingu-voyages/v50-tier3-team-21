@@ -33,7 +33,7 @@ export const FormField: React.FC<FormFieldProps> = ({
 }) => {
 
   return (
-    <div className="flex flex-col relative">
+    <div className="flex flex-col relative w-full">
       <label htmlFor={name} className="text-sm">
         {label}
       </label>
@@ -42,7 +42,7 @@ export const FormField: React.FC<FormFieldProps> = ({
         id={name}
         placeholder={placeholder}
         {...register(name, { required: `${label} is requried` })}
-        className={`border border-black m-1 p-3 rounded-lg text-sm text-red my-5  active:outline-secondary focus:outline-primary ${className}`}
+        className={`border border-1 border-gray-200 p-4 rounded-lg text-sm text-gray-400 mt-3 mb-5 focus:border-black outline-none ${className}`}
         {...props}
       />
       {errors && (

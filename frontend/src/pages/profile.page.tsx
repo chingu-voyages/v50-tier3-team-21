@@ -27,7 +27,8 @@ export const ProfilePage = () => {
   // make api request to getUser from database
   useEffect(() => {
     async function getUser() {
-      // const res = await fetch();
+
+      // const res = await fetch("http://localhost:3000/api/auth/login");
       // const data = await res.json();
       setTimeout(() => setUser(exampleUser), 800);
     }

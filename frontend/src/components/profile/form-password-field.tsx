@@ -37,7 +37,7 @@ export const FormPasswordField: React.FC<FormFieldProps> = ({
         {label}
       </label>
       <input
-        className="border border-black m-1 p-3 rounded-lg text-sm text-red my-5  active:outline-secondary focus:outline-primary"
+        className="border border-black m-1 p-4 rounded-lg text-sm text-red my-5  active:outline-secondary focus:outline-primary"
         type={passwordVisible ? "text" : "password"}
         id={name}
         {...register(name, { required: "Password is required" })}

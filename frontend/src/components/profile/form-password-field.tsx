@@ -38,7 +38,7 @@ export const FormPasswordField: React.FC<FormFieldProps> = ({
       </label>
       <input
         className="border border-black m-1 p-3 rounded-lg text-sm text-red my-5  active:outline-secondary focus:outline-primary"
-        type={passwordVisible ? "password" : "text"}
+        type={passwordVisible ? "text" : "password"}
         id={name}
         {...register(name, { required: "Password is required" })}
         placeholder={placeholder}
@@ -46,7 +46,7 @@ export const FormPasswordField: React.FC<FormFieldProps> = ({
         {...props}
       />
       <div
-        className="absolute top-[50%] right-5 cursor-pointer"
+        className="absolute top-[47%] right-5 cursor-pointer"
         onClick={() => setPasswordVisible((prev) => !prev)}
       >
         {passwordVisible ? "(see)" : "(hide)"}

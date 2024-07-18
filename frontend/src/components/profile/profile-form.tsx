@@ -28,20 +28,22 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
   const {
     register,
     handleSubmit,
-    setValue,
+    // setValue,
     formState: { errors },
+    reset
   } = useForm<UserType>();
   // const [passwordVisible, setPasswordVisible] = useState(false);
 
   // prefill form with user data, recall if user changes
   useEffect(() => {
-    setValue("username", user.username);
-    setValue("email", user.email);
-    setValue("firstName", user.firstName);
-    setValue("lastName", user.lastName);
-    setValue("contact", user.contact);
-    setValue("password", user.password);
-  }, [user, setValue]);
+    // setValue("username", user.username);
+    // setValue("email", user.email);
+    // setValue("firstName", user.firstName);
+    // setValue("lastName", user.lastName);
+    // setValue("contact", user.contact);
+    // setValue("password", user.password);
+    reset(user)
+  }, [user, reset]);
 
   // on submit, edited profile will be saved in database
   const handleSave: SubmitHandler<UserType> = (data) => {
@@ -117,7 +119,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
             <PrimaryButton
               type="button"
               className="bg-white border-primary text-primary uppercase"
-              onClick={() => history.back()}
+              onClick={() => reset(user)}
             >
               Discard Changes
             </PrimaryButton>

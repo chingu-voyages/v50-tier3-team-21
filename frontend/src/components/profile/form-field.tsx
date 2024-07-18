@@ -31,7 +31,7 @@ export const FormField: React.FC<FormFieldProps> = ({
   errors,
   ...props
 }) => {
-  console.log(errors);
+
   return (
     <div className="flex flex-col relative">
       <label htmlFor={name} className="text-sm">

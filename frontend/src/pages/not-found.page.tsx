@@ -1,7 +1,6 @@
 import React from "react";
 import PrimaryButton from "../components/ui/button";
 import { useNavigate } from "react-router-dom";
-import HeaderNav from "../components/ui/header";
 
 export const NotFoundPage = () => {
   const [isLoading, setIsLoading] = React.useState(false);
@@ -15,8 +14,7 @@ export const NotFoundPage = () => {
   };
   return (
     <>
-      <HeaderNav ></HeaderNav>
-      <div className="h-screen w-screen bg-gray-100 flex items-center">
+      <div className="h-screen w-full bg-white flex items-center">
         <div className="container flex flex-col md:flex-row items-center justify-center px-5 text-gray-700">
           <div className="max-w-md space-y-4">
             <div className="text-5xl font-dark font-bold">404</div>

@@ -3,14 +3,15 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 // Token generation helper function
-const generateToken = (payload, expiresIn) => {
+const generateToken = (payload, secret, expiresIn) => {
    return jwt.sign(
       payload,
-      process.env.JWT_SECRET,
+      secret,
       { expiresIn }
    );
 }
 
+// Refresh token controller
 const refreshToken = async (req, res, next) => {
 
   // Get refresh token from cookies
@@ -25,7 +26,7 @@ const refreshToken = async (req, res, next) => {
   }
 
   // Verify old refresh token
-  jwt.verify(oldRefreshToken, process.env.JWT_REFRESH_SECRET, (err, decoded) => {
+  jwt.verify(oldRefreshToken, process.env.JWT_SECRET, (err, decoded) => {
     if (err) {
       return res.status(401).json({
         status: "fail",
@@ -36,10 +37,12 @@ const refreshToken = async (req, res, next) => {
     // Generate new tokens
     const newToken = generateToken(
       { id: decoded.id },
+      process.env.JWT_SECRET,
       process.env.JWT_EXPIRES_IN
     );
     const newRefreshToken = generateToken(
       { id: decoded.id },
+      process.env.JWT_SECRET,
       process.env.JWT_REFRESH_EXPIRES_IN
     );
 
@@ -61,7 +64,7 @@ const refreshToken = async (req, res, next) => {
 
 // Signup controller
 const signup = async (req, res, next) => {
-  const { username, email, password, confirmPassword } = req.body;
+  const { username, email, password, confirmPassword, firstName, lastName, contact } = req.body;
 
   if (password.length < 7) {
       return res.status(400).json({
@@ -81,14 +84,25 @@ const signup = async (req, res, next) => {
       const newUser = await db.User.create({
           username,
           email,
-          password
+          password,
+          contact,
+          firstName,
+          lastName
       });
 
       const result = newUser.toJSON();
       delete result.password;
 
-      const token = generateToken({ id: result.id }, process.env.JWT_EXPIRES_IN);
-      const refreshToken = generateToken({ id: result.id }, process.env.JWT_REFRESH_EXPIRES_IN);
+      const token = generateToken(
+        {id: result.id},
+        process.env.JWT_SECRET,
+        process.env.JWT_EXPIRES_IN
+      );
+      const refreshToken = generateToken(
+        { id: result.id },
+        process.env.JWT_SECRET,
+        process.env.JWT_REFRESH_EXPIRES_IN
+      );
 
       res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
       res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
@@ -147,10 +161,13 @@ const login = async (req, res, next) => {
 
     const token = generateToken(
       { id: result.id },
+      process.env.JWT_SECRET,
       process.env.JWT_EXPIRES_IN
     );
+
     const refreshToken = generateToken(
       { id: result.id },
+      process.env.JWT_SECRET,
       process.env.JWT_REFRESH_EXPIRES_IN
     );
 

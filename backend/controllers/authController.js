@@ -11,54 +11,63 @@ const generateToken = (payload, secret, expiresIn) => {
    );
 }
 
-// Refresh token controller
-const refreshToken = async (req, res, next) => {
+// Verify Token contoller - refresh if (access) token is invalid
+const verifyToken = async (req, res, next) => {
+  const { token: oldToken, refreshToken: oldRefreshToken } = req.cookies;
 
-  // Get refresh token from cookies
-  const { refreshToken: oldRefreshToken } = req.cookies;
-
-  // Check if there is a refresh token
-  if (!oldRefreshToken) {
+  if (!oldToken && !oldRefreshToken) {
     return res.status(401).json({
       status: "fail",
-      message: "No refresh token provided",
+      message: "No token provided",
     });
   }
 
-  // Verify old refresh token
-  jwt.verify(oldRefreshToken, process.env.JWT_SECRET, (err, decoded) => {
+  // Verify access token
+  jwt.verify(oldToken, process.env.JWT_SECRET, (err, decoded) => {
     if (err) {
-      return res.status(401).json({
-        status: "fail",
-        message: "Invalid refresh token",
+      // If access token is invalid, verify the refresh token
+      jwt.verify(oldRefreshToken, process.env.JWT_SECRET, async (refreshErr, refreshDecoded) => {
+        if (refreshErr) {
+          return res.status(401).json({
+            status: "fail",
+            message: "Invalid refresh token",
+          });
+        }
+
+        // Generate new tokens
+        const newToken = generateToken(
+          { id: refreshDecoded.id },
+          process.env.JWT_SECRET,
+          process.env.JWT_EXPIRES_IN
+        );
+        const newRefreshToken = generateToken(
+          { id: refreshDecoded.id },
+          process.env.JWT_SECRET,
+          process.env.JWT_REFRESH_EXPIRES_IN
+        );
+
+        // Set new tokens in cookies
+        res.cookie("token", newToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
+        });
+        res.cookie("refreshToken", newRefreshToken, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
+        });
+
+        return res.status(200).json({
+          status: "success",
+          message: "Token refreshed successfully",
+        });
+      });
+    } else {
+      // Access token is valid
+      return res.status(200).json({
+        status: "success",
+        message: "Token is valid",
       });
     }
-
-    // Generate new tokens
-    const newToken = generateToken(
-      { id: decoded.id },
-      process.env.JWT_SECRET,
-      process.env.JWT_EXPIRES_IN
-    );
-    const newRefreshToken = generateToken(
-      { id: decoded.id },
-      process.env.JWT_SECRET,
-      process.env.JWT_REFRESH_EXPIRES_IN
-    );
-
-    // Set new token and refreshToken in cookies
-    res.cookie("token", newToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-    });
-    res.cookie("refreshToken", newRefreshToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-    });
-
-    res.status(200).json({
-      status: "success",
-    });
   });
 };
 
@@ -257,4 +266,5 @@ const protect = (req, res, next) => {
    });
 }
 
-module.exports = { signup, login, profile, logout, refreshToken, protect };
+module.exports = { signup, login, profile, logout, protect, verifyToken };
+

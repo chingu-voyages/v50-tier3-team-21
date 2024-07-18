@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import PrimaryButton from "../ui/button";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { FormField } from "./form-field";
+import { FormPasswordField } from "./form-password-field";
 
 // TYPES
 interface UserType {
@@ -29,7 +31,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
     setValue,
     formState: { errors },
   } = useForm<UserType>();
-  const [passwordVisible, setPasswordVisible] = useState(false);
+  // const [passwordVisible, setPasswordVisible] = useState(false);
 
   // prefill form with user data, recall if user changes
   useEffect(() => {
@@ -51,124 +53,60 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
     alert("Profile Changed!");
   };
 
-  // temp styles
-  const styles =
-    "border border-black m-1 p-3 rounded-lg text-sm text-red my-5  active:outline-secondary focus:outline-primary";
-
   return (
     <>
       <div className="w-full">
         <form onSubmit={handleSubmit(handleSave)}>
-          {" "}
-          {/* SHOUDL BE HANDLESAVE*/}
-          <div className="flex flex-col">
-            <label htmlFor="username" className="text-sm">
-              Username
-            </label>
-            <input
-              type="text"
-              id="username"
-              {...register("username")}
-              className={`${styles} text-gray-400`}
-              disabled
-            />
-          </div>
-          <div className="flex flex-col">
-            <label htmlFor="email" className="text-sm">
-              Email{" "}
-            </label>
-            <input
-              type="text"
-              id="email"
-              {...register("email")}
-              className={`${styles} text-gray-400`}
-              disabled
-            />
-          </div>
-          <div className="flex flex-col relative">
-            <label htmlFor="firstName" className="text-sm">
-              First Name
-            </label>
-            <input
-              {...register("firstName", { required: "Name is requried" })}
-              type="text"
-              id="firstName"
-              {...register("firstName")}
-              placeholder="First Name"
-              className={styles}
-            />
-            {errors.firstName && (
-              <span className="text-danger absolute bottom-0 text-xs right-0">
-                {errors.firstName.message}
-              </span>
-            )}
-          </div>
-          <div className="flex flex-col relative">
-            <label htmlFor="lastName" className="text-sm">
-              Last Name:
-            </label>
-            <input
-              {...register("lastName", { required: "Last name is requried" })}
-              type="text"
-              id="lastName"
-              {...register("lastName")}
-              placeholder="Last Name"
-              className={styles}
-            />
-            {errors.lastName && (
-              <span className="text-danger absolute bottom-0 text-xs right-0">
-                {errors.lastName.message}
-              </span>
-            )}
-          </div>
-          <div className="flex flex-col relative">
-            <label htmlFor="contact" className="text-sm">
-              Contact:
-            </label>
-            <input
-              {...register("contact", {
-                required: "Contact number is requried",
-                pattern: {
-                  value: /^\d{10}$/,
-                  message: "Phone number must be 10 digits",
-                },
-              })}
-              type="tel"
-              id="contact"
-              {...register("contact")}
-              placeholder="555-555-1234"
-              className={styles}
-            />
-            {errors.contact && (
-              <span className="text-danger absolute bottom-0 text-xs right-0">
-                {errors.contact.message}
-              </span>
-            )}
-          </div>
-          <div className="flex flex-col relative">
-            <label htmlFor="password" className="text-sm">
-              Password:
-            </label>
-            <input
-              type={passwordVisible ? "password" : "text"}
-              id="password"
-              {...register("password", { required: "Password is requried" })}
-              placeholder="Password"
-              className={styles}
-              minLength={8}
-            />
-            <div
-              className="absolute top-[50%] right-5 cursor-pointer"
-              onClick={() => setPasswordVisible((prev) => !prev)}
-            >
-              {passwordVisible ? "(see)" : "(hide)"}
-            </div>
-            {errors.password && (
-              <span className="text-danger absolute bottom-0 text-xs right-0">
-                {errors.password.message}
-              </span>
-            )}
-          </div>
+          <FormField
+            label="Username"
+            name="username"
+            type="text"
+            placeholder="Username"
+            register={register}
+            className="text-gray-400"
+            disabled={true}
+          />
+          <FormField
+            label="E-mail"
+            name="email"
+            type="text"
+            placeholder="E-mail"
+            register={register}
+            className="text-gray-400"
+            disabled={true}
+          />
+          <FormField
+            label="First Name"
+            name="firstName"
+            type="text"
+            placeholder="First Name"
+            register={register}
+            errors={errors?.firstName}
+          />
+          <FormField
+            label="Last Name"
+            name="lastName"
+            type="text"
+            placeholder="Last Name"
+            register={register}
+            errors={errors?.lastName}
+          />
+          <FormField
+            label="Contact"
+            name="contact"
+            type="text"
+            placeholder="Contact"
+            register={register}
+            errors={errors?.contact}
+          />
+          <FormPasswordField
+            label="Password"
+            name="password"
+            placeholder="Password"
+            register={register}
+            errors={errors?.password}
+          />
+
           <div>
             <p>
               Total Balance:{" "}

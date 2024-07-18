@@ -257,4 +257,31 @@ const protect = (req, res, next) => {
    });
 }
 
-module.exports = { signup, login, profile, logout, refreshToken, protect };
+// Verify access token
+const checkToken = (req, res, next) => {
+  const token = req.cookies.token;
+
+  if (!token) {
+    return res.status(401).json({
+      status: "fail",
+      message: "No token provided",
+    });
+  }
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({
+        status: "fail",
+        message: "Invalid token",
+      });
+    }
+
+    res.status(200).json({
+      status: "success",
+      message: "Token is valid",
+    });
+  });
+};
+
+module.exports = { signup, login, profile, logout, refreshToken, protect, checkToken };
+

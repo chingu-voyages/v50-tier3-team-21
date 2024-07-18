@@ -6,7 +6,8 @@ module.exports = {
     extend: {
       backgroundImage: {
         hippo: "url('./assets/hippo image.png')",
-        menuClose: "url('./assets/icons/menu-close.svg')",
+        logo: "url('./assets/logo.svg')",
+        menuExpand: "url('./assets/menu-expand.png')",
       },
       colors: {
         primary: "#49CC76",

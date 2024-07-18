@@ -112,7 +112,6 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
             placeholder="555-555-5555"
             register={register}
             errors={errors?.contact}
-            className="md:w-1/2"
           />
           <div className="text-secondary font-bold mb-5 cursor-pointer" onClick={handleChangePassword}>Change Password</div>
           {/* <FormPasswordField

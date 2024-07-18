@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import PrimaryButton from "../ui/button";
 import { useForm, SubmitHandler } from "react-hook-form";
 
@@ -29,6 +29,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
     setValue,
     formState: { errors },
   } = useForm<UserType>();
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   // prefill form with user data, recall if user changes
   useEffect(() => {
@@ -149,13 +150,19 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
               Password:
             </label>
             <input
-              type="password"
+              type={passwordVisible ? "password" : "text"}
               id="password"
               {...register("password", { required: "Password is requried" })}
               placeholder="Password"
               className={styles}
               minLength={8}
             />
+            <div
+              className="absolute top-[50%] right-5 cursor-pointer"
+              onClick={() => setPasswordVisible((prev) => !prev)}
+            >
+              {passwordVisible ? "(see)" : "(hide)"}
+            </div>
             {errors.password && (
               <span className="text-danger absolute bottom-0 text-xs right-0">
                 {errors.password.message}

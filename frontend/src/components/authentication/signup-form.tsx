@@ -4,6 +4,8 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {FormField} from "./form-field.tsx";
 import {PasswordField} from "./password-field.tsx";
 import PrimaryButton from "../ui/button.tsx";
+import {useSignUpWithCredentials} from "../../services/api/authentication/mutation.tsx";
+import {useNavigate} from "react-router-dom";
 
 
 
@@ -12,11 +14,17 @@ export const SignupForm = () => {
         register,
         handleSubmit,
         formState: { errors}
-    } = useForm<SignUpSchemaType>({ resolver: zodResolver(SignUpSchema)})
-
+    } = useForm<SignUpSchemaType>({ resolver: zodResolver(SignUpSchema)});
+    const navigate = useNavigate()
+    const {mutate: signup, isSuccess, isLoading, isError, data:response} = useSignUpWithCredentials()
     const onSubmit = async (data: SignUpSchemaType) => {
-        console.log(data)
+        signup(data)
+        console.log(response)
     }
+    //todo: display error
+   if(isError){
+       navigate('/')
+   }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-4">
@@ -30,25 +38,25 @@ export const SignupForm = () => {
                error={errors.email}
            />
             <div className="w-full flex flex-col md:flex-row justify-center items-center gap-2">
-                <FormField<SignUpSchemaType, 'firstname'>
+                <FormField<SignUpSchemaType, 'firstName'>
                     type="text"
                     placeholder="First name"
-                    name="firstname"
+                    name="firstName"
                     isRequired={true}
                     label="First Name"
                     register={register}
-                    error={errors.firstname}
+                    error={errors.firstName}
                     className="w-full"
 
                 />
-                <FormField<SignUpSchemaType, 'lastname'>
+                <FormField<SignUpSchemaType, 'lastName'>
                     type="text"
                     placeholder="Last name"
-                    name="lastname"
+                    name="lastName"
                     isRequired={true}
                     label="Last Name"
                     register={register}
-                    error={errors.lastname}
+                    error={errors.lastName}
                     className="w-full"
                 />
             </div>
@@ -59,7 +67,7 @@ export const SignupForm = () => {
                 isRequired={true}
                 label="Contact Number"
                 register={register}
-                error={errors.lastname}
+                error={errors.lastName}
             />
             <PasswordField<SignUpSchemaType>
                 label="Enter your Password"
@@ -77,7 +85,7 @@ export const SignupForm = () => {
                 register={register}
                 error={errors.confirmPassword}
             />
-            <PrimaryButton   isLoading={false} type={"submit"}>
+            <PrimaryButton   isLoading={isLoading} type={"submit"}>
                 SIGN UP
             </PrimaryButton>
         </form>

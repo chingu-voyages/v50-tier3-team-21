@@ -13,6 +13,39 @@ in your `readme` feel free to replace the text we've provided here.
 
 > Own it & Make it your Own!
 
+## API Endpoints
+
+For the testing purposes, we've included the API endpoints in the `readme`.
+
+- Base URL: `http://localhost:3000`
+  **Authentication**
+- Signup: `/api/auth/signup` - <font style="color:green">POST</font> - raw/json data
+  > { 
+  >   "username": "testuser",
+  >   "email": "3JFJt@example.com",
+  >   "password": "testpassword",
+  >   "confirmPassword": "testpassword",
+  >   *"firstName": "test",*
+  >   *"lastName": "test",*
+  >   *"contact": "1234567890"*
+  > }
+- Login: `/api/auth/login` - <font style="color:green">POST</font> - raw/json data
+  > {
+  >   "username": "testuser", // or "email": "3JFJt@example.com"
+  >   "password": "testpassword"
+  > }
+- Logout: `/api/auth/logout` - <font style="color:green">POST</font>
+- Refresh Token: `/api/auth/refresh-token` - <font style="color:green">POST</font>
+- Profile: `/api/auth/profile` - <font style="color:red">GET</font>
+  **Food Items Search**
+- Get All: `/api/fooditems/items` - <font style="color:red">GET</font>
+  **Nearby Restaurants**
+- Get all Nearby Restaurants (5km distance): `/api/nearbyrestaurants` - <font style="color:red">GET</font>
+  > {
+  > "longitude": 40.6782,
+  > "latitude": -73.9442
+  > }
+
 ## Team Documents
 
 You may find these helpful as you work together to organize your project.

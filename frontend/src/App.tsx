@@ -12,9 +12,7 @@ export default function App() {
         <Route path="/auth" element={<AuthLayout />}>
           <Route index={true} path="signup" element={<SignupPage />} />
           <Route path="login" element={<LoginPage />} />
-        </Route>
-        <Route path="/profile" element={<MainLayout />}>
-          <Route index={true} element={<ProfilePage />} />
+          <Route path="profile" element={<ProfilePage />} />
         </Route>
         <Route path="/404" element={<NotFoundPage />} />
         <Route path="*" element={<Navigate to="/404" replace />} />

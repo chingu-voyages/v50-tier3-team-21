@@ -47,7 +47,7 @@ export const ProfilePage = () => {
 
   return (
     <div className="bg-white flex flex-col w-full gap-5 px-5 md:px-10 max-w-[1290px] m-auto">
-      <h1 className="text-lg font-bold">Profile</h1>
+      <h1 className="text-lg font-bold md:text-5xl pl-3">Profile</h1>
 
       <div className="md:flex md:gap-24">
         <div className="flex border border-primary bg-primary bg-opacity-10 rounded-lg p-3 text-primary h-fit md:w-1/3">

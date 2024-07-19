@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import PrimaryButton from "../ui/button";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FormField } from "./form-field";
-import { FormPasswordField } from "./form-password-field";
+import { PasswordModal } from "./password-modal";
 
 // TYPES
 interface UserType {
@@ -20,29 +20,19 @@ interface ProfileFormProps {
   setUser: (user: UserType) => void;
 }
 
-export const ProfileForm: React.FC<ProfileFormProps> = ({
-  balance,
-  user,
-  setUser,
-}) => {
+export const ProfileForm: React.FC<ProfileFormProps> = ({user,setUser}) => {
+  const [viewPasswordModal, setViewPasswordModal] = useState(false);
   const {
     register,
     handleSubmit,
-    // setValue,
     formState: { errors },
     reset
   } = useForm<UserType>();
-  // const [passwordVisible, setPasswordVisible] = useState(false);
+  
 
   // prefill form with user data, recall if user changes
   useEffect(() => {
-    // setValue("username", user.username);
-    // setValue("email", user.email);
-    // setValue("firstName", user.firstName);
-    // setValue("lastName", user.lastName);
-    // setValue("contact", user.contact);
-    // setValue("password", user.password);
-    reset(user)
+reset(user)
   }, [user, reset]);
 
   // on submit, edited profile will be saved in database
@@ -54,14 +44,6 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
     setUser(editedUser);
     alert("Profile Changed!");
   };
-
-  const handleChangePassword = () => {
-    if (confirm('Are you sure you want to change your password?')) {
-      console.log('Proceed to change pasword');
-    } else {
-      console.log("Don't change password");
-    }
-  }
 
   return (
     <>
@@ -113,21 +95,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
             register={register}
             errors={errors?.contact}
           />
-          <div className="text-secondary font-bold mb-5 cursor-pointer" onClick={handleChangePassword}>Change Password</div>
-          {/* <FormPasswordField
-            label="Password"
-            name="password"
-            placeholder="Password"
-            register={register}
-            errors={errors?.password}
-          /> */}
-
-          {/* <div>
-            <p>
-              Total Balance:{" "}
-              <span className="font-bold text-lg">{balance.toString()}</span>
-            </p>
-          </div> */}
+          <div className="text-secondary font-bold mb-5 cursor-pointer" onClick={() => setViewPasswordModal(true)}>Change Password</div>
 
           <div className="flex justify-between w-full">
             <PrimaryButton
@@ -141,6 +109,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({
             <PrimaryButton type="submit">SAVE CHANGES</PrimaryButton> 
           </div>
         </form>
+        {viewPasswordModal && <PasswordModal setViewPasswordModal={setViewPasswordModal}/>}
       </div>
     </>
   );

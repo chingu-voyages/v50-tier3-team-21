@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import { FieldError, UseFormRegister } from "react-hook-form";
+import { EyeIcon, EyeOffIcon } from "../ui";
 
 // types
 interface FieldTypes {
-  username: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  contact: string;
   password: string;
+  confirmPassword: string
 }
 
 interface FormFieldProps {
@@ -49,7 +46,7 @@ export const FormPasswordField: React.FC<FormFieldProps> = ({
         className="absolute top-[47%] right-5 cursor-pointer"
         onClick={() => setPasswordVisible((prev) => !prev)}
       >
-        {passwordVisible ? "(see)" : "(hide)"}
+        {passwordVisible ? <EyeIcon /> : <EyeOffIcon />}
       </div>
       {errors && (
         <span className="text-danger absolute bottom-0 text-xs right-0">

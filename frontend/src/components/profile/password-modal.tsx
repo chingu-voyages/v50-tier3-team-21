@@ -70,9 +70,9 @@ export const PasswordModal: React.FC<PasswordModalProps> = ({
                 errors={errors?.confirmPassword}
               />
             </div>
-            <div className="flex justify-between w-full mt-3">
-              <PrimaryButton type="reset" onClick={() => reset}>Cancel</PrimaryButton>
-              <PrimaryButton type="submit">Confirm</PrimaryButton>
+            <div className="flex w-full mt-3 md:justify-between gap-3">
+              <PrimaryButton type="reset" onClick={() => reset} className="md:flex-none md:px-10 flex-1 bg-white border rounded-md p-3 font-bold border-primary text-primary">Cancel</PrimaryButton>
+              <PrimaryButton type="submit" className="md:flex-none md:px-10 flex-1">Confirm</PrimaryButton>
             </div>
           </form>
         </div>

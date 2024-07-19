@@ -17,7 +17,7 @@ let exampleUser: UserType = {
   email: "myemail@gmail.com",
   firstName: "greg",
   lastName: "minezzi",
-  contact: "123456789"
+  contact: "123456789",
 };
 
 export const ProfilePage = () => {
@@ -28,12 +28,45 @@ export const ProfilePage = () => {
   useEffect(() => {
     async function getUser() {
 
-      // const res = await fetch("http://localhost:3000/api/auth/login");
+      // ! LOGIN
+      // const res = await fetch("http://localhost:3000/api/auth/login", {
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   method: "POST",
+      //   body: JSON.stringify({ username: "greg", password: "12345678" }),
+      // });
       // const data = await res.json();
+      // console.log(data);
+
+
+
+      //! VERIFY TOKEN
+    //   const res = await fetch("http://localhost:3000/api/auth/verify-token",  {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //  })
+    //   const data = await res.json();
+    //   console.log(data)
+
+
+
+
+      //! GET PROFILE
+      // const res = await fetch("http://localhost:3000/api/auth/profile",{
+      //   headers: { Authorization: Bearer <token>},
+      //   credentials:'include'
+      // }
+      // );
+      // const data = await res.json();
+      // console.log(data);
       setTimeout(() => setUser(exampleUser), 800);
+
     }
     getUser();
-  }, [user]);
+    // }, [user]);
+  }, []);
 
   // make api request to get balance for user based on userId
   useEffect(() => {

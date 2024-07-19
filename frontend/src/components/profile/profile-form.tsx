@@ -100,7 +100,7 @@ reset(user)
           <div className="flex justify-between w-full">
             <PrimaryButton
               type="button"
-              className="bg-white border-primary text-primary uppercase"
+              className="bg-white border rounded-md p-3 font-bold border-primary text-primary uppercase"
               onClick={() => reset(user)}
             >
               Discard Changes

@@ -25,6 +25,11 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     FoodItem.associate = (models) => {
+      FoodItem.belongsTo(models.Restaurant, {
+          foreignKey: 'restaurantId',
+          as: 'restaurant'
+      });
+
         FoodItem.belongsToMany(models.Category, {
             through: 'FoodItemCategory',
             foreignKey: 'foodItemId',

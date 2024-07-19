@@ -13,6 +13,40 @@ in your `readme` feel free to replace the text we've provided here.
 
 > Own it & Make it your Own!
 
+## API Endpoints
+
+For the testing purposes, we've included the API endpoints in the `readme`.
+
+- Base URL: `http://localhost:3000`
+  **Authentication**
+- Signup: `/api/auth/signup` - <font style="color:green">POST</font> - raw/json data
+  > { 
+  >   "username": "testuser",
+  >   "email": "3JFJt@example.com",
+  >   "password": "testpassword",
+  >   "confirmPassword": "testpassword",
+  >   *"firstName": "test",*
+  >   *"lastName": "test",*
+  >   *"contact": "1234567890"*
+  > }
+- Login: `/api/auth/login` - <font style="color:green">POST</font> - raw/json data
+  > {
+  >   "username": "testuser", // or "email": "3JFJt@example.com"
+  >   "password": "testpassword"
+  > }
+- Logout: `/api/auth/logout` - <font style="color:green">POST</font>
+- Verify Token: `/api/auth/refresh-token` - <font style="color:red">GET</font>
+  - checks if token is still valid, if not it will generate a new one if the refresh token is valid. If refresh token is invalid, it will return 401.
+- Profile: `/api/auth/profile` - <font style="color:red">GET</font>
+  **Food Items Search**
+- Get All: `/api/fooditems/items` - <font style="color:red">GET</font>
+  **Nearby Restaurants**
+- Get all Nearby Restaurants (5km distance): `/api/nearbyrestaurants` - <font style="color:red">GET</font>
+  > {
+  > "longitude": 40.6782,
+  > "latitude": -73.9442
+  > }
+
 ## Team Documents
 
 You may find these helpful as you work together to organize your project.
@@ -46,8 +80,8 @@ coding!
 
 - Greg Minezzi #3: [GitHub](https://github.com/minezzig) / [LinkedIn](https://linkedin.com/in/gregminezzi)
 
-- Tomislav Dukez #4: [GitHub](https://github.com/tomdu3) / [LinkedIn](https://linkedin.com/in/tomislav-dukez)
+- Tomislav Dukez #4: [GitHub](https://github.com/tomdu3) / [LinkedIn](https://www.linkedin.com/in/tomislav-dukez-bb2349231/)
 
-- Riry Nomenjanahary  #n: [GitHub](https://github.com/TiaDev7474) / [LinkedIn](https://linkedin.com/in/riry-nomenjanahary-a47a85264)
+- Riry Nomenjanahary  #5: [GitHub](https://github.com/TiaDev7474) / [LinkedIn](https://linkedin.com/in/riry-nomenjanahary-a47a85264)
 
-- Albert Ngodi  #n: [GitHub](https://github.com/ngodi) / [LinkedIn](https://linkedin.com/in/albertngodi)
+- Albert Ngodi  #6: [GitHub](https://github.com/ngodi) / [LinkedIn](https://linkedin.com/in/albertngodi)

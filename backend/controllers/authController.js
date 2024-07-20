@@ -54,7 +54,6 @@ const refreshToken = async (req, res, next) => {
 // signup controller
 const signup = async (req, res, next) => {
   const body = req.body;
-  console.log(body);
 
   // password length validation
   if (body.password.length < 7) {
@@ -70,6 +69,9 @@ const signup = async (req, res, next) => {
       email: body.email,
       password: body.password,
       confirmPassword: body.confirmPassword,
+      firstName: body.firstName || null,
+      lastName: body.lastName || null,
+      contact: body.contact || null,
     });
 
     const result = newUser.toJSON();

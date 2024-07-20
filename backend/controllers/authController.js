@@ -1,137 +1,125 @@
-const db = require("../models"); // Ensure models are required correctly
+const db = require("../models"); // Make sure to require your models
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-// Token generation helper function
-const generateToken = (payload, secret, expiresIn) => {
-   return jwt.sign(
-      payload,
-      secret,
-      { expiresIn }
-   );
-}
-
-// Refresh token helper function
-const refreshToken = async (req, res, next) => {
-  // get refresh token from cookies
-  const { refreshToken: oldRefreshToken } = req.cookies;
-
-  // check if there is a refresh token
-  if (!oldRefreshToken) {
-    return res.status(401).json({
-      status: "fail",
-      message: "No refresh token provided",
-    });
-  }
-
-  // verify old refresh token
-  jwt.verify(oldRefreshToken, process.env.JWT_SECRET, (err, decoded) => {
-    if (err) {
-      return res.status(401).json({
-        status: "fail",
-        message: "Invalid refresh token",
-      });
-    }
-
-    // generate new refresh token
-    const newToken = generateToken(
-      { id: decoded.id },
-      process.env.JWT_EXPIRES_IN
-    );
-    const newRefreshToken = generateToken(
-      { id: decoded.id },
-      process.env.JWT_REFRESH_EXPIRES_IN
-    );
-
-    res.cookie("token", newToken, {
-      httpOnly: true,
-      secure: true, // TODO: process.env.NODE_ENV === 'production'
-    });
-    res.cookie("refreshToken", newRefreshToken, {
-      httpOnly: true,
-      secure: true, // TODO: process.env.NODE_ENV === 'production'
-    });
-
-    res.status(200).json({
-      status: "success",
-    });
+// generate token function from .env settings
+const generateToken = (payload) => {
+  return jwt.sign(payload, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRES_IN,
   });
 };
 
-// Signup controller
-const signup = async (req, res, next) => {
-  const { username, email, password, confirmPassword, firstName, lastName, contact } = req.body;
+// generate refresh token
+const refreshToken = async (req, res, next) => {
+  const { token: oldToken, refreshToken: oldRefreshToken } = req.cookies;
 
-  if (password.length < 7) {
-      return res.status(400).json({
-          status: 'fail',
-          message: 'Password must be at least 7 characters long',
-      });
-  }
-
-  if (password !== confirmPassword) {
-      return res.status(400).json({
-          status: 'fail',
-          message: 'Passwords do not match',
-      });
+  if (!oldToken && !oldRefreshToken) {
+    return res.status(401).json({
+      status: "fail",
+      message: "No token provided",
+    });
   }
 
   try {
-      const newUser = await db.User.create({
-          username,
-          email,
-          password,
-          contact,
-          firstName,
-          lastName
-      });
+    // Decode refresh token
+    const refreshDecoded = jwt.decode(oldRefreshToken);
 
-      const result = newUser.toJSON();
-      delete result.password;
+    // Generate new tokens
+    const newToken = generateToken(
+      { id: refreshDecoded.id },
+      process.env.JWT_SECRET,
+      process.env.JWT_EXPIRES_IN
+    );
+    const newRefreshToken = generateToken(
+      { id: refreshDecoded.id },
+      process.env.JWT_SECRET,
+      process.env.JWT_REFRESH_EXPIRES_IN
+    );
 
-      const token = generateToken(
-        {id: result.id},
-        process.env.JWT_SECRET,
-        process.env.JWT_EXPIRES_IN
-      );
-      const refreshToken = generateToken(
-        { id: result.id },
-        process.env.JWT_SECRET,
-        process.env.JWT_REFRESH_EXPIRES_IN
-      );
+    // Set new tokens in cookies
+    res.cookie("token", newToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+    });
+    res.cookie("refreshToken", newRefreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+    });
 
-      res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
-      res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
-
-      return res.status(201).json({
-          status: 'success',
-          message: 'User created successfully',
-          data: result,
-      });
+    return res.status(200).json({
+      status: "success",
+      message: "Token refreshed successfully",
+    });
   } catch (error) {
-      console.error(error);
-      return res.status(500).json({
-          status: 'fail',
-          message: 'Failed to create user',
-          error: error.message,
-      });
+    return res.status(401).json({
+      status: "fail",
+      message: "Invalid refresh token",
+    });
   }
-}
+};
 
-// Login controller
+// signup controller
+const signup = async (req, res, next) => {
+  const body = req.body;
+  console.log(body);
+
+  // password length validation
+  if (body.password.length < 7) {
+    return res.status(400).json({
+      status: "fail",
+      message: "Password must be at least 7 characters long",
+    });
+  }
+  // attempt to create user in db (unsuccessful if doesn't pass validations)
+  try {
+    const newUser = await db.User.create({
+      username: body.username,
+      email: body.email,
+      password: body.password,
+      confirmPassword: body.confirmPassword,
+    });
+
+    const result = newUser.toJSON();
+    delete result.password;
+    delete result.deletedAt;
+
+    result.token = generateToken({
+      id: result.id,
+    });
+
+    if (!result) {
+      return res.status(400).json({
+        status: "fail",
+        message: "Failed to create user",
+      });
+    }
+
+    return res.status(201).json({
+      status: "success",
+      message: "User created successfully",
+      data: result,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      status: "fail",
+      message: "Failed to create user",
+      error: error.message,
+    });
+  }
+};
+
 const login = async (req, res, next) => {
   const { username, email, password } = req.body;
 
-  // Check if username or email and password are provided
   if ((!username && !email) || !password) {
-    return res.status(422).json({
+    return res.status(400).json({
       status: "fail",
       message: "Please provide username or email and password",
     });
   }
 
   try {
-    // Check if user exists
     const condition = username ? { username } : { email };
 
     const result = await db.User.findOne({
@@ -145,7 +133,13 @@ const login = async (req, res, next) => {
       });
     }
 
-    // Compare passwords
+    if (!result) {
+      return res.status(401).json({
+        status: "fail",
+        message: "Incorrect email or username",
+      });
+    }
+
     const isMatch = await bcrypt.compare(password, result.password);
 
     if (!isMatch) {
@@ -155,32 +149,15 @@ const login = async (req, res, next) => {
       });
     }
 
-    const token = generateToken(
-      { id: result.id },
-      process.env.JWT_SECRET,
-      process.env.JWT_EXPIRES_IN
-    );
-
-    const refreshToken = generateToken(
-      { id: result.id },
-      process.env.JWT_SECRET,
-      process.env.JWT_REFRESH_EXPIRES_IN
-    );
-
-    res.cookie('token', token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-    });
-    res.cookie('refreshToken', refreshToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
+    const token = generateToken({
+      id: result.id,
     });
 
     return res.status(200).json({
       status: "success",
       message: "User logged in successfully",
+      token,
     });
-
   } catch (error) {
     console.error(error);
     return res.status(500).json({
@@ -189,17 +166,26 @@ const login = async (req, res, next) => {
       error: error.message,
     });
   }
-}
-
-// Logout controller
-const logout = async (req, res, next) => {
-   res.clearCookie('token');
-   res.clearCookie('refreshToken');
-   res.status(200).json({
-       status: 'success',
-       message: 'User logged out successfully',
-   });
 };
 
-module.exports = { signup, login, logout, refreshToken };
+const logout = async (req, res, next) => {
+  return res.status(200).json({
+    status: "success",
+    message: "User logged out successfully",
+  });
+};
 
+const profile = async (req, res, next) => {
+  return res.status(200).json({
+    status: "success",
+    message: "User profile retrieved successfully",
+  });
+};
+
+const protect = async (req, res, next) => {
+  return res.status(200).json({
+    status: "success",
+    message: "User protected successfully",
+  });
+};
+module.exports = { signup, login, profile, logout, refreshToken, protect };

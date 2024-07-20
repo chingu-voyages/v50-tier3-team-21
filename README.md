@@ -35,8 +35,7 @@ For the testing purposes, we've included the API endpoints in the `readme`.
   >   "password": "testpassword"
   > }
 - Logout: `/api/auth/logout` - <font style="color:green">POST</font>
-- Verify Token: `/api/auth/refresh-token` - <font style="color:red">GET</font>
-  - checks if token is still valid, if not it will generate a new one if the refresh token is valid. If refresh token is invalid, it will return 401.
+- Refresh Token: `/api/auth/refresh-token` - <font style="color:red">GET</font>
 - Profile: `/api/auth/profile` - <font style="color:red">GET</font>
   **Food Items Search**
 - Get All: `/api/fooditems/items` - <font style="color:red">GET</font>

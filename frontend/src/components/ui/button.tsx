@@ -9,7 +9,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 export default function PrimaryButton({ isLoading = false, children, ...props }: ButtonProps) {
     return (
-        <button type="button" className="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-primary hover:bg-dark hover:border-dark transition ease-in-out duration-15" {...props} disabled={isLoading}>
+        <button  className="inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-primary hover:bg-dark hover:border-dark transition ease-in-out duration-15" {...props} disabled={isLoading}>
             {
                 isLoading ? (
                     <><svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

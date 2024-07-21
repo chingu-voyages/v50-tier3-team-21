@@ -8,6 +8,7 @@ import {authService } from "./auth.service.ts";
 export const  useLoginWithPasswordAndEmail = () => {
     return useMutation(
         {
+            mutationKey: ['login'],
             mutationFn: (data: LoginSchemaType) => authService.loginWithPasswordAndEmail(data)
         }
     )
@@ -16,6 +17,7 @@ export const  useLoginWithPasswordAndEmail = () => {
 export const useSignUpWithCredentials = () => {
      return useMutation(
          {
+             mutationKey: ['signup'],
              mutationFn: (data: SignUpSchemaType) => authService.signupWithCredentials(data)
          }
      )

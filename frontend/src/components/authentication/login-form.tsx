@@ -7,10 +7,11 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {FormField} from "./form-field.tsx";
 import {PasswordField} from "./password-field.tsx";
 import PrimaryButton from "../ui/button.tsx";
-import {Link} from "react-router-dom";
+import {Link , useNavigate} from "react-router-dom";
 import {useAuth} from "../../hooks/auth.hook.ts";
 import {useLoginWithPasswordAndEmail} from "../../services/api/authentication/mutation.tsx";
 import {data} from "autoprefixer";
+import {ErrorMessage} from "./error_message.tsx";
 
 export const LoginForm = () => {
     const {
@@ -18,16 +19,26 @@ export const LoginForm = () => {
         handleSubmit,
         formState: { errors}
     } = useForm<LoginSchemaType>({ resolver: zodResolver(LoginSchema)})
-    const { loggedIn: handleLoggedIn } = useAuth();
-    const { mutate: loginWithPasswordAndEmail , isSuccess, isError, isPending, data: response} = useLoginWithPasswordAndEmail()
+    const { loggedIn } = useAuth();
+    const navigate = useNavigate();
+    const { mutate: loginWithPasswordAndEmail , isSuccess, error, isError, isPending, data: response} = useLoginWithPasswordAndEmail()
     const onSubmit = async (data: LoginSchemaType) => {
         loginWithPasswordAndEmail(data);
     }
+    if(isError){
+        console.log(error)
+    }
     if(isSuccess) {
-        handleLoggedIn();
+        loggedIn()
+        navigate('/')
     }
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-3">
+            { isError &&
+                <ErrorMessage
+                    message={error.response.data.message ?? 'Something went wrong. Please try again later'}
+                />
+            }
             <FormField<LoginSchemaType, 'email'>
                 type="email"
                 placeholder="Your email address"

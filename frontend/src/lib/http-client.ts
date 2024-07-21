@@ -1,9 +1,9 @@
 import axios , {AxiosInstance , AxiosRequestConfig , AxiosResponse} from "axios";
 import {authService } from "../services/api/authentication/auth.service.ts";
 
-export abstract class HttpClient {
+export class HttpClient {
     //private static readonly  baseUrl  = process.env.REACT_API_REMOTE_BASE_URL || process.env.REACT_API_LOCAL_BASE_URL;
-    private static  client(): AxiosInstance {
+    private client(): AxiosInstance {
         const axiosConfig = {
             baseURL: "http://localhost:3000/api", //todo: use env variable instead of this
         }
@@ -26,7 +26,7 @@ export abstract class HttpClient {
             }
         )
         //add a response interceptor
-         axiosInstance.interceptors.response.use(
+        /* axiosInstance.interceptors.response.use(
              (response) => {
                       return response;
                       },
@@ -44,23 +44,25 @@ export abstract class HttpClient {
                      return  Promise.reject(error);
                  }
              }
-         )
+         )*/
         return axiosInstance
     }
-    public  static get(url: string): Promise<AxiosResponse>{
+    public  get(url: string): Promise<AxiosResponse>{
         return this.client().get(url);
     }
-    public static post<T>(url: string, payload: T) : Promise<AxiosResponse>{
+    public  post<T>(url: string, payload: T) : Promise<AxiosResponse>{
         return this.client().post(url, payload);
     }
-    public static put<T>(url: string, payload: T) : Promise<AxiosResponse>{
+    public put<T>(url: string, payload: T) : Promise<AxiosResponse>{
         return this.client().put(url, payload);
     }
-    public static patch<T>(url: string, payload: T): Promise<AxiosResponse> {
+    public patch<T>(url: string, payload: T): Promise<AxiosResponse> {
         return this.client().patch(url, payload);
     }
-    public static delete(url: string): Promise<AxiosResponse> {
+    public delete(url: string): Promise<AxiosResponse> {
         return this.client().delete(url);
     }
 
 }
+
+export  const httpClient = new HttpClient();

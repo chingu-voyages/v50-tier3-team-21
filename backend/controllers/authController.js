@@ -2,6 +2,7 @@ const db = require('../models'); // Make sure to require your models
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { generateToken } = require('../helpers/jwt');
+
 // generate refresh token
 const refreshToken = async (req, res, next) => {
   const { token: oldToken, refreshToken: oldRefreshToken } = req.cookies;

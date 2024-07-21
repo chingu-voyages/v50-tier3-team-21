@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --verbose --coverage",
     "start": "nodemon app.js"
   },
   "author": "",

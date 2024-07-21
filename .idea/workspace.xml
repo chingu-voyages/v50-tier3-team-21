@@ -4,18 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="wip: implementing auth logic">
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/authentication/error_message.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/authentication/login-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/authentication/login-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/authentication/signup-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/authentication/signup-form.tsx" afterDir="false" />
+    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="feat: auth logic implemented">
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/ui/button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ui/button.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/ui/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ui/header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/lib/http-client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/lib/http-client.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/provider/auth.provider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/provider/auth.provider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/authentication/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/authentication/auth.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/authentication/mutation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/authentication/mutation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/types/authentication/auth.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/types/authentication/auth.types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +16,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/auth-logic-implementation" />
+        <entry key="$PROJECT_DIR$" value="development" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -69,7 +60,7 @@
       <workItem from="1721162389714" duration="3417000" />
       <workItem from="1721321856976" duration="12694000" />
       <workItem from="1721409270361" duration="1829000" />
-      <workItem from="1721575191351" duration="9541000" />
+      <workItem from="1721575191351" duration="9909000" />
     </task>
     <task id="LOCAL-00001" summary="chore: add axios">
       <option name="closed" value="true" />
@@ -95,7 +86,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721334307610</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat: auth logic implemented">
+      <option name="closed" value="true" />
+      <created>1721585044372</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1721585044372</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -104,7 +103,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="chore: add axios" />
     <MESSAGE value="wip: implementing auth logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="wip: implementing auth logic" />
+    <MESSAGE value="feat: auth logic implemented" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: auth logic implemented" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

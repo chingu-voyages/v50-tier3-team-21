@@ -1,8 +1,9 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const { sequelize, User } = require('../models')
+const { sequelize, User } = require('../models');
+const bcrypt = require('bcrypt');
 
 beforeAll(async () => {
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ force: false });
 });
 
 afterAll(async () => {
@@ -22,8 +23,9 @@ describe('User Model', () => {
         expect(testUser).toHaveProperty('id');
         expect(testUser.username).toBe('testuser');
         expect(testUser.email).toBe('testuser@example.com');
-        expect(testUser.password).toBe('testpassword123');
 
+        const isMatch = await bcrypt.compare('testpassword123', testUser.password);
+        expect(isMatch).toBe(true);
     });
 
     test('should read a user', async () => {
@@ -42,6 +44,27 @@ describe('User Model', () => {
         expect(updatedUser.firstName).toBe('Test');
     });
 
+    test('should update a user with a new password', async () => {
+        testUser.password = 'testnewpassword';
+        await testUser.save();
+
+        const updatedUser = await User.findByPk(testUser.id);
+        const isMatch = await bcrypt.compare('testnewpassword', updatedUser.password);
+        expect(isMatch).toBe(true);
+    });
+
+    test('should update a user with a firstName, lastName and contact', async () => {
+        testUser.firstName = 'Test';
+        testUser.lastName = 'User';
+        testUser.contact = '123456789';
+        await testUser.save();
+
+        const updatedUser = await User.findByPk(testUser.id);
+        expect(updatedUser.firstName).toBe('Test');
+        expect(updatedUser.lastName).toBe('User');
+        expect(updatedUser.contact).toBe('123456789');
+    });
+
     test('should delete a user', async () => {
         await User.destroy({
             where: { id: testUser.id }
@@ -51,3 +74,4 @@ describe('User Model', () => {
         expect(deletedUser).toBeNull();
     });
 });
+

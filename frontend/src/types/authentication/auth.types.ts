@@ -4,13 +4,14 @@ export const SignUpSchema = z.object({
     email: z.coerce.string({
         required_error: "Email address is required",
     }).email({ message: "Please enter a valid email address"}),
-    firstname: z.string(),
-    lastname: z.string(),
+    firstName: z.string(),
+    lastName: z.string(),
+    username: z.string({ message: 'Username is required'}),
     contact: z.coerce.string().refine((val) => {
-        const phoneNumberRegex = /^[0-9]{10}$/;
+        const phoneNumberRegex = /^\+?[1-9]\d{1,14}$/
         return phoneNumberRegex.test(val);
     }, {
-        message: "Invalid phone number. It must be 10 digits long."
+        message: "Invalid phone number",
     }),
     password: z
         .string({

@@ -33,28 +33,41 @@ export const ProfilePage = () => {
       //     "Content-Type": "application/json",
       //   },
       //   method: "POST",
-      //   body: JSON.stringify({ username: "greg", password: "12345678" }),
+      //   body: JSON.stringify({ email: "gregoryminezzi@gmail.com", password: "gregorygregory" }),
       // });
       // const data = await res.json();
-      // console.log(data);
+      // console.log("Success login", data);
+      // setTimeout(() => console.log(localStorage.getItem("token")), 2000)
 
       //! VERIFY TOKEN
-      //   const res = await fetch("http://localhost:3000/api/auth/verify-token",  {
+      // const accessToken: string | null = localStorage.getItem('token');
+      // const refreshToken: string | null = localStorage.getItem('refreshToken');
+
+      //   const res = await fetch("http://localhost:3000/api/auth/refresh-token",  {
       //       headers: {
       //         "Content-Type": "application/json",
+      // "Authorization": `Bearer ${token || refreshToken}`
       //       },
       //  })
       //   const data = await res.json();
       //   console.log(data)
 
-      //! GET PROFILE
-      // const res = await fetch("http://localhost:3000/api/auth/profile",{
-      //   headers: { Authorization: Bearer <token>},
-      //   credentials:'include'
-      // }
-      // );
+      // //! GET PROFILE
+      // const token = document.cookie;
+      // console.log("TIJEB",token)
+
+      // const res = await fetch("http://localhost:3000/api/profile", {
+      //   method: "GET",
+      //   headers: { 
+      //     "Authorization": `Bearer ${token}`,
+      //     "credentials": "include",
+      //   }
+      // });
       // const data = await res.json();
       // console.log(data);
+
+
+
       setTimeout(() => setUser(exampleUser), 800);
     }
     getUser();
@@ -77,7 +90,7 @@ export const ProfilePage = () => {
 
       <div className="md:flex md:gap-24">
         <div className="flex border border-primary bg-primary bg-opacity-10 rounded-lg p-3 text-primary h-fit md:w-1/3 items-center">
-          <div className="bg-primary/30 mr-3 rounded px-2 py-2 items-start flex">         
+          <div className="bg-primary/30 mr-3 rounded px-2 py-2 items-start flex">
             <div className="icon-[ph--user-duotone] text-2xl"></div>
           </div>
           <div>

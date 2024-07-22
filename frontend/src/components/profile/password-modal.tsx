@@ -1,6 +1,7 @@
 import { FormPasswordField } from "./form-password-field";
 import PrimaryButton from "../ui/button";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { editProfile } from "../../services/api/authentication/api";
 
 // types
 interface PasswordInputs {
@@ -23,21 +24,34 @@ export const PasswordModal: React.FC<PasswordModalProps> = ({
     getValues,
   } = useForm<PasswordInputs>();
 
+  // toggle modal open/close
   const closeModal = () => {
     setViewPasswordModal(false);
   };
-  // function to handle submission of password change request
-  const handleSavePassword: SubmitHandler<PasswordInputs> = (data) => {
+
+  // submit change of password request
+  const handleSavePassword: SubmitHandler<PasswordInputs> = async (data) => {
+    // if passwords don't match, don't submit
     if (getValues("password") !== getValues("confirmPassword")) {
       console.log("passwords don't match, try again");
       return;
     }
+    const abortController = new AbortController();
+    const {signal} = abortController;
+    const editedPassword = data;
+    try {
+      await editProfile(editedPassword, signal)
+      alert("Password Changed!");
+    } catch (error){
+      console.log(error)
+    }
+    return () => abortController.abort();
 
-    console.log("PASSWORD SAVED)");
+
   };
   return (
     <div className="absolute inset-0 bg-[#291E43] bg-opacity-30 flex items-center justify-center">
-      <div className="bg-white rounded-md m-7 md:w-1/3 p-5 text-sm">
+      <div className="bg-white rounded-md m-7 md:max-w-2/3 p-5 text-sm">
         <div>
           <div className="mb-7 flex gap-5 items-start">
             <div className="bg-secondary/10 flex">

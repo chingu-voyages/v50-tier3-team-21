@@ -3,6 +3,7 @@ import PrimaryButton from "../ui/button";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FormField } from "./form-field";
 import { PasswordModal } from "./password-modal";
+import { editProfile } from "../../services/api/authentication/api";
 
 // TYPES
 interface UserType {
@@ -36,13 +37,23 @@ reset(user)
   }, [user, reset]);
 
   // on submit, edited profile will be saved in database
-  const handleSave: SubmitHandler<UserType> = (data) => {
+  const handleSave: SubmitHandler<UserType> = async (data) => {
     console.log(data);
     const editedUser = data;
 
     //make API call to PUT edited user in database...something like: editUser(userId, editedUser)
-    setUser(editedUser);
-    alert("Profile Changed!");
+    const abortController = new AbortController();
+    const {signal} = abortController;
+
+    try {
+      await editProfile(editedUser, signal)
+      setUser(editedUser);
+      alert("Profile Changed!");
+    } catch (error){
+      console.log(error)
+    }
+    return () => abortController.abort();
+    
   };
 
   return (

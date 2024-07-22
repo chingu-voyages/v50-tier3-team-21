@@ -3,7 +3,8 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { generateToken } = require('../helpers/jwt');
 
-// Verify Token contoller - refresh if (access) token is invalid
+
+// Refresh token
 const refreshToken = async (req, res, next) => {
   const { token: oldToken, refreshToken: oldRefreshToken } = req.cookies;
 

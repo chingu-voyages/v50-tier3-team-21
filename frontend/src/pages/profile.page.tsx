@@ -27,7 +27,6 @@ export const ProfilePage = () => {
   // make api request to getUser from database
   useEffect(() => {
     async function getUser() {
-
       // ! LOGIN
       // const res = await fetch("http://localhost:3000/api/auth/login", {
       //   headers: {
@@ -39,19 +38,14 @@ export const ProfilePage = () => {
       // const data = await res.json();
       // console.log(data);
 
-
-
       //! VERIFY TOKEN
-    //   const res = await fetch("http://localhost:3000/api/auth/verify-token",  {
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //  })
-    //   const data = await res.json();
-    //   console.log(data)
-
-
-
+      //   const res = await fetch("http://localhost:3000/api/auth/verify-token",  {
+      //       headers: {
+      //         "Content-Type": "application/json",
+      //       },
+      //  })
+      //   const data = await res.json();
+      //   console.log(data)
 
       //! GET PROFILE
       // const res = await fetch("http://localhost:3000/api/auth/profile",{
@@ -62,7 +56,6 @@ export const ProfilePage = () => {
       // const data = await res.json();
       // console.log(data);
       setTimeout(() => setUser(exampleUser), 800);
-
     }
     getUser();
     // }, [user]);
@@ -83,8 +76,10 @@ export const ProfilePage = () => {
       <h1 className="text-lg font-bold md:text-5xl pl-3">Profile</h1>
 
       <div className="md:flex md:gap-24">
-        <div className="flex border border-primary bg-primary bg-opacity-10 rounded-lg p-3 text-primary h-fit md:w-1/3">
-          <div className="h-10 w-10 mr-3 bg-primary bg-opacity-30 rounded" />
+        <div className="flex border border-primary bg-primary bg-opacity-10 rounded-lg p-3 text-primary h-fit md:w-1/3 items-center">
+          <div className="bg-primary/30 mr-3 rounded px-2 py-2 items-start flex">         
+            <div className="icon-[ph--user-duotone] text-2xl"></div>
+          </div>
           <div>
             <p className="text-lg">Account</p>
             <p className="text-xs opacity-60">Personal Information</p>

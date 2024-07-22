@@ -30,19 +30,20 @@ export const PasswordModal: React.FC<PasswordModalProps> = ({
   const handleSavePassword: SubmitHandler<PasswordInputs> = (data) => {
     if (getValues("password") !== getValues("confirmPassword")) {
       console.log("passwords don't match, try again");
-      console.
       return;
     }
-     
-    console.log("PASSWORD SAVED)")
+
+    console.log("PASSWORD SAVED)");
   };
   return (
     <div className="absolute inset-0 bg-[#291E43] bg-opacity-30 flex items-center justify-center">
       <div className="bg-white rounded-md m-7 md:w-1/3 p-5 text-sm">
-        <div className="">
-          <div className="mb-7 flex gap-5">
-            <div className="text-2xl">🔒</div>
-            <div className="py-1">
+        <div>
+          <div className="mb-7 flex gap-5 items-start">
+            <div className="bg-secondary/10 flex">
+              <svg className="text-2xl icon-[uim--padlock] bg-secondary"></svg>
+            </div>
+            <div className="">
               <p>Are you sure you want to change your password?</p>
               <p className="text-gray-400 mt-3">
                 Be reminded that you will be required to use the new password
@@ -50,7 +51,7 @@ export const PasswordModal: React.FC<PasswordModalProps> = ({
               </p>
             </div>
             <div className="text-xl cursor-pointer" onClick={closeModal}>
-              ❌
+              <span className="icon-[material-symbols-light--close]"></span>
             </div>
           </div>
           <form onSubmit={handleSubmit(handleSavePassword)}>
@@ -71,8 +72,19 @@ export const PasswordModal: React.FC<PasswordModalProps> = ({
               />
             </div>
             <div className="flex w-full mt-3 md:justify-between gap-3">
-              <PrimaryButton type="reset" onClick={() => reset} className="md:flex-none md:px-10 flex-1 bg-white border rounded-md p-3 font-bold border-primary text-primary">Cancel</PrimaryButton>
-              <PrimaryButton type="submit" className="md:flex-none md:px-10 flex-1">Confirm</PrimaryButton>
+              <PrimaryButton
+                type="reset"
+                onClick={() => reset}
+                className="md:flex-none md:px-10 flex-1 bg-white border rounded-md p-3 font-bold border-primary text-primary"
+              >
+                Cancel
+              </PrimaryButton>
+              <PrimaryButton
+                type="submit"
+                className="md:flex-none md:px-10 flex-1"
+              >
+                Confirm
+              </PrimaryButton>
             </div>
           </form>
         </div>

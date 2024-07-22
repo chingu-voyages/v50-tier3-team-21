@@ -43,7 +43,7 @@ export const FormPasswordField: React.FC<FormFieldProps> = ({
         {...props}
       />
       <div
-        className="absolute top-[47%] right-5 cursor-pointer"
+        className="absolute top-[47%] right-5 cursor-pointer text-secondary"
         onClick={() => setPasswordVisible((prev) => !prev)}
       >
         {passwordVisible ? <EyeIcon /> : <EyeOffIcon />}

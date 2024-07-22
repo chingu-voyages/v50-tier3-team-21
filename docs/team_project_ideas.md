@@ -12,5 +12,7 @@ you like the best.
 
 | Project Idea | Description | teammate name | teammate name | teammate name | teammate name | teammate name | teammate name |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| First idea | Brainstorm and come up with a new projects | | | | | | |
-| Second idea | Use provided idea: Restaurant Simulation | Martha | Sam |  Greg | Tom | Riry | Albert |
+| First idea | Description | | | | | | |
+| Second idea | Description | | | | | | |
+| ... | Description | | | | | | |
+| Last idea | Description | | | | | | |

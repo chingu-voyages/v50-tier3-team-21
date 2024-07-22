@@ -7,6 +7,7 @@ module.exports = {
       backgroundImage: {
         hippo: "url('./assets/hippo image.png')",
         logo: "url('./assets/logo.svg')",
+        notFoundPage: "url('./assets/404.png')",
         menuExpand: "url('./assets/menu-expand.png')",
       },
       colors: {

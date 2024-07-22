@@ -6,6 +6,7 @@ export class HttpClient {
     private client(): AxiosInstance {
         const axiosConfig = {
             baseURL: "http://localhost:3000/api", //todo: use env variable instead of this
+            withCredentials: true
         }
         let axiosInstance = axios.create(axiosConfig);
 
@@ -26,7 +27,7 @@ export class HttpClient {
             }
         )
         //add a response interceptor
-        /* axiosInstance.interceptors.response.use(
+         axiosInstance.interceptors.response.use(
              (response) => {
                       return response;
                       },
@@ -44,7 +45,7 @@ export class HttpClient {
                      return  Promise.reject(error);
                  }
              }
-         )*/
+         )
         return axiosInstance
     }
     public  get(url: string): Promise<AxiosResponse>{

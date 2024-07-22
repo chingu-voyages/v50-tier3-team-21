@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { ProfileForm } from "../components/profile/profile-form";
+import { httpClient } from "../lib/http-client";
 
 interface UserType {
   username: string;
@@ -27,48 +28,10 @@ export const ProfilePage = () => {
   // make api request to getUser from database
   useEffect(() => {
     async function getUser() {
-      // ! LOGIN
-      // const res = await fetch("http://localhost:3000/api/auth/login", {
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   method: "POST",
-      //   body: JSON.stringify({ email: "gregoryminezzi@gmail.com", password: "gregorygregory" }),
-      // });
-      // const data = await res.json();
-      // console.log("Success login", data);
-      // setTimeout(() => console.log(localStorage.getItem("token")), 2000)
-
-      //! VERIFY TOKEN
-      // const accessToken: string | null = localStorage.getItem('token');
-      // const refreshToken: string | null = localStorage.getItem('refreshToken');
-
-      //   const res = await fetch("http://localhost:3000/api/auth/refresh-token",  {
-      //       headers: {
-      //         "Content-Type": "application/json",
-      // "Authorization": `Bearer ${token || refreshToken}`
-      //       },
-      //  })
-      //   const data = await res.json();
-      //   console.log(data)
-
-      // //! GET PROFILE
-      // const token = document.cookie;
-      // console.log("TIJEB",token)
-
-      // const res = await fetch("http://localhost:3000/api/profile", {
-      //   method: "GET",
-      //   headers: { 
-      //     "Authorization": `Bearer ${token}`,
-      //     "credentials": "include",
-      //   }
-      // });
-      // const data = await res.json();
-      // console.log(data);
-
-
-
-      setTimeout(() => setUser(exampleUser), 800);
+      //! GET PROFILE
+      const res = await httpClient.get("http://localhost:3000/api/profile");
+      console.log(res.data.data);
+      setUser(res.data.data);
     }
     getUser();
     // }, [user]);

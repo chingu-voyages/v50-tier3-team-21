@@ -43,6 +43,8 @@ const resetPassword = async (req, res) => {
     user.confirmPassword = confirmPassword
     await user.save();
     return res.status(200).json({ status: 'success', message: 'Password reset successfully' });
+    // delete cookie
+    res.clearCookie('token');
   } catch (error) {
     if (error instanceof jwt.JsonWebTokenError) {
       return res.status(400).json({ status: 'fail', message: 'Invalid or expired token' });

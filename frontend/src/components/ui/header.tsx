@@ -1,4 +1,6 @@
 import { ReactNode, useState } from "react";
+import {useAuth} from "../../hooks/auth.hook.ts";
+import {Link} from "react-router-dom";
 interface HeaderNavProps {
     isLoggedIn?: boolean;
     onLogout?: boolean;
@@ -6,7 +8,7 @@ interface HeaderNavProps {
 }
 export default function HeaderNav() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(true);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const {isAuthenticated, data, logout} = useAuth();
     const mobileLinks = [
         { name: 'Home', href: '/', icon: 'icon-[lets-icons--home-duotone]' },
         { name: 'Recent Orders', href: '/orders', icon: 'icon-[solar--history-line-duotone]' },
@@ -47,7 +49,7 @@ export default function HeaderNav() {
                     }
                 </div>
                 <div className="hidden md:flex flex-1 justify-end">
-                    <div className="text-lg text-dark/60">{isLoggedIn ? 'Order & Log Out' : 'Order & Sign In'}</div>
+                    <div className="text-lg text-dark/60">{isAuthenticated ? 'Order & Log Out' : 'Order & Sign In'}</div>
                 </div>
                 <button
                     type="button"
@@ -55,25 +57,25 @@ export default function HeaderNav() {
                 >
                     <span className="sr-only">My Profile</span>
                     <span className="icon-[ph--user-duotone] h-8 w-8" style={{ color: "#49CC76" }}></span>
+                    <span>{isAuthenticated ? data && data?.firstName: ''}</span>
                 </button>
-                {isLoggedIn ? (
+                {isAuthenticated ? (
                     <button
                         type="button"
-                        onClick={() => setIsLoggedIn(false)}
+                        onClick={() => logout()}
                         className="hidden md:inline-flex items-center justify-center  p-2.5 text-dark"
                     >
                         <span className="sr-only">Log Out</span>
                         <span className="icon-[solar--logout-3-bold-duotone] h-8 w-8" style={{ color: "#49CC76" }}></span>
                     </button>
                 ) : (
-                    <button
-                        type="button"
-                        onClick={() => setIsLoggedIn(true)}
+                    <Link
+                        to="/auth/signin"
                         className="hidden md:inline-flex items-center justify-center  p-2.5 text-dark"
-                    >
+                     >
                         <span className="sr-only">Log In</span>
                         <span className="icon-[solar--login-3-bold-duotone] h-8 w-8" style={{ color: "#49CC76" }}></span>
-                    </button>
+                    </Link>
                 )}
                 <button
                     type="button"
@@ -86,7 +88,7 @@ export default function HeaderNav() {
                 </button>
 
                 <div className={`absolute top-0 left-0 h-screen w-screen bg-white md:hidden  z-40${mobileMenuOpen ? '' : 'absolute hidden'}`}>
-                    <div className="h-screen w-screen flex bg-primary/30 flex">
+                    <div className="h-screen w-screen flex bg-primary/30 ">
                         <ul className="font-medium flex flex-col gap-y-5 p-6  text-dark/60 pt-24">
                             {mobileLinks.map((item) => (
                                 <li key={item.name}
@@ -97,19 +99,19 @@ export default function HeaderNav() {
                                 </li>
                             ))}
                             {
-                                isLoggedIn ? (
+                                isAuthenticated ? (
                                     <li
                                         className="flex items-center gap-2">
                                         <span className=" h-6 w-6 icon-[solar--logout-3-line-duotone]" style={{ color: "#291E43" }}></span>
                                         <span className="sr-only">Logout</span>
-                                        <a onClick={() => setIsLoggedIn(false)} className="block py-2 px-3 text-sm whitespace-nowrap">Logout</a>
+                                        <a onClick={() => logout()} className="block py-2 px-3 text-sm whitespace-nowrap">Logout</a>
                                     </li>
                                 ) : (
                                     <li
                                         className="flex items-center gap-2">
                                         <span className=" h-6 w-6 icon-[solar--login-3-line-duotone]" style={{ color: "#291E43" }}></span>
                                         <span className="sr-only">LogIn</span>
-                                        <a onClick={() => setIsLoggedIn(true)} className="block py-2 px-3 tex-sm whitespace-nowrap">Sign In</a>
+                                        <Link to='/auth/signin' className="block py-2 px-3 tex-sm whitespace-nowrap">Sign In</Link>
                                     </li>
                                 )
                             }

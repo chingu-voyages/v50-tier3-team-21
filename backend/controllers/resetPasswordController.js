@@ -1,104 +1,55 @@
 const db = require('../models');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 const { generateToken } = require('../helpers/jwt');
 
-// demo user
-let user = {
-  id: "12345",
-  email: "test@example.com",
-  password: "password"
-};
-
-const getForgotPassword = async (req, res, next) => {
-  res.render('forgotPassword');
-};
-
-const postForgotPassword = async (req, res, next) => {
+// Send password reset email with token
+const sendPasswordResetEmail = async (req, res) => {
   const { email } = req.body;
-
-  // make sure user exists in the database
-  if (email !== user.email) {
-    res.send('User not found');
-    return;
-  }
-
-  // user exists, create a one-time link valid for 15 minutes
-  const payload = {
-    email: user.email,
-    id: user.id
-  };
-
-  payload.token = generateToken({ id: payload.id });
-
-  const link = `http://localhost:3000/resetPassword/${payload.id}/${token}`;
-  console.log(link);
-  res.send('Password reset link sent to your email');
-};
-
-const getResetPassword = async (req, res, next) => {
-  const { id, token } = req.params;
-
-  // check if id exists
-  if (id !== user.id) {
-    res.send('Invalid id');
-    return;
-  }
-
   try {
-    // verify the token
-    const payload = jwt.verify(token, process.env.JWT_SECRET);
-    if (payload.id !== id) {
-      res.send('Invalid token');
-      return;
+    const user = await db.User.findOne({ where: { email } });
+    if (!user) {
+      return res.status(404).json({ status: 'fail', message: 'User not found' });
     }
-
-    res.status(201).json({
-      status: 'success',
-      message: 'passwordReset',
-      data: { email: user.email }
-    });
+    const token = generateToken({ id: user.id }, process.env.JWT_SECRET,  process.env.JWT_RESET_EXPIRES_IN);
+    // Send email with token and link to reset password
+    // ...
+    res.cookie('token', token, { httpOnly: true, sameSite: 'strict' });
+    return res.status(200).json({ status: 'success', message: 'Password reset email sent', token });
   } catch (error) {
-    console.log(error.message);
-    res.send(error.message);
+    console.error(error);
+    return res.status(500).json({ status: 'fail', message: 'Failed to send password reset email' });
   }
 };
 
-const postResetPassword = async (req, res, next) => {
-  const { id, token } = req.params;
+// Reset password with token
+const resetPassword = async (req, res) => {
   const { password, confirmPassword } = req.body;
-
-  // check if this id exists in the database
-  if (id !== user.id) {
-    res.send('Invalid id or token');
-    return;
+  
+  const token = req.cookies.token;
+  if (!token) {
+    return res.status(400).json({ status: 'fail', message: 'Token must be provided' });
   }
-
   try {
-    // verify the token
-    const payload = jwt.verify(token, process.env.JWT_SECRET);
-    if (payload.id !== id) {
-      res.send('Invalid token');
-      return;
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await db.User.findByPk(decoded.id);
+    if (!user) {
+      return res.status(404).json({ status: 'fail', message: 'User not found' });
     }
-
-    // validate password and confirmPassword, they should match
     if (password !== confirmPassword) {
-      res.send('Passwords do not match');
-      return;
+      return res.status(400).json({ status: 'fail', message: 'Passwords do not match' });
     }
-
-    // update the user's password
-    user.password = password;
-    res.send('Password updated successfully');
+    user.password = password
+    user.confirmPassword = confirmPassword
+    await user.save();
+    return res.status(200).json({ status: 'success', message: 'Password reset successfully' });
   } catch (error) {
-    console.log(error.message);
-    res.send(error.message);
+    if (error instanceof jwt.JsonWebTokenError) {
+      return res.status(400).json({ status: 'fail', message: 'Invalid or expired token' });
+    }
+    console.error(error);
+    return res.status(500).json({ status: 'fail', message: 'Failed to reset password' });
   }
 };
 
-module.exports = {
-  getForgotPassword,
-  postForgotPassword,
-  getResetPassword,
-  postResetPassword
-};
+module.exports = { sendPasswordResetEmail, resetPassword };

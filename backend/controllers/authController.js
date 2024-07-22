@@ -2,52 +2,47 @@ const db = require('../models'); // Make sure to require your models
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { generateToken } = require('../helpers/jwt');
-// generate refresh token
+
+// Verify Token contoller - refresh if (access) token is invalid
 const refreshToken = async (req, res, next) => {
   const { token: oldToken, refreshToken: oldRefreshToken } = req.cookies;
 
   if (!oldToken && !oldRefreshToken) {
-    return res.status(401).json({
-      status: 'fail',
-      message: 'No token provided',
-    });
+    return res.status(401).json({ status: "fail", message: "No token provided" });
   }
 
   try {
-    // Decode refresh token
-    const refreshDecoded = jwt.decode(oldRefreshToken);
+    // Verify access token
+    const decoded = jwt.verify(oldToken, process.env.JWT_SECRET);
+    
+    // Access token is valid, generate new refresh token
+    const newRefreshToken = generateToken({ id: decoded.id }, process.env.JWT_SECRET, process.env.JWT_REFRESH_EXPIRES_IN);
 
-    // Generate new tokens
-    const newToken = generateToken(
-      { id: refreshDecoded.id },
-      process.env.JWT_SECRET,
-      process.env.JWT_EXPIRES_IN
-    );
-    const newRefreshToken = generateToken(
-      { id: refreshDecoded.id },
-      process.env.JWT_SECRET,
-      process.env.JWT_REFRESH_EXPIRES_IN
-    );
+    // Set new refresh token in cookies
+    res.cookie("refreshToken", newRefreshToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
 
-    // Set new tokens in cookies
-    res.cookie('token', newToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-    });
-    res.cookie('refreshToken', newRefreshToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-    });
+    return res.status(200).json({ status: "success", message: "Token is valid, new refresh token generated" });
 
-    return res.status(200).json({
-      status: 'success',
-      message: 'Token refreshed successfully',
-    });
   } catch (error) {
-    return res.status(401).json({
-      status: 'fail',
-      message: 'Invalid refresh token',
-    });
+    // Token is invalid, verify the refresh token
+    try {
+      const decodedRefresh = jwt.verify(oldRefreshToken, process.env.JWT_SECRET);
+      if (!decodedRefresh) {
+        return res.status(401).json({ status: "fail", message: "Invalid refresh token" });
+      }
+
+      // Generate new tokens
+      const newToken = generateToken({ id: decodedRefresh.id }, process.env.JWT_SECRET, process.env.JWT_EXPIRES_IN);
+      const newRefreshToken = generateToken({ id: decodedRefresh.id }, process.env.JWT_SECRET, process.env.JWT_REFRESH_EXPIRES_IN);
+
+      // Set new tokens in cookies
+      res.cookie("token", newToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+      res.cookie("refreshToken", newRefreshToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+
+      return res.status(200).json({ status: "success", message: "Token refreshed successfully" });
+    } catch (refreshError) {
+      return res.status(401).json({ status: "fail", message: "Invalid token and refresh token" });
+    }
   }
 };
 
@@ -104,6 +99,7 @@ const signup = async (req, res, next) => {
   }
 };
 
+// Login controller
 const login = async (req, res, next) => {
   const { username, email, password } = req.body;
 
@@ -128,13 +124,6 @@ const login = async (req, res, next) => {
       });
     }
 
-    if (!result) {
-      return res.status(401).json({
-        status: 'fail',
-        message: 'Incorrect email or username',
-      });
-    }
-
     const isMatch = await bcrypt.compare(password, result.password);
 
     if (!isMatch) {
@@ -144,9 +133,11 @@ const login = async (req, res, next) => {
       });
     }
 
-    const token = generateToken({
-      id: result.id,
-    });
+    const token = generateToken({ id: result.id }, process.env.JWT_SECRET, process.env.JWT_EXPIRES_IN);
+    const refreshToken = generateToken({ id: result.id }, process.env.JWT_SECRET, process.env.JWT_REFRESH_EXPIRES_IN);
+
+    res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+    res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
 
     return res.status(200).json({
       status: 'success',
@@ -163,7 +154,11 @@ const login = async (req, res, next) => {
   }
 };
 
+
 const logout = async (req, res, next) => {
+  res.cookie("token", "", { httpOnly: true, secure: process.env.NODE_ENV === 'production', expires: new Date(0) });
+  res.cookie("refreshToken", "", { httpOnly: true, secure: process.env.NODE_ENV === 'production', expires: new Date(0) });
+
   return res.status(200).json({
     status: 'success',
     message: 'User logged out successfully',

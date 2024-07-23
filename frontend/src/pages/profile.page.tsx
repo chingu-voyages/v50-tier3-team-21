@@ -29,9 +29,10 @@ export const ProfilePage = () => {
   useEffect(() => {
     async function getUser() {
       //! GET PROFILE
-      const res = await httpClient.get("http://localhost:3000/api/profile");
-      console.log(res.data.data);
-      setUser(res.data.data);
+      const response = await httpClient.get("http://localhost:3000/api/profile");
+      const {data} = response.data;
+      console.log(data);
+      setUser(data);
     }
     getUser();
     // }, [user]);

@@ -4,6 +4,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { FormField } from "./form-field";
 import { PasswordModal } from "./password-modal";
 import { editProfile } from "../../services/api/authentication/api";
+import { httpClient } from "../../lib/http-client";
 
 // TYPES
 interface UserType {
@@ -46,9 +47,13 @@ reset(user)
     const {signal} = abortController;
 
     try {
-      await editProfile(editedUser, signal)
-      setUser(editedUser);
-      alert("Profile Changed!");
+      const response = await httpClient.put("http://localhost:3000/api/profile", editedUser);
+      const {data} = response.data;
+      console.log(data);
+      alert("user edited")
+      // await editProfile(editedUser, signal)
+      // setUser(editedUser);
+      // alert("Profile Changed!");
     } catch (error){
       console.log(error)
     }

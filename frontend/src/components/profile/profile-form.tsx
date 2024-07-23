@@ -3,7 +3,6 @@ import PrimaryButton from "../ui/button";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { FormField } from "./form-field";
 import { PasswordModal } from "./password-modal";
-import { editProfile } from "../../services/api/authentication/api";
 import { httpClient } from "../../lib/http-client";
 
 // TYPES

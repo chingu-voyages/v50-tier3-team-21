@@ -1,7 +1,7 @@
 import { FormPasswordField } from "./form-password-field";
 import PrimaryButton from "../ui/button";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { editProfile } from "../../services/api/authentication/api";
+import { httpClient } from "../../lib/http-client";
 
 // types
 interface PasswordInputs {
@@ -36,19 +36,19 @@ export const PasswordModal: React.FC<PasswordModalProps> = ({
       console.log("passwords don't match, try again");
       return;
     }
-    const abortController = new AbortController();
-    const {signal} = abortController;
+
     const editedPassword = data;
     try {
-      await editProfile(editedPassword, signal)
+      const response = await httpClient.put("http://localhost:3000/api/profile", editedPassword);
+      const {data} = response.data;
+      console.log(data);
       alert("Password Changed!");
     } catch (error){
       console.log(error)
     }
-    return () => abortController.abort();
-
 
   };
+
   return (
     <div className="absolute inset-0 bg-[#291E43] bg-opacity-30 flex items-center justify-center">
       <div className="bg-white rounded-md m-7 md:max-w-2/3 p-5 text-sm">

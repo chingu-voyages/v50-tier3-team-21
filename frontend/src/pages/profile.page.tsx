@@ -11,16 +11,6 @@ interface UserType {
   contact: string;
 }
 
-// example of the user Object fetched from database
-let exampleUser: UserType = {
-  username: "minezzig",
-  password: "12345",
-  email: "myemail@gmail.com",
-  firstName: "greg",
-  lastName: "minezzi",
-  contact: "123456789",
-};
-
 export const ProfilePage = () => {
   const [user, setUser] = useState<UserType | null>(null);
   const [balance, setBalance] = useState<number>(0);
@@ -28,14 +18,13 @@ export const ProfilePage = () => {
   // make api request to getUser from database
   useEffect(() => {
     async function getUser() {
-      //! GET PROFILE
       const response = await httpClient.get("http://localhost:3000/api/profile");
       const {data} = response.data;
       console.log(data);
       setUser(data);
     }
+    
     getUser();
-    // }, [user]);
   }, []);
 
   // make api request to get balance for user based on userId

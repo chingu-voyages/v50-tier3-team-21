@@ -2,6 +2,7 @@ const db = require('../models');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { generateToken } = require('../helpers/jwt');
+const { sendEmail } = require('../middlewares/mail');
 
 // Send password reset email with token
 const sendPasswordResetEmail = async (req, res) => {
@@ -11,10 +12,15 @@ const sendPasswordResetEmail = async (req, res) => {
     if (!user) {
       return res.status(404).json({ status: 'fail', message: 'User not found' });
     }
-    console.log( process.env.JWT_SECRET,  process.env.JWT_RESET_EXPIRES_IN)
     const token = generateToken({ id: user.id }, process.env.JWT_SECRET,  process.env.JWT_RESET_EXPIRES_IN);
-    // TODO: Send email with token and link to reset password
-    
+
+    // send email
+    const address = email;
+    const link = `http://localhost:${process.env.PORT}/api/resetpassword/reset-link/${token}`;
+
+    sendEmail(address, link);
+
+    // send response
     return res.status(200).json({
       status: 'success',
       message: 'Password reset email sent',

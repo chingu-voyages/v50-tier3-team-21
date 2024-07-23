@@ -1,0 +1,283 @@
+{
+  "swaggerDefinition": {
+    "openapi": "3.0.3",
+    "info": {
+      "title": "Hungry Hippo API",
+      "description": "API for the Web Application Hungry Hippo that allows the user to order food and track their order status.",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000/api"
+      }
+    ],
+    "tags": [
+      {
+        "name": "Auth",
+        "description": "Authentication routes"
+      }
+    ],
+    "paths": {
+      "/auth/signup": {
+        "post": {
+          "summary": "Signup a new user",
+          "description": "Fields required: `username, email, password, confirmPassword`",
+          "tags": ["Auth"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["username", "email", "password", "confirmPassword"],
+                  "properties": {
+                    "username": {
+                      "type": "string",
+                      "description": "Required. The unique username for the user."
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "Required. The email address of the user."
+                    },
+                    "password": {
+                      "type": "string",
+                      "description": "Required. The password for the user account."
+                    },
+                    "confirmPassword": {
+                      "type": "string",
+                      "description": "Required. The password confirmation for the user account."
+                    },
+                    "firstName": {
+                      "type": "string",
+                      "description": "The first name of the user."
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "description": "The last name of the user."
+                    },
+                    "contact": {
+                      "type": "string",
+                      "description": "The contact number of the user."
+                    }
+                  },
+                  "example": {
+                    "username": "JohnDoe",
+                    "email": "john.doe@example.com",
+                    "password": "password123",
+                    "confirmPassword": "password123",
+                    "firstName": "John",
+                    "lastName": "Doe",
+                    "contact": "1234567890"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "User created successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "success"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "User created successfully"
+                      },
+                      "data": {
+                        "type": "object",
+                        "additionalProperties": true
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Failed to create user or Password must be at least 7 characters long"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Failed to create user"
+                      },
+                      "error": {
+                        "type": "string",
+                        "example": "error.message"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/auth/login": {
+        "post": {
+          "summary": "Login a user",
+          "description": "Fields required: `username`, or `email`, and `password`",
+          "tags": ["Auth"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string",
+                      "description": "The username of the user."
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "The email address of the user."
+                    },
+                    "password": {
+                      "type": "string",
+                      "description": "Required. The password for the user account."
+                    }
+                  },
+                  "example": {
+                    "username": "JohnDoe",
+                    "email": "john.doe@example.com",
+                    "password": "password123"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "User logged in successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "success"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "User logged in successfully"
+                      },
+                      "token": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request"
+            },
+            "401": {
+              "description": "Unauthorized"
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+      "/auth/logout": {
+        "post": {
+          "summary": "Logout a user",
+          "tags": ["Auth"],
+          "responses": {
+            "200": {
+              "description": "User logged out successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "success"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "User logged out successfully"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized"
+            }
+          }
+        }
+      },
+      "/auth/refresh-token": {
+        "get": {
+          "summary": "Refresh the access token",
+          "tags": ["Auth"],
+          "responses": {
+            "200": {
+              "description": "Token refreshed successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "success"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Token refreshed successfully"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized"
+            }
+          }
+        }
+      }
+    }
+  },
+  "apis": ["./routes/*.js"]
+}

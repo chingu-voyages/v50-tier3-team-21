@@ -23,7 +23,7 @@ export const ProfilePage = () => {
       console.log(data);
       setUser(data);
     }
-    
+
     getUser();
   }, []);
 
@@ -38,7 +38,7 @@ export const ProfilePage = () => {
   }, []);
 
   return (
-    <div className="bg-white flex flex-col w-full gap-5 px-5 md:px-10 max-w-[1290px]">
+    <div className="bg-white flex flex-col w-full gap-5 px-5 md:px-10 max-w-[1290px] pt-16 m-auto">
       <h1 className="text-lg font-bold md:text-5xl pl-3">Profile</h1>
 
       <div className="md:flex md:gap-24">

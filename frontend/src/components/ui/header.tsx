@@ -51,14 +51,15 @@ export default function HeaderNav() {
                 <div className="hidden md:flex flex-1 justify-end">
                     <div className="text-lg text-dark/60">{isAuthenticated ? 'Order & Log Out' : 'Order & Sign In'}</div>
                 </div>
-                <button
+                <Link
+                    to="/profile"
                     type="button"
                     className="hidden md:inline-flex items-center justify-center  p-2.5 text-dark"
                 >
                     <span className="sr-only">My Profile</span>
                     <span className="icon-[ph--user-duotone] h-8 w-8" style={{ color: "#49CC76" }}></span>
                     <span>{isAuthenticated ? data && data?.firstName: ''}</span>
-                </button>
+                </Link>
                 {isAuthenticated ? (
                     <button
                         type="button"

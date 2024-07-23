@@ -17,14 +17,17 @@ export const SignupPage = () => {
 
 
 
-export const AuthHeader = ({title}: { title: string}) => {
+export const AuthHeader = ({title, description}: { title: string, description?: string}) => {
   return(
-      <div className="w-full flex flex-col justify-center items-center gap-2">
+      <div className="w-full flex flex-col justify-center items-center gap-4">
           <div className="flex flex-col justify-center items-center gap-1">
               <HippoLogo />
               <p className="text-[12px] font-medium">Welcome to Hungry  Hippo</p>
           </div>
-          <h1 className="text-2xl">{title}</h1>
+          <div className='w-full flex flex-col justify-center items-center '>
+              <h1 className=" text-xl md:text-2xl font-bold ">{title}</h1>
+              { description && <p className="w-full text-sm md:text-md text-gray-500 text-center">{description}</p> }
+          </div>
       </div>
   )
 }

@@ -38,6 +38,29 @@ export const LoginSchema = z.object({
         .max(20, { message: "Password is too long"}),
 })
 
+export const ResetPasswordSchema = z.object({
+    email: z.string().email({
+        message: 'Email is required to get reset password instructions'
+    })
+})
+
+export const ChangePasswordSchema = z.object({
+
+    password: z
+        .string({
+            required_error: "Password is required"
+        })
+        .min(8, { message: "Password is too short, must be at least 8 length "})
+        .max(20, { message: "Password is too long"}),
+    confirmPassword: z.string(),
+})
+    .refine(data => data.password === data.confirmPassword, {
+        message: "Passwords do not match",
+        path: ['confirmPassword']
+    })
+
 export type SignUpSchemaType = z.infer<typeof SignUpSchema>;
 export type LoginSchemaType = z.infer<typeof LoginSchema>;
+export type ResetPasswordType = z.infer<typeof ResetPasswordSchema>;
+export  type ChangePasswordType = z.infer<typeof ChangePasswordSchema>
 

@@ -57,7 +57,7 @@ export const LoginForm = () => {
                 error={errors.password}
             />
             <div className='flex justify-end items-center mb-4'>
-               <Link to='/auth' className="text-secondary" >
+               <Link to='/auth/reset-password/sent-link' className="text-secondary" >
                    Forgot password ?
                </Link>
             </div>

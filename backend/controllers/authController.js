@@ -74,9 +74,7 @@ const signup = async (req, res, next) => {
     delete result.password;
     delete result.deletedAt;
 
-    result.token = generateToken({
-      id: result.id,
-    });
+    result.token = generateToken({id: result.id}, process.env.JWT_SECRET, process.env.JWT_EXPIRES_IN);
 
     if (!result) {
       return res.status(400).json({

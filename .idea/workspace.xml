@@ -4,22 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="feat: auth logic implemented">
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/authentication/change-password-form.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/authentication/reset-password-form.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/change-password.page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/reset-password-email.page.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/success-reset-email.page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/middlewares/authorization.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/middlewares/authorization.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/authentication/login-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/authentication/login-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/authentication/password-field.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/authentication/password-field.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/layouts/auth.layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/layouts/auth.layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/signup.page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/signup.page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/authentication/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/authentication/auth.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/authentication/mutation.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/authentication/mutation.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/types/authentication/auth.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/types/authentication/auth.types.ts" afterDir="false" />
+    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="wip: reset password features">
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/authentication/reset-password-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/authentication/reset-password-form.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +93,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721585044372</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="wip: reset password features">
+      <option name="closed" value="true" />
+      <created>1721767497187</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1721767497188</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -117,7 +111,8 @@
     <MESSAGE value="chore: add axios" />
     <MESSAGE value="wip: implementing auth logic" />
     <MESSAGE value="feat: auth logic implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: auth logic implemented" />
+    <MESSAGE value="wip: reset password features" />
+    <option name="LAST_COMMIT_MESSAGE" value="wip: reset password features" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

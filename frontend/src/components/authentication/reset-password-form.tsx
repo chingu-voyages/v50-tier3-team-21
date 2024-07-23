@@ -11,23 +11,22 @@ import {useState} from "react";
 export  const ResetPasswordForm = () => {
     const {
         register,
-        reset,
         handleSubmit,
         formState: { errors}
     } = useForm<ResetPasswordType>({ resolver: zodResolver(ResetPasswordSchema)})
     const navigate = useNavigate();
     const [email, setEmail ] = useState('')
-    const {mutate, isPending, isSuccess, isError, data,error} = useSendPasswordResetEmail();
+    const {mutate, isPending, isSuccess, isError,error} = useSendPasswordResetEmail();
     const onSubmit = (data: ResetPasswordType) => {
-        mutate(data)
         setEmail(data.email)
+        mutate(data)
     }
     if(isSuccess){
         navigate('/auth/reset-password/reset-sent', { state: { email }})
     }
   return(
       <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-4">
-          {isError && <ErrorMessage message={error.response.data.message} />}
+          {isError && <ErrorMessage message={error.response?.data?.message ?? "An error occured. Please try again later"} />}
           <FormField<ResetPasswordType, 'email'>
               type="email"
               placeholder="Enter your email"

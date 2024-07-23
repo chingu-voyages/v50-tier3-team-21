@@ -21,19 +21,18 @@ interface ProfileFormProps {
   setUser: (user: UserType) => void;
 }
 
-export const ProfileForm: React.FC<ProfileFormProps> = ({user,setUser}) => {
+export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
   const [viewPasswordModal, setViewPasswordModal] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset
+    reset,
   } = useForm<UserType>();
-  
 
   // prefill form with user data, recall if user changes
   useEffect(() => {
-reset(user)
+    reset(user);
   }, [user, reset]);
 
   // on submit, edited profile will be saved in database
@@ -42,29 +41,24 @@ reset(user)
     const editedUser = data;
 
     //make API call to PUT edited user in database...something like: editUser(userId, editedUser)
-    const abortController = new AbortController();
-    const {signal} = abortController;
-
     try {
-      const response = await httpClient.put("http://localhost:3000/api/profile", editedUser);
-      const {data} = response.data;
+      const response = await httpClient.put(
+        "http://localhost:3000/api/profile",
+        editedUser
+      );
+      const { data } = response.data;
       console.log(data);
-      alert("user edited")
-      // await editProfile(editedUser, signal)
-      // setUser(editedUser);
-      // alert("Profile Changed!");
-    } catch (error){
-      console.log(error)
+      alert("Profile edited");
+    } catch (error) {
+      console.log(error);
     }
-    return () => abortController.abort();
-    
   };
 
   return (
     <>
       <div className="w-full">
         <form onSubmit={handleSubmit(handleSave)}>
-        <div className="flex flex-col md:flex-row md:gap-3">
+          <div className="flex flex-col md:flex-row md:gap-3">
             <FormField
               label="First Name"
               name="firstName"
@@ -110,7 +104,12 @@ reset(user)
             register={register}
             errors={errors?.contact}
           />
-          <div className="text-secondary font-bold mb-5 cursor-pointer" onClick={() => setViewPasswordModal(true)}>Change Password</div>
+          <div
+            className="text-secondary font-bold mb-5 cursor-pointer"
+            onClick={() => setViewPasswordModal(true)}
+          >
+            Change Password
+          </div>
 
           <div className="flex justify-between w-full">
             <PrimaryButton
@@ -121,10 +120,12 @@ reset(user)
               Discard Changes
             </PrimaryButton>
             {/* //? why does className="uppercase" break button classes? */}
-            <PrimaryButton type="submit">SAVE CHANGES</PrimaryButton> 
+            <PrimaryButton type="submit">SAVE CHANGES</PrimaryButton>
           </div>
         </form>
-        {viewPasswordModal && <PasswordModal setViewPasswordModal={setViewPasswordModal}/>}
+        {viewPasswordModal && (
+          <PasswordModal setViewPasswordModal={setViewPasswordModal} />
+        )}
       </div>
     </>
   );

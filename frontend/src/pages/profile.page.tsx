@@ -30,8 +30,6 @@ export const ProfilePage = () => {
   // make api request to get balance for user based on userId
   useEffect(() => {
     async function getBalance() {
-      //const res = await fetch();
-      //const data = await res.json();
       setTimeout(() => setBalance(48.09), 1000);
     }
     getBalance();

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { FormPasswordField } from "./form-password-field";
 import PrimaryButton from "../ui/button";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -16,6 +17,7 @@ interface PasswordModalProps {
 export const PasswordModal: React.FC<PasswordModalProps> = ({
   setViewPasswordModal,
 }) => {
+  const [error, setError] = useState("");
   const {
     register,
     handleSubmit,
@@ -29,11 +31,18 @@ export const PasswordModal: React.FC<PasswordModalProps> = ({
     setViewPasswordModal(false);
   };
 
+  // handle click cancel 
+  const handleCancel = () => {
+    setError("");
+    reset()
+  }
+
   // submit change of password request
   const handleSavePassword: SubmitHandler<PasswordInputs> = async (data) => {
     // if passwords don't match, don't submit
     if (getValues("password") !== getValues("confirmPassword")) {
       console.log("passwords don't match, try again");
+      setError("Passwords do not match")
       return;
     }
 
@@ -69,7 +78,7 @@ export const PasswordModal: React.FC<PasswordModalProps> = ({
             </div>
           </div>
           <form onSubmit={handleSubmit(handleSavePassword)}>
-            <div>
+            <div className="relative">
               <FormPasswordField
                 label="New Password"
                 placeholder="Password"
@@ -84,11 +93,12 @@ export const PasswordModal: React.FC<PasswordModalProps> = ({
                 register={register}
                 errors={errors?.confirmPassword}
               />
+            <div className="text-danger text-xs absolute bottom-0 right-3">{error}</div>
             </div>
             <div className="flex w-full mt-3 md:justify-between gap-3">
               <PrimaryButton
                 type="reset"
-                onClick={() => reset}
+                onClick={handleCancel}
                 className="md:flex-none md:px-10 flex-1 bg-white border rounded-md p-3 font-bold border-primary text-primary"
               >
                 Cancel

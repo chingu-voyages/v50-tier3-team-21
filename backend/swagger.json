@@ -15,6 +15,10 @@
       {
         "name": "Auth",
         "description": "Authentication routes"
+      },
+      {
+        "name": "ResetPassword",
+        "description": "Password reset routes"
       }
     ],
     "paths": {
@@ -273,6 +277,323 @@
             },
             "401": {
               "description": "Unauthorized"
+            }
+          }
+        }
+      },
+      "/resetpassword/send-password-reset-email": {
+        "post": {
+          "summary": "Send password reset email",
+          "description": "Sends a password reset email to the user with a reset token.",
+          "tags": ["ResetPassword"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "email": {
+                      "type": "string",
+                      "description": "Required. The email address of the user."
+                    }
+                  },
+                  "example": {
+                    "email": "john.doe@example.com"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Password reset email sent",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "success"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Password reset email sent"
+                      },
+                      "link": {
+                        "type": "string",
+                        "example": "http://localhost:3000/api/resetpassword/reset-link/{token}"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "User not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "User not found"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Failed to send password reset email"
+                      },
+                      "error": {
+                        "type": "string",
+                        "example": "error.message"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/resetpassword/reset-link/{token}": {
+        "get": {
+          "summary": "Authorize reset token",
+          "description": "Authorize the reset token provided in the URL.",
+          "tags": ["ResetPassword"],
+          "parameters": [
+            {
+              "name": "token",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "The reset token."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Token authorized",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "success"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Token authorized"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid or expired token",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Invalid or expired token"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "User not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "User not found"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Failed to authorize token"
+                      },
+                      "error": {
+                        "type": "string",
+                        "example": "error.message"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/resetpassword/reset-password": {
+        "post": {
+          "summary": "Reset password",
+          "description": "Reset the user's password using the token.",
+          "tags": ["ResetPassword"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "password": {
+                      "type": "string",
+                      "description": "Required. The new password for the user account."
+                    },
+                    "confirmPassword": {
+                      "type": "string",
+                      "description": "Required. The password confirmation for the user account."
+                    }
+                  },
+                  "example": {
+                    "password": "newpassword123",
+                    "confirmPassword": "newpassword123"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Password reset successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "success"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Password reset successfully"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Passwords do not match",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Passwords do not match"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "User not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "User not found"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Failed to reset password"
+                      },
+                      "error": {
+                        "type": "string",
+                        "example": "error.message"
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }

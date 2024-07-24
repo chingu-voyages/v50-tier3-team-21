@@ -22,6 +22,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 const authRouter = require('./routes/authRoutes');
 const profileRouter = require('./routes/profileRoutes');
 const foodItemsRouter = require('./routes/foodItemsRoutes');
+const foodCategoriesRouter = require('./routes/foodCategoriesRoutes');
 const nearbyRestaurantRouter = require('./routes/nearbyRestaurantRoutes');
 const resetPasswordRouter = require('./routes/resetPasswordRoutes');
 
@@ -37,6 +38,7 @@ app.use(cors({credentials: true, origin: process.env.FRONTEND_URL}));
 app.use('/api/auth', authRouter);
 app.use('/api/profile', profileRouter);
 app.use('/api/fooditems', foodItemsRouter);
+app.use('/api/foodCategories', foodCategoriesRouter);
 app.use('/api/nearbyrestaurants', nearbyRestaurantRouter);
 app.use('/api/resetpassword', resetPasswordRouter);
 

@@ -12,7 +12,7 @@ const sendPasswordResetEmail = async (req, res) => {
     if (!user) {
       return res.status(404).json({ status: 'fail', message: 'User not found' });
     }
-    const token = generateToken({ id: user.id }, process.env.JWT_SECRET,  process.env.JWT_RESET_EXPIRES_IN);
+    const token = generateToken({ id: user.id }, process.env.JWT_RESET_SECRET,  process.env.JWT_RESET_EXPIRES_IN);
 
     // send email
     const address = email;
@@ -24,7 +24,7 @@ const sendPasswordResetEmail = async (req, res) => {
     return res.status(200).json({
       status: 'success',
       message: 'Password reset email sent',
-      link: `http://localhost:${process.env.PORT}/api/resetpassword/reset-link/${token}`
+      link: `${process.env.BACKEND_URL}/api/resetpassword/reset-link/${token}`
     });
   } catch (error) {
     console.error(error);
@@ -38,13 +38,15 @@ const authorizeResetToken = async (req, res) => {
     return res.status(400).json({ status: 'fail', message: 'Token must be provided' });
   }
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_RESET_SECRET);
     const user = await db.User.findByPk(decoded.id);
     if (!user) {
       return res.status(404).json({ status: 'fail', message: 'User not found' });
     }
     res.cookie('token', token, { httpOnly: true, sameSite: 'strict' });
-    return res.status(200).json({ status: 'success', message: 'Token authorized' });
+    // redirect to reset password page
+    console.log(`Page is redirected to ${process.env.FRONTEND_URL}/resetpassword`)
+    return res.redirect(`${process.env.FRONTEND_URL}/auth/change-password`);
   } catch (error) {
     if (error instanceof jwt.JsonWebTokenError) {
       return res.status(400).json({ status: 'fail', message: 'Invalid or expired token' });
@@ -62,7 +64,7 @@ const resetPassword = async (req, res) => {
     return res.status(400).json({ status: 'fail', message: 'Token must be provided' });
   }
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_RESET_SECRET);
     const user = await db.User.findByPk(decoded.id);
     if (!user) {
       return res.status(404).json({ status: 'fail', message: 'User not found' });
@@ -79,8 +81,6 @@ const resetPassword = async (req, res) => {
     // delete cookie after successful password change
     res.clearCookie('token');
     return res.status(200).json({ status: 'success', message: 'Password reset successfully' });
-    // delete cookie
-
   } catch (error) {
     if (error instanceof jwt.JsonWebTokenError) {
       return res.status(400).json({ status: 'fail', message: 'Invalid or expired token' });

@@ -1,5 +1,5 @@
-import { SignupForm } from "../components/authentication";
-import {HippoLogo} from "../components/ui";
+import { SignupForm } from "../../components/authentication";
+import {HippoLogo} from "../../components/ui";
 import {Link} from "react-router-dom";
 
 

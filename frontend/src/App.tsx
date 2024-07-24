@@ -7,15 +7,13 @@ import {
 
 import { AuthLayout } from "./layouts";
 import {
+    ChangePasswordPage ,
     LoginPage ,
-    NotFoundPage ,
-    SignupPage
+    NotFoundPage , ResetPasswordEmailPage ,
+    SignupPage , SuccessResetEmailPage
 } from "./pages";
 import {AppProvider} from "./provider/app.provider.tsx";
 import {MainLayout} from "./layouts/main.layout.tsx";
-import {ResetPasswordEmailPage} from "./pages/reset-password-email.page.tsx";
-import {SuccessResetEmailPage} from "./pages/success-reset-email.page.tsx";
-import {ChangePasswordPage} from "./pages/change-password.page.tsx";
 
 //Todo: define routes in separate file
 export default function App() {
@@ -26,7 +24,6 @@ export default function App() {
                     <Route path="/" element={<MainLayout />}>
                         <Route index element={<div> Hello world from Hungry hippo </div>}/>
                     </Route>
-
                     <Route  element={<AuthLayout />} >
                         <Route path='/auth/signup' element={<SignupPage />} />
                         <Route path="/auth/signin" element={<LoginPage />} />

@@ -1,5 +1,5 @@
 import {AuthHeader} from "./signup.page.tsx";
-import {ChangePasswordForm} from "../components/authentication/change-password-form.tsx";
+import {ChangePasswordForm} from "../../components/authentication/change-password-form.tsx";
 
 export const ChangePasswordPage = () => {
     return(

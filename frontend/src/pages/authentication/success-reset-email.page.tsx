@@ -1,6 +1,6 @@
 import {AuthHeader} from "./signup.page.tsx";
 import {useLocation , useNavigate} from "react-router-dom";
-import PrimaryButton from "../components/ui/button.tsx";
+import PrimaryButton from "../../components/ui/button.tsx";
 export const SuccessResetEmailPage = () => {
     const { state} = useLocation();
     const { email } = state

@@ -1,4 +1,4 @@
-import {LoginForm , SignupForm} from "../components/authentication";
+import {LoginForm , SignupForm} from "../../components/authentication";
 import {AuthFooter , AuthHeader} from "./signup.page.tsx";
 
 export const LoginPage = () => {

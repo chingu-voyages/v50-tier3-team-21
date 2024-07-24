@@ -1,5 +1,5 @@
 import {AuthHeader} from "./signup.page.tsx";
-import {ResetPasswordForm} from "../components/authentication/reset-password-form.tsx";
+import {ResetPasswordForm} from "../../components/authentication/reset-password-form.tsx";
 
 
 export const ResetPasswordEmailPage = () => {

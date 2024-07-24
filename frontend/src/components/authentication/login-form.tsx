@@ -36,7 +36,7 @@ export const LoginForm = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-3">
             { isError &&
                 <ErrorMessage
-                    message={error.response.data.message ?? 'Something went wrong. Please try again later'}
+                    message={error.response?.data?.message ?? 'Something went wrong. Please try again later'}
                 />
             }
             <FormField<LoginSchemaType, 'email'>

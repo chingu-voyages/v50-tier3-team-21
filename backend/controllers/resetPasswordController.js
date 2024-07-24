@@ -12,7 +12,7 @@ const sendPasswordResetEmail = async (req, res) => {
     if (!user) {
       return res.status(404).json({ status: 'fail', message: 'User not found' });
     }
-    const token = generateToken({ id: user.id }, process.env.JWT_SECRET,  process.env.JWT_RESET_EXPIRES_IN);
+    const token = generateToken({ id: user.id }, process.env.JWT_RESET_SECRET,  process.env.JWT_RESET_EXPIRES_IN);
 
     // send email
     const address = email;
@@ -38,7 +38,7 @@ const authorizeResetToken = async (req, res) => {
     return res.status(400).json({ status: 'fail', message: 'Token must be provided' });
   }
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_RESET_SECRET);
     const user = await db.User.findByPk(decoded.id);
     if (!user) {
       return res.status(404).json({ status: 'fail', message: 'User not found' });
@@ -62,7 +62,7 @@ const resetPassword = async (req, res) => {
     return res.status(400).json({ status: 'fail', message: 'Token must be provided' });
   }
   try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_RESET_SECRET);
     const user = await db.User.findByPk(decoded.id);
     if (!user) {
       return res.status(404).json({ status: 'fail', message: 'User not found' });

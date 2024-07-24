@@ -46,8 +46,7 @@ const authorizeResetToken = async (req, res) => {
     res.cookie('token', token, { httpOnly: true, sameSite: 'strict' });
     // redirect to reset password page
     console.log(`Page is redirected to ${process.env.FRONTEND_URL}/resetpassword`)
-    return res.redirect(`${process.env.FRONTEND_URL}/resetpassword`);
-    //return res.status(200).json({ status: 'success', message: 'Token authorized' });
+    return res.redirect(`${process.env.FRONTEND_URL}/auth/reset-password`);
   } catch (error) {
     if (error instanceof jwt.JsonWebTokenError) {
       return res.status(400).json({ status: 'fail', message: 'Invalid or expired token' });

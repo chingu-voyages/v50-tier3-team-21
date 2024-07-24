@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="fix: fix null check error">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/authentication/login-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/authentication/login-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/authentication/signup-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/authentication/signup-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/lib/http-client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/lib/http-client.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/vite.config.ts" afterDir="false" />
-    </list>
+    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="refactor: refactor pages import" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,6 +46,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/src/pages/authetification" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -116,7 +112,23 @@
       <option name="project" value="LOCAL" />
       <updated>1721767981743</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="chore: add dotenv">
+      <option name="closed" value="true" />
+      <created>1721805457241</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1721805457241</updated>
+    </task>
+    <task id="LOCAL-00008" summary="refactor: refactor pages import">
+      <option name="closed" value="true" />
+      <created>1721805478122</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1721805478122</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -128,7 +140,9 @@
     <MESSAGE value="feat: auth logic implemented" />
     <MESSAGE value="wip: reset password features" />
     <MESSAGE value="fix: fix null check error" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: fix null check error" />
+    <MESSAGE value="chore: add dotenv" />
+    <MESSAGE value="refactor: refactor pages import" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: refactor pages import" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

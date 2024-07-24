@@ -1,5 +1,4 @@
 import axios , {AxiosInstance ,AxiosResponse} from "axios";
-import * as process from "process";
 import {authService} from "../services/api/authentication/auth.service.ts";
 
 export class HttpClient {

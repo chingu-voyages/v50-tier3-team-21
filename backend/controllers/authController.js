@@ -17,7 +17,7 @@ const refreshToken = async (req, res, next) => {
     const decoded = jwt.verify(oldToken, process.env.JWT_SECRET);
     
     // Access token is valid, generate new refresh token
-    const newRefreshToken = generateToken({ id: decoded.id }, process.env.JWT_SECRET, process.env.JWT_REFRESH_EXPIRES_IN);
+    const newRefreshToken = generateToken({ id: decoded.id }, process.env.JWT_REFRESH_SECRET, process.env.JWT_REFRESH_EXPIRES_IN);
 
     // Set new refresh token in cookies
     res.cookie("refreshToken", newRefreshToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
@@ -27,14 +27,14 @@ const refreshToken = async (req, res, next) => {
   } catch (error) {
     // Token is invalid, verify the refresh token
     try {
-      const decodedRefresh = jwt.verify(oldRefreshToken, process.env.JWT_SECRET);
+      const decodedRefresh = jwt.verify(oldRefreshToken, process.env.JWT_REFRESH_SECRET);
       if (!decodedRefresh) {
         return res.status(401).json({ status: "fail", message: "Invalid refresh token" });
       }
 
       // Generate new tokens
       const newToken = generateToken({ id: decodedRefresh.id }, process.env.JWT_SECRET, process.env.JWT_EXPIRES_IN);
-      const newRefreshToken = generateToken({ id: decodedRefresh.id }, process.env.JWT_SECRET, process.env.JWT_REFRESH_EXPIRES_IN);
+      const newRefreshToken = generateToken({ id: decodedRefresh.id }, process.env.JWT_REFRESH_SECRET, process.env.JWT_REFRESH_EXPIRES_IN);
 
       // Set new tokens in cookies
       res.cookie("token", newToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });

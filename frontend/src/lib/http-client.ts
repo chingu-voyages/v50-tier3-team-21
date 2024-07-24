@@ -1,32 +1,24 @@
-import axios , {AxiosInstance , AxiosRequestConfig , AxiosResponse} from "axios";
-import {authService } from "../services/api/authentication/auth.service.ts";
+import axios , {AxiosInstance ,AxiosResponse} from "axios";
+import {authService} from "../services/api/authentication/auth.service.ts";
 
 export class HttpClient {
     //private static readonly  baseUrl  = process.env.REACT_API_REMOTE_BASE_URL || process.env.REACT_API_LOCAL_BASE_URL;
     private client(): AxiosInstance {
         const axiosConfig = {
-            baseURL: "http://localhost:3000/api", //todo: use env variable instead of this
+            baseURL: import.meta.env.VITE_NODE_ENV !== 'production' ? import.meta.env.VITE_LOCAL_API_BASE_URL : import.meta.env.VITE_REMOTE_API_BASE_URL,
+            withCredentials: true
         }
         let axiosInstance = axios.create(axiosConfig);
 
         //add a request interceptor
         axiosInstance.interceptors.request.use((config) => {
-                const accessToken: string | null = localStorage.getItem('token');
-                const refreshToken: string | null = localStorage.getItem('refreshToken');
-
-                if(config.url.includes('/refresh-token') && refreshToken ) {
-                    config.headers.Authorization = `Bearer ${accessToken}`;
-                }else if (accessToken) {
-                    config.headers.Authorization = `Bearer ${accessToken}`;
-                }
-
                 return config
             }, (error) => {
                 return Promise.reject(error)
             }
         )
         //add a response interceptor
-        /* axiosInstance.interceptors.response.use(
+         axiosInstance.interceptors.response.use(
              (response) => {
                       return response;
                       },
@@ -34,8 +26,7 @@ export class HttpClient {
                  if(error.response  && error.response.status === '401'){
                      try{
                          await authService.refreshAccessToken();
-                         const accessToken: string | null = localStorage.getItem('token');
-                         error.config.headers.Authorization = ` Bearer ${accessToken}`;
+
                          return axiosInstance(error.config);
                      }catch(refreshTokenError){
                          return Promise.reject(refreshTokenError);
@@ -44,7 +35,7 @@ export class HttpClient {
                      return  Promise.reject(error);
                  }
              }
-         )*/
+         )
         return axiosInstance
     }
     public  get(url: string): Promise<AxiosResponse>{

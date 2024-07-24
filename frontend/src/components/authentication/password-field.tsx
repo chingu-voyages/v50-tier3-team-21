@@ -17,15 +17,15 @@ const withPasswordToggle = <T,>(Component: React.ComponentType<FormFieldProps<T 
        return (
            <div className="w-full flex flex-col gap-2  justify-center">
                <FormLabel label={label} htmlFor={props.name} />
-               <div className="flex justify-center border rounded-lg">
+               <div className="w-full border rounded-lg relative">
                    <Component {...rest}
                               type={showPassword ? 'text': 'password'}
-                              className=" bg-transparent focus:outline-0 pr-12  border-none  "
+                              className="bg-transparent focus:outline-0 border-none "
                    />
                    <button
                        onClick={togglePasswordVisibility}
                        type={"button"}
-                       className="flex justify-center items-center pr-3 text-secondary"
+                       className="absolute right-0 top-1/2 -translate-y-1/2 pr-3 text-secondary"
                    >
                        { showPassword ? <EyeIcon />:  <EyeOffIcon /> }
                    </button>

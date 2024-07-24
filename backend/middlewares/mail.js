@@ -1,4 +1,4 @@
-const nodemailer = require("nodemailer")
+const nodemailer = require("nodemailer");
 
 async function mailService(emailAddress, link) {
   const transporter = nodemailer.createTransport({
@@ -18,7 +18,7 @@ async function mailService(emailAddress, link) {
     to: emailAddress,
     subject: "Password Reset", // Subject line
     text: "The link will expire in 15 minutes.", // plain text body
-    html: `<a href="${link}">Click here</a> to reset your password.`, // html body
+    html: `The link will expire in 15 minutes.<br/><a href="${link}">Click here</a> to reset your password.`, // html body
   });
 
   console.log("Message sent: %s", info.messageId);
@@ -33,3 +33,4 @@ async function sendEmail(address, link) {
 }
 
 module.exports = { sendEmail };
+

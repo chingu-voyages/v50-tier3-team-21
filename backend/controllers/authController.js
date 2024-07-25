@@ -185,7 +185,7 @@ const login = async (req, res, next) => {
     );
     const refreshToken = generateToken(
       { id: result.id },
-      process.env.JWT_SECRET,
+      process.env.JWT_REFRESH_SECRET,
       process.env.JWT_REFRESH_EXPIRES_IN,
     );
 

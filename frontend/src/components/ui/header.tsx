@@ -1,6 +1,6 @@
 import { ReactNode, useState } from "react";
 import {useAuth} from "../../hooks/auth.hook.ts";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 interface HeaderNavProps {
     isLoggedIn?: boolean;
     onLogout?: boolean;
@@ -9,6 +9,7 @@ interface HeaderNavProps {
 export default function HeaderNav() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(true);
     const {isAuthenticated, data, logout} = useAuth();
+    const navigate = useNavigate();
     const mobileLinks = [
         { name: 'Home', href: '/', icon: 'icon-[lets-icons--home-duotone]' },
         { name: 'Recent Orders', href: '/orders', icon: 'icon-[solar--history-line-duotone]' },
@@ -51,15 +52,15 @@ export default function HeaderNav() {
                 <div className="hidden md:flex flex-1 justify-end">
                     <div className="text-lg text-dark/60">{isAuthenticated ? 'Order & Log Out' : 'Order & Sign In'}</div>
                 </div>
-                <Link
-                    to="/profile"
+                <button
+                    onClick={() => navigate("/profile")}
                     type="button"
                     className="hidden md:inline-flex items-center justify-center  p-2.5 text-dark"
                 >
                     <span className="sr-only">My Profile</span>
                     <span className="icon-[ph--user-duotone] h-8 w-8" style={{ color: "#49CC76" }}></span>
                     <span>{isAuthenticated ? data && data?.firstName: ''}</span>
-                </Link>
+                </button>
                 {isAuthenticated ? (
                     <button
                         type="button"

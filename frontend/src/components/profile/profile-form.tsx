@@ -21,7 +21,7 @@ interface ProfileFormProps {
   setUser: (user: UserType) => void;
 }
 
-export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
+export const ProfileForm: React.FC<ProfileFormProps> = ({ user, setUser }) => {
   const [viewPasswordModal, setViewPasswordModal] = useState(false);
   const {
     register,
@@ -48,6 +48,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user }) => {
       );
       const { data } = response.data;
       console.log(data);
+      setUser(editedUser)
       alert("Profile edited");
     } catch (error) {
       console.log(error);

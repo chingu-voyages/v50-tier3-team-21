@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <div className="hidden md:flex items-center justify-center flex-col">
+    <div className="hidden md:flex items-center justify-center flex-col mt-10">
       <hr className="border-primary border w-[95%]" />
       <div className="flex items-center justify-center h-24 gap-3">
         <p>All rights Reserverd</p>

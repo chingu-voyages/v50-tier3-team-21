@@ -1,6 +1,11 @@
 // api request with mutation methods POST | PUT | PATCH | DELETE
 import {useMutation} from "@tanstack/react-query";
-import {LoginSchemaType , SignUpSchemaType} from "../../../types/authentication/auth.types.ts";
+import {
+    ChangePasswordType ,
+    LoginSchemaType ,
+    ResetPasswordType ,
+    SignUpSchemaType
+} from "../../../types/authentication/auth.types.ts";
 import {authService } from "./auth.service.ts";
 
 
@@ -21,4 +26,22 @@ export const useSignUpWithCredentials = () => {
              mutationFn: (data: SignUpSchemaType) => authService.signupWithCredentials(data)
          }
      )
+}
+
+export const useSendPasswordResetEmail = () => {
+    return useMutation(
+        {
+            mutationKey: ['reset-password-email'],
+            mutationFn: (data: ResetPasswordType) => authService.sendPasswordResetEmail(data)
+        }
+    )
+}
+
+export const useChangePassword = () => {
+    return useMutation(
+        {
+            mutationKey: ['change-password'],
+            mutationFn: (data: ChangePasswordType) => authService.changePassword(data)
+        }
+    )
 }

@@ -1,5 +1,4 @@
 const express = require('express');
-
 const jwt = require('jsonwebtoken');
 
 const cookieParser = require('cookie-parser');
@@ -13,13 +12,13 @@ const foodItemsRouter = require('./routes/foodItemsRoutes');
 const foodCategoriesRouter = require('./routes/foodCategoriesRoutes');
 const nearbyRestaurantRouter = require('./routes/nearbyRestaurantRoutes');
 const resetPasswordRouter = require('./routes/resetPasswordRoutes');
+const walletRouter = require('./routes/walletRoutes');
 
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
 // app.use(express.urlencoded({ extended: false }));
-
 
 app.use(cookieParser());
 app.use(cors({credentials: true, origin: process.env.FRONTEND_URL}));
@@ -31,6 +30,7 @@ app.use('/api/fooditems', foodItemsRouter);
 app.use('/api/foodCategories', foodCategoriesRouter);
 app.use('/api/nearbyrestaurants', nearbyRestaurantRouter);
 app.use('/api/resetpassword', resetPasswordRouter);
+app.use('/api/wallets', walletRouter);
 
 // Sync database
 db.sequelize.sync().then((req) => {  

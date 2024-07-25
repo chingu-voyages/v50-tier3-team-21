@@ -10,7 +10,6 @@ import PrimaryButton from "../ui/button.tsx";
 import {Link , useNavigate} from "react-router-dom";
 import {useAuth} from "../../hooks/auth.hook.ts";
 import {useLoginWithPasswordAndEmail} from "../../services/api/authentication/mutation.tsx";
-import {data} from "autoprefixer";
 import {ErrorMessage} from "./error_message.tsx";
 
 export const LoginForm = () => {
@@ -36,7 +35,7 @@ export const LoginForm = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-3">
             { isError &&
                 <ErrorMessage
-                    message={error.response.data.message ?? 'Something went wrong. Please try again later'}
+                    message={error.response?.data?.message ?? 'Something went wrong. Please try again later'}
                 />
             }
             <FormField<LoginSchemaType, 'email'>
@@ -57,7 +56,7 @@ export const LoginForm = () => {
                 error={errors.password}
             />
             <div className='flex justify-end items-center mb-4'>
-               <Link to='/auth' className="text-secondary" >
+               <Link to='/auth/reset-password/sent-link' className="text-secondary" >
                    Forgot password ?
                </Link>
             </div>

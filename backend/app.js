@@ -32,22 +32,18 @@ app.use(express.json());
 
 // Middleware
 app.use(cookieParser());
-// app.use(cors({credentials: true, origin: process.env.FRONTEND_URL}));
-// Allow specific origin
 
-const allowedOrigins = [`${process.env.FRONTEND_URL}:5173`];
+// CORS Middleware with debugging headers
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', process.env.FRONTEND_URL);
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  next();
+});
 
-app.use(cors({
-    origin: function (origin, callback) {
-        // Allow requests with no origin (like mobile apps or curl requests)
-        if (!origin) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) === -1) {
-            const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-            return callback(new Error(msg), false);
-        }
-        return callback(null, true);
-    }
-}));
+app.use(cors({credentials: true, origin: process.env.FRONTEND_URL}));
+
 
 // Routes
 app.use('/api/auth', authRouter);

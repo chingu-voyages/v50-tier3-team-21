@@ -4,9 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="refactor: refactor pages import">
+    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="fix: add withCredentials options in axios to allow token to be injected into req  cookies">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/lib/http-client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/lib/http-client.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/authentication/change-password-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/authentication/change-password-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/authentication/form-field.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/authentication/form-field.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/authentication/form-label.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/authentication/form-label.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/authentication/login-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/authentication/login-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/authentication/password-field.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/authentication/password-field.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/authentication/reset-password-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/authentication/reset-password-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/authentication/signup-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/authentication/signup-form.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/ui/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ui/header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/ui/icons/eye.icons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ui/icons/eye.icons.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/provider/auth.provider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/provider/auth.provider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/authentication/interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/authentication/interface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/types/authentication/auth.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/types/authentication/auth.types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/utils/helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/helpers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/utils/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/vite.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,7 +30,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="test/email" />
+        <entry key="$PROJECT_DIR$" value="110-task-125a-implement-a-forgotten-password-feature-frontend" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -37,7 +51,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "110-task-125a-implement-a-forgotten-password-feature-frontend",
+    "git-widget-placeholder": "fix/frontend-error-deployment",
     "last_opened_file_path": "/mnt/mydata/Archive/WebstormProjects/voyage",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -66,6 +80,9 @@
       <workItem from="1721321856976" duration="12694000" />
       <workItem from="1721409270361" duration="1829000" />
       <workItem from="1721575191351" duration="9909000" />
+      <workItem from="1721894264086" duration="157000" />
+      <workItem from="1721991734996" duration="1478000" />
+      <workItem from="1721993268812" duration="8030000" />
     </task>
     <task id="LOCAL-00001" summary="chore: add axios">
       <option name="closed" value="true" />
@@ -131,7 +148,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721805478122</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="fix: add withCredentials options in axios to allow token to be injected into req  cookies">
+      <option name="closed" value="true" />
+      <created>1721827094399</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1721827094399</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -145,7 +170,8 @@
     <MESSAGE value="fix: fix null check error" />
     <MESSAGE value="chore: add dotenv" />
     <MESSAGE value="refactor: refactor pages import" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: refactor pages import" />
+    <MESSAGE value="fix: add withCredentials options in axios to allow token to be injected into req  cookies" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: add withCredentials options in axios to allow token to be injected into req  cookies" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -162,7 +188,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/frontend/src/components/authentication/reset-password-form.tsx</url>
-          <line>23</line>
+          <line>25</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>

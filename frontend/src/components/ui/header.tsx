@@ -1,7 +1,7 @@
 import { ReactNode, useState } from "react";
 import {useAuth} from "../../hooks/auth.hook.ts";
 import {Link} from "react-router-dom";
-interface HeaderNavProps {
+export interface HeaderNavProps {
     isLoggedIn?: boolean;
     onLogout?: boolean;
     children: ReactNode;

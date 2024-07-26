@@ -1,47 +1,47 @@
-import React from 'react';
+import {ComponentType , useState} from 'react';
 import {FormField , FormFieldProps} from "./form-field.tsx";
 import {EyeIcon , EyeOffIcon} from "../ui";
+import {FormLabel} from "./form-label.tsx";
+import {FieldValues} from "react-hook-form";
 
-interface PasswordFieldProps<T> extends Omit<FormFieldProps<T>, 'type'> {}
+interface PasswordFieldProps<T extends  FieldValues> extends  Omit<FormFieldProps<T> , 'type'> {}
 
-const withPasswordToggle = <T ,>(
-    Component: React.ComponentType<FormFieldProps<T>>
-) => {
+//todo: use icons instead of hide or show text
+const withPasswordToggle = <T extends FieldValues>(Component: ComponentType<FormFieldProps<T>>) => {
     return (props: PasswordFieldProps<T>) => {
-        const { label, className, name, error, ...rest } = props;
-        const [isPasswordVisible, setPasswordVisibility] = React.useState(false);
-
+        const [showPassword, setShowPassword] = useState(false);
+        const {label, error, ...rest} = props
         const togglePasswordVisibility = () => {
-            setPasswordVisibility(!isPasswordVisible);
+            setShowPassword((prev) => !prev);
         };
-
         return (
-            <div className="w-full flex flex-col gap-2 justify-center">
-                <label htmlFor={name as string}>{label}</label>
-                <div className="w-full border rounded-lg relative">
-                    <Component
-                        {...rest as FormFieldProps<T>}
-                        type={isPasswordVisible ? 'text' : 'password'}
-                        register={rest.register}
-                        className={`bg-transparent focus:outline-0 border-none ${className || ''}`}
+            <div className="w-full flex flex-col gap-2  justify-center">
+                <FormLabel label={label} htmlFor={props.name} />
+                <div className="flex justify-center border rounded-lg">
+                    <Component {...rest}
+                               error={error}
+                               type={showPassword ? 'text': 'password'}
+                               className=" bg-transparent focus:outline-0 pr-12  border-none  "
                     />
                     <button
                         onClick={togglePasswordVisibility}
-                        type="button"
-                        className="absolute right-0 top-1/2 -translate-y-1/2 pr-3 text-secondary"
+                        type={"button"}
+                        className="flex justify-center items-center pr-3 text-secondary"
                     >
-                        {isPasswordVisible ? <EyeIcon /> : <EyeOffIcon />}
+                        { showPassword ? <EyeIcon />:  <EyeOffIcon /> }
                     </button>
                 </div>
-                {error && (
-                    <span className="text-danger text-sm font-medium" role="alert">
-                        {error.message}
-                    </span>
-                )}
+                {error &&
+                    <span
+                        className="text-danger text-sm font-medium"
+                        role={"alert"}>
+                  { error?.message }
+              </span>
+                }
             </div>
-        );
-    };
-};
+        )
+    }
+}
+
 
 export const PasswordField = withPasswordToggle(FormField);
-

@@ -394,22 +394,14 @@
             }
           ],
           "responses": {
-            "200": {
-              "description": "Token authorized",
-              "content": {
-                "application/json": {
+            "302": {
+              "description": "Redirect to change password",
+              "headers": {
+                "Location": {
+                  "description": "URL to change password",
                   "schema": {
-                    "type": "object",
-                    "properties": {
-                      "status": {
-                        "type": "string",
-                        "example": "success"
-                      },
-                      "message": {
-                        "type": "string",
-                        "example": "Token authorized"
-                      }
-                    }
+                    "type": "string",
+                    "example": "{FRONTEND_URL}/auth/change-password"
                   }
                 }
               }

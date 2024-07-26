@@ -7,6 +7,8 @@ import {useNavigate} from "react-router-dom";
 import {useSendPasswordResetEmail} from "../../services/api/authentication/mutation.tsx";
 import {ErrorMessage} from "./error_message.tsx";
 import {useState} from "react";
+import {isAxiosError} from "../../utils";
+
 
 export  const ResetPasswordForm = () => {
     const {
@@ -26,13 +28,20 @@ export  const ResetPasswordForm = () => {
     }
   return(
       <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-4">
-          {isError && <ErrorMessage message={error.response?.data?.message ?? "An error occured. Please try again later"} />}
-          <FormField<ResetPasswordType, 'email'>
+          {isError &&
+              <ErrorMessage
+                  message={
+                      isAxiosError(error)
+                          ? error.response?.data?.message ?? "An error occurred. Please try again later"
+                          : "An unexpected error occurred."
+                  }
+              />
+          }
+          <FormField<ResetPasswordType>
               type="email"
               placeholder="Enter your email"
               name="email"
               label='Email'
-              isRequired="true"
               register={register}
               error={errors.email}
           />

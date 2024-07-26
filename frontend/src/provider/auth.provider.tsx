@@ -1,8 +1,8 @@
-import React , {createContext , PropsWithChildren , useEffect , useState} from "react";
+import {createContext , PropsWithChildren , useState} from "react";
 
 
 export interface IAuthContext {
-    data: IUser | null,
+    data: IUser | undefined,
     isAuthenticated: boolean,
     loggedIn: ()  => void,
     storeUserData: (data: IUser) => void
@@ -26,7 +26,7 @@ export  const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
    const [ isAuthenticated, setIsAuthenticated ] = useState<boolean>(false);
-   const [userData, setUserData ] = useState<IUser>(null);
+   const [userData, setUserData ] = useState<IUser | undefined>(undefined);
 
    const handleLoggedIn = () => {
        setIsAuthenticated(true);
@@ -35,7 +35,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
        setUserData(userData)
    }
    const handleLogout = () => {
-       setUserData(null)
+       setUserData(undefined)
        setIsAuthenticated(false)
    }
    return (

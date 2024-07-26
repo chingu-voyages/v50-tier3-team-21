@@ -35,6 +35,7 @@ type CategoryType = {
 
 export const RestaurantPage = () => {
   const [restaurantData, setRestaurantData] = useState<MenuItemType[]>([]);
+  const [filterVisible, setFilterVisible] = useState(true);
   const { restaurantId } = useParams();
 
   // get list of foodITems from API
@@ -54,7 +55,9 @@ export const RestaurantPage = () => {
     getMenu();
   }, [restaurantId]);
 
-
+  const handleViewFilter = () => {
+    setFilterVisible((prev) => !prev);
+  };
 
   return (
     <>
@@ -83,13 +86,49 @@ export const RestaurantPage = () => {
           </div>
           <div className="h-[200px] rounded-2xl md:h-[400px] bg-cover md:bg-fill bg-no-repeat bg-[url(https://images.pexels.com/photos/735869/pexels-photo-735869.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)] md:bg-center"></div>
 
-          <div className="flex items-center gap-3 my-5">
-            <span>Restaurant Menus</span>
-            <span className="icon-[mage--filter] text-secondary text-2xl"></span>
+          <div className="flex items-center gap-3 my-5 relative cursor-pointer">
+            <span>Restaurnat Menus </span>
+            <span
+              className="icon-[mage--filter] text-secondary text-2xl"
+              onClick={handleViewFilter}
+            ></span>
+            {filterVisible && (
+              <div className=" w-48 h-56 p-3 border-secondary/60 border rounded-md shadow-lg absolute bg-white left-36 top-8">
+                <ul className="flex flex-col justify-around h-full">
+                  <li>
+                    <input type="checkbox" className="appearance-none w-4 h-4 border-2 border-white rounded cursor-pointer checked:bg-secondary" style={{boxShadow: "0 0 0 1px lightGrey"}} checked/>
+                    <label htmlFor="appetizers" className="ml-3 text-lg">
+                      Appetizers
+                    </label>
+                  </li>
+                  <li>
+                    <input type="checkbox"  className="appearance-none w-4 h-4 border-2 border-white rounded cursor-pointer checked:bg-secondary" style={{boxShadow: "0 0 0 1px lightGrey"}} checked/>
+                    <label htmlFor="desserts" className="ml-3 text-lg">
+                      Desserts
+                    </label>
+                  </li>
+                  <li>
+                    <input type="checkbox"  className="appearance-none w-4 h-4 border-2 border-white rounded cursor-pointer checked:bg-secondary" style={{boxShadow: "0 0 0 1px lightGrey"}} checked/>
+                    <label htmlFor="beverages" className="ml-3 text-lg">
+                      Beverages
+                    </label>
+                  </li>
+                  <li>
+                    <input type="checkbox"  className="appearance-none w-4 h-4 border-2 border-white rounded cursor-pointer checked:bg-secondary" style={{boxShadow: "0 0 0 1px lightGrey"}} checked/>
+                    <label htmlFor="salads" className="ml-3 text-lg">
+                      Salads
+                    </label>
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
+
           <hr />
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 my-5 p-3 justify-items-center">
-            {restaurantData.map((item: MenuItemType) => <FoodCard item={item} />)}
+            {restaurantData.map((item: MenuItemType) => (
+              <FoodCard item={item} />
+            ))}
           </div>
         </div>
       )}

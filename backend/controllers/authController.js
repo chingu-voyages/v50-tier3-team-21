@@ -30,12 +30,10 @@ const refreshToken = async (req, res, next) => {
       secure: process.env.NODE_ENV === "production",
     });
 
-    return res
-      .status(200)
-      .json({
-        status: "success",
-        message: "Token is valid, new refresh token generated",
-      });
+    return res.status(200).json({
+      status: "success",
+      message: "Token is valid, new refresh token generated",
+    });
   } catch (error) {
     // Token is invalid, verify the refresh token
     try {
@@ -128,6 +126,8 @@ const signup = async (req, res, next) => {
         message: "Failed to create user",
       });
     }
+
+    // TODO: send email to user
 
     return res.status(201).json({
       status: "success",

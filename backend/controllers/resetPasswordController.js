@@ -24,6 +24,9 @@ const sendPasswordResetEmail = async (req, res) => {
     const address = email;
     const link = `${process.env.BACKEND_URL}/api/resetpassword/reset-link/${token}`;
 
+    // TODO: sendEmail(address, link, subject, html)
+    // const subject = 'Password Reset';
+    // const html = `The link will expire in 15 minutes.<br/><a href="${link}">Click here</a> to reset your password.`
     sendEmail(address, link);
 
     // send response

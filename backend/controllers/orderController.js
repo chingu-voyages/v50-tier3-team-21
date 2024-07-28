@@ -39,6 +39,7 @@ const createOrder = async (req, res) => {
     }
 };
 
+
 // Controller to get orders by user
 const getOrderByUser = async (req, res) => {
     const userId = req.user.id;
@@ -54,7 +55,6 @@ const getOrderByUser = async (req, res) => {
                         {
                             model: FoodItem,
                             as: 'item',
-                            attributes: ['id', 'name', 'price'] 
                         }
                     ]
                 }
@@ -67,4 +67,46 @@ const getOrderByUser = async (req, res) => {
     }
 };
 
-module.exports = { createOrder, getOrderByUser };
+
+// Controller to cancel an order
+const cancelOrder = async (req, res) => {
+
+    const { orderId } = req.params;
+    const userId = req.user.id;
+    
+    
+    try {
+
+        const  orderDetails = await Order.findOne({
+            where: { id: orderId },
+        });
+        
+        if (!orderDetails) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
+        
+        // Update the order to set cancelled to true
+        if ( userId !== orderDetails.userId) {
+            return res.status(401).json({ message: 'Unauthorized user' });
+        }
+
+        if (orderDetails.cancelled) {
+            return res.status(400).json({ message: 'Order already cancelled' });
+        }
+
+        const result = await Order.update(
+            { cancelled: true },
+            { where: { id: orderId } }
+        );
+
+        if (result[0] === 0) {
+            return res.status(404).json({ message: 'Order not found' });
+        }
+
+        res.status(200).json({ message: 'Order cancelled successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to cancel order', error: error.message });
+    }
+};
+
+module.exports = { createOrder, getOrderByUser, cancelOrder };

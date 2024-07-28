@@ -54,7 +54,7 @@ const getOrderByUser = async (req, res) => {
                         {
                             model: FoodItem,
                             as: 'item',
-                            attributes: ['id', 'name', 'price'] // Adjust attributes as needed
+                            attributes: ['id', 'name', 'price'] 
                         }
                     ]
                 }

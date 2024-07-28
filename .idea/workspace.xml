@@ -4,10 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="fix: fix types issue that blocks frontend to be build">
+    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="fix: fix types issues from form field component that trigger error boundaries">
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/interactive-map/address-search-input.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/interactive-map/address-search-provider.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/interactive-map/address-search.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/interactive-map/popup.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/hooks/debounce.hook.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/hooks/geocode-query.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/hooks/geolocation.hook.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/services/api/interctive-map/restaurant.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/services/api/searchbox/mutation.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/services/api/searchbox/queries.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/authentication/form-field.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/authentication/form-field.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/authentication/password-field.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/authentication/password-field.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/backend/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/interactive-map/map.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/interactive-map/map.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/hooks/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/hooks/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/layouts/main.layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/layouts/main.layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/lib/http-client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/lib/http-client.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/home/home.page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/home/home.page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/provider/auth.provider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/provider/auth.provider.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +42,9 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/frontend/src/services/api/searchbox/queries.ts" root0="SKIP_INSPECTION" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -38,7 +62,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;fix/frontend-error-deployment&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;44-us-23-interactive-map&quot;,
     &quot;last_opened_file_path&quot;: &quot;/mnt/mydata/Archive/WebstormProjects/voyage&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -81,6 +105,10 @@
       <workItem from="1721991734996" duration="1478000" />
       <workItem from="1721993268812" duration="9626000" />
       <workItem from="1722008844505" duration="675000" />
+      <workItem from="1722072093480" duration="660000" />
+      <workItem from="1722091427390" duration="3749000" />
+      <workItem from="1722096729660" duration="4806000" />
+      <workItem from="1722171556962" duration="19903000" />
     </task>
     <task id="LOCAL-00001" summary="chore: add axios">
       <option name="closed" value="true" />

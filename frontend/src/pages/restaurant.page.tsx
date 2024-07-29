@@ -35,8 +35,8 @@ type CategoryType = {
   updatedAt: string;
 };
 
-interface CategoryList {
-  string: boolean;
+interface CategoryListType {
+  [key: string]: boolean;
 }
 
 export const RestaurantPage = () => {
@@ -46,7 +46,7 @@ export const RestaurantPage = () => {
     []
   );
   const [error, setError] = useState<string | null>(null);
-  const [categories, setCategories] = useState<CategoryList>({});
+  const [categories, setCategories] = useState<CategoryListType>({});
   const { restaurantId } = useParams<{ restaurantId: string }>();
 
   // get list of foodITems from API
@@ -74,14 +74,14 @@ export const RestaurantPage = () => {
 
   // get a list of categories that are present at this restaurant
   const getCategories = (data: MenuItemType[]) => {
-    let categoryList = data
-      .map((item) => item.Categories.map((cat) => cat.name))
-      .flat(); // flatten because is {{}}
-    categoryList = Array.from(new Set(categoryList));
-    const categoryObj = categoryList.reduce((acc, item) => {
+    const categoryList = data.flatMap((item) =>
+      item.Categories.map((cat) => cat.name)
+    );
+    const uniqueCategories = Array.from(new Set(categoryList));
+    const categoryObj = uniqueCategories.reduce((acc, item) => {
       acc[item] = true;
       return acc;
-    }, {});
+    }, {} as CategoryListType);
     setCategories(categoryObj);
   };
 
@@ -89,30 +89,21 @@ export const RestaurantPage = () => {
     setFilterVisible((prev) => !prev);
   };
 
-  //! WORKING ON FILTERING
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { checked, value } = e.target;
 
-    const updatedCategories = {...categories, [value]: checked}
-    // Update categories state
-    setCategories(updatedCategories);
+    const updatedCategories = { ...categories, [value]: checked };
 
-  
+    setCategories(updatedCategories);
 
     const catsToInclude = Object.keys(categories).filter(
       (cat) => updatedCategories[cat]
     );
 
-
-      const filtered = restaurantData.filter((item) =>
-        item.Categories.some((category) =>
-          catsToInclude.includes(category.name)
-        )
-      );
-      setFilteredMenuItems(filtered);
-console.log(filtered)
-
-
+    const filtered = restaurantData.filter((item) =>
+      item.Categories.some((category) => catsToInclude.includes(category.name))
+    );
+    setFilteredMenuItems(filtered);
   };
 
   return (

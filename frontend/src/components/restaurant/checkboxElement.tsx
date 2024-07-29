@@ -4,21 +4,24 @@ interface RadioButtonProps {
   name: string;
   label: string;
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  isChecked: boolean
 }
 
 
-export const CheckboxElement: FC<RadioButtonProps> = ({name, label, handleChange}) => {
+export const CheckboxElement: FC<RadioButtonProps> = ({name, label, handleChange, isChecked}) => {
   return (
     <li>
       <input
         type="checkbox"
         name={name}
+        id={name}
         value={name}
         className="appearance-none w-4 h-4 border-2 border-white rounded cursor-pointer checked:bg-secondary"
         style={{ boxShadow: "0 0 0 1px lightGrey" }}
-        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}
-      />
-      <label htmlFor="appetizers" className="ml-3 text-lg">
+        onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e)}   
+        checked={isChecked}
+        />
+      <label htmlFor={name} className="ml-3 text-lg cursor-pointer">
         {label[0].toUpperCase() + label.slice(1)}
       </label>
     </li>

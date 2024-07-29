@@ -35,6 +35,10 @@ type CategoryType = {
   updatedAt: string;
 };
 
+interface CategoryList {
+  string: boolean;
+}
+
 export const RestaurantPage = () => {
   const [restaurantData, setRestaurantData] = useState<MenuItemType[]>([]);
   const [filterVisible, setFilterVisible] = useState(false);
@@ -42,7 +46,7 @@ export const RestaurantPage = () => {
     []
   );
   const [error, setError] = useState<string | null>(null);
-  const [categories, setCategories] = useState<string[]>([]);
+  const [categories, setCategories] = useState<CategoryList>({});
   const { restaurantId } = useParams<{ restaurantId: string }>();
 
   // get list of foodITems from API
@@ -68,49 +72,47 @@ export const RestaurantPage = () => {
     getMenu();
   }, [restaurantId]);
 
-
+  // get a list of categories that are present at this restaurant
   const getCategories = (data: MenuItemType[]) => {
-    // get categories from each item and flatten into single array with no duplicates
-    let categoryList = data.map(item => item.Categories.map(cat => cat.name)).flat();
+    let categoryList = data
+      .map((item) => item.Categories.map((cat) => cat.name))
+      .flat(); // flatten because is {{}}
     categoryList = Array.from(new Set(categoryList));
-    setCategories(categoryList)
-  }
+    const categoryObj = categoryList.reduce((acc, item) => {
+      acc[item] = true;
+      return acc;
+    }, {});
+    setCategories(categoryObj);
+  };
 
   const handleViewFilter = () => {
     setFilterVisible((prev) => !prev);
   };
 
- const cats = [];
- //! WORKING ON FILTERING
+  //! WORKING ON FILTERING
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const edit = restaurantData.filter(item =>
-      item.Categories.some(category => category.name === e.target.name)) 
-//     const {checked, value} = e.target;
-   
-//     if (checked && !cats.includes(value)) cats.push(value);
-//     if (!checked && cats.includes(value)) cats.filter((cat) => cat !== value);
-// console.log(cats)
-    // //const filteredItems = restaurantData.filter(cat => cats.includes(cat.name))
-    // //const filteredItems = restaurantData.filter(item => item.Categories.some(cat => cats.includes(cat.name)))
-    // const filteredList = [];
-    // for (let i = 0; i < restaurantData.length; i++) {
-    //   const filtered = restaurantData[i].Categories.filter(
-    //     (cat) => cat.name === "bread"
-    //   );
-    //   filteredList.push(filtered);
-    // }
-    // console.log("hi", filteredList);
-    // //const filteredItems = restaurantData.forEach(foodItem => foodItem.Categories.some(cat => cat.name === 'breads'));
-    // //console.log(filteredItems)
+    const { checked, value } = e.target;
 
-    // if (e.target.checked && !filteredMenuItems.includes(e.target.value)) {
-    //   setFilteredMenuItems((prev) => [...prev, e.target.value]);
-    // } else {
-    //   setFilteredMenuItems((prev) =>
-    //     prev.filter((item) => item !== e.target.value)
-    //   );
-    // }
-    // console.log(filteredMenuItems);
+    const updatedCategories = {...categories, [value]: checked}
+    // Update categories state
+    setCategories(updatedCategories);
+
+  
+
+    const catsToInclude = Object.keys(categories).filter(
+      (cat) => updatedCategories[cat]
+    );
+
+
+      const filtered = restaurantData.filter((item) =>
+        item.Categories.some((category) =>
+          catsToInclude.includes(category.name)
+        )
+      );
+      setFilteredMenuItems(filtered);
+console.log(filtered)
+
+
   };
 
   return (
@@ -150,13 +152,15 @@ export const RestaurantPage = () => {
               <div className=" md:w-48 md:h-56 p-3 border-secondary/60 border rounded-md shadow-lg absolute bg-white left-36 top-8">
                 <form>
                   <ul className="flex flex-col justify-around h-full">
-                    {categories.map(category => <CheckboxElement
-                      name={category}
-                      label={category}
-                      handleChange={handleChange}
-                      key={category}
-                    />)}
-                  
+                    {Object.keys(categories).map((category) => (
+                      <CheckboxElement
+                        name={category}
+                        label={category}
+                        handleChange={handleChange}
+                        key={category}
+                        isChecked={categories[category]}
+                      />
+                    ))}
                   </ul>
                 </form>
               </div>

@@ -1,38 +1,11 @@
+import { MenuItemType } from "./types/types";
+
+// types
 interface RestaurantHeaderTypes {
   restaurantData: MenuItemType[];
 }
-interface MenuItemType {
-  id: number;
-  name: string;
-  imageUrl: string;
-  restaurantId: number;
-  price: number;
-  createdAt: string;
-  updatedAt: string;
-  restaurant: RestaurantType;
-  Categories: CategoryType[];
-}
 
-type RestaurantType = {
-  id: number;
-  name: string;
-  country: string;
-  longitude: number;
-  latitude: number;
-  createdAt: string;
-  updatedAt: string;
-};
-
-type CategoryType = {
-  id: number;
-  name: string;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export const RestaurantHeader: React.FC<RestaurantHeaderTypes> = ({
-  restaurantData,
-}) => {
+export const RestaurantHeader = ({ restaurantData }: RestaurantHeaderTypes) => {
   return (
     <div
       id="food-header"

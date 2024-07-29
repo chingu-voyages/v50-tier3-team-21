@@ -7,38 +7,10 @@ import {
   CategoryFilter,
   Orders,
 } from "../components/restaurant/";
+import { MenuItemType } from "../components/restaurant/types/types";
 const BASE_URL = import.meta.env.VITE_LOCAL_API_BASE_URL;
 
-// TYPES
-interface MenuItemType {
-  id: number;
-  name: string;
-  imageUrl: string;
-  restaurantId: number;
-  price: number;
-  createdAt: string;
-  updatedAt: string;
-  restaurant: RestaurantType;
-  Categories: CategoryType[];
-}
-
-type RestaurantType = {
-  id: number;
-  name: string;
-  country: string;
-  longitude: number;
-  latitude: number;
-  createdAt: string;
-  updatedAt: string;
-};
-
-type CategoryType = {
-  id: number;
-  name: string;
-  createdAt: string;
-  updatedAt: string;
-};
-
+// types
 type CategoryListType = {
   [key: string]: boolean;
 };

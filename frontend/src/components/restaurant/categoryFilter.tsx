@@ -1,5 +1,7 @@
 import { CheckboxElement } from "./";
+import { MenuItemType } from "./types/types";
 
+// types
 interface CategoryFilterProps {
   restaurantData: MenuItemType[];
   setFilteredMenuItems: (items: MenuItemType[]) => void;
@@ -7,45 +9,16 @@ interface CategoryFilterProps {
   setCategories: (categories: CategoryListType) => void;
 }
 
-interface MenuItemType {
-  id: number;
-  name: string;
-  imageUrl: string;
-  restaurantId: number;
-  price: number;
-  createdAt: string;
-  updatedAt: string;
-  restaurant: RestaurantType;
-  Categories: CategoryType[];
-}
-
 type CategoryListType = {
   [key: string]: boolean;
 };
 
-type RestaurantType = {
-  id: number;
-  name: string;
-  country: string;
-  longitude: number;
-  latitude: number;
-  createdAt: string;
-  updatedAt: string;
-};
-
-type CategoryType = {
-  id: number;
-  name: string;
-  createdAt: string;
-  updatedAt: string;
-};
-
-export const CategoryFilter: React.FC<CategoryFilterProps> = ({
+export const CategoryFilter = ({
   restaurantData,
   setFilteredMenuItems,
   categories,
   setCategories,
-}) => {
+}: CategoryFilterProps) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { checked, value } = e.target;
 

@@ -1,41 +1,13 @@
 import PrimaryButton from "../ui/button";
+import { MenuItemType } from "./types/types";
 
 // TYPES
-interface MenuItemType {
-    id: number;
-    name: string;
-    imageUrl: string;
-    restaurantId: number;
-    price: number;
-    createdAt: string;
-    updatedAt: string;
-    restaurant: RestaurantType;
-    Categories: CategoryType[];
-  }
-  
-  type RestaurantType = {
-    id: number;
-    name: string;
-    country: string;
-    longitude: number;
-    latitude: number;
-    createdAt: string;
-    updatedAt: string;
-  };
-  
-  type CategoryType = {
-    id: number;
-    name: string;
-    createdAt: string;
-    updatedAt: string;
-  };
-
   interface FoodCardProps {
     item: MenuItemType
   }
   
   // render a card for each menu item
-export const FoodCard: React.FC<FoodCardProps> = ({item}) => {
+export const FoodCard = ({item}: FoodCardProps) => {
 
   // mock adding an item to the shopping card
   const handleAddToCart= (item: MenuItemType) => {

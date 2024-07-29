@@ -1,4 +1,4 @@
-import { ChangeEvent, FC } from "react";
+import { ChangeEvent} from "react";
 
 interface RadioButtonProps {
   name: string;
@@ -8,7 +8,7 @@ interface RadioButtonProps {
 }
 
 
-export const CheckboxElement: FC<RadioButtonProps> = ({name, label, handleChange, isChecked}) => {
+export const CheckboxElement = ({name, label, handleChange, isChecked}: RadioButtonProps) => {
   return (
     <li>
       <input

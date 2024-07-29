@@ -196,4 +196,5 @@ module.exports = {
     createOrder,
     getOrderByUser,
     getOrderById,
-    cancelOrder };
+    cancelOrder
+};

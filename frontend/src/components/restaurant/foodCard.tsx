@@ -36,9 +36,14 @@ interface MenuItemType {
   
   // render a card for each menu item
 export const FoodCard: React.FC<FoodCardProps> = ({item}) => {
+
+  // mock adding an item to the shopping card
+  const handleAddToCart= (item: MenuItemType) => {
+    alert(`${item.name} added to cart!`)
+  }
+
     return (
       <div
-        key={item.id}
         className="rounded-md shadow-lg max-w-[295px] md:max-w-[360px]"
       >
         <div className="w-full  h-56 overflow-hidden">
@@ -53,7 +58,7 @@ export const FoodCard: React.FC<FoodCardProps> = ({item}) => {
             <p className="text-xs font-bold">${item.price}</p>
           </div>
           <div>
-            <PrimaryButton>
+            <PrimaryButton onClick={() => handleAddToCart(item)}>
               <span className="icon-[solar--bag-smile-bold-duotone] mr-1"></span>
               PLACE ORDER
             </PrimaryButton>

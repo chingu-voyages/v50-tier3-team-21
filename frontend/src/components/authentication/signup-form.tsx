@@ -4,7 +4,7 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {FormField} from "./form-field.tsx";
 import {PasswordField} from "./password-field.tsx";
 import PrimaryButton from "../ui/button.tsx";
-import {useSignUpWithCredentials} from "../../services/api/authentication/mutation.tsx";
+import {useSignUpWithCredentials} from "../../services/api/authentication/mutation.ts";
 import {useNavigate} from "react-router-dom";
 import {ErrorMessage} from "./error_message.tsx";
 import {useAuth} from "../../hooks/auth.hook.ts";

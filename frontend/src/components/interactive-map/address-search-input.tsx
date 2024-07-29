@@ -5,7 +5,7 @@ import {FormLabel} from "../authentication/form-label.tsx";
 import PrimaryButton from "../ui/button.tsx";
 
 export const AddressSearchInput = () => {
-    const { query, handleSearchQuery, isOpen} = useAddressSearch();
+    const { query, handleSearchQuery, isOpen, flyTo} = useAddressSearch();
     const debouncedLocation = useDebounce(query);
     const {isLoading,data, isSuccess} = useGetLocation(debouncedLocation);
 
@@ -14,23 +14,23 @@ export const AddressSearchInput = () => {
     };
 
     return (
-        <form className="w-full flex flex-col gap-5    p-6 bg-white border rounded-lg">
+        <form className="w-full flex flex-col gap-5  p-6 bg-white border rounded-lg">
             <FormLabel htmlFor="location" label="Enter your delivery address" />
             <div className="relative">
-                <div className="w-full relative border-2 rounded-md">
+                <div className="w-full relative border-2 z-10 rounded-md">
                     <input
                         type="text"
                         id="location"
                         value={query}
                         onChange={handleSearchChange}
                         placeholder="Search for an address"
-                        className="w-full px-3 py-2  rounded-lg placeholder:font-light placeholder:text-[0.8em] focus:outline-0"
+                        className="w-full px-3 py-2 z-10  rounded-lg placeholder:font-light placeholder:text-[0.8em] focus:outline-0"
                     />
-                    <span className="icon-[solar--map-point-wave-bold-duotone] absolute right-2 top-1/2 -translate-y-1/2 " />
+                    <span className="icon-[solar--gps-bold-duotone] absolute right-2 top-1/2 -translate-y-1/2 " />
                 </div>
                 {isSuccess && isOpen && <LocationResults isLoading={isLoading} data={data} />}
             </div>
-            <PrimaryButton type={"button"}>
+            <PrimaryButton type={"button"} onClick={flyTo}>
                 Find Restaurants
             </PrimaryButton>
         </form>

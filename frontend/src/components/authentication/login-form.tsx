@@ -9,7 +9,7 @@ import {PasswordField} from "./password-field.tsx";
 import PrimaryButton from "../ui/button.tsx";
 import {Link , useNavigate} from "react-router-dom";
 import {useAuth} from "../../hooks/auth.hook.ts";
-import {useLoginWithPasswordAndEmail} from "../../services/api/authentication/mutation.tsx";
+import {useLoginWithPasswordAndEmail} from "../../services/api/authentication/mutation.ts";
 import {ErrorMessage} from "./error_message.tsx";
 import {isAxiosError} from "../../utils";
 

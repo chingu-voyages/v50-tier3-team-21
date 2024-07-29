@@ -1,29 +1,45 @@
 import PrimaryButton from "../ui/button.tsx";
+import {RestaurantWithImage} from "../../services/api/interctive-map/interface.ts";
+import {useAppMapContext} from "../../provider/map.provider.tsx";
 
 
-export const Popup = ({imageUrl, name, country, id}) => {
+interface PopupPropsType {
+    restaurant: RestaurantWithImage
+}
+
+export const AppPopup = ({restaurant}: PopupPropsType) => {
+    const { handleSelectRestaurant } = useAppMapContext();
    return(
-       <div>
-           <div>
-               <img  src={imageUrl} alt='restaurant image'/>
-           </div>
-           <h3>{ name }</h3>
-           <div>
-               <span className="icon-[solar--map-point-wave-bold-duotone]"/>
-               <p>{ country }</p>
-           </div>
-           <div>
-               <span className="icon-[lets-icons:flag-duotone]"/>
-               <p>{ country }</p>
-           </div>
-           <div className="flex justify-start items-center">
-               <PrimaryButton variant={"outline"}>
-                   CLOSE
-               </PrimaryButton>
-               <PrimaryButton >
-                   VIEW MENU ITEMS
-               </PrimaryButton>
+       <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[80%] sm:max-w-md md:max-w-md md:w-[336px] ">
+           <div className="w-full bg-white flex flex-col justify-center items-start  rounded-md gap-4 z-50">
+               <div className="w-full h-[150px] overflow-hidden bg-white rounded-md">
+                   <img
+                       src={restaurant.imageUrl}
+                       alt={`${restaurant.name} image`}
+                       className="w-full h-full object-cover rounded-tl-md rounded-tr-md"
+                   />
+               </div>
+               <div className="flex flex-col w-full px-3  gap-2">
+                   <h3 className="font-light text-lg text-dark">{ restaurant.name }</h3>
+                   <div className="flex items-center gap-2">
+                       <span className="icon-[solar--map-point-wave-bold-duotone]"/>
+                       <p className="font-light">{ restaurant.country }</p>
+                   </div>
+                   <div className="flex items-center justify-start gap-2">
+                       <span className="icon-[lets-icons:flag-duotone]"/>
+                       <span className="text-md font-light"> <strong className="text-primary font-light">5km </strong> from your location</span>
+                   </div>
+                   <div className="flex justify-start items-center gap-2 py-4">
+                       <PrimaryButton variant={"outline"} onClick={() => handleSelectRestaurant(-1)}>
+                           CLOSE
+                       </PrimaryButton>
+                       <PrimaryButton >
+                           VIEW MENU ITEMS
+                       </PrimaryButton>
+                   </div>
+               </div>
            </div>
        </div>
+
    )
 }

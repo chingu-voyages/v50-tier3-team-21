@@ -17,8 +17,8 @@ export default function HeaderNav() {
     ]
 
     return (
-        <header className="bg-white fixed w-full">
-            <nav aria-label="Global" className="relative mx-auto flex md:gap-3 max-w-7xl items-center justify-between  p-8">
+        <header className="bg-white fixed w-full z-50 ">
+            <nav aria-label="Global" className="relative mx-auto flex md:gap-3 max-w-8xl items-center justify-between py-8 px-12">
                 <div className="hidden md:flex">
                     <a href="/" className="-m-1.5 p-1.5">
                         <span className="sr-only">Hungry Hippo</span>

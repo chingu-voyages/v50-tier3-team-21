@@ -1,4 +1,5 @@
 import {useEffect , useState} from "react";
+import {useMap} from "react-map-gl";
 
 
 interface ICoordinate {

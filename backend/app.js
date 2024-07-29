@@ -25,6 +25,7 @@ const foodItemsRouter = require('./routes/foodItemsRoutes');
 const foodCategoriesRouter = require('./routes/foodCategoriesRoutes');
 const nearbyRestaurantRouter = require('./routes/nearbyRestaurantRoutes');
 const resetPasswordRouter = require('./routes/resetPasswordRoutes');
+const orderRouter = require('./routes/orderRoutes');
 
 const PORT = process.env.PORT || 3000;
 
@@ -52,7 +53,7 @@ app.use('/api/fooditems', foodItemsRouter);
 app.use('/api/foodCategories', foodCategoriesRouter);
 app.use('/api/nearbyrestaurants', nearbyRestaurantRouter);
 app.use('/api/resetpassword', resetPasswordRouter);
-
+app.use('/api/order', orderRouter);
 // Sync database
 db.sequelize.sync().then((req) => {  
   app.get('/', (req, res) => {

@@ -1,4 +1,4 @@
-import { CheckboxElement } from "./checkboxElement";
+import { CheckboxElement } from "./";
 
 interface CategoryFilterProps {
   restaurantData: MenuItemType[];

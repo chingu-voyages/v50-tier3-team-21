@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { httpClient } from "../lib/http-client";
 import { useParams } from "react-router-dom";
-import { FoodCard } from "../components/restaurant/foodCard";
-import { RestaurantHeader } from "../components/restaurant/RestaurantHeader";
-import { CategoryFilter } from "../components/restaurant/categoryFilter";
+import {
+  FoodCard,
+  RestaurantHeader,
+  CategoryFilter,
+  Orders,
+} from "../components/restaurant/";
 const BASE_URL = import.meta.env.VITE_LOCAL_API_BASE_URL;
 
 // TYPES
@@ -38,7 +41,7 @@ type CategoryType = {
 
 type CategoryListType = {
   [key: string]: boolean;
-}
+};
 
 export const RestaurantPage = () => {
   const [restaurantData, setRestaurantData] = useState<MenuItemType[]>([]);
@@ -90,8 +93,6 @@ export const RestaurantPage = () => {
     setFilterVisible((prev) => !prev);
   };
 
-  
-
   return (
     <>
       {restaurantData.length ? (
@@ -107,7 +108,12 @@ export const RestaurantPage = () => {
             ></span>
             {filterVisible && (
               <div className=" md:w-48 md:h-56 p-3 border-secondary/60 border rounded-md shadow-lg absolute bg-white left-36 top-8">
-                <CategoryFilter categories={categories} restaurantData={restaurantData} setFilteredMenuItems={setFilteredMenuItems} setCategories={setCategories}/>
+                <CategoryFilter
+                  categories={categories}
+                  restaurantData={restaurantData}
+                  setFilteredMenuItems={setFilteredMenuItems}
+                  setCategories={setCategories}
+                />
               </div>
             )}
           </div>
@@ -124,8 +130,7 @@ export const RestaurantPage = () => {
       ) : (
         <div className="mt-36">Loading...</div>
       )}
-      <p>Your Order</p>
-      <hr />
+      <Orders orders={restaurantData}/>
     </>
   );
 };

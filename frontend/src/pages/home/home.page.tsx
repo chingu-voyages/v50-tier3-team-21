@@ -15,7 +15,7 @@ export const HomePage = () => {
                           <AddressSearch />
                           <AppMapProvider >
                               <FilterSection />
-                              <div className="md:p-12 h-[100vh] md:h-[600px]">
+                              <div className="md:p-12 h-[100vh] md:h-[800px]">
                                   <AppMap />
                               </div>
                           </AppMapProvider>

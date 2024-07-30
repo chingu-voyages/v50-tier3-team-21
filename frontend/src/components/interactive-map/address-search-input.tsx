@@ -3,6 +3,7 @@ import {useGetLocation} from "../../services/api/searchbox/queries.ts";
 import {useDebounce} from "../../hooks/debounce.hook.ts";
 import {FormLabel} from "../authentication/form-label.tsx";
 import PrimaryButton from "../ui/button.tsx";
+import {GeolocationBtn} from "./geolocation-btn.tsx";
 
 export const AddressSearchInput = () => {
     const { query, handleSearchQuery, isOpen, flyTo} = useAddressSearch();
@@ -26,7 +27,7 @@ export const AddressSearchInput = () => {
                         placeholder="Search for an address"
                         className="w-full px-3 py-2 z-10  rounded-lg placeholder:font-light placeholder:text-[0.8em] focus:outline-0"
                     />
-                    <span className="icon-[solar--gps-bold-duotone] absolute right-2 top-1/2 -translate-y-1/2 " />
+                    <GeolocationBtn />
                 </div>
                 {isSuccess && isOpen && <LocationResults isLoading={isLoading} data={data} />}
             </div>

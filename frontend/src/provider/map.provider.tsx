@@ -1,6 +1,8 @@
 import React , {createContext , useContext , useMemo , useState} from "react";
 import {Category , FilterOptions , RestaurantWithImage} from "../services/api/interctive-map/interface.ts";
 import {useGetFoodItemsWithRestaurants} from "../services/api/interctive-map/queries.ts";
+import {useGeoLocation} from "../hooks";
+
 
 
 const AppMapContext = createContext<AppMapContextType>({} as AppMapContextType);
@@ -8,7 +10,11 @@ const AppMapContext = createContext<AppMapContextType>({} as AppMapContextType);
 interface AppMapContextType {
     restaurants: RestaurantWithImage[] | [],
     selectedRestaurantId: number,
-    handleSelectRestaurant: (id: number) => void
+    handleSelectRestaurant: (id: number) => void,
+    geoLocation: {
+        lat: number,
+        long: number,
+    }
 
 }
 
@@ -21,9 +27,9 @@ export const AppMapProvider = ({ children }) => {
         restaurantId: undefined,
         country: undefined
     });
-    const [seletectedRestaurantId, setSelectedRestaurantId] = useState<number>(-1)
-    const {data: foodItemsWithRestaurants, isLoading, isSuccess} = useGetFoodItemsWithRestaurants(filterOptions)
-
+    const [seletectedRestaurantId, setSelectedRestaurantId] = useState<number>(-1);
+    const {data: foodItemsWithRestaurants, isLoading, isSuccess} = useGetFoodItemsWithRestaurants(filterOptions);
+    const { location } = useGeoLocation()
     const restaurants = useMemo(() => {
         if(isSuccess){
             if(!foodItemsWithRestaurants?.data) return []
@@ -45,7 +51,7 @@ export const AppMapProvider = ({ children }) => {
         setSelectedRestaurantId(id)
     }
     return (
-        <AppMapContext.Provider value={{ restaurants,selectedRestaurantId: seletectedRestaurantId, handleSelectRestaurant: handleClickMapPoint}}>
+        <AppMapContext.Provider value={{ restaurants,selectedRestaurantId: seletectedRestaurantId, handleSelectRestaurant: handleClickMapPoint, geoLocation: location}}>
             {children}
         </AppMapContext.Provider>
     );

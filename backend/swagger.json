@@ -26,14 +26,21 @@
         "post": {
           "summary": "Signup a new user",
           "description": "Fields required: `username, email, password, confirmPassword`",
-          "tags": ["Auth"],
+          "tags": [
+            "Auth"
+          ],
           "requestBody": {
             "required": true,
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": ["username", "email", "password", "confirmPassword"],
+                  "required": [
+                    "username",
+                    "email",
+                    "password",
+                    "confirmPassword"
+                  ],
                   "properties": {
                     "username": {
                       "type": "string",
@@ -153,7 +160,9 @@
         "post": {
           "summary": "Login a user",
           "description": "Fields required: `username`, or `email`, and `password`",
-          "tags": ["Auth"],
+          "tags": [
+            "Auth"
+          ],
           "requestBody": {
             "required": true,
             "content": {
@@ -222,7 +231,9 @@
       "/auth/logout": {
         "post": {
           "summary": "Logout a user",
-          "tags": ["Auth"],
+          "tags": [
+            "Auth"
+          ],
           "responses": {
             "200": {
               "description": "User logged out successfully",
@@ -253,7 +264,9 @@
       "/auth/refresh-token": {
         "get": {
           "summary": "Refresh the access token",
-          "tags": ["Auth"],
+          "tags": [
+            "Auth"
+          ],
           "responses": {
             "200": {
               "description": "Token refreshed successfully",
@@ -285,7 +298,9 @@
         "post": {
           "summary": "Send password reset email",
           "description": "Sends a password reset email to the user with a reset token.",
-          "tags": ["ResetPassword"],
+          "tags": [
+            "ResetPassword"
+          ],
           "requestBody": {
             "required": true,
             "content": {
@@ -381,7 +396,9 @@
         "get": {
           "summary": "Authorize reset token",
           "description": "Authorize the reset token provided in the URL.",
-          "tags": ["ResetPassword"],
+          "tags": [
+            "ResetPassword"
+          ],
           "parameters": [
             {
               "name": "token",
@@ -477,7 +494,9 @@
         "post": {
           "summary": "Reset password",
           "description": "Reset the user's password using the token.",
-          "tags": ["ResetPassword"],
+          "tags": [
+            "ResetPassword"
+          ],
           "requestBody": {
             "required": true,
             "content": {
@@ -594,7 +613,9 @@
         "post": {
           "summary": "Create a new order",
           "description": "Fields required: `deliveryAddress, deliveryDate, deliveryTime, foodItems`",
-          "tags": ["Order"],
+          "tags": [
+            "Order"
+          ],
           "requestBody": {
             "required": true,
             "content": {
@@ -743,7 +764,9 @@
         "put": {
           "summary": "Update an existing order",
           "description": "Fields required: `deliveryAddress, deliveryDate, deliveryTime, foodItems`",
-          "tags": ["Order"],
+          "tags": [
+            "Order"
+          ],
           "parameters": [
             {
               "name": "orderId",
@@ -920,149 +943,153 @@
         }
       },
       "/order/get-order/{orderId}": {
-    "get": {
-      "summary": "Get order by ID",
-      "description": "Retrieve an order by its ID.",
-      "tags": ["Order"],
-      "parameters": [
-        {
-          "name": "orderId",
-          "in": "path",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "description": "The ID of the order to retrieve."
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Order retrieved successfully",
-          "content": {
-            "application/json": {
+        "get": {
+          "summary": "Get order by ID",
+          "description": "Retrieve an order by its ID.",
+          "tags": [
+            "Order"
+          ],
+          "parameters": [
+            {
+              "name": "orderId",
+              "in": "path",
+              "required": true,
               "schema": {
-                "type": "object",
-                "properties": {
-                  "status": {
-                    "type": "string",
-                    "example": "success"
-                  },
-                  "message": {
-                    "type": "string",
-                    "example": "Order retrieved successfully"
-                  },
-                  "data": {
+                "type": "string"
+              },
+              "description": "The ID of the order to retrieve."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Order retrieved successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
                     "type": "object",
                     "properties": {
-                      "id": {
-                        "type": "integer",
-                        "example": 1
-                      },
-                      "userId": {
-                        "type": "integer",
-                        "example": 7
-                      },
-                      "deliveryAddress": {
+                      "status": {
                         "type": "string",
-                        "example": "whatever"
+                        "example": "success"
                       },
-                      "deliveryDate": {
+                      "message": {
                         "type": "string",
-                        "example": "2024-08-01"
+                        "example": "Order retrieved successfully"
                       },
-                      "deliveryTime": {
-                        "type": "string",
-                        "example": "14:00:00"
-                      },
-                      "tip": {
-                        "type": "number",
-                        "example": 0
-                      },
-                      "deliveryCost": {
-                        "type": "number",
-                        "example": 0
-                      },
-                      "finalized": {
-                        "type": "boolean",
-                        "example": false
-                      },
-                      "cancelled": {
-                        "type": "boolean",
-                        "example": false
-                      },
-                      "createdAt": {
-                        "type": "string",
-                        "format": "date-time",
-                        "example": "2024-07-30T07:36:19.605Z"
-                      },
-                      "updatedAt": {
-                        "type": "string",
-                        "format": "date-time",
-                        "example": "2024-07-30T07:41:30.884Z"
-                      },
-                      "orderFoodItems": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "integer",
-                              "example": 1
-                            },
-                            "orderId": {
-                              "type": "integer",
-                              "example": 1
-                            },
-                            "itemId": {
-                              "type": "integer",
-                              "example": 1
-                            },
-                            "quantity": {
-                              "type": "integer",
-                              "example": 1
-                            },
-                            "createdAt": {
-                              "type": "string",
-                              "format": "date-time",
-                              "example": "2024-07-30T07:36:19.684Z"
-                            },
-                            "updatedAt": {
-                              "type": "string",
-                              "format": "date-time",
-                              "example": "2024-07-30T07:36:19.684Z"
-                            },
-                            "item": {
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "userId": {
+                            "type": "integer",
+                            "example": 7
+                          },
+                          "deliveryAddress": {
+                            "type": "string",
+                            "example": "whatever"
+                          },
+                          "deliveryDate": {
+                            "type": "string",
+                            "example": "2024-08-01"
+                          },
+                          "deliveryTime": {
+                            "type": "string",
+                            "example": "14:00:00"
+                          },
+                          "tip": {
+                            "type": "number",
+                            "example": 0
+                          },
+                          "deliveryCost": {
+                            "type": "number",
+                            "example": 0
+                          },
+                          "finalized": {
+                            "type": "boolean",
+                            "example": false
+                          },
+                          "cancelled": {
+                            "type": "boolean",
+                            "example": false
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2024-07-30T07:36:19.605Z"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2024-07-30T07:41:30.884Z"
+                          },
+                          "orderFoodItems": {
+                            "type": "array",
+                            "items": {
                               "type": "object",
                               "properties": {
                                 "id": {
                                   "type": "integer",
                                   "example": 1
                                 },
-                                "name": {
-                                  "type": "string",
-                                  "example": "Joe's KC Ribs, Brisket & Burnt Ends"
-                                },
-                                "imageUrl": {
-                                  "type": "string",
-                                  "example": "https://goldbelly.imgix.net/uploads/showcase_media_asset/image/79619/joes-kc-ribs-brisket-and-burnt-ends.6710e994980e485e6441b794717ad6fb.jpg?ixlib=react-9.0.2&auto=format&ar=1%3A1"
-                                },
-                                "restaurantId": {
+                                "orderId": {
                                   "type": "integer",
                                   "example": 1
                                 },
-                                "price": {
-                                  "type": "number",
-                                  "example": 110.99
+                                "itemId": {
+                                  "type": "integer",
+                                  "example": 1
+                                },
+                                "quantity": {
+                                  "type": "integer",
+                                  "example": 1
                                 },
                                 "createdAt": {
                                   "type": "string",
                                   "format": "date-time",
-                                  "example": "2024-07-20T07:05:06.499Z"
+                                  "example": "2024-07-30T07:36:19.684Z"
                                 },
                                 "updatedAt": {
                                   "type": "string",
                                   "format": "date-time",
-                                  "example": "2024-07-20T07:05:06.499Z"
+                                  "example": "2024-07-30T07:36:19.684Z"
+                                },
+                                "item": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "integer",
+                                      "example": 1
+                                    },
+                                    "name": {
+                                      "type": "string",
+                                      "example": "Joe's KC Ribs, Brisket & Burnt Ends"
+                                    },
+                                    "imageUrl": {
+                                      "type": "string",
+                                      "example": "https://goldbelly.imgix.net/uploads/showcase_media_asset/image/79619/joes-kc-ribs-brisket-and-burnt-ends.6710e994980e485e6441b794717ad6fb.jpg?ixlib=react-9.0.2&auto=format&ar=1%3A1"
+                                    },
+                                    "restaurantId": {
+                                      "type": "integer",
+                                      "example": 1
+                                    },
+                                    "price": {
+                                      "type": "number",
+                                      "example": 110.99
+                                    },
+                                    "createdAt": {
+                                      "type": "string",
+                                      "format": "date-time",
+                                      "example": "2024-07-20T07:05:06.499Z"
+                                    },
+                                    "updatedAt": {
+                                      "type": "string",
+                                      "format": "date-time",
+                                      "example": "2024-07-20T07:05:06.499Z"
+                                    }
+                                  }
                                 }
                               }
                             }
@@ -1073,77 +1100,253 @@
                   }
                 }
               }
-            }
-          }
-        },
-        "401": {
-          "description": "Unauthorized",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "status": {
-                    "type": "string",
-                    "example": "fail"
-                  },
-                  "message": {
-                    "type": "string",
-                    "example": "Unauthorized user"
+            },
+            "401": {
+              "description": "Unauthorized",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Unauthorized user"
+                      }
+                    }
                   }
                 }
               }
-            }
-          }
-        },
-        "404": {
-          "description": "Order not found",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "status": {
-                    "type": "string",
-                    "example": "fail"
-                  },
-                  "message": {
-                    "type": "string",
-                    "example": "Order not found"
+            },
+            "404": {
+              "description": "Order not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Order not found"
+                      }
+                    }
                   }
                 }
               }
-            }
-          }
-        },
-        "500": {
-          "description": "Internal server error",
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "status": {
-                    "type": "string",
-                    "example": "fail"
-                  },
-                  "message": {
-                    "type": "string",
-                    "example": "Failed to get order"
-                  },
-                  "error": {
-                    "type": "string",
-                    "example": "error.message"
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Failed to get order"
+                      },
+                      "error": {
+                        "type": "string",
+                        "example": "error.message"
+                      }
+                    }
                   }
                 }
               }
             }
           }
         }
-      }
-    }
-  }
+      },
+      "/order/get-orders": {
+          "get": {
+            "summary": "Get orders by user",
+            "description": "Retrieve all orders made by the authenticated user.",
+            "tags": ["Order"],
+            "responses": {
+              "200": {
+                "description": "Orders retrieved successfully",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "example": "success"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Orders retrieved successfully"
+                        },
+                        "data": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer",
+                                "example": 2
+                              },
+                              "userId": {
+                                "type": "integer",
+                                "example": 7
+                              },
+                              "deliveryAddress": {
+                                "type": "string",
+                                "example": "whatever2"
+                              },
+                              "deliveryDate": {
+                                "type": "string",
+                                "example": "2024-08-01"
+                              },
+                              "deliveryTime": {
+                                "type": "string",
+                                "example": "14:00:00"
+                              },
+                              "tip": {
+                                "type": "number",
+                                "example": 0
+                              },
+                              "deliveryCost": {
+                                "type": "number",
+                                "example": 0
+                              },
+                              "finalized": {
+                                "type": "boolean",
+                                "example": false
+                              },
+                              "cancelled": {
+                                "type": "boolean",
+                                "example": false
+                              },
+                              "createdAt": {
+                                "type": "string",
+                                "format": "date-time",
+                                "example": "2024-07-30T07:53:10.971Z"
+                              },
+                              "updatedAt": {
+                                "type": "string",
+                                "format": "date-time",
+                                "example": "2024-07-30T07:53:10.973Z"
+                              },
+                              "orderFoodItems": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "integer",
+                                      "example": 10
+                                    },
+                                    "orderId": {
+                                      "type": "integer",
+                                      "example": 2
+                                    },
+                                    "itemId": {
+                                      "type": "integer",
+                                      "example": 1
+                                    },
+                                    "quantity": {
+                                      "type": "integer",
+                                      "example": 1
+                                    },
+                                    "createdAt": {
+                                      "type": "string",
+                                      "format": "date-time",
+                                      "example": "2024-07-30T07:53:11.154Z"
+                                    },
+                                    "updatedAt": {
+                                      "type": "string",
+                                      "format": "date-time",
+                                      "example": "2024-07-30T07:53:11.154Z"
+                                    },
+                                    "item": {
+                                      "type": "object",
+                                      "properties": {
+                                        "id": {
+                                          "type": "integer",
+                                          "example": 1
+                                        },
+                                        "name": {
+                                          "type": "string",
+                                          "example": "Joe's KC Ribs, Brisket & Burnt Ends"
+                                        },
+                                        "imageUrl": {
+                                          "type": "string",
+                                          "example": "https://goldbelly.imgix.net/uploads/showcase_media_asset/image/79619/joes-kc-ribs-brisket-and-burnt-ends.6710e994980e485e6441b794717ad6fb.jpg?ixlib=react-9.0.2&auto=format&ar=1%3A1"
+                                        },
+                                        "restaurantId": {
+                                          "type": "integer",
+                                          "example": 1
+                                        },
+                                        "price": {
+                                          "type": "number",
+                                          "example": 110.99
+                                        },
+                                        "createdAt": {
+                                          "type": "string",
+                                          "format": "date-time",
+                                          "example": "2024-07-20T07:05:06.499Z"
+                                        },
+                                        "updatedAt": {
+                                          "type": "string",
+                                          "format": "date-time",
+                                          "example": "2024-07-20T07:05:06.499Z"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "500": {
+                "description": "Internal server error",
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "status": {
+                          "type": "string",
+                          "example": "fail"
+                        },
+                        "message": {
+                          "type": "string",
+                          "example": "Failed to get orders"
+                        },
+                        "error": {
+                          "type": "string",
+                          "example": "error.message"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }      
     }
   },
-  "apis": ["./routes/*.js"]
+  "apis": [
+    "./routes/*.js"
+  ]
 }

@@ -19,6 +19,10 @@
       {
         "name": "ResetPassword",
         "description": "Password reset routes"
+      },
+      {
+        "name": "Order",
+        "description": "Order routes"
       }
     ],
     "paths": {

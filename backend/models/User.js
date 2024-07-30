@@ -68,6 +68,13 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
+  User.associate = (models) => {
+    User.hasOne(models.Account, {
+      foreignKey: 'userId',
+      as: 'account'
+    });
+  };
+  
   User.beforeCreate(async (user) => {
     if (user.password) {
       const salt = await bcrypt.genSalt(10);

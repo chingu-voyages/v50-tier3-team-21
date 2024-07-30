@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="feat: auth logic implemented">
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/ui/button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ui/button.tsx" afterDir="false" />
+    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="fix: fix types issue that blocks frontend to be build">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/authentication/form-field.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/authentication/form-field.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/authentication/password-field.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/authentication/password-field.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,7 +17,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="development" />
+        <entry key="$PROJECT_DIR$" value="110-task-125a-implement-a-forgotten-password-feature-frontend" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -37,7 +38,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;33-us-11-user-registration&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;fix/frontend-error-deployment&quot;,
     &quot;last_opened_file_path&quot;: &quot;/mnt/mydata/Archive/WebstormProjects/voyage&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -49,6 +50,21 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/src/pages/authetification" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/voyage/frontend/dist/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.index.html" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -61,6 +77,10 @@
       <workItem from="1721321856976" duration="12694000" />
       <workItem from="1721409270361" duration="1829000" />
       <workItem from="1721575191351" duration="9909000" />
+      <workItem from="1721894264086" duration="157000" />
+      <workItem from="1721991734996" duration="1478000" />
+      <workItem from="1721993268812" duration="9626000" />
+      <workItem from="1722008844505" duration="675000" />
     </task>
     <task id="LOCAL-00001" summary="chore: add axios">
       <option name="closed" value="true" />
@@ -94,7 +114,55 @@
       <option name="project" value="LOCAL" />
       <updated>1721585044372</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="wip: reset password features">
+      <option name="closed" value="true" />
+      <created>1721767497187</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1721767497188</updated>
+    </task>
+    <task id="LOCAL-00006" summary="fix: fix null check error">
+      <option name="closed" value="true" />
+      <created>1721767981743</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1721767981743</updated>
+    </task>
+    <task id="LOCAL-00007" summary="chore: add dotenv">
+      <option name="closed" value="true" />
+      <created>1721805457241</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1721805457241</updated>
+    </task>
+    <task id="LOCAL-00008" summary="refactor: refactor pages import">
+      <option name="closed" value="true" />
+      <created>1721805478122</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1721805478122</updated>
+    </task>
+    <task id="LOCAL-00009" summary="fix: add withCredentials options in axios to allow token to be injected into req  cookies">
+      <option name="closed" value="true" />
+      <created>1721827094399</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1721827094399</updated>
+    </task>
+    <task id="LOCAL-00010" summary="fix: fix types issue that blocks frontend to be build">
+      <option name="closed" value="true" />
+      <created>1722007282691</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1722007282691</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -104,7 +172,13 @@
     <MESSAGE value="chore: add axios" />
     <MESSAGE value="wip: implementing auth logic" />
     <MESSAGE value="feat: auth logic implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: auth logic implemented" />
+    <MESSAGE value="wip: reset password features" />
+    <MESSAGE value="fix: fix null check error" />
+    <MESSAGE value="chore: add dotenv" />
+    <MESSAGE value="refactor: refactor pages import" />
+    <MESSAGE value="fix: add withCredentials options in axios to allow token to be injected into req  cookies" />
+    <MESSAGE value="fix: fix types issue that blocks frontend to be build" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: fix types issue that blocks frontend to be build" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -113,6 +187,16 @@
           <url>file://$PROJECT_DIR$/backend/routes/authRoutes.js</url>
           <line>7</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/backend/controllers/resetPasswordController.js</url>
+          <line>58</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/components/authentication/reset-password-form.tsx</url>
+          <line>25</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

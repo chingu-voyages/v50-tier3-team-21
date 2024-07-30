@@ -10,8 +10,9 @@ import PrimaryButton from "../ui/button.tsx";
 import {Link , useNavigate} from "react-router-dom";
 import {useAuth} from "../../hooks/auth.hook.ts";
 import {useLoginWithPasswordAndEmail} from "../../services/api/authentication/mutation.tsx";
-import {data} from "autoprefixer";
 import {ErrorMessage} from "./error_message.tsx";
+import {isAxiosError} from "../../utils";
+
 
 export const LoginForm = () => {
     const {
@@ -21,7 +22,7 @@ export const LoginForm = () => {
     } = useForm<LoginSchemaType>({ resolver: zodResolver(LoginSchema)})
     const { loggedIn } = useAuth();
     const navigate = useNavigate();
-    const { mutate: loginWithPasswordAndEmail , isSuccess, error, isError, isPending, data: response} = useLoginWithPasswordAndEmail()
+    const { mutate: loginWithPasswordAndEmail , isSuccess, error, isError, isPending,} = useLoginWithPasswordAndEmail()
     const onSubmit = async (data: LoginSchemaType) => {
         loginWithPasswordAndEmail(data);
     }
@@ -36,28 +37,30 @@ export const LoginForm = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-3">
             { isError &&
                 <ErrorMessage
-                    message={error.response.data.message ?? 'Something went wrong. Please try again later'}
+                    message={
+                        isAxiosError(error)
+                            ? error.response?.data?.message ?? "An error occurred. Please try again later"
+                            : "An unexpected error occurred."
+                    }
                 />
             }
-            <FormField<LoginSchemaType, 'email'>
+            <FormField<LoginSchemaType>
                 type="email"
                 placeholder="Your email address"
                 name="email"
-                isRequired={true}
                 label="Enter your email address"
                 register={register}
                 error={errors.email}
             />
-            <PasswordField<LoginSchemaType>
+            <PasswordField
                 placeholder="Password"
                 name="password"
                 label="Enter your Password"
-                isRequired={true}
                 register={register}
                 error={errors.password}
             />
             <div className='flex justify-end items-center mb-4'>
-               <Link to='/auth' className="text-secondary" >
+               <Link to='/auth/reset-password/sent-link' className="text-secondary" >
                    Forgot password ?
                </Link>
             </div>

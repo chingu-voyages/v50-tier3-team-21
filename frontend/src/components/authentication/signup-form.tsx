@@ -8,6 +8,8 @@ import {useSignUpWithCredentials} from "../../services/api/authentication/mutati
 import {useNavigate} from "react-router-dom";
 import {ErrorMessage} from "./error_message.tsx";
 import {useAuth} from "../../hooks/auth.hook.ts";
+import {isAxiosError} from "../../utils";
+
 
 
 
@@ -34,72 +36,69 @@ export const SignupForm = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-4">
             { isError &&
                 <ErrorMessage
-                message={error.response.data.message ?? 'Something went wrong. Please try again later'}
-            />
+                    message={
+                        isAxiosError(error)
+                            ? error.response?.data?.message ?? "An error occurred. Please try again later"
+                            : "An unexpected error occurred."
+                    }
+                />
             }
-           <FormField<SignUpSchemaType, 'email'>
+           <FormField<SignUpSchemaType>
                type="email"
                placeholder="Your email address"
                name="email"
-               isRequired={true}
                label="Enter your email address"
                register={register}
                error={errors.email}
            />
-            <FormField<SignUpSchemaType, 'username'>
+            <FormField<SignUpSchemaType>
                 type="text"
                 placeholder="Username"
                 name="username"
-                isRequired={true}
                 label="Username"
                 register={register}
                 error={errors.username}
             />
             <div className="w-full flex flex-col md:flex-row justify-center items-center gap-2">
-                <FormField<SignUpSchemaType, 'firstName'>
+                <FormField<SignUpSchemaType>
                     type="text"
                     placeholder="First name"
                     name="firstName"
-                    isRequired={true}
                     label="First Name"
                     register={register}
                     error={errors.firstName}
                     className="w-full"
 
                 />
-                <FormField<SignUpSchemaType, 'lastName'>
+                <FormField<SignUpSchemaType>
                     type="text"
                     placeholder="Last name"
                     name="lastName"
-                    isRequired={true}
                     label="Last Name"
                     register={register}
                     error={errors.lastName}
                     className="w-full"
                 />
             </div>
-            <FormField<SignUpSchemaType, 'contact'>
+            <FormField<SignUpSchemaType>
                 type="text"
                 placeholder="+261349852634"
                 name="contact"
-                isRequired={true}
                 label="Contact Number"
                 register={register}
                 error={errors.contact}
             />
-            <PasswordField<SignUpSchemaType>
+            <PasswordField
                 label="Enter your Password"
                 placeholder="Password"
                 name="password"
-                isRequired={true}
                 register={register}
                 error={errors.password}
             />
-            <PasswordField<SignUpSchemaType>
+            <PasswordField
                 label="Confirm your Password"
                 placeholder="Confirm Password"
                 name="confirmPassword"
-                isRequired={true}
                 register={register}
                 error={errors.confirmPassword}
             />

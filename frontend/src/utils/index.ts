@@ -1,2 +1,2 @@
-export  * from 'formating.ts'
+export  * from './formating.ts'
 export * from './helpers.ts'

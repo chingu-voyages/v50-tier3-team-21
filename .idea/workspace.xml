@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="refactor: refactor pages import">
+    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="fix: fix types issue that blocks frontend to be build">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/lib/http-client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/lib/http-client.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/authentication/form-field.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/authentication/form-field.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/authentication/password-field.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/authentication/password-field.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,7 +17,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="test/email" />
+        <entry key="$PROJECT_DIR$" value="110-task-125a-implement-a-forgotten-password-feature-frontend" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -32,27 +33,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "110-task-125a-implement-a-forgotten-password-feature-frontend",
-    "last_opened_file_path": "/mnt/mydata/Archive/WebstormProjects/voyage",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "configurable.group.appearance",
-    "ts.external.directory.path": "/mnt/mydata/Archive/WebstormProjects/voyage/frontend/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;fix/frontend-error-deployment&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/mnt/mydata/Archive/WebstormProjects/voyage&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/mnt/mydata/Archive/WebstormProjects/voyage/frontend/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/frontend/src/pages/authetification" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="index.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/voyage/frontend/dist/index.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.index.html" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -66,6 +77,10 @@
       <workItem from="1721321856976" duration="12694000" />
       <workItem from="1721409270361" duration="1829000" />
       <workItem from="1721575191351" duration="9909000" />
+      <workItem from="1721894264086" duration="157000" />
+      <workItem from="1721991734996" duration="1478000" />
+      <workItem from="1721993268812" duration="9626000" />
+      <workItem from="1722008844505" duration="675000" />
     </task>
     <task id="LOCAL-00001" summary="chore: add axios">
       <option name="closed" value="true" />
@@ -131,7 +146,23 @@
       <option name="project" value="LOCAL" />
       <updated>1721805478122</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="fix: add withCredentials options in axios to allow token to be injected into req  cookies">
+      <option name="closed" value="true" />
+      <created>1721827094399</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1721827094399</updated>
+    </task>
+    <task id="LOCAL-00010" summary="fix: fix types issue that blocks frontend to be build">
+      <option name="closed" value="true" />
+      <created>1722007282691</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1722007282691</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -145,7 +176,9 @@
     <MESSAGE value="fix: fix null check error" />
     <MESSAGE value="chore: add dotenv" />
     <MESSAGE value="refactor: refactor pages import" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: refactor pages import" />
+    <MESSAGE value="fix: add withCredentials options in axios to allow token to be injected into req  cookies" />
+    <MESSAGE value="fix: fix types issue that blocks frontend to be build" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: fix types issue that blocks frontend to be build" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -162,7 +195,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/frontend/src/components/authentication/reset-password-form.tsx</url>
-          <line>23</line>
+          <line>25</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>

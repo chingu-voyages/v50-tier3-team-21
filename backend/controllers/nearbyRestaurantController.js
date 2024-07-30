@@ -3,14 +3,21 @@ const Op = require('sequelize').Op;
 
 module.exports = {
   async getNearbyRestaurants(req, res) {
-    const { latitude, longitude } = req.body;
-
-    if (latitude === undefined || longitude === undefined) {
+    const latitude = parseFloat(req.query.latitude);
+    const longitude = parseFloat(req.query.longitude);
+    
+    if (req.query.latitude === undefined || req.query.longitude === undefined) {
       return res.status(400).json({
         status: 'fail',
         message: 'Missing latitude or longitude',
       });
+    } else if (isNaN(latitude) || isNaN(longitude)) {
+      return res.status(400).json({
+        status: 'fail',
+        message: 'Invalid latitude or longitude',
+      });
     }
+
 
     if (typeof latitude !== 'number' || typeof longitude !== 'number') {
       return res.status(400).json({

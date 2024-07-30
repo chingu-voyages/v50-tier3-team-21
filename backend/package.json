@@ -4,7 +4,8 @@
   "main": "app.js",
   "scripts": {
     "test": "jest --verbose --coverage",
-    "start": "nodemon app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "author": "",
   "license": "ISC",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "body-parser": "^1.20.2",
+    "@flydotio/dockerfile": "^0.5.8",
     "chai": "^5.1.1",
     "jest": "^29.7.0",
     "mocha": "^10.6.0",

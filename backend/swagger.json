@@ -8,7 +8,7 @@
     },
     "servers": [
       {
-        "url": "http://localhost:3000/api"
+        "url": "https://hungryhippo.onrender.com/"
       }
     ],
     "tags": [

@@ -87,7 +87,7 @@ export const Orders = () => {
           </div>
           <hr />
           <div className="flex items-center justify-between p-5">
-            <div className="font-bold">
+            <div className="text-xl font-bold">
               Total Cost: $<span>{calculateTotal()}</span>
             </div>
             <PrimaryButton onClick={() => alert("go to checkout")}>

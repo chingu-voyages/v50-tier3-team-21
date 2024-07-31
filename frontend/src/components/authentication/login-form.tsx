@@ -13,6 +13,7 @@ import { useLoginWithPasswordAndEmail } from "../../services/api/authentication/
 import { ErrorMessage } from "./error_message.tsx";
 import { isAxiosError } from "../../utils";
 import { notify, ToastMessages } from "../ui/toast.tsx";
+import { useEffect } from "react";
 
 
 export const LoginForm = () => {
@@ -27,14 +28,24 @@ export const LoginForm = () => {
     const onSubmit = async (data: LoginSchemaType) => {
         loginWithPasswordAndEmail(data);
     }
-    if (isError) {
-        console.log(error);
-        notify(error, 'error')
-    }
-    if (isSuccess) {
-        loggedIn()
-        notify({ message: 'You are logged in successfully' }, 'success')
 
+    useEffect(() => {
+        if (isError) {
+            console.log('error', error)
+            notify({
+                message:
+                    isAxiosError(error)
+                        ? error.response?.data?.message ?? "An error occurred. Please try again later"
+                        : "An unexpected error occurred."
+            }, 'error')
+        }
+        if (isSuccess) {
+            notify({ message: 'You are logged in successfully' }, 'success')
+        }
+    }, [isError, isSuccess])
+
+    if (isSuccess) {
+        loggedIn();
         setTimeout(() => {
             navigate('/');
         }, 2000);

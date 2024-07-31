@@ -25,6 +25,7 @@ export interface MenuItemType {
     name: string;
     createdAt: string;
     updatedAt: string;
+    displayName?: string
   };
 
   export type OrderType = MenuItemType & {

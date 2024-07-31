@@ -50,11 +50,11 @@ export const RestaurantPage = () => {
   // get a list of categories that are present at this restaurant
   const getCategories = (data: MenuItemType[]) => {
     const categoryList = data.flatMap((item) =>
-      item.Categories.map((cat) => cat.name)
+      item.Categories.map((cat) => cat.displayName)
     );
     const uniqueCategories = Array.from(new Set(categoryList));
     const categoryObj = uniqueCategories.reduce((acc, item) => {
-      acc[item] = true;
+      if (typeof item === "string") acc[item] = true;
       return acc;
     }, {} as CategoryListType);
     setCategories(categoryObj);
@@ -69,10 +69,10 @@ export const RestaurantPage = () => {
       {restaurantData.length ? (
         <div className="p-3 md:px-10 max-w-[1290px] pt-28 md:pt-32 m-auto">
           <RestaurantHeader restaurantData={restaurantData} />
-          <div className="rounded-2xl h-[500px] bg-contain bg-no-repeat bg-[url('./assets/hippo-server.png')] md:bg-center"></div>
+          <div className="rounded-2xl h-[220px] md:h-[500px] bg-contain bg-no-repeat bg-[url('./assets/hippo-server-mobile.png')] md:bg-[url('./assets/hippo-server.png')] bg-center"></div>
 
-          <div className="flex items-center gap-3 my-5 relative cursor-pointer">
-            <span>Restaurant Menus </span>
+          <div className="flex items-center gap-3 my-5 mt-10 relative cursor-pointer">
+            <div className="font-bold">Restaurant Menus </div>
             <span
               className="icon-[mage--filter] text-secondary text-2xl"
               onClick={handleViewFilter}

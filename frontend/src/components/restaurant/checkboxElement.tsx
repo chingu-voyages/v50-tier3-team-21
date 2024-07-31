@@ -22,7 +22,8 @@ export const CheckboxElement = ({name, label, handleChange, isChecked}: RadioBut
         checked={isChecked}
         />
       <label htmlFor={name} className="ml-3 text-lg cursor-pointer">
-        {label[0].toUpperCase() + label.slice(1)}
+        {/* {label[0].toUpperCase() + label.slice(1)} */}
+        {label}
       </label>
     </li>
   );

@@ -2,6 +2,7 @@ const db = require("../models"); // Make sure to require your models
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { generateToken } = require("../helpers/jwt");
+const { sendEmail } = require("../middlewares/mail");
 
 // Refresh token
 const refreshToken = async (req, res, next) => {
@@ -128,6 +129,12 @@ const signup = async (req, res, next) => {
     }
 
     // TODO: send email to user
+
+    await sendEmail(
+      result.email,
+      "Welcome to Hungry Hippo!",
+      `<p>Dear ${result.username},</p><p>Welcome to Hungry Hippo! We're excited to have you on board.</p>`
+    );
 
     return res.status(201).json({
       status: "success",

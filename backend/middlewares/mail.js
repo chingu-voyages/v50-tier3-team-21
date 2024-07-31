@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 
-// TODO: rewrite the function to include subject and html parameters
-async function mailService(emailAddress, link) {
+// TODO: rewrite the function to include subject and html as parameters
+async function mailService(emailAddress, subject, html) {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     host: "smtp.gmail.com",
@@ -17,17 +17,19 @@ async function mailService(emailAddress, link) {
   let info = await transporter.sendMail({
     from: '"Hungry Hippo Support" <support@hungryhippo.mail>', // sender address
     to: emailAddress,
-    subject: "Password Reset", // Subject line  // TODO: subject parameter
+    subject: subject, // Subject line  // TODO: subject parameter
     text: "The link will expire in 15 minutes.", // plain text body
-    html: `The link will expire in 15 minutes.<br/><a href="${link}">Click here</a> to reset your password.`, // html parameter
+    html: html, // html parameter
   });
 
   console.log("Message sent: %s", info.messageId);
 }
-
-async function sendEmail(address, link) {
+// TODO: add parameters subject and html, 
+async function sendEmail(address, subject, html) {
+  
   try {
-    await mailService(address, link);
+    // TODO: add subject and html as parameters
+    await mailService(address, subject, html);
   } catch (error) {
     console.error("Error sending email:", error);
   }

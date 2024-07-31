@@ -133,7 +133,7 @@ const signup = async (req, res, next) => {
     await sendEmail(
       result.email,
       "Welcome to Hungry Hippo!",
-      `<p>Dear ${result.username},</p><p>Welcome to Hungry Hippo! We're excited to have you on board.</p>`
+      `<p>Dear <strong>${result.username}</strong>,</p><p>Welcome to Hungry Hippo! We're excited to have you on board.</p>`
     );
 
     return res.status(201).json({

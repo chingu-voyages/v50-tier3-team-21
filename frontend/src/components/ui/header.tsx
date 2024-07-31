@@ -1,7 +1,7 @@
 import { ReactNode, useState } from "react";
 import {useAuth} from "../../hooks/auth.hook.ts";
 import {Link, useNavigate} from "react-router-dom";
-interface HeaderNavProps {
+export interface HeaderNavProps {
     isLoggedIn?: boolean;
     onLogout?: boolean;
     children: ReactNode;
@@ -21,9 +21,10 @@ export default function HeaderNav() {
         <header className="bg-white fixed w-full">
             <nav aria-label="Global" className="relative mx-auto flex md:gap-3 max-w-7xl items-center justify-between  p-8">
                 <div className="hidden md:flex">
-                    <a href="/" className="-m-1.5 p-1.5">
+                    <a href="/" className="-m-1.5 p-1.5 flex items-end gap-2">
                         <span className="sr-only">Hungry Hippo</span>
-                        <div className="bg-logo bg-contain bg-no-repeat bg-center h-16 w-16"></div>
+                        <div className="bg-logo bg-contain bg-no-repeat bg-center h-12 w-12"></div>
+                        <div className="text-2xl font-bold">Hungry Hippo</div>
                     </a>
                 </div>
                 <div className="flex md:hidden z-50">
@@ -50,45 +51,47 @@ export default function HeaderNav() {
                     }
                 </div>
                 <div className="hidden md:flex flex-1 justify-end">
-                    <div className="text-lg text-dark/60">{isAuthenticated ? 'Order & Log Out' : 'Order & Sign In'}</div>
+                    <div className="text-lg text-dark/60">{isAuthenticated ? 'Order & Log Out' : 'Sign In & Order'}</div>
                 </div>
-                <button
-                    onClick={() => navigate("/profile")}
-                    type="button"
-                    className="hidden md:inline-flex items-center justify-center  p-2.5 text-dark"
-                >
-                    <span className="sr-only">My Profile</span>
-                    <span className="icon-[ph--user-duotone] h-8 w-8" style={{ color: "#49CC76" }}></span>
-                    <span>{isAuthenticated ? data && data?.firstName: ''}</span>
-                </button>
                 {isAuthenticated ? (
-                    <button
-                        type="button"
-                        onClick={() => logout()}
-                        className="hidden md:inline-flex items-center justify-center  p-2.5 text-dark"
-                    >
-                        <span className="sr-only">Log Out</span>
-                        <span className="icon-[solar--logout-3-bold-duotone] h-8 w-8" style={{ color: "#49CC76" }}></span>
-                    </button>
+                    <>
+                        <button
+                            onClick={() => navigate("/profile")}
+                            type="button"
+                            className="hidden md:inline-flex items-center justify-center  p-2.5 text-dark"
+                        >
+                            <span className="sr-only">My Profile</span>
+                            <span className="icon-[ph--user-duotone] h-8 w-8" style={{ color: "#49CC76" }}></span>
+                            <span>{isAuthenticated ? data && data?.firstName : ''}</span>
+                        </button>
+                        <button
+                            type="button"
+                            onClick={() => logout()}
+                            className="hidden md:inline-flex items-center justify-center  p-2.5 text-dark"
+                        >
+                            <span className="sr-only">Log Out</span>
+                            <span className="icon-[solar--logout-3-bold-duotone] h-8 w-8" style={{ color: "#49CC76" }}></span>
+                        </button>
+                        <button
+                            type="button"
+                            className="relative rounded-full bg-primary  inline-flex items-center justify-center  p-2.5 text-white "
+                        >
+                            <span className="sr-only">Go to Cart</span>
+                            <span className="icon-[solar--bag-smile-bold-duotone] h-[30px] w-[30px] md:h-6 md:w-6" style={{ color: "white" }}></span>
+                            <span className="sr-only">Notifications</span>
+                            <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-dark  rounded-full -top-2 -end-2">0</div>
+                        </button>
+
+                    </>
                 ) : (
                     <Link
                         to="/auth/signin"
                         className="hidden md:inline-flex items-center justify-center  p-2.5 text-dark"
-                     >
+                    >
                         <span className="sr-only">Log In</span>
                         <span className="icon-[solar--login-3-bold-duotone] h-8 w-8" style={{ color: "#49CC76" }}></span>
                     </Link>
                 )}
-                <button
-                    type="button"
-                    className="relative rounded-full bg-primary  inline-flex items-center justify-center  p-2.5 text-white "
-                >
-                    <span className="sr-only">Go to Cart</span>
-                    <span className="icon-[solar--bag-smile-bold-duotone] h-[30px] w-[30px] md:h-6 md:w-6" style={{ color: "white" }}></span>
-                    <span className="sr-only">Notifications</span>
-                    <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-dark  rounded-full -top-2 -end-2">0</div>
-                </button>
-
                 <div className={`absolute top-0 left-0 h-screen w-screen bg-white md:hidden  z-40${mobileMenuOpen ? '' : 'absolute hidden'}`}>
                     <div className="h-screen w-screen flex bg-primary/30 ">
                         <ul className="font-medium flex flex-col gap-y-5 p-6  text-dark/60 pt-24">

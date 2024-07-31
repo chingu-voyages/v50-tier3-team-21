@@ -27,4 +27,7 @@ export interface MenuItemType {
     updatedAt: string;
   };
 
- 
+  export type OrderType = MenuItemType & {
+    count?: number;
+  };
+  

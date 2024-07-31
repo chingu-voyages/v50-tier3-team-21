@@ -32,7 +32,6 @@ export const RestaurantPage = () => {
         const url = `${BASE_URL}/foodItems/items?restaurantId=${restaurantId}`;
         const response = await httpClient.get(url);
         const { data } = response.data;
-        console.log(data);
         setRestaurantData(data);
         setFilteredMenuItems(data);
         getCategories(data);
@@ -102,7 +101,7 @@ export const RestaurantPage = () => {
       ) : (
         <div className="mt-36">Loading...</div>
       )}
-      <Orders orders={restaurantData}/>
+      <Orders />
     </>
   );
 };

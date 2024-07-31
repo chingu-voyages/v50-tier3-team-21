@@ -7,10 +7,12 @@ export const MainLayout = () => {
             <header>
                 <HeaderNav ></HeaderNav>
             </header>
-            <main>
+            <main className="mb-36">
                 <Outlet />
             </main>
-            <FooterComponent></FooterComponent>
+            <footer>
+                <FooterComponent></FooterComponent>
+            </footer>
         </div>
     )
 }

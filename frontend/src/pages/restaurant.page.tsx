@@ -69,7 +69,7 @@ export const RestaurantPage = () => {
       {restaurantData.length ? (
         <div className="p-3 md:px-10 max-w-[1290px] pt-28 md:pt-32 m-auto">
           <RestaurantHeader restaurantData={restaurantData} />
-          <div className="h-[200px] rounded-2xl md:h-[400px] bg-cover md:bg-fill bg-no-repeat bg-[url(https://images.pexels.com/photos/735869/pexels-photo-735869.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)] md:bg-center"></div>
+          <div className="rounded-2xl h-[500px] bg-contain bg-no-repeat bg-[url('./assets/hippo-server.png')] md:bg-center"></div>
 
           <div className="flex items-center gap-3 my-5 relative cursor-pointer">
             <span>Restaurant Menus </span>

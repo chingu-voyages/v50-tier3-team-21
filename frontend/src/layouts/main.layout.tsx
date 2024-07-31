@@ -7,7 +7,7 @@ export const MainLayout = () => {
             <header>
                 <HeaderNav ></HeaderNav>
             </header>
-            <main className="mb-36">
+            <main>
                 <Outlet />
             </main>
             <footer>

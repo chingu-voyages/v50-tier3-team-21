@@ -28,6 +28,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.FLOAT,
             defaultValue: 0
         },
+        deliveryCost: {
+            type: DataTypes.FLOAT,
+            defaultValue: 0
+        },
         finalized: {
             type: DataTypes.BOOLEAN,
             allowNull: false,

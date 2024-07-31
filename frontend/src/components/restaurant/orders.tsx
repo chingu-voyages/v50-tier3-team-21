@@ -7,19 +7,19 @@ import { example } from "./example";
 localStorage.setItem("shoppingCart", JSON.stringify(example));
 
 export const Orders = () => {
-  const [cart, setCart] = useState<OrderType[]>([]);
+  const [cart, setCart] = useState<OrderType[] | null >(null);
 
   useEffect(() => {
     // check to see if a shopping cart is saved
-    try{
+    try {
       const data = JSON.parse(localStorage.getItem("shoppingCart"));
-      if (data){
-        setCart(data)
+      if (data) {
+        setCart(data);
       } else {
-        setCart([])
+        setCart([]);
       }
-    } catch(error){
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
   }, []);
 
@@ -30,39 +30,46 @@ export const Orders = () => {
 
   // add one quantity
   const addQuantity = (item: OrderType) => {
-    setCart((prev) =>
-      prev.map((cartItem) =>
-        cartItem.id === item.id
-          ? { ...cartItem, count: (cartItem.count || 0) + 1 }
-          : cartItem
-      )
+    const editedItemQuantity = cart.map((cartItem) =>
+      cartItem.id === item.id
+        ? { ...cartItem, count: (cartItem.count || 0) + 1 }
+        : cartItem
     );
+    setCart(editedItemQuantity);
   };
 
   // subtract one quantity
   const subtractQuantity = (item: OrderType) => {
-    setCart((prev) =>
-      prev.map((cartItem) =>
-        cartItem.id === item.id
-          ? { ...cartItem, count: (cartItem.count || 0) - 1 }
-          : cartItem
-      )
+    // if item is already at 1, confirm that they want to remove item from cart
+    if (item.count === 1 ) {
+      handleDelete(item.id);
+      return;
+    }
+
+    const editedItemQuantity = cart.map((cartItem) =>
+      cartItem.id === item.id
+        ? { ...cartItem, count: (cartItem.count || 0) - 1 }
+        : cartItem
     );
+    setCart(editedItemQuantity);
   };
 
-  // delete the item from the cart 
+  // delete the item from the cart
   const handleDelete = (id: number) => {
-    alert(id, "deleted")
+    const foundItem = cart.find(cartItem => cartItem.id === id)
+    let message;
+    if(foundItem?.count === 1) message = `If you remove a single quantity the item will be removed from your card.  Are you srue you'd like to remove ${foundItem.name} from your order?`;
+    else message = `Are you sure you want to remove  from your cart?`
+    if(!confirm(message)) return
 
-    const filteredCart = cart.filter(item => item.id !== id)
+    const filteredCart = cart.filter((item) => item.id !== id);
     setCart(filteredCart);
     localStorage.setItem("shoppingCart", JSON.stringify(filteredCart));
-
-  }
+  };
 
   return (
     <div>
-      {cart.length && (
+      {cart?.length ? (
         <div>
           <h2 className="p-5">Your Orders</h2>
           <hr />
@@ -89,7 +96,7 @@ export const Orders = () => {
             </PrimaryButton>
           </div>
         </div>
-      )}
+      ) : <div>Your shopping cart is currently empty</div>}
     </div>
   );
 };

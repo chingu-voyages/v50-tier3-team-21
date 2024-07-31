@@ -8,7 +8,7 @@
     },
     "servers": [
       {
-        "url": "http://localhost:3000/api"
+        "url": "https://hungryhippo.onrender.com/"
       }
     ],
     "tags": [
@@ -19,6 +19,10 @@
       {
         "name": "ResetPassword",
         "description": "Password reset routes"
+      },
+      {
+        "name": "Order",
+        "description": "Order routes"
       }
     ],
     "paths": {
@@ -26,14 +30,21 @@
         "post": {
           "summary": "Signup a new user",
           "description": "Fields required: `username, email, password, confirmPassword`",
-          "tags": ["Auth"],
+          "tags": [
+            "Auth"
+          ],
           "requestBody": {
             "required": true,
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": ["username", "email", "password", "confirmPassword"],
+                  "required": [
+                    "username",
+                    "email",
+                    "password",
+                    "confirmPassword"
+                  ],
                   "properties": {
                     "username": {
                       "type": "string",
@@ -153,7 +164,9 @@
         "post": {
           "summary": "Login a user",
           "description": "Fields required: `username`, or `email`, and `password`",
-          "tags": ["Auth"],
+          "tags": [
+            "Auth"
+          ],
           "requestBody": {
             "required": true,
             "content": {
@@ -222,7 +235,9 @@
       "/auth/logout": {
         "post": {
           "summary": "Logout a user",
-          "tags": ["Auth"],
+          "tags": [
+            "Auth"
+          ],
           "responses": {
             "200": {
               "description": "User logged out successfully",
@@ -253,7 +268,9 @@
       "/auth/refresh-token": {
         "get": {
           "summary": "Refresh the access token",
-          "tags": ["Auth"],
+          "tags": [
+            "Auth"
+          ],
           "responses": {
             "200": {
               "description": "Token refreshed successfully",
@@ -285,7 +302,9 @@
         "post": {
           "summary": "Send password reset email",
           "description": "Sends a password reset email to the user with a reset token.",
-          "tags": ["ResetPassword"],
+          "tags": [
+            "ResetPassword"
+          ],
           "requestBody": {
             "required": true,
             "content": {
@@ -381,7 +400,9 @@
         "get": {
           "summary": "Authorize reset token",
           "description": "Authorize the reset token provided in the URL.",
-          "tags": ["ResetPassword"],
+          "tags": [
+            "ResetPassword"
+          ],
           "parameters": [
             {
               "name": "token",
@@ -394,22 +415,14 @@
             }
           ],
           "responses": {
-            "200": {
-              "description": "Token authorized",
-              "content": {
-                "application/json": {
+            "302": {
+              "description": "Redirect to change password",
+              "headers": {
+                "Location": {
+                  "description": "URL to change password",
                   "schema": {
-                    "type": "object",
-                    "properties": {
-                      "status": {
-                        "type": "string",
-                        "example": "success"
-                      },
-                      "message": {
-                        "type": "string",
-                        "example": "Token authorized"
-                      }
-                    }
+                    "type": "string",
+                    "example": "{FRONTEND_URL}/auth/change-password"
                   }
                 }
               }
@@ -485,7 +498,9 @@
         "post": {
           "summary": "Reset password",
           "description": "Reset the user's password using the token.",
-          "tags": ["ResetPassword"],
+          "tags": [
+            "ResetPassword"
+          ],
           "requestBody": {
             "required": true,
             "content": {
@@ -597,8 +612,873 @@
             }
           }
         }
+      },
+      "/order/create-order": {
+        "post": {
+          "summary": "Create a new order",
+          "description": "Fields required: `deliveryAddress, deliveryDate, deliveryTime, foodItems`",
+          "tags": [
+            "Order"
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "deliveryAddress": {
+                      "type": "string",
+                      "description": "Required. The delivery address for the order."
+                    },
+                    "deliveryDate": {
+                      "type": "string",
+                      "format": "date",
+                      "description": "Required. The delivery date for the order."
+                    },
+                    "deliveryTime": {
+                      "type": "string",
+                      "description": "Required. The delivery time for the order."
+                    },
+                    "foodItems": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "itemId": {
+                            "type": "string",
+                            "description": "Required. The ID of the food item."
+                          },
+                          "quantity": {
+                            "type": "integer",
+                            "description": "Required. The quantity of the food item."
+                          }
+                        }
+                      }
+                    },
+                    "deliveryCost": {
+                      "type": "number",
+                      "description": "The delivery cost for the order."
+                    },
+                    "tip": {
+                      "type": "number",
+                      "description": "The tip for the delivery."
+                    },
+                    "finalized": {
+                      "type": "boolean",
+                      "description": "Whether the order is finalized."
+                    }
+                  },
+                  "example": {
+                    "deliveryAddress": "whatever4",
+                    "deliveryDate": "2024-08-05",
+                    "deliveryTime": "14:00",
+                    "foodItems": [
+                      {
+                        "itemId": "1",
+                        "quantity": 1
+                      },
+                      {
+                        "itemId": 200,
+                        "quantity": 5
+                      },
+                      {
+                        "itemId": 4,
+                        "quantity": 2
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Order created successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "success"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Order created successfully"
+                      },
+                      "orderId": {
+                        "type": "integer",
+                        "example": 1
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "User not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "User not found"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Failed to create order"
+                      },
+                      "error": {
+                        "type": "string",
+                        "example": "error.message"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/order/update-order/{orderId}": {
+        "put": {
+          "summary": "Update an existing order",
+          "description": "Fields required: `deliveryAddress, deliveryDate, deliveryTime, foodItems`",
+          "tags": [
+            "Order"
+          ],
+          "parameters": [
+            {
+              "name": "orderId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "The ID of the order to update."
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "deliveryAddress": {
+                      "type": "string",
+                      "description": "Required. The new delivery address for the order."
+                    },
+                    "deliveryDate": {
+                      "type": "string",
+                      "format": "date",
+                      "description": "Required. The new delivery date for the order."
+                    },
+                    "deliveryTime": {
+                      "type": "string",
+                      "description": "Required. The new delivery time for the order."
+                    },
+                    "foodItems": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "itemId": {
+                            "type": "string",
+                            "description": "Required. The ID of the food item."
+                          },
+                          "quantity": {
+                            "type": "integer",
+                            "description": "Required. The quantity of the food item."
+                          }
+                        }
+                      }
+                    },
+                    "deliveryCost": {
+                      "type": "number",
+                      "description": "The new delivery cost for the order."
+                    },
+                    "tip": {
+                      "type": "number",
+                      "description": "The new tip for the delivery."
+                    },
+                    "finalized": {
+                      "type": "boolean",
+                      "description": "Whether the order is finalized."
+                    }
+                  },
+                  "example": {
+                    "deliveryAddress": "whatever",
+                    "deliveryDate": "2024-08-01",
+                    "deliveryTime": "14:00",
+                    "foodItems": [
+                      {
+                        "itemId": "1",
+                        "quantity": 1
+                      },
+                      {
+                        "itemId": "2",
+                        "quantity": 10
+                      },
+                      {
+                        "itemId": "5",
+                        "quantity": 10
+                      },
+                      {
+                        "itemId": "10",
+                        "quantity": 2
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Order updated successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "success"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Order updated successfully"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Failed to update order"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Order not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Order not found"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Failed to update order"
+                      },
+                      "error": {
+                        "type": "string",
+                        "example": "error.message"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/order/get-order/{orderId}": {
+        "get": {
+          "summary": "Get order by ID",
+          "description": "Retrieve an order by its ID.",
+          "tags": [
+            "Order"
+          ],
+          "parameters": [
+            {
+              "name": "orderId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "The ID of the order to retrieve."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Order retrieved successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "success"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Order retrieved successfully"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "userId": {
+                            "type": "integer",
+                            "example": 7
+                          },
+                          "deliveryAddress": {
+                            "type": "string",
+                            "example": "whatever"
+                          },
+                          "deliveryDate": {
+                            "type": "string",
+                            "example": "2024-08-01"
+                          },
+                          "deliveryTime": {
+                            "type": "string",
+                            "example": "14:00:00"
+                          },
+                          "tip": {
+                            "type": "number",
+                            "example": 0
+                          },
+                          "deliveryCost": {
+                            "type": "number",
+                            "example": 0
+                          },
+                          "finalized": {
+                            "type": "boolean",
+                            "example": false
+                          },
+                          "cancelled": {
+                            "type": "boolean",
+                            "example": false
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2024-07-30T07:36:19.605Z"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2024-07-30T07:41:30.884Z"
+                          },
+                          "orderFoodItems": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer",
+                                  "example": 1
+                                },
+                                "orderId": {
+                                  "type": "integer",
+                                  "example": 1
+                                },
+                                "itemId": {
+                                  "type": "integer",
+                                  "example": 1
+                                },
+                                "quantity": {
+                                  "type": "integer",
+                                  "example": 1
+                                },
+                                "createdAt": {
+                                  "type": "string",
+                                  "format": "date-time",
+                                  "example": "2024-07-30T07:36:19.684Z"
+                                },
+                                "updatedAt": {
+                                  "type": "string",
+                                  "format": "date-time",
+                                  "example": "2024-07-30T07:36:19.684Z"
+                                },
+                                "item": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "integer",
+                                      "example": 1
+                                    },
+                                    "name": {
+                                      "type": "string",
+                                      "example": "Joe's KC Ribs, Brisket & Burnt Ends"
+                                    },
+                                    "imageUrl": {
+                                      "type": "string",
+                                      "example": "https://goldbelly.imgix.net/uploads/showcase_media_asset/image/79619/joes-kc-ribs-brisket-and-burnt-ends.6710e994980e485e6441b794717ad6fb.jpg?ixlib=react-9.0.2&auto=format&ar=1%3A1"
+                                    },
+                                    "restaurantId": {
+                                      "type": "integer",
+                                      "example": 1
+                                    },
+                                    "price": {
+                                      "type": "number",
+                                      "example": 110.99
+                                    },
+                                    "createdAt": {
+                                      "type": "string",
+                                      "format": "date-time",
+                                      "example": "2024-07-20T07:05:06.499Z"
+                                    },
+                                    "updatedAt": {
+                                      "type": "string",
+                                      "format": "date-time",
+                                      "example": "2024-07-20T07:05:06.499Z"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Unauthorized user"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Order not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Order not found"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Failed to get order"
+                      },
+                      "error": {
+                        "type": "string",
+                        "example": "error.message"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/order/get-orders": {
+        "get": {
+          "summary": "Get orders by user",
+          "description": "Retrieve all orders made by the authenticated user.",
+          "tags": [
+            "Order"
+          ],
+          "responses": {
+            "200": {
+              "description": "Orders retrieved successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "success"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Orders retrieved successfully"
+                      },
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "example": 2
+                            },
+                            "userId": {
+                              "type": "integer",
+                              "example": 7
+                            },
+                            "deliveryAddress": {
+                              "type": "string",
+                              "example": "whatever2"
+                            },
+                            "deliveryDate": {
+                              "type": "string",
+                              "example": "2024-08-01"
+                            },
+                            "deliveryTime": {
+                              "type": "string",
+                              "example": "14:00:00"
+                            },
+                            "tip": {
+                              "type": "number",
+                              "example": 0
+                            },
+                            "deliveryCost": {
+                              "type": "number",
+                              "example": 0
+                            },
+                            "finalized": {
+                              "type": "boolean",
+                              "example": false
+                            },
+                            "cancelled": {
+                              "type": "boolean",
+                              "example": false
+                            },
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-07-30T07:53:10.971Z"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-07-30T07:53:10.973Z"
+                            },
+                            "orderFoodItems": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "integer",
+                                    "example": 10
+                                  },
+                                  "orderId": {
+                                    "type": "integer",
+                                    "example": 2
+                                  },
+                                  "itemId": {
+                                    "type": "integer",
+                                    "example": 1
+                                  },
+                                  "quantity": {
+                                    "type": "integer",
+                                    "example": 1
+                                  },
+                                  "createdAt": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "example": "2024-07-30T07:53:11.154Z"
+                                  },
+                                  "updatedAt": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "example": "2024-07-30T07:53:11.154Z"
+                                  },
+                                  "item": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "integer",
+                                        "example": 1
+                                      },
+                                      "name": {
+                                        "type": "string",
+                                        "example": "Joe's KC Ribs, Brisket & Burnt Ends"
+                                      },
+                                      "imageUrl": {
+                                        "type": "string",
+                                        "example": "https://goldbelly.imgix.net/uploads/showcase_media_asset/image/79619/joes-kc-ribs-brisket-and-burnt-ends.6710e994980e485e6441b794717ad6fb.jpg?ixlib=react-9.0.2&auto=format&ar=1%3A1"
+                                      },
+                                      "restaurantId": {
+                                        "type": "integer",
+                                        "example": 1
+                                      },
+                                      "price": {
+                                        "type": "number",
+                                        "example": 110.99
+                                      },
+                                      "createdAt": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-07-20T07:05:06.499Z"
+                                      },
+                                      "updatedAt": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-07-20T07:05:06.499Z"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Failed to get orders"
+                      },
+                      "error": {
+                        "type": "string",
+                        "example": "error.message"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/order/cancel/{orderId}": {
+        "put": {
+          "summary": "Cancel an order",
+          "description": "Cancel an order by its ID.",
+          "tags": [
+            "Order"
+          ],
+          "parameters": [
+            {
+              "name": "orderId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "description": "The ID of the order to cancel."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Order cancelled successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "success"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Order cancelled successfully"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Unauthorized user"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Order not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Order not found"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Order already cancelled",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Order already cancelled"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Failed to cancel order"
+                      },
+                      "error": {
+                        "type": "string",
+                        "example": "error.message"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
-  "apis": ["./routes/*.js"]
+  "apis": [
+    "./routes/*.js"
+  ]
 }

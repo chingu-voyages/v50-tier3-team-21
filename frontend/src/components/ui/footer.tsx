@@ -1,12 +1,13 @@
-export default function Footer() {
-  return (
-    <div className="hidden md:flex items-center justify-center flex-col mt-10">
-      <hr className="border-primary border w-[95%]" />
-      <div className="flex items-center justify-center h-24 gap-3">
-        <p>All rights Reserverd</p>
-        <span className="text-2xl">©</span>
-        <p className="font-bold">Hungry Hippo 2024</p>
-      </div>
-    </div>
-  );
+export default function FooterComponent() {
+    const currentYear = new Date().getFullYear();
+    return (
+        <footer className="bg-white m-4 fixed bottom-0 left-0 z-20 w-full">
+            <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+                <hr className="my-6 border-primary border-2 sm:mx-auto lg:my-8" />
+                <span className="block text-sm text-dark sm:text-center">&copy; {currentYear} <a href="/" className="hover:underline">Hungry Hippo.</a> All rights reserved.</span>
+            </div>
+        </footer>
+
+
+    )
 }

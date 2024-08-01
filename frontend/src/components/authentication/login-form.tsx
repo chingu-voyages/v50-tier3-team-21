@@ -31,7 +31,6 @@ export const LoginForm = () => {
 
     useEffect(() => {
         if (isError) {
-            console.log('error', error)
             notify({
                 message:
                     isAxiosError(error)

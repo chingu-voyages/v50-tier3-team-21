@@ -21,7 +21,7 @@ const refreshToken = async (req, res, next) => {
     const newRefreshToken = generateToken(
       { id: decoded.id },
       process.env.JWT_REFRESH_SECRET,
-      process.env.JWT_REFRESH_EXPIRES_IN,
+      process.env.JWT_REFRESH_EXPIRES_IN
     );
 
     // Set new refresh token in cookies
@@ -39,7 +39,7 @@ const refreshToken = async (req, res, next) => {
     try {
       const decodedRefresh = jwt.verify(
         oldRefreshToken,
-        process.env.JWT_REFRESH_SECRET,
+        process.env.JWT_REFRESH_SECRET
       );
       if (!decodedRefresh) {
         return res
@@ -51,12 +51,12 @@ const refreshToken = async (req, res, next) => {
       const newToken = generateToken(
         { id: decodedRefresh.id },
         process.env.JWT_SECRET,
-        process.env.JWT_EXPIRES_IN,
+        process.env.JWT_EXPIRES_IN
       );
       const newRefreshToken = generateToken(
         { id: decodedRefresh.id },
         process.env.JWT_REFRESH_SECRET,
-        process.env.JWT_REFRESH_EXPIRES_IN,
+        process.env.JWT_REFRESH_EXPIRES_IN
       );
 
       // Set new tokens in cookies
@@ -100,40 +100,35 @@ const signup = async (req, res, next) => {
   }
   // attempt to create user in db (unsuccessful if doesn't pass validations)
   try {
-    const newUser = await db.User.create({
-      username: body.username,
-      email: body.email,
-      password: body.password,
-      confirmPassword: body.confirmPassword,
-      firstName: body.firstName || null,
-      lastName: body.lastName || null,
-      contact: body.contact || null,
-    });
+    const response = await new UserCreator(db, body).perform();
 
-    const result = newUser.toJSON();
-    delete result.password;
-    delete result.deletedAt;
+    if (response) {
+      const { newUser, account } = response;
+      const result = newUser.toJSON();
+      delete result.password;
+      delete result.deletedAt;
 
-    result.token = generateToken(
-      { id: result.id },
-      process.env.JWT_SECRET,
-      process.env.JWT_EXPIRES_IN,
-    );
+      result.token = generateToken(
+        { id: result.id },
+        process.env.JWT_SECRET,
+        process.env.JWT_EXPIRES_IN
+      );
 
-    if (!result) {
-      return res.status(400).json({
-        status: "fail",
-        message: "Failed to create user",
+      if (!result) {
+        return res.status(400).json({
+          status: "fail",
+          message: "Failed to create user",
+        });
+      }
+
+      // TODO: send email to user
+
+      return res.status(201).json({
+        status: "success",
+        message: "User Successfully created",
+        data: { result, account },
       });
     }
-
-    // TODO: send email to user
-
-    return res.status(201).json({
-      status: "success",
-      message: "User created successfully",
-      data: result,
-    });
   } catch (error) {
     console.error(error);
     return res.status(500).json({
@@ -181,12 +176,12 @@ const login = async (req, res, next) => {
     const token = generateToken(
       { id: result.id },
       process.env.JWT_SECRET,
-      process.env.JWT_EXPIRES_IN,
+      process.env.JWT_EXPIRES_IN
     );
     const refreshToken = generateToken(
       { id: result.id },
       process.env.JWT_REFRESH_SECRET,
-      process.env.JWT_REFRESH_EXPIRES_IN,
+      process.env.JWT_REFRESH_EXPIRES_IN
     );
 
     res.cookie("token", token, {

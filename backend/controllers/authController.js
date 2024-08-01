@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { generateToken } = require("../helpers/jwt");
 const { sendEmail } = require("../middlewares/mail");
+const UserCreator = require("../services/auth/userCreator");
 
 // Refresh token
 const refreshToken = async (req, res, next) => {

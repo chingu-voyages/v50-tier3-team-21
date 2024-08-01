@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.toast-body-success {
+  background-color: #ffffff;
+  background-image: linear-gradient(
+    rgba(73, 204, 118, 0.1),
+    rgba(73, 204, 118, 0.1)
+  );
+}
+
+.toast-body-error {
+  background-color: #ffffff;
+  background-image: linear-gradient(rgba(247, 0, 0, 0.1), rgba(247, 0, 0, 0.1));
+}

@@ -7,7 +7,7 @@ export interface HeaderNavProps {
     children: ReactNode;
 }
 export default function HeaderNav() {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(true);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const {isAuthenticated, data, logout} = useAuth();
     const navigate = useNavigate();
     const mobileLinks = [

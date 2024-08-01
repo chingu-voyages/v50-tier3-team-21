@@ -7,7 +7,7 @@ import {
   CategoryFilter,
   Orders,
 } from "../components/restaurant/";
-import { MenuItemType } from "../components/restaurant/types/types";
+import { MenuItemType, OrderType } from "../components/restaurant/types/types";
 const BASE_URL = import.meta.env.VITE_LOCAL_API_BASE_URL;
 
 // types
@@ -24,6 +24,7 @@ export const RestaurantPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [categories, setCategories] = useState<CategoryListType>({});
   const { restaurantId } = useParams<{ restaurantId: string }>();
+  const [cart, setCart] = useState<OrderType[]>([]);
 
   // get list of foodITems from API
   useEffect(() => {
@@ -64,6 +65,34 @@ export const RestaurantPage = () => {
     setFilterVisible((prev) => !prev);
   };
 
+  //! add item to cart
+  const handleAddItemToCart = (item) => {
+
+    
+    // get cart from local storage
+    let storedCart = localStorage.getItem("shoppingCart");
+    if (storedCart) storedCart = JSON.parse(storedCart);
+
+    //check to see if already in cart, if so, just add to count
+    const found = storedCart.find((cartItem) => cartItem.id === item.id);
+    if (found) {
+      found.count += 1;
+    } else {
+      // set item coun to 1
+      item.count = 1;
+      storedCart.push(item);
+    }
+    setCart(storedCart)
+    //! set cart from here????
+    // update and save cart in local storage
+    let formattedCart = JSON.stringify(storedCart);
+    localStorage.setItem("shoppingCart", formattedCart);
+
+    // alert that item was added successful
+    alert(`${item.name} added to cart successfully`);
+  };
+
+
   return (
     <>
       {restaurantData.length ? (
@@ -88,11 +117,15 @@ export const RestaurantPage = () => {
               </div>
             )}
           </div>
-
+          <h2 className="p-5">Your Orders</h2>
           <hr />
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 my-5 p-3 justify-items-center">
             {filteredMenuItems.map((item: MenuItemType) => (
-              <FoodCard item={item} key={item.id} />
+              <FoodCard
+                item={item}
+                key={item.id}
+                handleAddItemToCart={() => handleAddItemToCart(item)}
+              />
             ))}
           </div>
         </div>
@@ -101,7 +134,7 @@ export const RestaurantPage = () => {
       ) : (
         <div className="mt-36">Loading...</div>
       )}
-      <Orders />
+      <Orders  cart={cart} setCart={setCart} />
     </>
   );
 };

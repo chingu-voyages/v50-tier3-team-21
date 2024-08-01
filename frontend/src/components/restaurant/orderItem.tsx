@@ -1,3 +1,4 @@
+import { FoodImage } from "./FoodImage";
 import { OrderType } from "./types/types";
 
 // types
@@ -17,7 +18,7 @@ export const OrderItem = ({
   return (
     <div className="w-full shadow-lg flex p-3 rounded-lg gap-3 justify-center">
       <div className="w-20 object-contain content-center">
-        <img src={item.imageUrl} className="w-full rounded-lg" />
+        <FoodImage src={item.imageUrl} alt={item.name} className="w-full rounded-lg" />
       </div>
       <div className="flex flex-col gap-3 flex-1">
         <div className="text-primary font-bold">{item.restaurant.name}</div>

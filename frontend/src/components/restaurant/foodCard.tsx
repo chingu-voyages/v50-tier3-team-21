@@ -1,18 +1,15 @@
 import PrimaryButton from "../ui/button";
-import { MenuItemType } from "./types/types";
+import { MenuItemType, OrderType } from "./types/types";
 import { FoodImage } from "./FoodImage";
 
 // TYPES
 interface FoodCardProps {
   item: MenuItemType;
+  handleAddItemToCart: (item: OrderType) => void
 }
 
 // render a card for each menu item
-export const FoodCard = ({ item }: FoodCardProps) => {
-  // mock adding an item to the shopping card
-  const handleAddToCart = (item: MenuItemType) => {
-    alert(`${item.name} added to cart!`);
-  };
+export const FoodCard = ({ item, handleAddItemToCart}: FoodCardProps) => {
 
   return (
     <div className="rounded-md shadow-lg max-w-[295px] md:max-w-[360px]">
@@ -28,9 +25,9 @@ export const FoodCard = ({ item }: FoodCardProps) => {
           <p className="text-xs font-bold">${item.price}</p>
         </div>
         <div>
-          <PrimaryButton onClick={() => handleAddToCart(item)}>
+          <PrimaryButton onClick={() => handleAddItemToCart(item)}>
             <span className="icon-[solar--bag-smile-bold-duotone] mr-1"></span>
-            PLACE ORDER
+            ADD TO CART
           </PrimaryButton>
         </div>
       </div>

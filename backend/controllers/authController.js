@@ -2,7 +2,7 @@ const db = require("../models"); // Make sure to require your models
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { generateToken } = require("../helpers/jwt");
-const UserCreator = require("../services/auth/userCreator");
+const { sendEmail } = require("../middlewares/mail");
 
 // Refresh token
 const refreshToken = async (req, res, next) => {
@@ -22,7 +22,7 @@ const refreshToken = async (req, res, next) => {
     const newRefreshToken = generateToken(
       { id: decoded.id },
       process.env.JWT_REFRESH_SECRET,
-      process.env.JWT_REFRESH_EXPIRES_IN,
+      process.env.JWT_REFRESH_EXPIRES_IN
     );
 
     // Set new refresh token in cookies
@@ -31,18 +31,16 @@ const refreshToken = async (req, res, next) => {
       secure: process.env.NODE_ENV === "production",
     });
 
-    return res
-      .status(200)
-      .json({
-        status: "success",
-        message: "Token is valid, new refresh token generated",
-      });
+    return res.status(200).json({
+      status: "success",
+      message: "Token is valid, new refresh token generated",
+    });
   } catch (error) {
     // Token is invalid, verify the refresh token
     try {
       const decodedRefresh = jwt.verify(
         oldRefreshToken,
-        process.env.JWT_REFRESH_SECRET,
+        process.env.JWT_REFRESH_SECRET
       );
       if (!decodedRefresh) {
         return res
@@ -54,12 +52,12 @@ const refreshToken = async (req, res, next) => {
       const newToken = generateToken(
         { id: decodedRefresh.id },
         process.env.JWT_SECRET,
-        process.env.JWT_EXPIRES_IN,
+        process.env.JWT_EXPIRES_IN
       );
       const newRefreshToken = generateToken(
         { id: decodedRefresh.id },
         process.env.JWT_REFRESH_SECRET,
-        process.env.JWT_REFRESH_EXPIRES_IN,
+        process.env.JWT_REFRESH_EXPIRES_IN
       );
 
       // Set new tokens in cookies
@@ -87,26 +85,36 @@ const refreshToken = async (req, res, next) => {
 const signup = async (req, res, next) => {
   const body = req.body;
 
-  // const result = await db.Transaction.create({
-  //   amount: 100, type: 'credit', accountId: 3, status: 'completed', paymentIntentId: '123',
-  // });
-
-  // return res.status(200).json(result);
+  // password length validation
+  if (body.password.length < 7) {
+    return res.status(400).json({
+      status: "fail",
+      message: "Password must be at least 7 characters long",
+    });
+  }
+  // password confirmation validation
+  if (body.password !== body.confirmPassword) {
+    return res.status(400).json({
+      status: "fail",
+      message: "Password and confirm password do not match",
+    });
+  }
+  // attempt to create user in db (unsuccessful if doesn't pass validations)
   try {
-   const response = await new UserCreator(db, body).perform();
-   
+    const response = await new UserCreator(db, body).perform();
+
     if (response) {
       const { newUser, account } = response;
       const result = newUser.toJSON();
       delete result.password;
       delete result.deletedAt;
-  
+
       result.token = generateToken(
         { id: result.id },
         process.env.JWT_SECRET,
-        process.env.JWT_EXPIRES_IN,
+        process.env.JWT_EXPIRES_IN
       );
-  
+
       if (!result) {
         return res.status(400).json({
           status: "fail",
@@ -114,13 +122,20 @@ const signup = async (req, res, next) => {
         });
       }
 
-      return res.status(200).json({
+    // TODO: send email to user
+
+    await sendEmail(
+      result.email,
+      "Welcome to Hungry Hippo!",
+      `<p>Dear <strong>${result.username}</strong>,</p><p>Welcome to Hungry Hippo! We're excited to have you on board.</p>`
+    );
+
+      return res.status(201).json({
         status: "success",
         message: "User Successfully created",
-        data: { result, account }
+        data: { result, account },
       });
     }
-  
   } catch (error) {
     console.error(error);
     return res.status(500).json({
@@ -128,18 +143,6 @@ const signup = async (req, res, next) => {
       message: "Failed to create user",
       error: error.message,
     });
-  }
-};
-
-const deleteUser = async (req, res) => {
-  try {
-    await db.User.destroy({
-      where: { username: req.body.username},
-    });
-
-    return res.status(204);
-  } catch (err) {
-    throw new Error(err);
   }
 };
 
@@ -180,12 +183,12 @@ const login = async (req, res, next) => {
     const token = generateToken(
       { id: result.id },
       process.env.JWT_SECRET,
-      process.env.JWT_EXPIRES_IN,
+      process.env.JWT_EXPIRES_IN
     );
     const refreshToken = generateToken(
       { id: result.id },
       process.env.JWT_REFRESH_SECRET,
-      process.env.JWT_REFRESH_EXPIRES_IN,
+      process.env.JWT_REFRESH_EXPIRES_IN
     );
 
     res.cookie("token", token, {
@@ -243,4 +246,4 @@ const protect = async (req, res, next) => {
     message: "User protected successfully",
   });
 };
-module.exports = { signup, login, profile, logout, refreshToken, protect, deleteUser };
+module.exports = { signup, login, profile, logout, refreshToken, protect };

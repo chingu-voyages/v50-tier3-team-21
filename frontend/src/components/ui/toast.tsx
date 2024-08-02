@@ -3,6 +3,21 @@ import 'react-toastify/dist/ReactToastify.css';
 
 type toastTypes = 'success' | 'error';
 
+interface ToastProps {
+    type: toastTypes;
+    message: string;
+}
+
+const CustomToast: React.FC<ToastProps> = ({ type, message }) => {
+    const titleMessage: string = type === 'success' ? 'All changes applied' : 'Error! no changes applied';
+    return (
+        <div className="toast-container">
+            <h3 className="toast-title text-sm sm:text-md font-semibold text-dark mb-1">{titleMessage}</h3>
+            <p className="toast-message text-dark/60 text-md">{message}</p>
+        </div>
+    );
+};
+
 export const notify = ({ message }: { message: string }, type: toastTypes) => {
     const icon = type === 'success' ? (
         <span className='bg-primary/10  rounded p-1 flex items-center'>
@@ -14,8 +29,9 @@ export const notify = ({ message }: { message: string }, type: toastTypes) => {
         </span>
     );
 
-    toast[type](message, {
-        position: "bottom-right",
+
+    toast[type](<CustomToast type={type} message={message} />, {
+        position: "top-right",
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
@@ -37,5 +53,9 @@ const CustomCloseButton = () => {
 };
 
 export const ToastMessages = () => {
-    return <ToastContainer toastClassName="py-6 px-5 rounded-lg shadow-lg shadow-dark/5 " bodyClassName="text-sm text-dark/60 gap-2 " closeButton={CustomCloseButton} />;
+    return (
+        <div>
+            <ToastContainer toastClassName="py-6 px-5 rounded-lg shadow-lg shadow-dark/5 " bodyClassName="text-sm text-dark/60 gap-3 " closeButton={CustomCloseButton} />
+        </div>);
 }
+

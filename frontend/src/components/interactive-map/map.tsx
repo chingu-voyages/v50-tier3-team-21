@@ -5,6 +5,9 @@ import {useAddressSearch} from "./address-search-provider.tsx";
 import {createGeoJSONCircle , layerStyle} from "../../utils/geospatial.ts";
 import {Pins} from "./pins.tsx";
 import {useAppMapContext} from "../../provider/map.provider.tsx";
+import Modal from "../ui/modal.tsx";
+import {FilterSection} from "./filter.tsx";
+import {useModal} from "../../hooks/modal.hook.ts";
 
 
 
@@ -17,8 +20,7 @@ import {useAppMapContext} from "../../provider/map.provider.tsx";
 
 export const AppMap = () => {
    const {selectedLocation} = useAddressSearch();
-   const { geoLocation} = useAppMapContext()
-
+   const { geoLocation} = useAppMapContext();
     const circle = createGeoJSONCircle(
         selectedLocation.coordinates ?
             selectedLocation.coordinates : {
@@ -28,7 +30,7 @@ export const AppMap = () => {
         5
     );
    return(
-       <React.Fragment>
+       <section className="w-full h-full">
            <Map
                id="mapA"
                mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}
@@ -56,9 +58,8 @@ export const AppMap = () => {
                <Source id="my-data" type="geojson" data={circle}>
                    <Layer {...layerStyle} />
                </Source>
-
            </Map>
-       </React.Fragment>
+       </section>
 
 
 

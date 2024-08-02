@@ -17,7 +17,7 @@ export const Pins = () => {
                             longitude={restaurant.longitude}
                             latitude={restaurant.latitude}
                             onClick={() => handleSelectRestaurant(restaurant.id)}
-                            style={{zIndex: 20}}
+                            style={{zIndex: 2}}
                             scale={2.0}
                         >
                             <span className="icon-[majesticons--map-marker] text-primary"

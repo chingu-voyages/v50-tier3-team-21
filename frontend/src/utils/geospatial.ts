@@ -63,7 +63,7 @@ export const layerStyle = {
     id: 'circle-layer',
     type: 'fill',
     paint: {
-        'fill-color': '#43ff64',
+        'fill-color': '#43ff6422',
         'fill-opacity': 0.8
     }
 };

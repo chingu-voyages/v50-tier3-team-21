@@ -3,6 +3,14 @@ module.exports = (sequelize, DataTypes) => {
         name: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        // make a Virtual name from the name (slug)
+        displayName: {
+            type: DataTypes.VIRTUAL,
+            get() {
+                const name = this.getDataValue('name');
+                return name.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+            }
         }
     });
 

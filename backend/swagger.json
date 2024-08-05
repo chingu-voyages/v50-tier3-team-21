@@ -36,6 +36,10 @@
       {
         "name": "Food Categories",
         "description": "Food category routes"
+      },
+      {
+        "name": "Food Items",
+        "description": "Food item routes"
       }
     ],
     "paths": {
@@ -1907,7 +1911,155 @@
             }
           }
         }
-      }    
+      },
+      "/fooditems/items": {
+        "get": {
+          "summary": "Get food items",
+          "description": "Retrieve a list of food items based on optional query parameters such as food item ID, category ID, restaurant ID, and country.",
+          "tags": [
+            "Food Items"
+          ],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "foodItemId",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "integer"
+              },
+              "description": "Filter by specific food item ID."
+            },
+            {
+              "name": "categoryId",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "integer"
+              },
+              "description": "Filter by specific category ID."
+            },
+            {
+              "name": "restaurantId",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "integer"
+              },
+              "description": "Filter by specific restaurant ID."
+            },
+            {
+              "name": "country",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "string"
+              },
+              "description": "Filter by country of the restaurant."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "List of food items retrieved successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "success"
+                      },
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "Spaghetti Bolognese"
+                            },
+                            "price": {
+                              "type": "number",
+                              "format": "float",
+                              "example": 12.99
+                            },
+                            "restaurant": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer",
+                                  "example": 1
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "example": "Italian Bistro"
+                                },
+                                "country": {
+                                  "type": "string",
+                                  "example": "United States"
+                                }
+                              }
+                            },
+                            "categories": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "integer",
+                                    "example": 1
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "example": "Pasta"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Failed to fetch food items"
+                      },
+                      "error": {
+                        "type": "string",
+                        "example": "error.message"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "apis": [

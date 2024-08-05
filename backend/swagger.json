@@ -48,6 +48,10 @@
       {
         "name": "Wallet",
         "description": "Wallet routes"
+      },
+      {
+        "name": "Transactions",
+        "description": "Transaction routes"
       }
     ],
     "paths": {
@@ -2252,6 +2256,97 @@
                         "type": "string",
                         "format": "date-time",
                         "example": "2024-07-30T07:36:19.605Z"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Account not found"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/transactions": {
+        "get": {
+          "summary": "Get transactions",
+          "description": "Retrieve a list of all transactions for the authenticated user's account.",
+          "tags": [
+            "Transactions"
+          ],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "List of transactions retrieved successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "success"
+                      },
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "amount": {
+                              "type": "number",
+                              "format": "float",
+                              "example": 100.00
+                            },
+                            "type": {
+                              "type": "string",
+                              "example": "credit"
+                            },
+                            "status": {
+                              "type": "string",
+                              "example": "completed"
+                            },
+                            "paymentIntentId": {
+                              "type": "string",
+                              "example": "pi_1A2B3C4D"
+                            },
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-07-30T07:36:19.605Z"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-07-30T07:36:19.605Z"
+                            }
+                          }
+                        }
                       }
                     }
                   }

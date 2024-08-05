@@ -1,5 +1,5 @@
 import { CheckboxElement } from "./";
-import { MenuItemType } from "./types/types";
+import { MenuItemType } from "./types/restaurant-types";
 
 // types
 interface CategoryFilterProps {
@@ -33,7 +33,9 @@ export const CategoryFilter = ({
     );
 
     const filtered = restaurantData.filter((item) =>
-      item.Categories.some((category) => catsToInclude.includes(category.displayName))
+      item.Categories.some((category) =>
+        catsToInclude.includes(category.displayName)
+      )
     );
     // if filtered list is empty, just show all items
     // if (!filtered.length) {

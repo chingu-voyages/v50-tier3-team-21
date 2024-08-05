@@ -7,7 +7,10 @@ import {
   CategoryFilter,
   Orders,
 } from "../components/restaurant/";
-import { MenuItemType, OrderType } from "../components/restaurant/types/types";
+import {
+  MenuItemType,
+  OrderType,
+} from "../components/restaurant/types/restaurant-types";
 const BASE_URL = import.meta.env.VITE_LOCAL_API_BASE_URL;
 
 // types
@@ -24,7 +27,7 @@ export const RestaurantPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [categories, setCategories] = useState<CategoryListType>({});
   const { restaurantId } = useParams<{ restaurantId: string }>();
-  const [cart, setCart] = useState<OrderType[]>([]);
+  const [cart, setCart] = useState<OrderType[]>([])
 
   // get list of foodITems from API
   useEffect(() => {
@@ -66,23 +69,23 @@ export const RestaurantPage = () => {
   };
 
   //! add item to cart
-  const handleAddItemToCart = (item) => {
-
-    
+  const handleAddItemToCart = (item: OrderType) => {
     // get cart from local storage
-    let storedCart = localStorage.getItem("shoppingCart");
-    if (storedCart) storedCart = JSON.parse(storedCart);
+    const storedCart: OrderType[] = JSON.parse(
+      localStorage.getItem("shoppingCart") || "[]"
+    );
 
     //check to see if already in cart, if so, just add to count
     const found = storedCart.find((cartItem) => cartItem.id === item.id);
     if (found) {
-      found.count += 1;
+      found.count = (found.count || 0) + 1;
     } else {
       // set item coun to 1
       item.count = 1;
       storedCart.push(item);
     }
-    setCart(storedCart)
+
+    setCart(storedCart);
     //! set cart from here????
     // update and save cart in local storage
     let formattedCart = JSON.stringify(storedCart);
@@ -91,7 +94,6 @@ export const RestaurantPage = () => {
     // alert that item was added successful
     alert(`${item.name} added to cart successfully`);
   };
-
 
   return (
     <>
@@ -134,7 +136,7 @@ export const RestaurantPage = () => {
       ) : (
         <div className="mt-36">Loading...</div>
       )}
-      <Orders  cart={cart} setCart={setCart} />
+      <Orders cart={cart} setCart={setCart} children />
     </>
   );
 };

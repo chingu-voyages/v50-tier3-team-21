@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface MenuItemType {
     id: number;
     name: string;
@@ -32,3 +34,9 @@ export interface MenuItemType {
     count?: number;
   };
   
+
+  export interface OrdersProps {
+    cart: OrderType[];
+    setCart: (cart: OrderType[]) => void;
+    children: ReactNode;
+  }

@@ -3,16 +3,7 @@ import { FormPasswordField } from "./form-password-field";
 import PrimaryButton from "../ui/button";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { httpClient } from "../../lib/http-client";
-
-// types
-interface PasswordInputs {
-  password: string;
-  confirmPassword: string;
-}
-
-interface PasswordModalProps {
-  setViewPasswordModal: (status: boolean) => void;
-}
+import { PasswordInputs, PasswordModalProps } from "./types/profile-types";
 
 export const PasswordModal: React.FC<PasswordModalProps> = ({
   setViewPasswordModal,

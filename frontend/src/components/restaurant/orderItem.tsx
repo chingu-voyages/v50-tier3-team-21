@@ -1,5 +1,5 @@
 import { FoodImage } from "./FoodImage";
-import { OrderType } from "./types/types";
+import { OrderType } from "./types/restaurant-types";
 
 // types
 interface OrderItemProps {
@@ -13,12 +13,16 @@ export const OrderItem = ({
   item,
   addQuantity,
   subtractQuantity,
-  handleDelete
+  handleDelete,
 }: OrderItemProps) => {
   return (
     <div className="w-full shadow-lg flex p-3 rounded-lg gap-3 justify-center">
       <div className="w-20 object-contain content-center">
-        <FoodImage src={item.imageUrl} alt={item.name} className="w-full rounded-lg" />
+        <FoodImage
+          src={item.imageUrl}
+          alt={item.name}
+          className="w-full rounded-lg"
+        />
       </div>
       <div className="flex flex-col gap-3 flex-1">
         <div className="text-primary font-bold">{item.restaurant.name}</div>
@@ -26,7 +30,10 @@ export const OrderItem = ({
         <div className="font-bold">${item.price}</div>
       </div>
       <div className="flex flex-col justify-between h-full items-end">
-        <span onClick={() => handleDelete(item.id)} className="icon-[solar--trash-bin-minimalistic-bold-duotone] text-2xl text-danger cursor-pointer"></span>
+        <span
+          onClick={() => handleDelete(item.id)}
+          className="icon-[solar--trash-bin-minimalistic-bold-duotone] text-2xl text-danger cursor-pointer"
+        ></span>
 
         <div className="flex items-center">
           <span

@@ -37,9 +37,18 @@ export const FormPasswordField: React.FC<FormFieldProps> = ({
         className="border border-black m-1 p-4 rounded-lg text-sm text-red my-5  active:outline-secondary focus:outline-primary"
         type={passwordVisible ? "text" : "password"}
         id={name}
-        {...register(name, { required: "Password is required" })}
+        {...register(name, { 
+          required: "Password is required", 
+          minLength: {
+            value: 8,
+            message: "Password must be at least 8 characters"
+          },
+          maxLength: {
+            value: 20,
+            message: "Password must be at most 20 characters"
+          }
+        })}
         placeholder={placeholder}
-        minLength={8}
         {...props}
       />
       <div

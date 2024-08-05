@@ -1,22 +1,18 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import PrimaryButton from "../ui/button";
 import { OrderItem } from "./orderItem";
-import { OrderType } from "./types/types";
-import { example } from "./example";
+import { OrderType, OrdersProps } from "./types/restaurant-types";
 import { useNavigate } from "react-router-dom";
 
-//localStorage.setItem("shoppingCart", JSON.stringify(example));
-
-export const Orders = ({cart, setCart, children}) => {
+export const Orders = ({ cart, setCart, children }: OrdersProps) => {
   const navigate = useNavigate();
-  // const [cart, setCart] = useState<OrderType[]>([]);
 
   useEffect(() => {
     // check to see if a shopping cart is saved
     try {
       const data = localStorage.getItem("shoppingCart");
       if (data) {
-        const parsedData = JSON.parse(data);
+        const parsedData: OrderType[] = JSON.parse(data);
         setCart(parsedData);
       } else {
         setCart([]);
@@ -24,20 +20,23 @@ export const Orders = ({cart, setCart, children}) => {
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [setCart]);
 
-  useEffect(() => {
-    
-  }, [cart])
+  // function to automatically format and set cart into local storage
+  const setStorage = (updatedCart: OrderType[]) => {
+    localStorage.setItem("shoppingCart", JSON.stringify(updatedCart));
+  };
 
-
-
+  // calculate total based on how many items in cart, including repeat items
   const calculateTotal = (): number => {
-    const total = cart.reduce((sum, item) => sum + (item.price * item.count), 0);
+    const total = cart.reduce(
+      (sum, item) => sum + item.price * (item.count || 1),
+      0
+    );
     return +total.toFixed(2);
   };
 
-  // add one quantity
+  // add one quantity to count and update cart
   const addQuantity = (item: OrderType) => {
     const editedItemQuantity = cart.map((cartItem) =>
       cartItem.id === item.id
@@ -45,9 +44,10 @@ export const Orders = ({cart, setCart, children}) => {
         : cartItem
     );
     setCart(editedItemQuantity);
+    setStorage(editedItemQuantity);
   };
 
-  // subtract one quantity
+  // subtract one quantity to count and update cart
   const subtractQuantity = (item: OrderType) => {
     // if item is already at 1, confirm that they want to remove item from cart
     if (item.count === 1) {
@@ -61,6 +61,7 @@ export const Orders = ({cart, setCart, children}) => {
         : cartItem
     );
     setCart(editedItemQuantity);
+    setStorage(editedItemQuantity);
   };
 
   // delete the item from the cart
@@ -74,10 +75,14 @@ export const Orders = ({cart, setCart, children}) => {
 
     const filteredCart = cart.filter((item) => item.id !== id);
     setCart(filteredCart);
-    localStorage.setItem("shoppingCart", JSON.stringify(filteredCart));
+    setStorage(filteredCart);
   };
 
-
+  // on clicking checkout, all items are saved to local Storage and user is sent to the shopping cart page
+  const handleCheckout = () => {
+    setStorage(cart);
+    navigate("/cart");
+  };
 
   return (
     <div>
@@ -101,7 +106,7 @@ export const Orders = ({cart, setCart, children}) => {
             <div className="text-xl font-bold">
               Total Cost: $<span>{calculateTotal()}</span>
             </div>
-            <PrimaryButton onClick={() => navigate("/cart")}>
+            <PrimaryButton onClick={handleCheckout}>
               <span className="icon-[solar--bag-smile-bold-duotone] mr-1"></span>
               CHECKOUT
             </PrimaryButton>

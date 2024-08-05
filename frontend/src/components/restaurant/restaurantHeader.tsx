@@ -1,4 +1,4 @@
-import { MenuItemType } from "./types/types";
+import { MenuItemType } from "./types/restaurant-types";
 import { useNavigate } from "react-router-dom";
 // types
 interface RestaurantHeaderTypes {
@@ -27,7 +27,9 @@ export const RestaurantHeader = ({ restaurantData }: RestaurantHeaderTypes) => {
         <div className="flex flex-col md:flex-row gap-3">
           <div className="flex items-center">
             <span className="icon-[solar--map-point-wave-bold-duotone]"></span>
-            <div className="pl-3 text-xs">{restaurantData[0].restaurant.country}</div>
+            <div className="pl-3 text-xs">
+              {restaurantData[0].restaurant.country}
+            </div>
           </div>
           <div className="flex items-center">
             <span className="icon-[lets-icons--flag-duotone] text-lg"></span>

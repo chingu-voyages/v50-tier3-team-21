@@ -5,7 +5,7 @@ export interface IAuthContext {
     data: IUser | undefined,
     isAuthenticated: boolean,
     loggedIn: ()  => void,
-    storeUserData: (data: IUser) => void
+    storeUserData: (data: IUser) => void,
     logout: () => void
 }
 

@@ -8,7 +8,12 @@
     },
     "servers": [
       {
-        "url": "https://hungryhippo.onrender.com/"
+        "url": "https://hungryhippo.onrender.com/api/",
+        "description": "Production server"
+      },
+      {
+        "url": "http://localhost:3000/api/",
+        "description": "Local development server"
       }
     ],
     "tags": [
@@ -23,6 +28,10 @@
       {
         "name": "Order",
         "description": "Order routes"
+      },
+      {
+        "name": "FindNearbyRestaurants",
+        "description": "Find restaurans in the area nearby"
       }
     ],
     "paths": {
@@ -1475,7 +1484,135 @@
             }
           }
         }
+      },
+      "/nearbyrestaurants": {
+  "get": {
+    "summary": "Get nearby restaurants",
+    "description": "Retrieve a list of nearby restaurants based on latitude and longitude.",
+    "tags": [
+      "Restaurant"
+    ],
+    "parameters": [
+      {
+        "name": "latitude",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "number",
+          "example": 40.650002
+        },
+        "description": "The latitude coordinate."
+      },
+      {
+        "name": "longitude",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "type": "number",
+          "example": -73.949997
+        },
+        "description": "The longitude coordinate."
       }
+    ],
+    "responses": {
+      "200": {
+        "description": "List of nearby restaurants",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Joe's Diner"
+                  },
+                  "country": {
+                    "type": "string",
+                    "example": "United States"
+                  },
+                  "latitude": {
+                    "type": "number",
+                    "example": 40.6782
+                  },
+                  "longitude": {
+                    "type": "number",
+                    "example": -73.9442
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Bad request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "fail"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Missing latitude or longitude"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "No nearby restaurants found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "fail"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "No nearby restaurants found"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal server error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "fail"
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Internal Server Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
     }
   },
   "apis": [

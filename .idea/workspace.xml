@@ -4,30 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="wip: adding filtering feature">
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/interactive-map/filter-form.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/ui/single-select/select.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/ui/slider.tsx" afterDir="false" />
+    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="fix: fix unused import issue">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/backend/yarn.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/authentication/login-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/authentication/login-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/authentication/signup-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/authentication/signup-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/interactive-map/address-search-input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/interactive-map/address-search-input.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/interactive-map/filter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/interactive-map/filter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/interactive-map/geolocation-btn.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/interactive-map/geolocation-btn.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/interactive-map/map.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/interactive-map/map.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/interactive-map/popup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/interactive-map/popup.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/ui/modal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ui/modal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/ui/multi-select/select.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/hooks/geolocation.hook.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/hooks/geolocation.hook.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/home/home.page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/home/home.page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/provider/map.provider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/provider/map.provider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/interctive-map/interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/interctive-map/interface.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/searchbox/queries.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/searchbox/queries.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/utils/geospatial.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/geospatial.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/utils/helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/helpers.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,23 +36,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "44-us-23-interactive-map",
-    "last_opened_file_path": "/mnt/mydata/Archive/WebstormProjects/voyage",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "editor.preferences.completion",
-    "ts.external.directory.path": "/mnt/mydata/Archive/WebstormProjects/voyage/frontend/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;44-us-23-interactive-map&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/mnt/mydata/Archive/WebstormProjects/voyage&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.completion&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/mnt/mydata/Archive/WebstormProjects/voyage/frontend/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/frontend/src/pages/authetification" />
@@ -117,7 +97,7 @@
       <workItem from="1722364016422" duration="8654000" />
       <workItem from="1722454505316" duration="2234000" />
       <workItem from="1722614726629" duration="3882000" />
-      <workItem from="1722855514990" duration="18094000" />
+      <workItem from="1722855514990" duration="18816000" />
     </task>
     <task id="LOCAL-00001" summary="chore: add axios">
       <option name="closed" value="true" />
@@ -247,7 +227,23 @@
       <option name="project" value="LOCAL" />
       <updated>1722617239894</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="feat: finish filter features on interactive map">
+      <option name="closed" value="true" />
+      <created>1722873820783</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1722873820783</updated>
+    </task>
+    <task id="LOCAL-00018" summary="fix: fix unused import issue">
+      <option name="closed" value="true" />
+      <created>1722874031933</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1722874031933</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -269,7 +265,9 @@
     <MESSAGE value="feat: add circle layer into the map surrounding with radius distance from user location" />
     <MESSAGE value="feat: add function that calculate the distance between user location and the restaurant" />
     <MESSAGE value="wip: adding filtering feature" />
-    <option name="LAST_COMMIT_MESSAGE" value="wip: adding filtering feature" />
+    <MESSAGE value="feat: finish filter features on interactive map" />
+    <MESSAGE value="fix: fix unused import issue" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: fix unused import issue" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

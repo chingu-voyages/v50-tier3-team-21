@@ -18,7 +18,7 @@ export const HomePage = () => {
                           <AddressSearch />
                           <AppMapProvider >
                               <FilterSection />
-                              <div className="w-full md:p-12  md:h-[800px] relative">
+                              <div className="w-full md:p-12  h-[500px] md:h-[800px] relative">
                                   <AppMap />
                                   <Modal>
                                       <FilterForm />

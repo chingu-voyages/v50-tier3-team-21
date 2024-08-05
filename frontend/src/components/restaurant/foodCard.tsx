@@ -1,6 +1,6 @@
 import PrimaryButton from "../ui/button";
 import { MenuItemType, OrderType } from "./types/restaurant-types";
-import { FoodImage } from "./FoodImage";
+import { FoodImage } from "./foodImage";
 
 // TYPES
 interface FoodCardProps {

@@ -1,5 +1,5 @@
-import { FoodImage } from "./FoodImage";
-import { OrderType } from "./types/restaurant-types";
+import { FoodImage } from "../restaurant/foodImage";
+import { OrderType } from "../restaurant/types/restaurant-types";
 
 // types
 interface OrderItemProps {

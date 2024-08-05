@@ -1,9 +1,8 @@
 import { useEffect } from "react";
 import { OrderItem } from "./orderItem";
-import { OrderType, OrdersProps } from "./types/restaurant-types";
+import { OrderType, OrdersProps } from "../restaurant/types/restaurant-types";
 
 export const Orders = ({ cart, setCart, setStorage }: OrdersProps) => {
-
   useEffect(() => {
     // check to see if a shopping cart is saved
     try {
@@ -77,25 +76,10 @@ export const Orders = ({ cart, setCart, setStorage }: OrdersProps) => {
                 />
               ))}
           </div>
-         
-
-         </div>
+        </div>
       ) : (
         <div>Your shopping cart is currently empty</div>
       )}
     </div>
   );
 };
-
-// 
-
-// needed for making a new order
-// {
-//   "deliveryAddress": "123 main street",
-//   "deliveryTime": "3:34",
-//   "foodItems": [{     
-//       "id": "69", this is the restaurant ID
-//       "itemId": "5", this is the food item ID
-//       "quantity": "3" this is what i have called "count"
-//   }]
-// }

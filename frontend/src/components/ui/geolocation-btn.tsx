@@ -1,6 +1,6 @@
 import {useGeoLocation} from "../../hooks";
 import {useReverseGeoCoding} from "../../services/api/searchbox/queries.ts";
-import PrimaryButton from "../ui/button.tsx";
+import PrimaryButton from "./button.tsx";
 import {useEffect} from "react";
 
 

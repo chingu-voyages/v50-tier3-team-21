@@ -3,7 +3,7 @@ import {useGetLocation} from "../../services/api/searchbox/queries.ts";
 import {useDebounce} from "../../hooks/debounce.hook.ts";
 import {FormLabel} from "../authentication/form-label.tsx";
 import PrimaryButton from "../ui/button.tsx";
-import {GeolocationBtn} from "./geolocation-btn.tsx";
+import {GeolocationBtn} from "../ui/geolocation-btn.tsx";
 
 export const AddressSearchInput = () => {
     const { query, handleSearchQuery, isOpen, flyTo, } = useAddressSearch();

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Orders } from "../components/restaurant";
+import { CheckoutFooter, Orders } from "../components/restaurant";
 import { DeliveryAddress } from "../components/cart/deliveryAddress";
 import { OrderType } from "../components/restaurant/types/restaurant-types";
 
@@ -21,7 +21,9 @@ export const CartPage = () => {
     }
   }, []);
 
-  useEffect(() => {}, [cart]);
+  const handleCheckout = () => {
+  alert("ITEM SAVED IN DATABASE")
+  }
 
   return (
     <>
@@ -30,9 +32,10 @@ export const CartPage = () => {
           <h1 className="mt-24 p-3 font-bold md:text-2xl">
             Please Confirm your Order Summary
           </h1>
-          <Orders cart={cart} setCart={setCart}>
+          <Orders cart={cart} setCart={setCart}/>
             <DeliveryAddress />
-          </Orders>
+            <CheckoutFooter cart={cart} handleCheckout={handleCheckout}/>
+        
         </div>
       ) : (
         <div>You have no added anything to you cart yet...</div>

@@ -1,5 +1,3 @@
-import { ReactNode } from "react";
-
 export interface MenuItemType {
     id: number;
     name: string;
@@ -34,9 +32,13 @@ export interface MenuItemType {
     quantity?: number;
   };
   
-
   export interface OrdersProps {
     cart: OrderType[];
     setCart: (cart: OrderType[]) => void;
-    children: ReactNode;
+    setStorage?: (cart: OrderType[]) => void;
+  }
+  
+  export interface CheckoutFooterTypes {
+    cart: OrderType[];
+    handleCheckout: () => void;
   }

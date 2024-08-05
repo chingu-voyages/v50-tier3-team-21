@@ -1,11 +1,8 @@
 import { useEffect } from "react";
-import PrimaryButton from "../ui/button";
 import { OrderItem } from "./orderItem";
 import { OrderType, OrdersProps } from "./types/restaurant-types";
-import { useNavigate } from "react-router-dom";
 
-export const Orders = ({ cart, setCart, children }: OrdersProps) => {
-  const navigate = useNavigate();
+export const Orders = ({ cart, setCart, setStorage }: OrdersProps) => {
 
   useEffect(() => {
     // check to see if a shopping cart is saved
@@ -22,19 +19,6 @@ export const Orders = ({ cart, setCart, children }: OrdersProps) => {
     }
   }, [setCart]);
 
-  // function to automatically format and set cart into local storage
-  const setStorage = (updatedCart: OrderType[]) => {
-    localStorage.setItem("shoppingCart", JSON.stringify(updatedCart));
-  };
-
-  // calculate total based on how many items in cart, including repeat items
-  const calculateTotal = (): number => {
-    const total = cart.reduce(
-      (sum, item) => sum + item.price * (item.count || 1),
-      0
-    );
-    return +total.toFixed(2);
-  };
   // add one quantity to quantity and update cart
   const addQuantity = (item: OrderType) => {
     const editedItemQuantity = cart.map((cartItem) =>
@@ -43,7 +27,7 @@ export const Orders = ({ cart, setCart, children }: OrdersProps) => {
         : cartItem
     );
     setCart(editedItemQuantity);
-    setStorage(editedItemQuantity);
+    setStorage && setStorage(editedItemQuantity);
   };
 
   // subtract one quantity to quantity and update cart
@@ -60,7 +44,7 @@ export const Orders = ({ cart, setCart, children }: OrdersProps) => {
         : cartItem
     );
     setCart(editedItemQuantity);
-    setStorage(editedItemQuantity);
+    setStorage && setStorage(editedItemQuantity);
   };
 
   // delete the item from the cart
@@ -74,13 +58,7 @@ export const Orders = ({ cart, setCart, children }: OrdersProps) => {
 
     const filteredCart = cart.filter((item) => item.id !== id);
     setCart(filteredCart);
-    setStorage(filteredCart);
-  };
-
-  // on clicking checkout, all items are saved to local Storage and user is sent to the shopping cart page
-  const handleCheckout = () => {
-    setStorage(cart);
-    navigate("/cart");
+    setStorage && setStorage(filteredCart);
   };
 
   return (
@@ -99,17 +77,8 @@ export const Orders = ({ cart, setCart, children }: OrdersProps) => {
                 />
               ))}
           </div>
-          {children}
-          <hr />
-          <div className="flex items-center justify-between p-5">
-            <div className="text-xl font-bold">
-              Total Cost: $<span>{calculateTotal()}</span>
-            </div>
-            <PrimaryButton onClick={handleCheckout}>
-              <span className="icon-[solar--bag-smile-bold-duotone] mr-1"></span>
-              CHECKOUT
-            </PrimaryButton>
-          </div>
+         
+
          </div>
       ) : (
         <div>Your shopping cart is currently empty</div>

@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { httpClient } from "../lib/http-client";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   FoodCard,
   RestaurantHeader,
   CategoryFilter,
   Orders,
+  CheckoutFooter,
 } from "../components/restaurant/";
 import {
   MenuItemType,
@@ -28,8 +29,9 @@ export const RestaurantPage = () => {
   const [categories, setCategories] = useState<CategoryListType>({});
   const { restaurantId } = useParams<{ restaurantId: string }>();
   const [cart, setCart] = useState<OrderType[]>([])
+  const navigate = useNavigate();
 
-  // get list of foodITems from API
+  // get list of foodItems from API
   useEffect(() => {
     async function getMenu() {
       try {
@@ -68,32 +70,40 @@ export const RestaurantPage = () => {
     setFilterVisible((prev) => !prev);
   };
 
-  //! add item to cart
+   // function to automatically format and set cart into local storage
+   const setStorage = (updatedCart: OrderType[]) => {
+    localStorage.setItem("shoppingCart", JSON.stringify(updatedCart));
+  };
+
+  // add item to cart
   const handleAddItemToCart = (item: OrderType) => {
     // get cart from local storage
     const storedCart: OrderType[] = JSON.parse(
       localStorage.getItem("shoppingCart") || "[]"
     );
-
     //check to see if already in cart, if so, just add to quantity
     const found = storedCart.find((cartItem) => cartItem.id === item.id);
     if (found) {
       found.quantity = (found.quantity || 0) + 1;
     } else {
-      // set item coun to 1
+      // set item count to 1
       item.quantity = 1;
       storedCart.push(item);
     }
 
+    // update and save cart in state / local storage
     setCart(storedCart);
-    //! set cart from here????
-    // update and save cart in local storage
-    let formattedCart = JSON.stringify(storedCart);
-    localStorage.setItem("shoppingCart", formattedCart);
+    setStorage(storedCart);
 
     // alert that item was added successful
     alert(`${item.name} added to cart successfully`);
   };
+
+    // on clicking checkout, all items are saved to local Storage and user is sent to the shopping cart page
+    const handleCheckout = () => {
+      setStorage(cart)
+      navigate("/cart");
+    };
 
   return (
     <>
@@ -136,7 +146,8 @@ export const RestaurantPage = () => {
       ) : (
         <div className="mt-36">Loading...</div>
       )}
-      <Orders cart={cart} setCart={setCart} children />
+      <Orders cart={cart} setCart={setCart} setStorage={setStorage}/>
+      <CheckoutFooter cart={cart} handleCheckout={handleCheckout}/>
     </>
   );
 };

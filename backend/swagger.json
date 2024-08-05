@@ -30,6 +30,10 @@
         "description": "Profile routes"
       },
       {
+        "name": "Nearby Restaurants",
+        "description": "Nearby restaurants routes"
+      },
+      {
         "name": "Order",
         "description": "Order routes"
       },
@@ -40,6 +44,10 @@
       {
         "name": "Food Items",
         "description": "Food item routes"
+      },
+      {
+        "name": "Wallet",
+        "description": "Wallet routes"
       }
     ],
     "paths": {
@@ -1707,7 +1715,7 @@
           "summary": "Get nearby restaurants",
           "description": "Retrieve a list of nearby restaurants based on latitude and longitude.",
           "tags": [
-            "Restaurants"
+            "Nearby Restaurants"
           ],
           "parameters": [
             {
@@ -2051,6 +2059,219 @@
                       "error": {
                         "type": "string",
                         "example": "error.message"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/wallets/requestAccountTopup": {
+        "post": {
+          "summary": "Request account top-up",
+          "description": "Initiates a Stripe payment session for topping up the user's wallet.",
+          "tags": [
+            "Wallet"
+          ],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "amount": {
+                      "type": "number",
+                      "description": "The amount to top up the wallet, in USD.",
+                      "example": 50
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Stripe session created successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string",
+                        "example": "https://checkout.stripe.com/pay/cs_test_a1b2c3d4e5"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Internal server error"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/wallets/makePayment": {
+        "post": {
+          "summary": "Make a payment",
+          "description": "Debits the user's account and records a transaction for a specified order.",
+          "tags": [
+            "Wallet"
+          ],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "amount": {
+                      "type": "number",
+                      "description": "The payment amount, in USD.",
+                      "example": 30
+                    },
+                    "orderId": {
+                      "type": "string",
+                      "description": "The ID of the order being paid for.",
+                      "example": "order_123456"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Payment made successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "success"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Payment successful"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Insufficient funds"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/wallets": {
+        "get": {
+          "summary": "Get account details",
+          "description": "Retrieves the account details for the authenticated user.",
+          "tags": [
+            "Wallet"
+          ],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Account details retrieved successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "userId": {
+                        "type": "integer",
+                        "example": 7
+                      },
+                      "balance": {
+                        "type": "number",
+                        "example": 100.00
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-07-30T07:36:19.605Z"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-07-30T07:36:19.605Z"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Account not found"
                       }
                     }
                   }

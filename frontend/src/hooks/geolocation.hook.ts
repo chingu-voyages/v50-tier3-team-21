@@ -1,5 +1,5 @@
-import {useCallback , useEffect , useState} from "react";
-import {useMap} from "react-map-gl";
+import {useCallback ,useState} from "react";
+
 
 
 interface ICoordinate {

@@ -6,7 +6,7 @@ import PrimaryButton from "../ui/button.tsx";
 import {GeolocationBtn} from "./geolocation-btn.tsx";
 
 export const AddressSearchInput = () => {
-    const { query, handleSearchQuery, isOpen, flyTo, handleSelectLocation} = useAddressSearch();
+    const { query, handleSearchQuery, isOpen, flyTo, } = useAddressSearch();
     const debouncedLocation = useDebounce(query);
     const {isLoading,data, isSuccess} = useGetLocation(debouncedLocation);
 
@@ -51,6 +51,7 @@ export const LocationResults = ({isLoading, data}: { isLoading: boolean, data: I
             {
                 data && data.features.map((feature ,index)=> (
                     <LocationItem
+                        key={index}
                         name={feature.properties.name}
                         full_formatted={feature.properties.place_formatted}
                         coordinates={feature.properties.coordinates}
@@ -61,7 +62,7 @@ export const LocationResults = ({isLoading, data}: { isLoading: boolean, data: I
         </ul>
     )
 }
-export const LocationItem = ({name, full_formatted, full_address, coordinates} ) => {
+export const LocationItem = ({name, full_formatted, coordinates} ) => {
   const { handleSelectLocation } = useAddressSearch();
 
   const handleClick = () => {

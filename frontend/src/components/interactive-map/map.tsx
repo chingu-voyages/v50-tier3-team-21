@@ -1,13 +1,10 @@
 import React  from "react";
 import {FullscreenControl , Layer , Map , Marker , NavigationControl , Source} from "react-map-gl";
-import {useGeoLocation} from "../../hooks";
 import {useAddressSearch} from "./address-search-provider.tsx";
 import {createGeoJSONCircle , layerStyle} from "../../utils/geospatial.ts";
 import {Pins} from "./pins.tsx";
 import {useAppMapContext} from "../../provider/map.provider.tsx";
-import Modal from "../ui/modal.tsx";
-import {FilterSection} from "./filter.tsx";
-import {useModal} from "../../hooks/modal.hook.ts";
+
 
 
 

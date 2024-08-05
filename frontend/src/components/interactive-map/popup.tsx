@@ -1,7 +1,7 @@
 import PrimaryButton from "../ui/button.tsx";
 import {RestaurantWithImage} from "../../services/api/interctive-map/interface.ts";
 import {useAppMapContext} from "../../provider/map.provider.tsx";
-import {useEffect , useMemo} from "react";
+import { useMemo} from "react";
 import {haversineDistance} from "../../utils/geospatial.ts";
 import {useAddressSearch} from "./address-search-provider.tsx";
 

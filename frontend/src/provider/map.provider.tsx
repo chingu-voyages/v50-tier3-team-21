@@ -47,8 +47,8 @@ export const AppMapProvider = ({ children }) => {
     });
 
     const [seletectedRestaurantId, setSelectedRestaurantId] = useState<number>(-1);
-    const {data: foodItemsWithRestaurants, isLoading, isSuccess} = useGetFoodItemsWithRestaurants(filterOptions);
-    const { location, getUserLocation } = useGeoLocation();
+    const {data: foodItemsWithRestaurants, isSuccess} = useGetFoodItemsWithRestaurants(filterOptions);
+    const { location } = useGeoLocation();
     const {selectedLocation} = useAddressSearch()
     const { handleOnOpenModal, modal, handleOnCloseModal} = useModal();
 

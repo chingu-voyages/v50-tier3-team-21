@@ -26,12 +26,12 @@
         "description": "Password reset routes"
       },
       {
-        "name": "Order",
-        "description": "Order routes"
+        "name": "Profile",
+        "description": "Profile routes"
       },
       {
-        "name": "FindNearbyRestaurants",
-        "description": "Find restaurans in the area nearby"
+        "name": "Order",
+        "description": "Order routes"
       }
     ],
     "paths": {
@@ -609,6 +609,215 @@
                       "message": {
                         "type": "string",
                         "example": "Failed to reset password"
+                      },
+                      "error": {
+                        "type": "string",
+                        "example": "error.message"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/profile": {
+        "get": {
+          "summary": "Get user profile",
+          "description": "Retrieve the profile information of the authenticated user.",
+          "tags": [
+            "Profile"
+          ],
+          "responses": {
+            "200": {
+              "description": "User profile retrieved successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "success"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "username": {
+                            "type": "string",
+                            "example": "johndoe"
+                          },
+                          "email": {
+                            "type": "string",
+                            "example": "johndoe@example.com"
+                          },
+                          "firstName": {
+                            "type": "string",
+                            "example": "John"
+                          },
+                          "lastName": {
+                            "type": "string",
+                            "example": "Doe"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2024-07-30T07:36:19.605Z"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2024-07-30T07:41:30.884Z"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "User not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "User not found"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Failed to fetch user profile"
+                      },
+                      "error": {
+                        "type": "string",
+                        "example": "error.message"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "summary": "Update user profile",
+          "description": "Update the profile information of the authenticated user.",
+          "tags": [
+            "Profile"
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string",
+                      "description": "The new username for the user."
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "The new email address for the user."
+                    },
+                    "firstName": {
+                      "type": "string",
+                      "description": "The new first name for the user."
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "description": "The new last name for the user."
+                    }
+                  },
+                  "example": {
+                    "username": "johndoe",
+                    "email": "johndoe@example.com",
+                    "firstName": "John",
+                    "lastName": "Doe"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "User updated successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean",
+                        "example": true
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "User updated successfully"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "User not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "User not found"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Failed to update user profile"
                       },
                       "error": {
                         "type": "string",
@@ -1486,133 +1695,133 @@
         }
       },
       "/nearbyrestaurants": {
-  "get": {
-    "summary": "Get nearby restaurants",
-    "description": "Retrieve a list of nearby restaurants based on latitude and longitude.",
-    "tags": [
-      "Restaurant"
-    ],
-    "parameters": [
-      {
-        "name": "latitude",
-        "in": "query",
-        "required": true,
-        "schema": {
-          "type": "number",
-          "example": 40.650002
-        },
-        "description": "The latitude coordinate."
-      },
-      {
-        "name": "longitude",
-        "in": "query",
-        "required": true,
-        "schema": {
-          "type": "number",
-          "example": -73.949997
-        },
-        "description": "The longitude coordinate."
-      }
-    ],
-    "responses": {
-      "200": {
-        "description": "List of nearby restaurants",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "integer",
-                    "example": 1
-                  },
-                  "name": {
-                    "type": "string",
-                    "example": "Joe's Diner"
-                  },
-                  "country": {
-                    "type": "string",
-                    "example": "United States"
-                  },
-                  "latitude": {
-                    "type": "number",
-                    "example": 40.6782
-                  },
-                  "longitude": {
-                    "type": "number",
-                    "example": -73.9442
+        "get": {
+          "summary": "Get nearby restaurants",
+          "description": "Retrieve a list of nearby restaurants based on latitude and longitude.",
+          "tags": [
+            "Restaurants"
+          ],
+          "parameters": [
+            {
+              "name": "latitude",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "number",
+                "example": 40.650002
+              },
+              "description": "The latitude coordinate."
+            },
+            {
+              "name": "longitude",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "number",
+                "example": -73.949997
+              },
+              "description": "The longitude coordinate."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "List of nearby restaurants",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "Joe's Diner"
+                        },
+                        "country": {
+                          "type": "string",
+                          "example": "United States"
+                        },
+                        "latitude": {
+                          "type": "number",
+                          "example": 40.6782
+                        },
+                        "longitude": {
+                          "type": "number",
+                          "example": -73.9442
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Missing latitude or longitude"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "No nearby restaurants found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "No nearby restaurants found"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Internal Server Error"
+                      }
+                    }
                   }
                 }
               }
             }
           }
         }
-      },
-      "400": {
-        "description": "Bad request",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string",
-                  "example": "fail"
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Missing latitude or longitude"
-                }
-              }
-            }
-          }
-        }
-      },
-      "404": {
-        "description": "No nearby restaurants found",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string",
-                  "example": "fail"
-                },
-                "message": {
-                  "type": "string",
-                  "example": "No nearby restaurants found"
-                }
-              }
-            }
-          }
-        }
-      },
-      "500": {
-        "description": "Internal server error",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "string",
-                  "example": "fail"
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Internal Server Error"
-                }
-              }
-            }
-          }
-        }
       }
-    }
-  }
-}
     }
   },
   "apis": [

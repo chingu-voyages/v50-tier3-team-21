@@ -1,8 +1,9 @@
 import PrimaryButton from "../ui/button.tsx";
 import {RestaurantWithImage} from "../../services/api/interctive-map/interface.ts";
 import {useAppMapContext} from "../../provider/map.provider.tsx";
-import {useMemo} from "react";
+import {useEffect , useMemo} from "react";
 import {haversineDistance} from "../../utils/geospatial.ts";
+import {useAddressSearch} from "./address-search-provider.tsx";
 
 
 interface PopupPropsType {
@@ -11,10 +12,11 @@ interface PopupPropsType {
 
 export const AppPopup = ({restaurant}: PopupPropsType) => {
     const { handleSelectRestaurant , geoLocation} = useAppMapContext();
+    const {selectedLocation} = useAddressSearch()
 
 
     const distance = useMemo(() => {
-        return haversineDistance([geoLocation.lat, geoLocation.long], [restaurant.latitude, restaurant.longitude])
+        return haversineDistance([selectedLocation.coordinates.latitude, selectedLocation.coordinates.longitude], [restaurant.latitude, restaurant.longitude])
     },[geoLocation, restaurant])
 
    return(

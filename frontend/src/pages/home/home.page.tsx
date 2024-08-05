@@ -6,6 +6,7 @@ import {MapProvider} from "react-map-gl";
 import Modal from "../../components/ui/modal.tsx";
 import React from "react";
 import {FilterSection} from "../../components/interactive-map/filter.tsx";
+import {FilterForm} from "../../components/interactive-map/filter-form.tsx";
 
 
 export const HomePage = () => {
@@ -15,14 +16,15 @@ export const HomePage = () => {
               <MapProvider>
                   <AddressSearchProvider >
                           <AddressSearch />
-                          <FilterSection />
                           <AppMapProvider >
-                              <div className="md:p-12 h-[100vh] md:h-[800px]">
+                              <FilterSection />
+                              <div className="w-full md:p-12  md:h-[800px] relative">
                                   <AppMap />
+                                  <Modal>
+                                      <FilterForm />
+                                  </Modal>
                               </div>
-                              <Modal>
-                                  <p>I am a modal</p>
-                              </Modal>
+
                           </AppMapProvider>
                   </AddressSearchProvider>
 

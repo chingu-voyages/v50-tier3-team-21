@@ -20,14 +20,14 @@ import {useModal} from "../../hooks/modal.hook.ts";
 
 export const AppMap = () => {
    const {selectedLocation} = useAddressSearch();
-   const { geoLocation} = useAppMapContext();
+   const { geoLocation, distancePriceFilters} = useAppMapContext();
     const circle = createGeoJSONCircle(
         selectedLocation.coordinates ?
             selectedLocation.coordinates : {
                 longitude: geoLocation.long ?? -73.935242,
                 latitude: geoLocation.lat ?? 40.730610,
             } ,
-        5
+        distancePriceFilters.distance ?? 5
     );
    return(
        <section className="w-full h-full">
@@ -50,7 +50,7 @@ export const AppMap = () => {
                        longitude={selectedLocation.coordinates.longitude}
                        latitude={selectedLocation.coordinates.latitude}
                    >
-                       <span className="icon-[majesticons--map-marker] "  style={{width: "48px",height: "48px", color: "#49CC76" }}></span>
+                       <span className="icon-[majesticons--map-marker] "  style={{width: "48px",height: "48px", color: "#F70000" }}></span>
                    </Marker>
                }
 

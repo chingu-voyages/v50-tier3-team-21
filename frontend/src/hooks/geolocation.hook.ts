@@ -1,4 +1,4 @@
-import {useEffect , useState} from "react";
+import {useCallback , useEffect , useState} from "react";
 import {useMap} from "react-map-gl";
 
 
@@ -8,15 +8,18 @@ interface ICoordinate {
 }
 export  const useGeoLocation = () => {
     const [viewport, setViewport] = useState<ICoordinate>({} as ICoordinate);
-    useEffect(() => {
-        navigator.geolocation.getCurrentPosition(position => {
-            console.log(position)
+    const getUserLocation = useCallback(() => {
+        navigator.geolocation.getCurrentPosition((position) => {
             setViewport({
-                ...viewport,
                 lat: position.coords.latitude,
                 long: position.coords.longitude
-            })
-        })
-    }, [])
-    return { location: viewport }
+            });
+        }, (error) => {
+            console.error("Error getting location: ", error);
+        });
+    },[]);
+    const setLocationEmpty = () => {
+        setViewport({} as ICoordinate)
+    }
+    return { location: viewport , getUserLocation, setLocationEmpty}
 }

@@ -20,13 +20,6 @@ export const haversineDistance = (coords1, coords2) => {
     return R * c; // Distance in kilometers
 };
 
-// Filter Restaurants  Function based on the distance from the user location
-export const filterRestaurants = (restaurants, center, radius) => {
-    return restaurants.filter(restaurant => {
-
-    });
-};
-
 // Create Circle GeoJSON
 export const createGeoJSONCircle = (center, radiusInKm, points = 64) => {
     const coords = {
@@ -63,7 +56,7 @@ export const layerStyle = {
     id: 'circle-layer',
     type: 'fill',
     paint: {
-        'fill-color': '#43ff6422',
+        'fill-color': '#43ff64',
         'fill-opacity': 0.8
     }
 };

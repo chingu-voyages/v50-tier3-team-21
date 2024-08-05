@@ -2,7 +2,7 @@ export interface FilterOptions {
     foodItemId?: number,
     categoryId?: number,
     restaurantId?: number,
-    country?: string
+    country?: string,
 }
 
 
@@ -19,12 +19,14 @@ export interface Restaurant {
 }
 
 export interface RestaurantWithImage extends  Restaurant {
-    imageUrl: string
+    imageUrl: string,
+    price: number,
 }
 
 export interface Category {
     id: number;
     name: string;
+    displayName: string,
     createdAt: string;
     updatedAt: string;
 }

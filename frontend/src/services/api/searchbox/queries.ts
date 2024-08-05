@@ -1,4 +1,5 @@
 import {useQuery} from "@tanstack/react-query";
+import {ISearchResult} from "../../../components/interactive-map/address-search-provider.tsx";
 
 
 const getSuggestions = async (sessionToken: string, location) => {
@@ -7,7 +8,7 @@ const getSuggestions = async (sessionToken: string, location) => {
 }
 
 const getReverseGeoCoding = async (longitute: string, latitude: string) => {
-    const response = await fetch(`https://api.mapbox.com/search/geocode/v6/reverse?longitude=${longitude}&latitude=${latitude}&access_token=${import.meta.env.VITE_MAPBOX_TOKEN}`);
+    const response = await fetch(`https://api.mapbox.com/search/geocode/v6/reverse?longitude=${longitute}&latitude=${latitude}&access_token=${import.meta.env.VITE_MAPBOX_TOKEN}`);
     return response.json();
 }
 
@@ -35,11 +36,11 @@ export const useGetLocation = (query: string) => {
     )
 }
 
-export const useReverseGeoCoding = (longitude: string, latitude: string) => {
-    return useQuery({
+export const useReverseGeoCoding = (longitude: number, latitude: number) => {
+    return useQuery<ISearchResult>({
             queryKey: [longitude, latitude],
             queryFn: () => getReverseGeoCoding(longitude, latitude),
-            enabled: false
+            enabled: !isNaN(longitude) && !isNaN(latitude)
         }
     )
 }

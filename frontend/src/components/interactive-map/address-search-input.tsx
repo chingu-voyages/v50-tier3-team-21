@@ -6,13 +6,14 @@ import PrimaryButton from "../ui/button.tsx";
 import {GeolocationBtn} from "./geolocation-btn.tsx";
 
 export const AddressSearchInput = () => {
-    const { query, handleSearchQuery, isOpen, flyTo} = useAddressSearch();
+    const { query, handleSearchQuery, isOpen, flyTo, handleSelectLocation} = useAddressSearch();
     const debouncedLocation = useDebounce(query);
     const {isLoading,data, isSuccess} = useGetLocation(debouncedLocation);
 
     const handleSearchChange = (e) => {
        handleSearchQuery(e.target.value)
     };
+
 
     return (
         <form className="w-full flex flex-col gap-5  p-6 bg-white border rounded-lg">
@@ -27,7 +28,10 @@ export const AddressSearchInput = () => {
                         placeholder="Search for an address"
                         className="w-full px-3 py-2 z-10  rounded-lg placeholder:font-light placeholder:text-[0.8em] focus:outline-0"
                     />
-                    <GeolocationBtn />
+                    <div className="absolute right-2 top-1/2 -translate-y-1/2">
+                        <GeolocationBtn onClick={handleSearchQuery} />
+                    </div>
+
                 </div>
                 {isSuccess && isOpen && <LocationResults isLoading={isLoading} data={data} />}
             </div>

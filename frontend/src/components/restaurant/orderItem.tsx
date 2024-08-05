@@ -42,7 +42,7 @@ export const OrderItem = ({
           >
             -
           </span>
-          <span className="px-3">{item.count}</span>
+          <span className="px-3">{item.quantity}</span>
           <span
             className="icon-[lets-icons--add-round-duotone] bg-secondary cursor-pointer"
             onClick={() => addQuantity(item)}

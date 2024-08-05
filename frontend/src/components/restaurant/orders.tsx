@@ -35,29 +35,28 @@ export const Orders = ({ cart, setCart, children }: OrdersProps) => {
     );
     return +total.toFixed(2);
   };
-
-  // add one quantity to count and update cart
+  // add one quantity to quantity and update cart
   const addQuantity = (item: OrderType) => {
     const editedItemQuantity = cart.map((cartItem) =>
       cartItem.id === item.id
-        ? { ...cartItem, count: (cartItem.count || 0) + 1 }
+        ? { ...cartItem, quantity: (cartItem.quantity || 0) + 1 }
         : cartItem
     );
     setCart(editedItemQuantity);
     setStorage(editedItemQuantity);
   };
 
-  // subtract one quantity to count and update cart
+  // subtract one quantity to quantity and update cart
   const subtractQuantity = (item: OrderType) => {
     // if item is already at 1, confirm that they want to remove item from cart
-    if (item.count === 1) {
+    if (item.quantity === 1) {
       handleDelete(item.id);
       return;
     }
 
     const editedItemQuantity = cart.map((cartItem) =>
       cartItem.id === item.id
-        ? { ...cartItem, count: (cartItem.count || 0) - 1 }
+        ? { ...cartItem, quantity: (cartItem.quantity || 0) - 1 }
         : cartItem
     );
     setCart(editedItemQuantity);
@@ -68,7 +67,7 @@ export const Orders = ({ cart, setCart, children }: OrdersProps) => {
   const handleDelete = (id: number) => {
     const foundItem = cart.find((cartItem) => cartItem.id === id);
     let message;
-    if (foundItem?.count === 1)
+    if (foundItem?.quantity === 1)
       message = `If you remove a single quantity the item will be removed from your card.  Are you srue you'd like to remove ${foundItem.name} from your order?`;
     else message = `Are you sure you want to remove  from your cart?`;
     if (!confirm(message)) return;
@@ -111,10 +110,23 @@ export const Orders = ({ cart, setCart, children }: OrdersProps) => {
               CHECKOUT
             </PrimaryButton>
           </div>
-        </div>
+         </div>
       ) : (
         <div>Your shopping cart is currently empty</div>
       )}
     </div>
   );
 };
+
+// 
+
+// needed for making a new order
+// {
+//   "deliveryAddress": "123 main street",
+//   "deliveryTime": "3:34",
+//   "foodItems": [{     
+//       "id": "69", this is the restaurant ID
+//       "itemId": "5", this is the food item ID
+//       "quantity": "3" this is what i have called "count"
+//   }]
+// }

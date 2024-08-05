@@ -31,7 +31,7 @@ export interface MenuItemType {
   };
 
   export type OrderType = MenuItemType & {
-    count?: number;
+    quantity?: number;
   };
   
 

@@ -75,13 +75,13 @@ export const RestaurantPage = () => {
       localStorage.getItem("shoppingCart") || "[]"
     );
 
-    //check to see if already in cart, if so, just add to count
+    //check to see if already in cart, if so, just add to quantity
     const found = storedCart.find((cartItem) => cartItem.id === item.id);
     if (found) {
-      found.count = (found.count || 0) + 1;
+      found.quantity = (found.quantity || 0) + 1;
     } else {
       // set item coun to 1
-      item.count = 1;
+      item.quantity = 1;
       storedCart.push(item);
     }
 

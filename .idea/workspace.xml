@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="update: update style to fit responsiveness" />
+    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="refactor: move geolocation button to shared ui components">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -51,6 +53,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/frontend/src/components/ui" />
       <recent name="$PROJECT_DIR$/frontend/src/pages/authetification" />
     </key>
   </component>
@@ -93,7 +96,7 @@
       <workItem from="1722364016422" duration="8654000" />
       <workItem from="1722454505316" duration="2234000" />
       <workItem from="1722614726629" duration="3882000" />
-      <workItem from="1722855514990" duration="19385000" />
+      <workItem from="1722855514990" duration="20502000" />
     </task>
     <task id="LOCAL-00001" summary="chore: add axios">
       <option name="closed" value="true" />
@@ -247,7 +250,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722874368779</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="refactor: move geolocation button to shared ui components">
+      <option name="closed" value="true" />
+      <created>1722875082003</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1722875082003</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -272,7 +283,8 @@
     <MESSAGE value="feat: finish filter features on interactive map" />
     <MESSAGE value="fix: fix unused import issue" />
     <MESSAGE value="update: update style to fit responsiveness" />
-    <option name="LAST_COMMIT_MESSAGE" value="update: update style to fit responsiveness" />
+    <MESSAGE value="refactor: move geolocation button to shared ui components" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: move geolocation button to shared ui components" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -291,6 +303,12 @@
           <url>file://$PROJECT_DIR$/frontend/src/components/authentication/reset-password-form.tsx</url>
           <line>25</line>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/components/ui/geolocation-btn.tsx</url>
+          <line>13</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

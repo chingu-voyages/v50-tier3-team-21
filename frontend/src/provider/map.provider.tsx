@@ -55,7 +55,6 @@ export const AppMapProvider = ({ children }) => {
 
     const restaurants = useMemo(() => {
         if (!isSuccess || !foodItemsWithRestaurants?.data?.data) {
-            console.log('Data  are missing');
             return [];
         }
 

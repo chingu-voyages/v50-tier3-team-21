@@ -9,8 +9,7 @@ export interface HeaderNavProps {
 export default function HeaderNav() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const { isAuthenticated, data, logout } = useAuth();
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const {isAuthenticated, data, logout} = useAuth();
+  
     const navigate = useNavigate();
     const mobileLinks = [
         { name: 'Home', href: '/', icon: 'icon-[lets-icons--home-duotone]' },

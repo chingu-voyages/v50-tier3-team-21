@@ -25,6 +25,20 @@ export interface MenuItemType {
     name: string;
     createdAt: string;
     updatedAt: string;
+    displayName: string;
   };
 
- 
+  export type OrderType = MenuItemType & {
+    quantity?: number;
+  };
+  
+  export interface OrdersProps {
+    cart: OrderType[];
+    setCart: (cart: OrderType[]) => void;
+    setStorage?: (cart: OrderType[]) => void;
+  }
+  
+  export interface CheckoutFooterTypes {
+    cart: OrderType[];
+    handleCheckout: () => void;
+  }

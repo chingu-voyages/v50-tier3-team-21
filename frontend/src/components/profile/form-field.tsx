@@ -1,25 +1,4 @@
-import {FieldError , UseFormRegister} from "react-hook-form";
-
-interface FieldTypes {
-  username: string,
-  email: string,
-  firstName: string,
-  lastName: string,
-  contact: string,
-  password: string
-}
-
-interface FormFieldProps {
-  label: string,
-  name: keyof FieldTypes
-  type: string
-  register: UseFormRegister<FieldTypes>,
-  placeholder: string,
-  className?: string,
-  errors?: FieldError
-  disabled?: boolean
-}
-
+import { FormFieldProps} from "./types/profile-types";
 
 export const FormField: React.FC<FormFieldProps> = ({
   label,

@@ -2,15 +2,8 @@ import { useEffect, useState } from "react";
 import { ProfileForm } from "../components/profile/profile-form";
 import { Wallet } from "../components/profile/wallet";
 import { httpClient } from "../lib/http-client";
-
-interface UserType {
-  username: string;
-  password: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  contact: string;
-}
+import { UserType } from "../components/profile/types/profile-types";
+const BASE_URL = import.meta.env.VITE_LOCAL_API_BASE_URL;
 
 export const ProfilePage = () => {
   const [user, setUser] = useState<UserType | null>(null);
@@ -22,11 +15,8 @@ export const ProfilePage = () => {
   useEffect(() => {
     async function getUser() {
       try {
-        const response = await httpClient.get(
-          "http://localhost:3000/api/profile"
-        );
+        const response = await httpClient.get(`${BASE_URL}/profile`);
         const { data } = response.data;
-        console.log(data);
         setUser(data);
       } catch (error) {
         if (error instanceof Error) {

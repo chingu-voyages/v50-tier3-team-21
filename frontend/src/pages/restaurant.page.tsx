@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import { httpClient } from "../lib/http-client";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   FoodCard,
   RestaurantHeader,
   CategoryFilter,
   Orders,
+  CheckoutFooter,
 } from "../components/restaurant/";
-import { MenuItemType } from "../components/restaurant/types/types";
+import {
+  MenuItemType,
+  OrderType,
+} from "../components/restaurant/types/restaurant-types";
 const BASE_URL = import.meta.env.VITE_LOCAL_API_BASE_URL;
 
 // types
@@ -24,15 +28,16 @@ export const RestaurantPage = () => {
   const [error, setError] = useState<string | null>(null);
   const [categories, setCategories] = useState<CategoryListType>({});
   const { restaurantId } = useParams<{ restaurantId: string }>();
+  const [cart, setCart] = useState<OrderType[]>([])
+  const navigate = useNavigate();
 
-  // get list of foodITems from API
+  // get list of foodItems from API
   useEffect(() => {
     async function getMenu() {
       try {
         const url = `${BASE_URL}/foodItems/items?restaurantId=${restaurantId}`;
         const response = await httpClient.get(url);
         const { data } = response.data;
-        console.log(data);
         setRestaurantData(data);
         setFilteredMenuItems(data);
         getCategories(data);
@@ -51,11 +56,11 @@ export const RestaurantPage = () => {
   // get a list of categories that are present at this restaurant
   const getCategories = (data: MenuItemType[]) => {
     const categoryList = data.flatMap((item) =>
-      item.Categories.map((cat) => cat.name)
+      item.Categories.map((cat) => cat.displayName)
     );
     const uniqueCategories = Array.from(new Set(categoryList));
     const categoryObj = uniqueCategories.reduce((acc, item) => {
-      acc[item] = true;
+      if (typeof item === "string") acc[item] = true;
       return acc;
     }, {} as CategoryListType);
     setCategories(categoryObj);
@@ -65,15 +70,50 @@ export const RestaurantPage = () => {
     setFilterVisible((prev) => !prev);
   };
 
+   // function to automatically format and set cart into local storage
+   const setStorage = (updatedCart: OrderType[]) => {
+    localStorage.setItem("shoppingCart", JSON.stringify(updatedCart));
+  };
+
+  // add item to cart
+  const handleAddItemToCart = (item: OrderType) => {
+    // get cart from local storage
+    const storedCart: OrderType[] = JSON.parse(
+      localStorage.getItem("shoppingCart") || "[]"
+    );
+    //check to see if already in cart, if so, just add to quantity
+    const found = storedCart.find((cartItem) => cartItem.id === item.id);
+    if (found) {
+      found.quantity = (found.quantity || 0) + 1;
+    } else {
+      // set item count to 1
+      item.quantity = 1;
+      storedCart.push(item);
+    }
+
+    // update and save cart in state / local storage
+    setCart(storedCart);
+    setStorage(storedCart);
+
+    // alert that item was added successful
+    alert(`${item.name} added to cart successfully`);
+  };
+
+    // on clicking checkout, all items are saved to local Storage and user is sent to the shopping cart page
+    const handleCheckout = () => {
+      setStorage(cart)
+      navigate("/cart");
+    };
+
   return (
     <>
       {restaurantData.length ? (
         <div className="p-3 md:px-10 max-w-[1290px] pt-28 md:pt-32 m-auto">
           <RestaurantHeader restaurantData={restaurantData} />
-          <div className="h-[200px] rounded-2xl md:h-[400px] bg-cover md:bg-fill bg-no-repeat bg-[url(https://images.pexels.com/photos/735869/pexels-photo-735869.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)] md:bg-center"></div>
+          <div className="rounded-2xl h-[220px] md:h-[500px] bg-contain bg-no-repeat bg-[url('./assets/hippo-server-mobile.png')] md:bg-[url('./assets/hippo-server.png')] bg-center"></div>
 
-          <div className="flex items-center gap-3 my-5 relative cursor-pointer">
-            <span>Restaurant Menus </span>
+          <div className="flex items-center gap-3 my-5 mt-10 relative cursor-pointer">
+            <div className="font-bold">Restaurant Menus </div>
             <span
               className="icon-[mage--filter] text-secondary text-2xl"
               onClick={handleViewFilter}
@@ -89,11 +129,15 @@ export const RestaurantPage = () => {
               </div>
             )}
           </div>
-
+          <h2 className="p-5">Your Orders</h2>
           <hr />
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 my-5 p-3 justify-items-center">
             {filteredMenuItems.map((item: MenuItemType) => (
-              <FoodCard item={item} key={item.id} />
+              <FoodCard
+                item={item}
+                key={item.id}
+                handleAddItemToCart={() => handleAddItemToCart(item)}
+              />
             ))}
           </div>
         </div>
@@ -102,7 +146,8 @@ export const RestaurantPage = () => {
       ) : (
         <div className="mt-36">Loading...</div>
       )}
-      <Orders orders={restaurantData}/>
+      <Orders cart={cart} setCart={setCart} setStorage={setStorage}/>
+      <CheckoutFooter cart={cart} handleCheckout={handleCheckout}/>
     </>
   );
 };

@@ -12,6 +12,7 @@ import {MainLayout} from "./layouts/main.layout.tsx";
 import {HomePage} from "./pages/home/home.page.tsx";
 import {ProfilePage} from "./pages/profile.page.tsx"
 import { RestaurantPage } from "./pages/restaurant.page.tsx";
+import { CartPage } from "./pages/cart.page.tsx";
 
 //Todo: define routes in separate file
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
                         <Route index element={<HomePage />}/>
                         <Route path="/profile" element={<ProfilePage />} />
                         <Route path="/restaurants/:restaurantId" element={<RestaurantPage />} />
+                        <Route path="/cart" element={<CartPage />} />
                     </Route>
                     <Route  element={<AuthLayout />} >
                         <Route path='/auth/signup' element={<SignupPage />} />

@@ -4,22 +4,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { FormField } from "./form-field";
 import { PasswordModal } from "./password-modal";
 import { httpClient } from "../../lib/http-client";
-
-// TYPES
-interface UserType {
-  username: string;
-  password: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  contact: string;
-}
-
-interface ProfileFormProps {
-  balance: number;
-  user: UserType;
-  setUser: (user: UserType) => void;
-}
+import { UserType, ProfileFormProps } from "./types/profile-types";
+const BASE_URL = import.meta.env.VITE_LOCAL_API_BASE_URL;
 
 export const ProfileForm: React.FC<ProfileFormProps> = ({ user, setUser }) => {
   const [viewPasswordModal, setViewPasswordModal] = useState(false);
@@ -43,7 +29,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user, setUser }) => {
     //make API call to PUT edited user in database...something like: editUser(userId, editedUser)
     try {
       const response = await httpClient.put(
-        "http://localhost:3000/api/profile",
+        `${BASE_URL}/profile`,
         editedUser
       );
       const { data } = response.data;

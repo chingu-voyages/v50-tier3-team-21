@@ -8,7 +8,9 @@ export const MainLayout = () => {
             <main className="w-full mt-28">
                 <Outlet />
             </main>
-            <FooterComponent></FooterComponent>
+            <footer>
+                <FooterComponent></FooterComponent>
+            </footer>
         </div>
     )
 }

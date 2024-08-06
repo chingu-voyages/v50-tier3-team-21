@@ -14,7 +14,7 @@ export const ProfilePage = () => {
   useEffect(() => {
     async function getUser() {
       try {
-        const response = await httpClient.get("/profile");
+        const response = await httpClient.get<{ data: UserType }>("/profile");
         const { data } = response.data;
         setUser(data);
       } catch (error) {

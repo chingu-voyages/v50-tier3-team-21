@@ -35,7 +35,7 @@ export const RestaurantPage = () => {
     async function getMenu() {
       try {
         const url = `/foodItems/items?restaurantId=${restaurantId}`;
-        const response = await httpClient.get(url);
+        const response = await httpClient.get<{ data: MenuItemType[] }>(url);
         const { data } = response.data;
         setRestaurantData(data);
         setFilteredMenuItems(data);

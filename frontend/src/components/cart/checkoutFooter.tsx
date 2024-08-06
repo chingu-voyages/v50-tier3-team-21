@@ -1,10 +1,15 @@
 import PrimaryButton from "../ui/button";
 import { CheckoutFooterTypes } from "../restaurant/types/restaurant-types";
+import { useLocation } from "react-router-dom";
+
 
 export const CheckoutFooter = ({
   cart,
   handleCheckout,
+  address
 }: CheckoutFooterTypes) => {
+  const location = useLocation()
+
   // calculate total based on how many items in cart, including repeat items
   const calculateTotal = (): number => {
     const total = cart.reduce(
@@ -13,6 +18,8 @@ export const CheckoutFooter = ({
     );
     return +total.toFixed(2);
   };
+
+  
   return (
     <div>
       <hr />
@@ -20,7 +27,7 @@ export const CheckoutFooter = ({
         <div className="text-xl font-bold">
           Total Cost: $<span>{calculateTotal()}</span>
         </div>
-        <PrimaryButton onClick={handleCheckout}>
+        <PrimaryButton onClick={handleCheckout} className={`${location.pathname === "/cart" && !address && address !== "getting address..." && "bg-opacity-30 pointer-events-none"}`}>
           <span className="icon-[solar--bag-smile-bold-duotone] mr-1"></span>
           CHECKOUT
         </PrimaryButton>

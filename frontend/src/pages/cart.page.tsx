@@ -6,6 +6,7 @@ import { httpClient } from "../lib/http-client";
 
 export const CartPage = () => {
   const [cart, setCart] = useState<OrderType[]>([]);
+  const [address, setAddress] = useState<string>("");
 
   // load locally stored shopping cart on load and save to state
   useEffect(() => {
@@ -31,19 +32,23 @@ export const CartPage = () => {
       quantity: item.quantity,
     }));
 
+    // get current time
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const time = `${hours}:${minutes}`;
+    console.log(time)
+
     // create an array of order info with foodItems attached
     const order = {
-      deliveryAddress: "123 Elm St.",
-      deliveryTime: "3:34",
+      deliveryAddress: address,
+      deliveryTime: time,
       foodItems: cartData,
     };
 
     //make API call to POST order in database
     try {
-      const response = await httpClient.post(
-        "/order/create-order",
-        order
-      );
+      const response = await httpClient.post("/order/create-order", order);
       const { data } = response;
       console.log(data.message);
       alert("ITEM SAVED IN DATABASE");
@@ -60,8 +65,8 @@ export const CartPage = () => {
             Please Confirm your Order Summary
           </h1>
           <Orders cart={cart} setCart={setCart} />
-          <DeliveryAddress />
-          <CheckoutFooter cart={cart} handleCheckout={handleCheckout} />
+          <DeliveryAddress address={address} setAddress={setAddress} />
+          <CheckoutFooter cart={cart} handleCheckout={handleCheckout} address={address}/>
         </div>
       ) : (
         <div>You have no added anything to you cart yet...</div>

@@ -41,4 +41,5 @@ export interface MenuItemType {
   export interface CheckoutFooterTypes {
     cart: OrderType[];
     handleCheckout: () => void;
+    address: string;
   }

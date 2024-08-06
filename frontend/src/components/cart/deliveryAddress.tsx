@@ -1,9 +1,16 @@
 import PrimaryButton from "../../components/ui/button";
 import { useState } from "react";
+const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
 
-export const DeliveryAddress = () => {
+interface DeliveryAddressTypes {
+  address: string;
+  setAddress: (address: string) => void;
+}
+export const DeliveryAddress = ({
+  address,
+  setAddress,
+}: DeliveryAddressTypes) => {
   const [modalVisable, setModalVisable] = useState(false);
-  const [address, setAddress] = useState("");
 
   const toggleModal = () => {
     setModalVisable((prev) => !prev);
@@ -11,20 +18,41 @@ export const DeliveryAddress = () => {
 
   const getPosition = () => {
     if (navigator.geolocation) {
-      setAddress("getting address...")
+      setAddress("getting address...");
       navigator.geolocation.getCurrentPosition(success, error);
     } else {
       console.log("Geolocation not supported");
     }
 
-    function success(position: GeolocationPosition) {
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
-      setAddress(`Latitude: ${latitude}, Longitude: ${longitude}`)
+    async function success(position: GeolocationPosition) {
+      const { latitude } = position.coords;
+      const { longitude } = position.coords;
+      // call mapbox API to convert lat/long into actually street address
+      const response = await fetch(
+        `https://api.mapbox.com/search/geocode/v6/batch?access_token=${MAPBOX_TOKEN}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify([
+            {
+              types: ["address"],
+              latitude: latitude,
+              longitude: longitude,
+            },
+          ]),
+        }
+      );
+
+      const data = await response.json();
+      const { full_address } = data.batch[0].features[0].properties;
+
+      setAddress(full_address);
     }
 
     function error() {
-     setAddress("Unable to retrieve your location");
+      setAddress("Unable to retrieve your location");
     }
   };
 
@@ -58,8 +86,9 @@ export const DeliveryAddress = () => {
       </div>
 
       <div>Delivery location</div>
-      <div>1906 Market St. San Francisc, CA 94102, USA</div>
-      <PrimaryButton>CHANGE</PrimaryButton>
+      {/* <div>1906 Market St. San Francisc, CA 94102, USA</div> */}
+      <div>{address !== "getting address..." && address}</div>
+      <PrimaryButton className="bg-opacity-30">CHANGE</PrimaryButton>
     </div>
   );
 };

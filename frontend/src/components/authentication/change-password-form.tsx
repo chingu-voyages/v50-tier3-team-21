@@ -7,7 +7,7 @@ import PrimaryButton from "../ui/button.tsx";
 import {useForm } from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useNavigate} from "react-router-dom";
-import {useChangePassword} from "../../services/api/authentication/mutation.tsx";
+import {useChangePassword} from "../../services/api/authentication/mutation.ts";
 import {PasswordField} from "./password-field.tsx";
 import {isAxiosError} from "../../utils";
 

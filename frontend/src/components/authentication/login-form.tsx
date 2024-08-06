@@ -9,10 +9,11 @@ import { PasswordField } from "./password-field.tsx";
 import PrimaryButton from "../ui/button.tsx";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/auth.hook.ts";
-import { useLoginWithPasswordAndEmail } from "../../services/api/authentication/mutation.tsx";
+import { useLoginWithPasswordAndEmail } from "../../services/api/authentication/mutation.ts";
 import { ErrorMessage } from "./error_message.tsx";
 import { isAxiosError } from "../../utils";
 import { notify, ToastMessages } from "../ui/toast.tsx";
+import { useEffect } from "react";
 
 
 export const LoginForm = () => {
@@ -27,14 +28,23 @@ export const LoginForm = () => {
     const onSubmit = async (data: LoginSchemaType) => {
         loginWithPasswordAndEmail(data);
     }
-    if (isError) {
-        console.log(error);
-        notify(error, 'error')
-    }
-    if (isSuccess) {
-        loggedIn()
-        notify({ message: 'You are logged in successfully' }, 'success')
 
+    useEffect(() => {
+        if (isError) {
+            notify({
+                message:
+                    isAxiosError(error)
+                        ? error.response?.data?.message ?? "An error occurred. Please try again later"
+                        : "An unexpected error occurred."
+            }, 'error')
+        }
+        if (isSuccess) {
+            notify({ message: 'You are logged in successfully' }, 'success')
+        }
+    }, [isError, isSuccess])
+
+    if (isSuccess) {
+        loggedIn();
         setTimeout(() => {
             navigate('/');
         }, 2000);

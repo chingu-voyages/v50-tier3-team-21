@@ -4,7 +4,7 @@ import {ResetPasswordSchema , ResetPasswordType} from "../../types/authenticatio
 import {zodResolver} from "@hookform/resolvers/zod";
 import PrimaryButton from "../ui/button.tsx";
 import {useNavigate} from "react-router-dom";
-import {useSendPasswordResetEmail} from "../../services/api/authentication/mutation.tsx";
+import {useSendPasswordResetEmail} from "../../services/api/authentication/mutation.ts";
 import {ErrorMessage} from "./error_message.tsx";
 import {useState} from "react";
 import {isAxiosError} from "../../utils";

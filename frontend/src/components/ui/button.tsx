@@ -8,7 +8,8 @@ const buttonVariants = cva("border-2 inline-flex items-center justify-center rou
         variant: {
             primary: "border-primary text-white bg-primary hover:bg-dark hover:text-white hover:border-dark",
             outline: "border-primary text-primary hover:border-dark hover:text-dark",
-            danger: "border-danger bg-danger/30 text-danger hover:bg-danger hover:text-white hover:border-danger"
+            danger: "border-danger bg-danger/30 text-danger hover:bg-danger hover:text-white hover:border-danger",
+            ghost: "border-none shadow-none"
         },
     },
     defaultVariants: {

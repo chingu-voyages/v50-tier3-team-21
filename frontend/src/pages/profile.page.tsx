@@ -3,7 +3,6 @@ import { ProfileForm } from "../components/profile/profile-form";
 import { Wallet } from "../components/profile/wallet";
 import { httpClient } from "../lib/http-client";
 import { UserType } from "../components/profile/types/profile-types";
-const BASE_URL = import.meta.env.VITE_LOCAL_API_BASE_URL;
 
 export const ProfilePage = () => {
   const [user, setUser] = useState<UserType | null>(null);
@@ -15,7 +14,7 @@ export const ProfilePage = () => {
   useEffect(() => {
     async function getUser() {
       try {
-        const response = await httpClient.get(`${BASE_URL}/profile`);
+        const response = await httpClient.get("/profile");
         const { data } = response.data;
         setUser(data);
       } catch (error) {

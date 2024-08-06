@@ -12,7 +12,6 @@ import {
   MenuItemType,
   OrderType,
 } from "../components/restaurant/types/restaurant-types";
-const BASE_URL = import.meta.env.VITE_LOCAL_API_BASE_URL;
 
 // types
 type CategoryListType = {
@@ -35,7 +34,7 @@ export const RestaurantPage = () => {
   useEffect(() => {
     async function getMenu() {
       try {
-        const url = `${BASE_URL}/foodItems/items?restaurantId=${restaurantId}`;
+        const url = `/foodItems/items?restaurantId=${restaurantId}`;
         const response = await httpClient.get(url);
         const { data } = response.data;
         setRestaurantData(data);

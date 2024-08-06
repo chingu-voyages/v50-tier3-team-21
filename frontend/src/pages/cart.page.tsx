@@ -3,7 +3,6 @@ import { CheckoutFooter, Orders } from "../components/restaurant";
 import { DeliveryAddress } from "../components/cart/deliveryAddress";
 import { OrderType } from "../components/restaurant/types/restaurant-types";
 import { httpClient } from "../lib/http-client";
-const BASE_URL = import.meta.env.VITE_LOCAL_API_BASE_URL;
 
 export const CartPage = () => {
   const [cart, setCart] = useState<OrderType[]>([]);
@@ -42,7 +41,7 @@ export const CartPage = () => {
     //make API call to POST order in database
     try {
       const response = await httpClient.post(
-        `${BASE_URL}/order/create-order`,
+        "/order/create-order",
         order
       );
       const { data } = response;

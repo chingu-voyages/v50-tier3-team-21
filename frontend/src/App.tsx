@@ -1,9 +1,4 @@
-import {
-    BrowserRouter ,
-    Navigate ,
-    Route ,
-    Routes
-} from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import { AuthLayout } from "./layouts";
 import {
@@ -15,6 +10,7 @@ import {
 import {AppProvider} from "./provider/app.provider.tsx";
 import {MainLayout} from "./layouts/main.layout.tsx";
 import {HomePage} from "./pages/home/home.page.tsx";
+import {ProfilePage} from "./pages/profile.page.tsx"
 
 //Todo: define routes in separate file
 export default function App() {
@@ -24,6 +20,7 @@ export default function App() {
                 <Routes>
                     <Route path="/" element={<MainLayout />}>
                         <Route index element={<HomePage />}/>
+                        <Route path="/profile" element={<ProfilePage />} />
                     </Route>
                     <Route  element={<AuthLayout />} >
                         <Route path='/auth/signup' element={<SignupPage />} />

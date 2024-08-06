@@ -58,6 +58,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user, setUser }) => {
   return (
     <>
       <div className="w-full">
+      <p className="text-primary text-lg mb-5">Personal Information</p>
         <form onSubmit={handleSubmit(handleSave)}>
           <div className="flex flex-col md:flex-row md:gap-3">
             <FormField

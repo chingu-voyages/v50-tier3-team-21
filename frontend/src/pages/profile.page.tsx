@@ -67,7 +67,7 @@ export const ProfilePage = () => {
             onClick={() => toggleActive("account")}
           >
             <div
-              className={`mr-3 rounded px-2 py-2 items-start flex ${
+              className={`mr-3 rounded-lg px-2 py-2 items-start flex ${
                 active === "account" ? "bg-primary/30 " : "bg-[#291E43]/10"
               }`}
             >
@@ -87,7 +87,7 @@ export const ProfilePage = () => {
             onClick={() => toggleActive("payment")}
           >
             <div
-              className={`mr-3 rounded px-2 py-2 items-start flex ${
+              className={`mr-3 rounded-lg px-2 py-2 items-start flex ${
                 active === "payment" ? "bg-primary/30" : "bg-[#291E43]/10"
               }`}
             >

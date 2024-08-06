@@ -38,7 +38,7 @@ export class HttpClient {
          )
         return axiosInstance
     }
-    public  get(url: string): Promise<AxiosResponse>{
+    public  get<T>(url: string): Promise<AxiosResponse<T>>{
         return this.client().get(url);
     }
     public  post<T>(url: string, payload: T) : Promise<AxiosResponse>{

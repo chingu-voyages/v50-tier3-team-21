@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { CheckoutFooter, Orders } from "../components/restaurant";
+import { CheckoutHeader } from "../components/cart/checkoutHeader";
 import { DeliveryAddress } from "../components/cart/deliveryAddress";
 import { OrderType } from "../components/restaurant/types/restaurant-types";
 import { httpClient } from "../lib/http-client";
@@ -60,7 +61,8 @@ export const CartPage = () => {
     <>
       {cart ? (
         <div>
-          <h1 className="mt-24 p-3 font-bold md:text-2xl">
+          <CheckoutHeader />
+          <h1 className="p-3 font-bold md:text-xl">
             Please Confirm your Order Summary
           </h1>
           <Orders cart={cart} setCart={setCart} />

@@ -1,12 +1,41 @@
+import { useEffect, useState } from "react";
 import { httpClient } from "../../lib/http-client";
 import PrimaryButton from "../ui/button";
-const BASE_URL = import.meta.env;
 
-const handleTopup = async () => {
-  const response = httpClient.get("https://hungryhippo.onrender.com/wallet");
-  console.log(response);
-};
+// types
+interface WalletResponse {
+  balance: number;
+}
+
 export const Wallet = () => {
+  const [balance, setBalance] = useState<string>("");
+
+  // load page by fetching current wallet balance 
+  useEffect(() => {
+    async function getBalance() {
+      try {
+        const response = await httpClient.get<WalletResponse>("/wallets");
+        const balanceCents = response.data.balance;
+        const formattedBalance = formatBalance(balanceCents);
+
+        setBalance(formattedBalance);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    getBalance();
+  }, []);
+
+  // format blanace from cents to dollar/cents with necessary 0s
+  const formatBalance = (balanceCents: number) => {
+    return (balanceCents / 100).toFixed(2);
+  };
+
+  // initiate modal to topof wallet
+  const handleTopup = async () => {
+    console.log("TOP UP PLEASE");
+  };
   return (
     <div className="w-full">
       <p className="text-primary text-lg mb-5">Balance & Top up Wallet</p>
@@ -15,7 +44,7 @@ export const Wallet = () => {
           Balance from your wallet{" "}
           <span className="text-primary">(Top up wallet balance)</span>
         </div>
-        <div className="font-bold text-2xl font">$10.00</div>
+        <div className="font-bold text-2xl font tracking-wider">${balance}</div>
         <PrimaryButton className="px-20" onClick={handleTopup}>
           <span className="icon-[solar--wallet-money-bold-duotone] mr-2"></span>
           TOP UP

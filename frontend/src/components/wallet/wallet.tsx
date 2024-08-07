@@ -10,7 +10,7 @@ interface WalletResponse {
 
 export const Wallet = () => {
   const [balance, setBalance] = useState<string>("");
-  const [showTopupModal, setShowTopupModal] = useState<boolean>(true);
+  const [showTopupModal, setShowTopupModal] = useState<boolean>(false);
 
   // load page by fetching current wallet balance 
   useEffect(() => {
@@ -53,7 +53,7 @@ export const Wallet = () => {
           TOP UP
         </PrimaryButton>
       </div>
-      {showTopupModal && <TopupModal balance={balance}/>}
+      {showTopupModal && <TopupModal balance={balance} setShowTopupModal={setShowTopupModal}/>}
     </div>
   );
 };

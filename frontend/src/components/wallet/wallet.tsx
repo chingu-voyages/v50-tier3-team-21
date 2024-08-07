@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { httpClient } from "../../lib/http-client";
 import PrimaryButton from "../ui/button";
+import { TopupModal } from "./topup-modal";
 
 // types
 interface WalletResponse {
@@ -9,6 +10,7 @@ interface WalletResponse {
 
 export const Wallet = () => {
   const [balance, setBalance] = useState<string>("");
+  const [showTopupModal, setShowTopupModal] = useState<boolean>(true);
 
   // load page by fetching current wallet balance 
   useEffect(() => {
@@ -17,15 +19,16 @@ export const Wallet = () => {
         const response = await httpClient.get<WalletResponse>("/wallets");
         const balanceCents = response.data.balance;
         const formattedBalance = formatBalance(balanceCents);
-
+        
         setBalance(formattedBalance);
       } catch (error) {
         console.log(error);
+        setBalance("error loading balance")
       }
     }
 
     getBalance();
-  }, []);
+  }, [balance]);
 
   // format blanace from cents to dollar/cents with necessary 0s
   const formatBalance = (balanceCents: number) => {
@@ -34,7 +37,7 @@ export const Wallet = () => {
 
   // initiate modal to topof wallet
   const handleTopup = async () => {
-    console.log("TOP UP PLEASE");
+    setShowTopupModal(prev => !prev)
   };
   return (
     <div className="w-full">
@@ -50,6 +53,7 @@ export const Wallet = () => {
           TOP UP
         </PrimaryButton>
       </div>
+      {showTopupModal && <TopupModal balance={balance}/>}
     </div>
   );
 };

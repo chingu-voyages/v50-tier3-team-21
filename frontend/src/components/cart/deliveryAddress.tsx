@@ -18,12 +18,15 @@ export const DeliveryAddress = ({
 
   const getPosition = () => {
     if (navigator.geolocation) {
-      setAddress("getting address...");
+      // display loading message in address field and fetch GEO location
+      const addressElement = document.getElementById("address") as HTMLInputElement;
+      addressElement.value = "getting address..."
       navigator.geolocation.getCurrentPosition(success, error);
     } else {
       console.log("Geolocation not supported");
     }
 
+    // if GEO location fetched correctly, convert to street address
     async function success(position: GeolocationPosition) {
       const { latitude } = position.coords;
       const { longitude } = position.coords;
@@ -48,12 +51,22 @@ export const DeliveryAddress = ({
       const data = await response.json();
       const { full_address } = data.batch[0].features[0].properties;
 
+      // dispay street address in field and save in state
+      const addressElement = document.getElementById("address") as HTMLInputElement;
+      addressElement.value = full_address;
       setAddress(full_address);
     }
 
+    // if error, display error
     function error() {
       setAddress("Unable to retrieve your location");
     }
+  };
+
+  // if address is edited manually, update state on click
+  const handleChangeAddress = () => {
+    const addressElement = document.getElementById("address") as HTMLInputElement;
+    setAddress(addressElement.value);
   };
 
   return (
@@ -67,8 +80,6 @@ export const DeliveryAddress = ({
           type="text"
           name="address"
           id="address"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
           placeholder="Enter location manually"
           className="outline rounded-lg p-3 w-full"
         />
@@ -88,7 +99,9 @@ export const DeliveryAddress = ({
       <div>Delivery location</div>
       {/* <div>1906 Market St. San Francisc, CA 94102, USA</div> */}
       <div>{address !== "getting address..." && address}</div>
-      <PrimaryButton className="bg-opacity-30">CHANGE</PrimaryButton>
+      <PrimaryButton className={`${!address && "bg-opacity-30"}`} onClick={handleChangeAddress}>
+        CHANGE
+      </PrimaryButton>
     </div>
   );
 };

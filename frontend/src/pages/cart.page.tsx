@@ -34,10 +34,9 @@ export const CartPage = () => {
 
     // get current time
     const now = new Date();
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
     const time = `${hours}:${minutes}`;
-    console.log(time)
 
     // create an array of order info with foodItems attached
     const order = {
@@ -74,15 +73,3 @@ export const CartPage = () => {
     </>
   );
 };
-
-// needed for making a new order
-// /api/order/create-order
-// {
-//   "deliveryAddress": "123 main street",
-//   "deliveryTime": "3:34",
-//   "foodItems": [{
-//       "id": "69", this is the restaurant ID
-//       "itemId": "5", this is the food item ID
-//       "quantity": "3" this is what i have called "count"
-//   }]
-// }

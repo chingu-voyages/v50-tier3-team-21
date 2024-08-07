@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import PrimaryButton from "../ui/button";
 import { httpClient } from "../../lib/http-client";
-import topupSuccess from "../../assets/topup-hippo-success.png";
+import { TopupSuccess } from "./topup-success";
 
 interface TopupModalPropsTypes {
   balance: string;
@@ -33,8 +33,8 @@ export const TopupModal = ({
       setError("Please enter an amount...");
       return;
     }
-    // alert("TOPED");
-    // setShowTopupModal(false);
+    alert("TOPED");
+    setShowSuccess(true);
 
     // try {
     //   const response = await httpClient.post("/wallets/requestAccountTopup", {
@@ -42,7 +42,7 @@ export const TopupModal = ({
     //     body: { amount: +topupAmount },
     //   });
     //   console.log(response);
-    //   setShowSuccess(true)
+      // setShowSuccess(true)
     // } catch (error) {
     //   console.log(error);
     // setError(error.message)
@@ -89,24 +89,7 @@ export const TopupModal = ({
               </PrimaryButton>
             </div>
           </div>
-        ) : (
-          <div
-            id="container"
-            className="flex flex-col gap-5 items-center justify-center p-5"
-          >
-            <img src={topupSuccess} />
-            <div className="font-bold text-xl">Topup Made Successfully</div>
-            <div className="text-[#7A869A] w-4/5 text-center">
-              Now you can spend on your favorite cuisines 🤘🏽
-            </div>
-            <PrimaryButton
-              onClick={() => setShowTopupModal(false)}
-              className="w-full"
-            >
-              CLOSE
-            </PrimaryButton>
-          </div>
-        )}
+        ) : <TopupSuccess setShowTopupModal={setShowTopupModal}/>}
       </div>
     </div>
   );

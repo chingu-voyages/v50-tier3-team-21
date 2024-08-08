@@ -22,7 +22,10 @@ export interface FormFieldProps {
 }
 
 // form
-
+export interface ProfileResponse {
+  status: string;
+  data: UserType;
+}
 export interface UserType {
   username: string;
   password: string;
@@ -33,7 +36,6 @@ export interface UserType {
 }
 
 export interface ProfileFormProps {
-  balance: number;
   user: UserType;
   setUser: (user: UserType) => void;
 }

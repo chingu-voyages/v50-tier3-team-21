@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { httpClient } from "../../lib/http-client";
 import PrimaryButton from "../ui/button";
 import { TopupModal } from "./topup-modal";
+import { TopupSuccessModal } from "./topup-success-modal";
+import { useSearchParams } from "react-router-dom";
 
 // types
 interface WalletResponse {
@@ -11,6 +13,8 @@ interface WalletResponse {
 export const Wallet = () => {
   const [balance, setBalance] = useState<string>("");
   const [showTopupModal, setShowTopupModal] = useState<boolean>(false);
+  const [showSuccess, setShowSuccess] = useState<boolean>(false);
+  const [searchParams] = useSearchParams();
 
   // load page by fetching current wallet balance 
   useEffect(() => {
@@ -30,6 +34,12 @@ export const Wallet = () => {
     getBalance();
   }, [balance]);
 
+  useEffect(() => {
+        // if success is true, set showSuccess module
+        const successParam = searchParams.get("success");
+        const wasSuccess = successParam === "true"
+        setShowSuccess(wasSuccess)
+  }, [searchParams]);
   // format blanace from cents to dollar/cents with necessary 0s
   const formatBalance = (balanceCents: number) => {
     return (balanceCents / 100).toFixed(2);
@@ -54,6 +64,7 @@ export const Wallet = () => {
         </PrimaryButton>
       </div>
       {showTopupModal && <TopupModal balance={balance} setShowTopupModal={setShowTopupModal}/>}
+      {showSuccess && <TopupSuccessModal setShowSuccess={setShowSuccess} />}
     </div>
   );
 };

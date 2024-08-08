@@ -2,21 +2,31 @@ import { useEffect, useState } from "react";
 import { ProfileForm } from "../components/profile/profile-form";
 import { Wallet } from "../components/wallet/wallet";
 import { httpClient } from "../lib/http-client";
-import { UserType } from "../components/profile/types/profile-types";
-const BASE_URL = import.meta.env.VITE_LOCAL_API_BASE_URL;
+import { UserType, ProfileResponse } from "../components/profile/types/profile-types";
+import { useSearchParams } from "react-router-dom";
 
 export const ProfilePage = () => {
   const [user, setUser] = useState<UserType | null>(null);
-  const [balance, setBalance] = useState<number>(0);
   const [error, setError] = useState<string>("");
   const [active, setActive] = useState<string>("account");
+  const [searchParams] = useSearchParams();
+  //check to see if navigated to page from stripe
+  useEffect(() => {
+    const successParam = searchParams.get("success");
+    // if no query, exit
+    if(successParam === null) return
+    // if query, set to payment tab
+    setActive("payment");
+
+  }, [searchParams]);
 
   // make api request to getUser from database
   useEffect(() => {
     async function getUser() {
       try {
-        const response = await httpClient.get(`${BASE_URL}/profile`);
+        const response = await httpClient.get<ProfileResponse>("/profile");
         const { data } = response.data;
+        
         setUser(data);
       } catch (error) {
         if (error instanceof Error) {
@@ -28,14 +38,6 @@ export const ProfilePage = () => {
     }
 
     getUser();
-  }, []);
-
-  // make api request to get balance for user based on userId
-  useEffect(() => {
-    async function getBalance() {
-      setTimeout(() => setBalance(48.09), 1000);
-    }
-    getBalance();
   }, []);
 
   const toggleActive = (section: string) => {
@@ -92,7 +94,7 @@ export const ProfilePage = () => {
         <div className="my-5 md:my-0 md:w-2/3">
           {active === "account" ? (
             user ? (
-              <ProfileForm balance={balance} user={user} setUser={setUser} />
+              <ProfileForm user={user} setUser={setUser} />
             ) : (
               <div>
                 {error ? <p>Something went wrong!</p> : <p>Loading...</p>}

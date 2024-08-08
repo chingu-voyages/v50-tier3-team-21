@@ -62,7 +62,7 @@ export const Orders = ({ cart, setCart, setStorage }: OrdersProps) => {
 
   return (
     <div
-      className="max-h-96 overflow-scroll mr-3 border-r border-r-secondary"
+      className="max-h-96 overflow-y-scroll mr-3 border-r border-r-secondary"
       style={{ scrollbarColor: "#8c63ee rgba(140, 99, 238, 30%)" }}
     >
       {cart?.length ? (

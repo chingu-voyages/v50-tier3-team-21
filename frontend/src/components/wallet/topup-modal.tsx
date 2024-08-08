@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import PrimaryButton from "../ui/button";
 import { httpClient } from "../../lib/http-client";
-import { TopupSuccess } from "./topup-success";
 import { useLocation } from "react-router-dom";
 
 interface TopupModalPropsTypes {
@@ -14,7 +13,6 @@ export const TopupModal = ({
 }: TopupModalPropsTypes) => {
   const [topupAmount, setTopupAmount] = useState<string>("");
   const [newTotal, setNewTotal] = useState<string>("0");
-  const [showSuccess, setShowSuccess] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const location = useLocation();
 
@@ -31,7 +29,7 @@ export const TopupModal = ({
   };
 
   // send API reqeust to add money to wallet 
-  const handleTopup = async (responseURL: string) => {
+  const handleTopup = async () => {
     // if there is no input, dispay error
     if (newTotal === balance || newTotal === "0.00") {
       setError("Please enter an amount...");
@@ -47,7 +45,6 @@ export const TopupModal = ({
       const {url} = response.data
       // redirect user to response URL to complete payment on stripe website
       window.location.href = url;
-      setShowSuccess(true);
     } catch (error) {
       console.log(error);
       setError((error as Error).message);
@@ -56,7 +53,6 @@ export const TopupModal = ({
   return (
     <div className="absolute inset-0 bg-[#291E43]/10 flex items-center justify-center">
       <div className="bg-white p-5 rounded-2xl min-w-[350px]">
-        {!showSuccess ? (
           <div id="container" className="flex flex-col gap-5 relative">
             <div>
               <div
@@ -97,9 +93,6 @@ export const TopupModal = ({
               </PrimaryButton>
             </div>
           </div>
-        ) : (
-          <TopupSuccess setShowTopupModal={setShowTopupModal} />
-        )}
       </div>
     </div>
   );

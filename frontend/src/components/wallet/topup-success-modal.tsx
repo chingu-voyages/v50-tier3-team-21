@@ -2,10 +2,12 @@ import topupSuccess from "../../assets/topup-hippo-success.png";
 import PrimaryButton from "../ui/button";
 
 interface TopupSuccessPropsTypes {
-    setShowTopupModal: (status: boolean) => void
+  setShowSuccess: (status: boolean) => void
 }
-export const TopupSuccess = ({setShowTopupModal}: TopupSuccessPropsTypes) => {
+export const TopupSuccessModal = ({setShowSuccess}: TopupSuccessPropsTypes) => {
   return (
+    <div className="absolute inset-0 bg-[#291E43]/10 flex items-center justify-center">
+      <div className="bg-white p-5 rounded-2xl min-w-[350px]">
     <div
       id="container"
       className="flex flex-col gap-5 items-center justify-center p-5"
@@ -16,11 +18,13 @@ export const TopupSuccess = ({setShowTopupModal}: TopupSuccessPropsTypes) => {
         Now you can spend on your favorite cuisines 🤘🏽
       </div>
       <PrimaryButton
-        onClick={() => setShowTopupModal(false)}
+        onClick={() => setShowSuccess(false)}
         className="w-full"
       >
         CLOSE
       </PrimaryButton>
+    </div>
+    </div>
     </div>
   );
 };

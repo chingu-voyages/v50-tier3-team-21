@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { CheckoutFooter, Orders } from "../components/restaurant";
-import { CheckoutHeader } from "../components/cart/checkoutHeader";
+import { CheckoutHeader } from "../components/cart/cartHeader";
 import { DeliveryAddress } from "../components/cart/deliveryAddress";
 import { OrderType } from "../components/restaurant/types/restaurant-types";
 import { httpClient } from "../lib/http-client";
+import { useNavigate } from "react-router-dom";
 
 export const CartPage = () => {
   const [cart, setCart] = useState<OrderType[]>([]);
   const [address, setAddress] = useState<string>("");
-
+  const navigate = useNavigate();
   // load locally stored shopping cart on load and save to state
   useEffect(() => {
     try {
@@ -49,9 +50,8 @@ export const CartPage = () => {
     //make API call to POST order in database
     try {
       const response = await httpClient.post("/order/create-order", order);
-      const { data } = response;
-      console.log(data.message);
-      alert("ITEM SAVED IN DATABASE");
+      const orderId: number = response.data.id
+      navigate(`/checkout/${orderId}`)
     } catch (error) {
       console.log(error);
     }

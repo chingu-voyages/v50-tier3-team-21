@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { CheckoutFooter, Orders } from "../components/restaurant";
+import { CheckoutHeader } from "../components/cart/cartHeader";
 import { DeliveryAddress } from "../components/cart/deliveryAddress";
 import { OrderType } from "../components/restaurant/types/restaurant-types";
 import { httpClient } from "../lib/http-client";
-const BASE_URL = import.meta.env.VITE_LOCAL_API_BASE_URL;
+import { useNavigate } from "react-router-dom";
 
 export const CartPage = () => {
   const [cart, setCart] = useState<OrderType[]>([]);
-
+  const [address, setAddress] = useState<string>("");
+  const navigate = useNavigate();
   // load locally stored shopping cart on load and save to state
   useEffect(() => {
     try {
@@ -32,22 +34,24 @@ export const CartPage = () => {
       quantity: item.quantity,
     }));
 
+    // get current time
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    const time = `${hours}:${minutes}`;
+
     // create an array of order info with foodItems attached
     const order = {
-      deliveryAddress: "123 Elm St.",
-      deliveryTime: "3:34",
+      deliveryAddress: address,
+      deliveryTime: time,
       foodItems: cartData,
     };
 
     //make API call to POST order in database
     try {
-      const response = await httpClient.post(
-        `${BASE_URL}/order/create-order`,
-        order
-      );
-      const { data } = response;
-      console.log(data.message);
-      alert("ITEM SAVED IN DATABASE");
+      const response = await httpClient.post("/order/create-order", order);
+      const orderId: number = response.data.id
+      navigate(`/checkout/${orderId}`)
     } catch (error) {
       console.log(error);
     }
@@ -57,12 +61,13 @@ export const CartPage = () => {
     <>
       {cart ? (
         <div>
-          <h1 className="mt-24 p-3 font-bold md:text-2xl">
+          <CheckoutHeader />
+          <h1 className="p-3 font-bold md:text-xl">
             Please Confirm your Order Summary
           </h1>
           <Orders cart={cart} setCart={setCart} />
-          <DeliveryAddress />
-          <CheckoutFooter cart={cart} handleCheckout={handleCheckout} />
+          <DeliveryAddress address={address} setAddress={setAddress} />
+          <CheckoutFooter cart={cart} handleCheckout={handleCheckout} address={address}/>
         </div>
       ) : (
         <div>You have no added anything to you cart yet...</div>
@@ -70,15 +75,3 @@ export const CartPage = () => {
     </>
   );
 };
-
-// needed for making a new order
-// /api/order/create-order
-// {
-//   "deliveryAddress": "123 main street",
-//   "deliveryTime": "3:34",
-//   "foodItems": [{
-//       "id": "69", this is the restaurant ID
-//       "itemId": "5", this is the food item ID
-//       "quantity": "3" this is what i have called "count"
-//   }]
-// }

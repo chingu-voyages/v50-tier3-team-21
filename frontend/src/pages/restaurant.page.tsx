@@ -12,7 +12,6 @@ import {
   MenuItemType,
   OrderType,
 } from "../components/restaurant/types/restaurant-types";
-const BASE_URL = import.meta.env.VITE_LOCAL_API_BASE_URL;
 
 // types
 type CategoryListType = {
@@ -35,8 +34,8 @@ export const RestaurantPage = () => {
   useEffect(() => {
     async function getMenu() {
       try {
-        const url = `${BASE_URL}/foodItems/items?restaurantId=${restaurantId}`;
-        const response = await httpClient.get(url);
+        const url = `/foodItems/items?restaurantId=${restaurantId}`;
+        const response = await httpClient.get<{ data: MenuItemType[] }>(url);
         const { data } = response.data;
         setRestaurantData(data);
         setFilteredMenuItems(data);
@@ -108,7 +107,7 @@ export const RestaurantPage = () => {
   return (
     <>
       {restaurantData.length ? (
-        <div className="p-3 md:px-10 max-w-[1290px] pt-28 md:pt-32 m-auto">
+        <div className="p-3 md:px-10 max-w-[1290px] m-auto">
           <RestaurantHeader restaurantData={restaurantData} />
           <div className="rounded-2xl h-[220px] md:h-[500px] bg-contain bg-no-repeat bg-[url('./assets/hippo-server-mobile.png')] md:bg-[url('./assets/hippo-server.png')] bg-center"></div>
 

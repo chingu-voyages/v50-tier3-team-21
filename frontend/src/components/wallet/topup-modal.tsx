@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import PrimaryButton from "../ui/button";
 import { httpClient } from "../../lib/http-client";
 import { TopupSuccess } from "./topup-success";
+import { useLocation } from "react-router-dom";
 
 interface TopupModalPropsTypes {
   balance: string;
@@ -15,6 +16,7 @@ export const TopupModal = ({
   const [newTotal, setNewTotal] = useState<string>("0");
   const [showSuccess, setShowSuccess] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const location = useLocation();
 
   useEffect(() => {
     // everytime the topUp amount changes, recalculate the new total
@@ -22,31 +24,34 @@ export const TopupModal = ({
     setNewTotal(total);
   }, [topupAmount]);
 
+  // when numbers are entered into input, topupAmount state is saved and errors are reset
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTopupAmount(e.target.value);
     setError(null);
   };
 
-  const handleTopup = async () => {
+  // send API reqeust to add money to wallet 
+  const handleTopup = async (responseURL: string) => {
     // if there is no input, dispay error
     if (newTotal === balance || newTotal === "0.00") {
       setError("Please enter an amount...");
       return;
     }
-    alert("TOPED");
-    setShowSuccess(true);
-
-    // try {
-    //   const response = await httpClient.post("/wallets/requestAccountTopup", {
-    //     header: { Authorization: `Bearer YOUR_SECRET_KEY` },
-    //     body: { amount: +topupAmount },
-    //   });
-    //   console.log(response);
-      // setShowSuccess(true)
-    // } catch (error) {
-    //   console.log(error);
-    // setError(error.message)
-    // }
+    // send API request to add amount (will also send origin/return path ie /profile or /cart)
+    try {
+      const response = await httpClient.post(`/wallets/requestAccountTopup`, {
+        amount: +topupAmount,
+        successUrl: location.pathname,
+        cancelUrl: location.pathname
+      });
+      const {url} = response.data
+      // redirect user to response URL to complete payment on stripe website
+      window.location.href = url;
+      setShowSuccess(true);
+    } catch (error) {
+      console.log(error);
+      setError((error as Error).message);
+    }
   };
   return (
     <div className="absolute inset-0 bg-[#291E43]/10 flex items-center justify-center">
@@ -54,9 +59,12 @@ export const TopupModal = ({
         {!showSuccess ? (
           <div id="container" className="flex flex-col gap-5 relative">
             <div>
-            <div className="text-xl cursor-pointer absolute right-0" onClick={() => setShowTopupModal(false)}>
-              <span className="icon-[material-symbols-light--close]"></span>
-            </div>
+              <div
+                className="text-xl cursor-pointer absolute right-0"
+                onClick={() => setShowTopupModal(false)}
+              >
+                <span className="icon-[material-symbols-light--close]"></span>
+              </div>
               <div className="mb-3">Enter amount to Top Up</div>
               <input
                 type="number"
@@ -89,7 +97,9 @@ export const TopupModal = ({
               </PrimaryButton>
             </div>
           </div>
-        ) : <TopupSuccess setShowTopupModal={setShowTopupModal}/>}
+        ) : (
+          <TopupSuccess setShowTopupModal={setShowTopupModal} />
+        )}
       </div>
     </div>
   );

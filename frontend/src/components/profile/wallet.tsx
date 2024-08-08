@@ -1,6 +1,5 @@
 import { httpClient } from "../../lib/http-client";
 import PrimaryButton from "../ui/button";
-const BASE_URL = import.meta.env;
 
 const handleTopup = async () => {
   const response = httpClient.get("https://hungryhippo.onrender.com/wallet");

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { ProfileForm } from "../components/profile/profile-form";
+import { Wallet } from "../components/profile/wallet";
+import { httpClient } from "../lib/http-client";
 import { UserType } from "../components/profile/types/profile-types";
-import {httpClient} from "../lib/http-client.ts";
-const BASE_URL = import.meta.env.VITE_LOCAL_API_BASE_URL;
 
 export const ProfilePage = () => {
   const [user, setUser] = useState<UserType | null>(null);
@@ -14,7 +14,7 @@ export const ProfilePage = () => {
   useEffect(() => {
     async function getUser() {
       try {
-        const response = await httpClient.get(`${BASE_URL}/profile`);
+        const response = await httpClient.get<{ data: UserType }>("/profile");
         const { data } = response.data;
         setUser(data);
       } catch (error) {
@@ -42,7 +42,7 @@ export const ProfilePage = () => {
   };
 
   return (
-    <div className="bg-white flex flex-col w-full gap-5 px-5 md:px-10 max-w-[1290px] pt-28 md:pt-16 m-auto">
+    <div className="bg-white flex flex-col w-full gap-5 px-5 md:px-10 max-w-[1290px] m-auto">
       <h1 className="text-lg font-bold md:text-5xl pl-3">Profile</h1>
 
       <div className="md:flex md:gap-24">

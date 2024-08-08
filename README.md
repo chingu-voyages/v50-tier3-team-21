@@ -8,7 +8,8 @@
 ## Introduction
 <img src="https://www.chingu.io/logo-with-text-192.png" alt="Chingu Image" style="width:200px; float:right"/>
 
-
+**Frontend**: React, Tailwind, TypeScript
+**Backend**: NodeJS, Express, PostgreSQL, JavaScript|
 
 T-grams Development Team presents the [Hungry Hippo](https://hungryhippo-tgrams.onrender.com/) project. This project is a web application that allows users to order food from the best restaurants in the vicinity and track their order status at affordable delivery prices.
 It is a Full Stack Web Application made as a part of 50th Voyage organised by [Chingu](https://www.chingu.io/). More about Voyage 50 and the project requirements can be found:
@@ -17,7 +18,27 @@ It is a Full Stack Web Application made as a part of 50th Voyage organised by [C
 
 
 
-## Technology Stack
+## Technology Used
+ 
+## Programming Languages
+- HTML - hypertext markup language - [link to HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
+- CSS - Cascading Style Sheets - [link to CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
+
+- TypeScript was used for frontend - [link to TypeScript](https://www.typescriptlang.org/)
+- JavaScript was used for backend - [link to JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+
+## Dependencies 
+
+*Frontend*:
+  - React: [React](https://reactjs.org/)
+  - Tailwind: [Tailwind](https://tailwindcss.com/)
+
+
+*Backend*:
+  - NodeJS: [NodeJS](https://nodejs.org/en/)
+  - Express: [Express](https://expressjs.com/)
+  - PostgreSQL: [PostgreSQL](https://www.postgresql.org/)
+
 
 
 ## API Endpoints
@@ -55,6 +76,7 @@ For the testing purposes, we've included the API endpoints in the `readme`.
 
 ## Team Documents
 
+- TODO: Add contents of the Google Docs Team Document here
 You may find these helpful as you work together to organize your project.
 
 - [Team Project Ideas](./docs/team_project_ideas.md)
@@ -67,11 +89,7 @@ Meeting Agenda templates (located in the `/docs` directory in this repo):
 - Meeting - Sprint Retrospective, Review, and Planning --> ./docs/meeting-sprint_retrospective_review_and_planning.docx
 - Meeting - Sprint Open Topic Session --> ./docs/meeting-sprint_open_topic_session.docx
 
-## Tech Used
 
-- Stack:
-  - Frontend: React, Tailwind
-  - Backend: NodeJS, Express, PostgreSQL
 
 ## Our Team
 

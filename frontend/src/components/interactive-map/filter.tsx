@@ -9,7 +9,7 @@ export const FilterSection = () => {
        <section className="w-full flex justify-between items-center  md:px-12 py-4">
            <PrimaryButton variant={'ghost'} onClick={handleOnOpenModal}>
                <div className="flex justify-start items-center gap-2">
-                   <span className="text-lg font-bold capitalize font-light">Filter</span>
+                   <span className="text-lg font-bold capitalize ">Filter</span>
                    <span  className="icon-[mage--filter] text-secondary text-xl" />
                </div>
            </PrimaryButton>

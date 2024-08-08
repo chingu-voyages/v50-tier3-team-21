@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { ProfileForm } from "../components/profile/profile-form";
-import { Wallet } from "../components/profile/wallet";
-import { httpClient } from "../lib/http-client";
 import { UserType } from "../components/profile/types/profile-types";
+import {httpClient} from "../lib/http-client.ts";
 const BASE_URL = import.meta.env.VITE_LOCAL_API_BASE_URL;
 
 export const ProfilePage = () => {

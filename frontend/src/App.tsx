@@ -8,9 +8,9 @@ import {
     SignupPage , SuccessResetEmailPage
 } from "./pages";
 import {AppProvider} from "./provider/app.provider.tsx";
-import {MainLayout} from "./layouts/main.layout.tsx";
+import {MainLayout} from "./layouts";
 import {HomePage} from "./pages/home/home.page.tsx";
-import {ProfilePage} from "./pages/profile.page.tsx"
+import {ProfilePage} from "./pages"
 import { RestaurantPage } from "./pages/restaurant.page.tsx";
 import { CartPage } from "./pages/cart.page.tsx";
 

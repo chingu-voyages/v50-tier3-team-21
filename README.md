@@ -1,17 +1,24 @@
-# voyage-tasks
+# Hungry Hippo
 
-Your project's `readme` is as important to success as your code. For
-this reason you should put as much care into its creation and maintenance
-as you would any other component of the application.
+![Hungry Hippo image](./frontend/src/assets/hippo-server-mobile.png)
 
-If you are unsure of what should go into the `readme` let this article,
-written by an experienced Chingu, be your starting point -
-[Keys to a well written README](https://tinyurl.com/yk3wubft).
+[Link to the Hungry Hippo website](https://hungryhippo-tgrams.onrender.com/)
 
-And before we go there's "one more thing"! Once you decide what to include
-in your `readme` feel free to replace the text we've provided here.
 
-> Own it & Make it your Own!
+## Introduction
+<img src="https://www.chingu.io/logo-with-text-192.png" alt="Chingu Image" style="width:200px; float:right"/>
+
+
+
+T-grams Development Team presents the [Hungry Hippo](https://hungryhippo-tgrams.onrender.com/) project. This project is a web application that allows users to order food from the best restaurants in the vicinity and track their order status at affordable delivery prices.
+It is a Full Stack Web Application made as a part of 50th Voyage organised by [Chingu](https://www.chingu.io/). More about Voyage 50 and the project requirements can be found:
+  - [Chingu: Voyage Guide](https://github.com/chingu-voyages/Handbook/blob/main/docs/guides/voyage/voyage.md)
+  - [Chingu: Voyage 50 - Tier 3 Project Requirements and Specifications](https://github.com/chingu-voyages/voyage-project-tier3-restaurantsim)
+
+
+
+## Technology Stack
+
 
 ## API Endpoints
 

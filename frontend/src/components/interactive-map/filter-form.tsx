@@ -20,7 +20,6 @@ export const FilterForm = () => {
     const { filterOptions, distancePriceFilters, updateFilterOptions, updateDistancePriceFilters, countries, categories, restaurants, handleOnCloseModal } = useAppMapContext();
     const maxPrice = useMemo(() => getMaxPrice(restaurants), []);
 
-
     const handleFilterChange = <K extends keyof FilterOptions>(key: K) => (value: FilterOptions[K]) => {
         updateFilterOptions({ [key]: value });
     };

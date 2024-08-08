@@ -19,7 +19,8 @@ class RestaurantService {
                 searchParams.append(key, value.toString());
             }
         });
-        return httpClient.get<FoodItem[]>('/fooditems/items' + searchParams.toString())
+        console.log(searchParams)
+        return httpClient.get<FoodItem[]>('/fooditems/items?' + searchParams.toString())
     }
 }
 

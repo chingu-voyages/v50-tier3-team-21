@@ -4,6 +4,7 @@ import {useAppMapContext} from "../../provider/map.provider.tsx";
 import { useMemo} from "react";
 import {haversineDistance} from "../../utils/geospatial.ts";
 import {useAddressSearch} from "./address-search-provider.tsx";
+import {useNavigate} from "react-router-dom";
 
 
 interface PopupPropsType {
@@ -13,10 +14,10 @@ interface PopupPropsType {
 export const AppPopup = ({restaurant}: PopupPropsType) => {
     const { handleSelectRestaurant , geoLocation} = useAppMapContext();
     const {selectedLocation} = useAddressSearch()
-
+    const navigate = useNavigate()
 
     const distance = useMemo(() => {
-        return haversineDistance([selectedLocation.coordinates.latitude, selectedLocation.coordinates.longitude], [restaurant.latitude, restaurant.longitude])
+        return haversineDistance([selectedLocation?.coordinates?.latitude, selectedLocation?.coordinates?.longitude], [restaurant.latitude, restaurant.longitude])
     },[geoLocation, restaurant])
 
    return(
@@ -37,13 +38,13 @@ export const AppPopup = ({restaurant}: PopupPropsType) => {
                    </div>
                    <div className="flex items-center justify-start gap-2">
                        <span className="icon-[lets--icons:flag-duotone]"/>
-                       <span className="text-md font-light"> <strong className="text-primary font-light">{Math.round(distance)}km</strong> from your location</span>
+                       <span className="text-md font-light"> <strong className="text-primary font-light">{distance ? `${Math.round(distance)} km`: "distance no specified"} </strong> from your location</span>
                    </div>
                    <div className="flex justify-start items-center gap-2 py-4">
                        <PrimaryButton variant={"outline"} onClick={() => handleSelectRestaurant(-1)}>
                            CLOSE
                        </PrimaryButton>
-                       <PrimaryButton >
+                       <PrimaryButton onClick={() => navigate(`/restaurants/${restaurant.id}`)}>
                            VIEW MENU ITEMS
                        </PrimaryButton>
                    </div>

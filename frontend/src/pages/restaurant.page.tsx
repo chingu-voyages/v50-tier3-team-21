@@ -101,7 +101,7 @@ export const RestaurantPage = () => {
     // on clicking checkout, all items are saved to local Storage and user is sent to the shopping cart page
     const handleCheckout = () => {
       setStorage(cart)
-      navigate("/cart");
+      navigate("/checkout/order/confirm");
     };
 
   return (

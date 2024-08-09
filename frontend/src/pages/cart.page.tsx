@@ -5,11 +5,16 @@ import { DeliveryAddress } from "../components/cart/deliveryAddress";
 import { OrderType } from "../components/restaurant/types/restaurant-types";
 import { httpClient } from "../lib/http-client";
 import { useNavigate } from "react-router-dom";
+import {useCheckPathname} from "../hooks/check-pathname.hook.ts";
 
 export const CartPage = () => {
   const [cart, setCart] = useState<OrderType[]>([]);
   const [address, setAddress] = useState<string>("");
   const navigate = useNavigate();
+  const activePath = useCheckPathname('/checkout/order/confirm');
+  if(activePath === null){
+     return  null;
+  }
   // load locally stored shopping cart on load and save to state
   useEffect(() => {
     try {
@@ -51,7 +56,7 @@ export const CartPage = () => {
     try {
       const response = await httpClient.post("/order/create-order", order);
       const orderId: number = response.data.id
-      navigate(`/checkout/${orderId}`)
+      navigate(`/checkout/order/payment/${orderId}`)
     } catch (error) {
       console.log(error);
     }
@@ -61,7 +66,6 @@ export const CartPage = () => {
     <>
       {cart ? (
         <div>
-          <CheckoutHeader />
           <h1 className="p-3 font-bold md:text-xl">
             Please Confirm your Order Summary
           </h1>

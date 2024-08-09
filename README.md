@@ -60,10 +60,11 @@ To access the API endpoints, you can use the following URLs:
 - Reset link: `/resetpassword/reset-link/{token}` - <font style="color:red">GET</font>
   - it will redirect to the reset password page
 - Reset Password: `/resetpassword/reset-password` - <font style="color:green">POST</font> - raw/json data
-  ```json {
+  ```json
+  {
   "password": "newpassword123",
   "confirmPassword": "newpassword123"
- }
+    }
 
 **Profile**
 - Profile: `/api/auth/profile` - <font style="color:red">GET</font>
@@ -113,7 +114,7 @@ To access the API endpoints, you can use the following URLs:
       "itemId": 4,
       "quantity": 2
     }
-  ]
+    ]
   }
 
 - Get Order by Id: `/order/get-order/{orderId}` - <font style="color:red">GET</font>
@@ -145,59 +146,59 @@ To access the API endpoints, you can use the following URLs:
 
 
 ### Database
+- [PostgreSQL](https://www.postgresql.org/) PostgreSQL relational database
 
 ## Deployment
 
 ## Testing
 
-## Technology Used
+## Technologies Used
  
 ## Programming Languages
-- HTML - hypertext markup language - [link to HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
-- CSS - Cascading Style Sheets - [link to CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
-- TypeScript was used for frontend - [link to TypeScript](https://www.typescriptlang.org/)
-- JavaScript was used for backend - [link to JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) - Hypertext Markup Language
+- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) - Cascading Style Sheets
+- [TypeScript](https://www.typescriptlang.org/) was used for frontend
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) was used for backend
 
-## Dependencies 
+## Dependencies and Technologies
 
 *Frontend*:
-  - React Frontend framework: [React](https://reactjs.org/)
-  - Tailwind CSS framework: [Tailwind](https://tailwindcss.com/)
-  - tailwind-merge - [Tailwind-merge](https://www.npmjs.com/package/tailwind-merge)
-  - Vite - Tool for building frontend - [Vite](https://vitejs.dev/)
-  - Axios for http requests - [Axios](https://github.com/axios/axios)
-  - dotenv for environment variables - [dotenv](https://www.npmjs.com/package/dotenv)
-  - Tanstack react query and devtools - [Tanstack](https://tanstack.com/)
-  - React Map GL for interactive maps - [React-Map-GL](https://www.npmjs.com/package/react-map-gl)
-  - React Map GL Geocoder for address search - [React-Map-GL-Geocoder](https://www.npmjs.com/package/react-map-gl-geocoder)
-  - React Toastify for displaying notifications - [React-Toastify](https://www.npmjs.com/package/react-toastify)
-  - React Router for declarative routing - [React-Router](https://www.npmjs.com/package/react-router-dom)
-  - React Hook Form for form validation - [React-Hook-Form](https://www.npmjs.com/package/react-hook-form)
-  - Zod for ts data declaration and validation - [Zod](https://www.npmjs.com/package/zod)
-  - clsx for class list - [clsx](https://www.npmjs.com/package/clsx)
-  - uuid for uuid generation - [uuid](https://www.npmjs.com/package/uuid)
-  - mapbox-gl for maps - [Mapbox-GL](https://www.mapbox.com/mapbox-gl-js/)
-  - geoJson - for creating, viewing, and sharing spatial data - [geoJson](https://www.npmjs.com/package/geojson)
+  - [React](https://reactjs.org/) Frontend framework
+  - [Tailwind](https://tailwindcss.com/) CSS framework
+  - [Tailwind-merge](https://www.npmjs.com/package/tailwind-merge) - Tailwind utilities
+  - [Vite](https://vitejs.dev/) - Tool for building frontend
+  - [Axios](https://github.com/axios/axios) for http requests
+  - [dotenv](https://www.npmjs.com/package/dotenv) for environment variables
+  - [Tanstack](https://tanstack.com/) react query and devtools
+  - [React-Map-GL](https://www.npmjs.com/package/react-map-gl) for interactive maps
+  - [React-Map-GL-Geocoder](https://www.npmjs.com/package/react-map-gl-geocoder) for address search
+  - [React-Toastify](https://www.npmjs.com/package/react-toastify) for displaying notifications
+  - [React-Router](https://www.npmjs.com/package/react-router-dom) for declarative routing
+  - [React-Hook-Form](https://www.npmjs.com/package/react-hook-form) for form validation
+  - [Zod](https://www.npmjs.com/package/zod) for ts data declaration and validation
+  - [clsx](https://www.npmjs.com/package/clsx) clsx for class list
+  - [uuid](https://www.npmjs.com/package/uuid) - for the generation of unique ids
+  - [Mapbox-GL](https://www.mapbox.com/mapbox-gl-js/) - a JavaScript library for maps
+  - [geoJson](https://www.npmjs.com/package/geojson) - for creating, viewing, and sharing spatial data
 
 *Backend*:
-  - NodeJS runtime environment -  [NodeJS](https://nodejs.org/en/)
-  - Express.js web backend framework - [Express](https://expressjs.com/)
-  - PostgreSQL relational database - [PostgreSQL](https://www.postgresql.org/)
-  - Cors library for cross-origin resource sharing - [Cors](https://www.npmjs.com/package/cors)
-  - JSON Web Tokens - [JWT](https://jwt.io/)
-  - Bcrypt password hashing library - [Bcrypt](https://www.npmjs.com/package/bcrypt)
-  - Nodemailer module for email sending - [Nodemailer](https://nodemailer.com/)
-  - Sequelize ORM - [Sequelize](https://sequelize.org/)
-  - dotenv for environment variables - [dotenv](https://www.npmjs.com/package/dotenv)
-  - PostgreSQL client libraries:
+  - [NodeJS](https://nodejs.org/en/) runtime environment
+  - [Express.js](https://expressjs.com/) web backend framework
+  - [PostgreSQL](https://www.postgresql.org/) database client libraries:
     - [pg](https://www.npmjs.com/package/pg)
     - [pg-hstore](https://www.npmjs.com/package/pg-hstore)
-  - Cookie parser - [cookie-parser](https://www.npmjs.com/package/cookie-parser)
-  - Embedded JavaScript templating - [ejs](https://www.npmjs.com/package/ejs)
-  - fs and path modules for file handling - [fs](https://nodejs.org/api/fs.html) and [path](https://nodejs.org/api/path.html)
-  - Swagger UI and Swagger JSDoc for API documentation - [Swagger UI](https://swagger.io/) and [Swagger JSDoc](https://github.com/Surnet/swagger-jsdoc)
-  - Jest for testing - [Jest](https://jestjs.io/)
-  - Stripe for payment processing - [Stripe](https://stripe.com/)
+  - [Cookie Parser](https://www.npmjs.com/package/cookie-parser)
+  - [Cors](https://www.npmjs.com/package/cors) library for cross-origin resource sharing
+  - [JWT](https://jwt.io/) - JSON Web Tokens
+  - [Bcrypt](https://www.npmjs.com/package/bcrypt) password hashing library
+  - [Nodemailer](https://nodemailer.com/) module for email sending
+  - [Sequelize](https://sequelize.org/) - ORM (Object-Relational Mapping)
+  - [dotenv](https://www.npmjs.com/package/dotenv) for environment variables
+  - [EJS](https://www.npmjs.com/package/ejs) - Embedded JavaScript templating
+  - [fs](https://nodejs.org/api/fs.html) and [path](https://nodejs.org/api/path.html) modules for file handling
+  - [Swagger UI](https://swagger.io/) and [Swagger JSDoc](https://github.com/Surnet/swagger-jsdoc) for API documentation
+  - [Jest](https://jestjs.io/) for testing
+  - [Stripe](https://stripe.com/) for payment processing
 
 ## Tools
 
@@ -210,8 +211,8 @@ To access the API endpoints, you can use the following URLs:
 - [Postman](https://www.postman.com/) - API testing
 - [Visual Studio Code](https://code.visualstudio.com/) - Develompent code editor
 - [Microsoft Designer](https://www.microsoft.com/en-us/designer/) - UI design and prototyping
-- Figma for wireframes = [https://www.figma.com/](https://www.figma.com/)
-- Lucidchart for DB design - [Lucidchart](https://www.lucidchart.com/)
+- [Figma](https://www.figma.com/) - for wireframing and prototyping
+- [Lucidchart](https://www.lucidchart.com/) for DB design
 
 
 ## Team Documents

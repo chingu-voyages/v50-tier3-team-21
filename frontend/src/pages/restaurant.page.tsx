@@ -1,17 +1,9 @@
 import { useEffect, useState } from "react";
 import { httpClient } from "../lib/http-client";
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  FoodCard,
-  RestaurantHeader,
-  CategoryFilter,
-  Orders,
-  CheckoutFooter,
-} from "../components/restaurant/";
-import {
-  MenuItemType,
-  OrderType,
-} from "../components/restaurant/types/restaurant-types";
+import { FoodCard, RestaurantHeader, CategoryFilter, Orders, CheckoutFooter} from "../components/restaurant/";
+import { MenuItemType, MenuItemResponse, OrderType } from "../components/restaurant/types/restaurant-types";
+const BASE_URL = import.meta.env.VITE_LOCAL_API_BASE_URL;
 
 // types
 type CategoryListType = {
@@ -34,8 +26,8 @@ export const RestaurantPage = () => {
   useEffect(() => {
     async function getMenu() {
       try {
-        const url = `/foodItems/items?restaurantId=${restaurantId}`;
-        const response = await httpClient.get<{ data: MenuItemType[] }>(url);
+        const url = `${BASE_URL}/foodItems/items?restaurantId=${restaurantId}`;
+        const response = await httpClient.get<MenuItemResponse>(url);
         const { data } = response.data;
         setRestaurantData(data);
         setFilteredMenuItems(data);

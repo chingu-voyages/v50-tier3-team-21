@@ -20,6 +20,7 @@ It is a Full Stack Web Application made as a part of 50th Voyage organised by [C
 
 ### Features
 
+- TODO: Frontend guys fill this out :)
 
 ### API
 

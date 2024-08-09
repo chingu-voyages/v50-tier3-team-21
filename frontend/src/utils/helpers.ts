@@ -20,4 +20,12 @@ export const getMaxPrice = (restaurants: RestaurantWithImage[]): number => {
 };
 
 
+export const calculateTotalPrice = (orderData: OrderData): number => {
+    const itemTotal = orderData.orderFoodItems.reduce((total, orderItem) => {
+        return total + orderItem.item.price * orderItem.quantity;
+    }, 0);
+
+    return itemTotal + orderData.deliveryCost + orderData.tip;
+};
+
 

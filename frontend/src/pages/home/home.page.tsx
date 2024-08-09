@@ -24,7 +24,6 @@ export const HomePage = () => {
                                       <FilterForm />
                                   </Modal>
                               </div>
-
                           </AppMapProvider>
                   </AddressSearchProvider>
 

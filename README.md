@@ -30,6 +30,10 @@ To access the API endpoints, you can use the following URLs:
 - local URL: `http://localhost:3000/api`
 - deployed URL: `https://hungryhippo.onrender.com/api`
 
+SwaggerUI Documentation can be found [here](https://hungryhippo.onrender.com/api/docs)
+
+![SwaggerUI Image](./docs/swaggerUI.png)
+
 
 **Authentication**
 - Signup: /auth/signup` - <font style="color:green">POST</font> - raw/json data

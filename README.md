@@ -23,9 +23,9 @@ It is a Full Stack Web Application made as a part of 50th Voyage organised by [C
 
 ### API
 
-## API Endpoints
+***API Endpoints***
 
-For the testing purposes, we've included the API endpoints in the `readme`.
+To access the API endpoints, you can use the following URLs:
 
 - local URL: `http://localhost:3000/api`
 - deployed URL: `https://hungryhippo.onrender.com/api`
@@ -33,31 +33,31 @@ For the testing purposes, we've included the API endpoints in the `readme`.
 
 **Authentication**
 - Signup: /auth/signup` - <font style="color:green">POST</font> - raw/json data
-  > { 
-  >   "username": "testuser",
-  >   "email": "3JFJt@example.com",
-  >   "password": "testpassword",
-  >   "confirmPassword": "testpassword",
-  >   *"firstName": "test",*
-  >   *"lastName": "test",*
-  >   *"contact": "1234567890"*
-  > }
+  ```json {
+    "username": "testuser",
+    "email": "3JFJt@example.com",
+    "password": "testpassword",
+    "confirmPassword": "testpassword",
+    *"firstName": "test",*
+    *"lastName": "test",*
+    *"contact": "1234567890"*
+  }
 - Login: `/auth/login` - <font style="color:green">POST</font> - raw/json data
-  > {
-  >   "username": "testuser", // or "email": "3JFJt@example.com"
-  >   "password": "testpassword"
-  > }
+  ```json {
+    "username": "testuser", // or "email": "3JFJt@example.com"
+    "password": "testpassword"
+  }
 - Logout: `/auth/logout` - <font style="color:green">POST</font>
 - Refresh Token: `/api/auth/refresh-token` - <font style="color:red">GET</font>
   **Reset Password**
 - Reset Password email: `/resetpassword/send-password-reset-email` - <font style="color:green">POST</font> - raw/json data
-  > {
-  >   "email": "john.doe@example.com"
-  > }
+  ```json {
+    "email": "john.doe@example.com"
+  }
 - Reset link: `/resetpassword/reset-link/{token}` - <font style="color:red">GET</font>
   - it will redirect to the reset password page
 - Reset Password: `/resetpassword/reset-password` - <font style="color:green">POST</font> - raw/json data
-  > {
+  ```json {
   "password": "newpassword123",
   "confirmPassword": "newpassword123"
  }
@@ -66,12 +66,12 @@ For the testing purposes, we've included the API endpoints in the `readme`.
 - Profile: `/api/auth/profile` - <font style="color:red">GET</font>
   **Food Items Search**
 - Get All: `/api/fooditems/items` - <font style="color:red">GET</font> - raw/json data
-  > {
+  ```json {
   "password": "newpassword123",
   "confirmPassword": "newpassword123"
   }
 - Update Profile: `/api/profile` - <font style="color:green">PUT</font> - raw/json data
-  > {
+  ```json {
   "username": "johndoe",
   "email": "johndoe@example.com",
   "firstName": "John",
@@ -81,10 +81,10 @@ For the testing purposes, we've included the API endpoints in the `readme`.
 **Nearby Restaurants**
 
 - Get all Nearby Restaurants (5km distance): `/api/nearbyrestaurants` - <font style="color:red">GET</font>
-  > {
-  > "longitude": 40.6782,
-  > "latitude": -73.9442
-  > }
+  ```json {
+  "longitude": 40.6782,
+  "latitude": -73.9442
+  }
 
 **Order**
 
@@ -108,7 +108,7 @@ For the testing purposes, we've included the API endpoints in the `readme`.
       "quantity": 2
     }
   ]
-  }```
+  }
 
 - Get Order by Id: `/order/get-order/{orderId}` - <font style="color:red">GET</font>
 
@@ -124,14 +124,14 @@ For the testing purposes, we've included the API endpoints in the `readme`.
 
 **Wallet**
 - Request Account Topup: `/wallets/requestAccountTopup` - <font style="color:green">POST</font> - raw/json data
-  > {
-  "amount": 50
-}
+  ```json {
+    "amount": 50
+  }
 - Make Payment: `/wallets/makePayment` - <font style="color:green">POST</font> - raw/json data
-  > {
-  "amount": 30,
-  "orderId": "order_123456"
-}
+  ```json {
+    "amount": 30,
+    "orderId": "order_123456"
+  }
 - Get Account Details: `/wallets` - <font style="color:red">GET</font>
 
 **Transactions**

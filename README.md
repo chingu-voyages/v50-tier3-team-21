@@ -23,23 +23,62 @@ It is a Full Stack Web Application made as a part of 50th Voyage organised by [C
 ## Programming Languages
 - HTML - hypertext markup language - [link to HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
 - CSS - Cascading Style Sheets - [link to CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
-
 - TypeScript was used for frontend - [link to TypeScript](https://www.typescriptlang.org/)
 - JavaScript was used for backend - [link to JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
 ## Dependencies 
 
 *Frontend*:
-  - React: [React](https://reactjs.org/)
-  - Tailwind: [Tailwind](https://tailwindcss.com/)
-
+  - React Frontend framework: [React](https://reactjs.org/)
+  - Tailwind CSS framework: [Tailwind](https://tailwindcss.com/)
+  - tailwind-merge - [Tailwind-merge](https://www.npmjs.com/package/tailwind-merge)
+  - Vite - Tool for building frontend - [Vite](https://vitejs.dev/)
+  - Axios for http requests - [Axios](https://github.com/axios/axios)
+  - dotenv for environment variables - [dotenv](https://www.npmjs.com/package/dotenv)
+  - Tanstack react query and devtools - [Tanstack](https://tanstack.com/)
+  - React Map GL for interactive maps - [React-Map-GL](https://www.npmjs.com/package/react-map-gl)
+  - React Map GL Geocoder for address search - [React-Map-GL-Geocoder](https://www.npmjs.com/package/react-map-gl-geocoder)
+  - React Toastify for displaying notifications - [React-Toastify](https://www.npmjs.com/package/react-toastify)
+  - React Router for declarative routing - [React-Router](https://www.npmjs.com/package/react-router-dom)
+  - React Hook Form for form validation - [React-Hook-Form](https://www.npmjs.com/package/react-hook-form)
+  - Zod for ts data declaration and validation - [Zod](https://www.npmjs.com/package/zod)
+  - clsx for class list - [clsx](https://www.npmjs.com/package/clsx)
+  - uuid for uuid generation - [uuid](https://www.npmjs.com/package/uuid)
+  - mapbox-gl for maps - [Mapbox-GL](https://www.mapbox.com/mapbox-gl-js/)
+  - geoJson - for creating, viewing, and sharing spatial data - [geoJson](https://www.npmjs.com/package/geojson)
 
 *Backend*:
-  - NodeJS: [NodeJS](https://nodejs.org/en/)
-  - Express: [Express](https://expressjs.com/)
-  - PostgreSQL: [PostgreSQL](https://www.postgresql.org/)
+  - NodeJS runtime environment -  [NodeJS](https://nodejs.org/en/)
+  - Express.js web backend framework - [Express](https://expressjs.com/)
+  - PostgreSQL relational database - [PostgreSQL](https://www.postgresql.org/)
+  - Cors library for cross-origin resource sharing - [Cors](https://www.npmjs.com/package/cors)
+  - JSON Web Tokens - [JWT](https://jwt.io/)
+  - Bcrypt password hashing library - [Bcrypt](https://www.npmjs.com/package/bcrypt)
+  - Nodemailer module for email sending - [Nodemailer](https://nodemailer.com/)
+  - Sequelize ORM - [Sequelize](https://sequelize.org/)
+  - dotenv for environment variables - [dotenv](https://www.npmjs.com/package/dotenv)
+  - PostgreSQL client libraries:
+    - [pg](https://www.npmjs.com/package/pg)
+    - [pg-hstore](https://www.npmjs.com/package/pg-hstore)
+  - Cookie parser - [cookie-parser](https://www.npmjs.com/package/cookie-parser)
+  - Embedded JavaScript templating - [ejs](https://www.npmjs.com/package/ejs)
+  - fs and path modules for file handling - [fs](https://nodejs.org/api/fs.html) and [path](https://nodejs.org/api/path.html)
+  - Swagger UI and Swagger JSDoc for API documentation - [Swagger UI](https://swagger.io/) and [Swagger JSDoc](https://github.com/Surnet/swagger-jsdoc)
+  - Jest for testing - [Jest](https://jestjs.io/)
+  - Stripe for payment processing - [Stripe](https://stripe.com/)
 
+## Tools
 
+**Hosting Platforms**
+- [Render](https://render.com/) - Hosting and Live App deployment
+- [Neon](https://neon.tech/) - PostgreSQL database hosting
+- [GitHub](https://github.com/) - Source Control hosting and Project management
+
+**Development and Design Tools**
+- [Postman](https://www.postman.com/) - API testing
+- [Visual Studio Code](https://code.visualstudio.com/) - Develompent code editor
+- [Microsoft Designer](https://www.microsoft.com/en-us/designer/) - UI design and prototyping
+- Lucidchart for DB design - [Lucidchart](https://www.lucidchart.com/)
 
 ## API Endpoints
 

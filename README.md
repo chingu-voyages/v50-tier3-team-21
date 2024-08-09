@@ -204,6 +204,7 @@ For the testing purposes, we've included the API endpoints in the `readme`.
 - [Postman](https://www.postman.com/) - API testing
 - [Visual Studio Code](https://code.visualstudio.com/) - Develompent code editor
 - [Microsoft Designer](https://www.microsoft.com/en-us/designer/) - UI design and prototyping
+- Figma for wireframes = [https://www.figma.com/](https://www.figma.com/)
 - Lucidchart for DB design - [Lucidchart](https://www.lucidchart.com/)
 
 

@@ -1,3 +1,7 @@
+export interface MenuItemResponse {
+  status: string;
+  data: MenuItemType[];
+}
 export interface MenuItemType {
     id: number;
     name: string;

@@ -1,5 +1,5 @@
-import {Wallet} from "../profile/wallet.tsx";
 import {InsufficientMessage} from "./inssuficient-message.tsx";
+import {Wallet} from "../wallet/wallet.tsx";
 
 
 export const PaymentInformation = () => {

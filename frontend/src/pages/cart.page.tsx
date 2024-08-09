@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { CheckoutFooter, Orders } from "../components/restaurant";
-import { CheckoutHeader } from "../components/cart/cartHeader";
 import { DeliveryAddress } from "../components/cart/deliveryAddress";
 import { OrderType } from "../components/restaurant/types/restaurant-types";
 import { httpClient } from "../lib/http-client";

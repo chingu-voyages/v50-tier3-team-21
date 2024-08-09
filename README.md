@@ -1,77 +1,233 @@
-# voyage-tasks
+# Hungry Hippo
 
-Your project's `readme` is as important to success as your code. For
-this reason you should put as much care into its creation and maintenance
-as you would any other component of the application.
+![Hungry Hippo image](./frontend/src/assets/hippo-server-mobile.png)
 
-If you are unsure of what should go into the `readme` let this article,
-written by an experienced Chingu, be your starting point -
-[Keys to a well written README](https://tinyurl.com/yk3wubft).
+[Link to the Hungry Hippo website](https://hungryhippo-tgrams.onrender.com/)
 
-And before we go there's "one more thing"! Once you decide what to include
-in your `readme` feel free to replace the text we've provided here.
 
-> Own it & Make it your Own!
+## Introduction
+<img src="https://www.chingu.io/logo-with-text-192.png" alt="Chingu Image" style="width:200px; float:right"/>
 
-## API Endpoints
+**Frontend**: React, Tailwind, TypeScript
+**Backend**: NodeJS, Express, PostgreSQL, JavaScript|
 
-For the testing purposes, we've included the API endpoints in the `readme`.
+T-grams Development Team presents the [Hungry Hippo](https://hungryhippo-tgrams.onrender.com/) project. This project is a web application that allows users to order food from the best restaurants in the vicinity and track their order status at affordable delivery prices.
+It is a Full Stack Web Application made as a part of 50th Voyage organised by [Chingu](https://www.chingu.io/). More about Voyage 50 and the project requirements can be found:
+  - [Chingu: Voyage Guide](https://github.com/chingu-voyages/Handbook/blob/main/docs/guides/voyage/voyage.md)
+  - [Chingu: Voyage 50 - Tier 3 Project Requirements and Specifications](https://github.com/chingu-voyages/voyage-project-tier3-restaurantsim)
 
-- Base URL: `http://localhost:3000`
-  **Authentication**
-- Signup: `/api/auth/signup` - <font style="color:green">POST</font> - raw/json data
-  > { 
-  >   "username": "testuser",
-  >   "email": "3JFJt@example.com",
-  >   "password": "testpassword",
-  >   "confirmPassword": "testpassword",
-  >   *"firstName": "test",*
-  >   *"lastName": "test",*
-  >   *"contact": "1234567890"*
-  > }
-- Login: `/api/auth/login` - <font style="color:green">POST</font> - raw/json data
-  > {
-  >   "username": "testuser", // or "email": "3JFJt@example.com"
-  >   "password": "testpassword"
-  > }
-- Logout: `/api/auth/logout` - <font style="color:green">POST</font>
+## Project Details
+
+### Features
+
+- TODO: Frontend guys fill this out :)
+
+### API
+
+***API Endpoints***
+
+To access the API endpoints, you can use the following URLs:
+
+- local URL: `http://localhost:3000/api`
+- deployed URL: `https://hungryhippo.onrender.com/api`
+
+SwaggerUI Documentation can be found [here](https://hungryhippo.onrender.com/api/docs)
+
+![SwaggerUI Image](./docs/swaggerUI.png)
+
+
+**Authentication**
+- Signup: /auth/signup` - <font style="color:green">POST</font> - raw/json data
+  ```json
+  {
+    "username": "testuser",
+    "email": "3JFJt@example.com",
+    "password": "testpassword",
+    "confirmPassword": "testpassword",
+    *"firstName": "test",*
+    *"lastName": "test",*
+    *"contact": "1234567890"*
+  }
+- Login: `/auth/login` - <font style="color:green">POST</font> - raw/json data
+  ```json
+  {
+    "username": "testuser", // or "email": "3JFJt@example.com"
+    "password": "testpassword"
+  }
+- Logout: `/auth/logout` - <font style="color:green">POST</font>
 - Refresh Token: `/api/auth/refresh-token` - <font style="color:red">GET</font>
+  **Reset Password**
+- Reset Password email: `/resetpassword/send-password-reset-email` - <font style="color:green">POST</font> - raw/json data
+  ```json
+  {
+    "email": "john.doe@example.com"
+  }
+- Reset link: `/resetpassword/reset-link/{token}` - <font style="color:red">GET</font>
+  - it will redirect to the reset password page
+- Reset Password: `/resetpassword/reset-password` - <font style="color:green">POST</font> - raw/json data
+  ```json
+  {
+  "password": "newpassword123",
+  "confirmPassword": "newpassword123"
+    }
+
+**Profile**
 - Profile: `/api/auth/profile` - <font style="color:red">GET</font>
   **Food Items Search**
-- Get All: `/api/fooditems/items` - <font style="color:red">GET</font>
-  **Nearby Restaurants**
+- Get All: `/api/fooditems/items` - <font style="color:red">GET</font> - raw/json data
+  ```json
+  {
+  "password": "newpassword123",
+  "confirmPassword": "newpassword123"
+  }
+- Update Profile: `/api/profile` - <font style="color:green">PUT</font> - raw/json data
+  ```json
+  {
+  "username": "johndoe",
+  "email": "johndoe@example.com",
+  "firstName": "John",
+  "lastName": "Doe"
+  }
+
+**Nearby Restaurants**
+
 - Get all Nearby Restaurants (5km distance): `/api/nearbyrestaurants` - <font style="color:red">GET</font>
-  > {
-  > "longitude": 40.6782,
-  > "latitude": -73.9442
-  > }
+  ```json
+  {
+  "longitude": 40.6782,
+  "latitude": -73.9442
+  }
+
+**Order**
+
+- Create Order: `/order/create-order` - <font style="color:green">POST</font> - raw/json data
+  ```json 
+  {
+  "deliveryAddress": "whatever4",
+  "deliveryDate": "2024-08-05",
+  "deliveryTime": "14:00",
+  "foodItems": [
+    {
+      "itemId": "1",
+      "quantity": 1
+    },
+    {
+      "itemId": 200,
+      "quantity": 5
+    },
+    {
+      "itemId": 4,
+      "quantity": 2
+    }
+    ]
+  }
+
+- Get Order by Id: `/order/get-order/{orderId}` - <font style="color:red">GET</font>
+
+- Get Orders by User: `/order/get-orders` - <font style="color:red">GET</font>
+
+- Cancel Order: `/order/cancel/{orderId}` - <font style="color:green">PUT</font> - raw/json data
+
+**Food Categories**
+- Get all Food Categories: `/foodcategories` - <font style="color:red">GET</font>
+
+**Food Items**
+- Get Food Items: `?[foodItemId={id}&][categoryId={id}&][restaurantId={id}&country={country string}]` - <font style="color:red">GET</font>
+
+**Wallet**
+- Request Account Topup: `/wallets/requestAccountTopup` - <font style="color:green">POST</font> - raw/json data
+  ```json {
+    "amount": 50
+  }
+- Make Payment: `/wallets/makePayment` - <font style="color:green">POST</font> - raw/json data
+  ```json {
+    "amount": 30,
+    "orderId": "order_123456"
+  }
+- Get Account Details: `/wallets` - <font style="color:red">GET</font>
+
+**Transactions**
+- Get Transactions: `/transactions` - <font style="color:red">GET</font>
+
+
+### Database
+- [PostgreSQL](https://www.postgresql.org/) PostgreSQL relational database
+
+## Deployment
+
+## Testing
+
+## Technologies Used
+ 
+## Programming Languages
+- [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) - Hypertext Markup Language
+- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) - Cascading Style Sheets
+- [TypeScript](https://www.typescriptlang.org/) was used for frontend
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) was used for backend
+
+## Dependencies and Technologies
+
+*Frontend*:
+  - [React](https://reactjs.org/) Frontend framework
+  - [Tailwind](https://tailwindcss.com/) CSS framework
+  - [Tailwind-merge](https://www.npmjs.com/package/tailwind-merge) - Tailwind utilities
+  - [Vite](https://vitejs.dev/) - Tool for building frontend
+  - [Axios](https://github.com/axios/axios) for http requests
+  - [dotenv](https://www.npmjs.com/package/dotenv) for environment variables
+  - [Tanstack](https://tanstack.com/) react query and devtools
+  - [React-Map-GL](https://www.npmjs.com/package/react-map-gl) for interactive maps
+  - [React-Map-GL-Geocoder](https://www.npmjs.com/package/react-map-gl-geocoder) for address search
+  - [React-Toastify](https://www.npmjs.com/package/react-toastify) for displaying notifications
+  - [React-Router](https://www.npmjs.com/package/react-router-dom) for declarative routing
+  - [React-Hook-Form](https://www.npmjs.com/package/react-hook-form) for form validation
+  - [Zod](https://www.npmjs.com/package/zod) for ts data declaration and validation
+  - [clsx](https://www.npmjs.com/package/clsx) clsx for class list
+  - [uuid](https://www.npmjs.com/package/uuid) - for the generation of unique ids
+  - [Mapbox-GL](https://www.mapbox.com/mapbox-gl-js/) - a JavaScript library for maps
+  - [geoJson](https://www.npmjs.com/package/geojson) - for creating, viewing, and sharing spatial data
+
+*Backend*:
+  - [NodeJS](https://nodejs.org/en/) runtime environment
+  - [Express.js](https://expressjs.com/) web backend framework
+  - [PostgreSQL](https://www.postgresql.org/) database client libraries:
+    - [pg](https://www.npmjs.com/package/pg)
+    - [pg-hstore](https://www.npmjs.com/package/pg-hstore)
+  - [Cookie Parser](https://www.npmjs.com/package/cookie-parser)
+  - [Cors](https://www.npmjs.com/package/cors) library for cross-origin resource sharing
+  - [JWT](https://jwt.io/) - JSON Web Tokens
+  - [Bcrypt](https://www.npmjs.com/package/bcrypt) password hashing library
+  - [Nodemailer](https://nodemailer.com/) module for email sending
+  - [Sequelize](https://sequelize.org/) - ORM (Object-Relational Mapping)
+  - [dotenv](https://www.npmjs.com/package/dotenv) for environment variables
+  - [EJS](https://www.npmjs.com/package/ejs) - Embedded JavaScript templating
+  - [fs](https://nodejs.org/api/fs.html) and [path](https://nodejs.org/api/path.html) modules for file handling
+  - [Swagger UI](https://swagger.io/) and [Swagger JSDoc](https://github.com/Surnet/swagger-jsdoc) for API documentation
+  - [Jest](https://jestjs.io/) for testing
+  - [Stripe](https://stripe.com/) for payment processing
+
+## Tools
+
+**Hosting Platforms**
+- [Render](https://render.com/) - Hosting and Live App deployment
+- [Neon](https://neon.tech/) - PostgreSQL database hosting
+- [GitHub](https://github.com/) - Source Control hosting and Project management
+
+**Development and Design Tools**
+- [Postman](https://www.postman.com/) - API testing
+- [Visual Studio Code](https://code.visualstudio.com/) - Develompent code editor
+- [Microsoft Designer](https://www.microsoft.com/en-us/designer/) - UI design and prototyping
+- [Figma](https://www.figma.com/) - for wireframing and prototyping
+- [Lucidchart](https://www.lucidchart.com/) for DB design
+
 
 ## Team Documents
 
-You may find these helpful as you work together to organize your project.
+- TODO: Add contents of the Google Docs Team Document here
 
-- [Team Project Ideas](./docs/team_project_ideas.md)
-- [Team Decision Log](./docs/team_decision_log.md)
 
-Meeting Agenda templates (located in the `/docs` directory in this repo):
 
-- Meeting - Voyage Kickoff --> ./docs/meeting-voyage_kickoff.docx
-- Meeting - App Vision & Feature Planning --> ./docs/meeting-vision_and_feature_planning.docx
-- Meeting - Sprint Retrospective, Review, and Planning --> ./docs/meeting-sprint_retrospective_review_and_planning.docx
-- Meeting - Sprint Open Topic Session --> ./docs/meeting-sprint_open_topic_session.docx
+## Our Team: T-grams
 
-## Tech Used
-
-- Stack:
-  - Frontend: React, Tailwind
-  - Backend: NodeJS, Express, PostgreSQL
-
-## Our Team
-
-Everyone on your team should add their name along with a link to their GitHub
-& optionally their LinkedIn profiles below. Do this in Sprint #1 to validate
-your repo access and to practice PR'ing with your team _before_ you start
-coding!
 
 - Martha Mwangi #1: [GitHub](https://github.com/marthamwangi) / [LinkedIn](https://linkedin.com/in/martymwangi)
 

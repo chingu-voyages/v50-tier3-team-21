@@ -35,10 +35,10 @@ export const Wallet = () => {
   }, [balance]);
 
   useEffect(() => {
-        // if success is true, set showSuccess module
-        const successParam = searchParams.get("success");
-        const wasSuccess = successParam === "true"
-        setShowSuccess(wasSuccess)
+    // if success is true, set showSuccess module
+    const successParam = searchParams.get("success");
+    const wasSuccess = successParam === "true"
+    setShowSuccess(wasSuccess)
   }, [searchParams]);
   // format blanace from cents to dollar/cents with necessary 0s
   const formatBalance = (balanceCents: number) => {

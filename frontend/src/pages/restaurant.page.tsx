@@ -99,7 +99,7 @@ export const RestaurantPage = () => {
   return (
     <>
       {restaurantData.length ? (
-        <div className="p-3 md:px-10 max-w-[1290px] pt-28 md:pt-32 m-auto">
+        <div className="p-3 md:px-10 max-w-[1290px] m-auto">
           <RestaurantHeader restaurantData={restaurantData} />
           <div className="rounded-2xl h-[220px] md:h-[500px] bg-contain bg-no-repeat bg-[url('./assets/hippo-server-mobile.png')] md:bg-[url('./assets/hippo-server.png')] bg-center"></div>
 

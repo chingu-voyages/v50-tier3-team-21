@@ -21,16 +21,16 @@ export const AppPopup = ({restaurant}: PopupPropsType) => {
     },[geoLocation, restaurant])
 
    return(
-       <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[80%] sm:max-w-md md:max-w-md md:w-[336px] z-50 ">
-           <div className="w-full bg-white flex flex-col justify-center items-start  rounded-md gap-4 z-50">
-               <div className="w-full h-[150px] overflow-hidden bg-white rounded-md z-50">
+       <div className="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 w-[300px]  md:max-w-md md:w-[336px] z-50 ">
+           <div className="w-full bg-white flex flex-col justify-center items-start  rounded-md gap-4 ">
+               <div className="w-full h-[150px] overflow-hidden bg-white rounded-md ">
                    <img
                        src={restaurant.imageUrl}
                        alt={`${restaurant.name} image`}
                        className="w-full h-full object-cover rounded-tl-md rounded-tr-md"
                    />
                </div>
-               <div className="flex flex-col w-full px-3  gap-2 z-50">
+               <div className="flex flex-col w-full px-3  gap-2">
                    <h3 className="font-light text-lg text-dark">{ restaurant.name }</h3>
                    <div className="flex items-center gap-2">
                        <span className="icon-[solar--map-point-wave-bold-duotone]"/>

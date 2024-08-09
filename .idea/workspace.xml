@@ -4,16 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="wip: payement details">
-      <change afterPath="$PROJECT_DIR$/frontend/src/hooks/check-pathname.hook.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/checkout.page.tsx" afterDir="false" />
+    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="feat: adding leaving tips and make payment feature">
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/payment/inssuficient-message.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/payment/modal.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/payment/payment-footer.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/payment/success-message.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/cart/cartFooter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/cart/cartFooter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/cart/cartHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/cart/cartHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/cart/deliveryAddress.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/cart/deliveryAddress.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/cart.page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/cart.page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/restaurant.page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/restaurant.page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/interactive-map/popup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/interactive-map/popup.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/payment/detail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/payment/detail.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/payment/info.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/payment/info.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/payment-details.page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/payment-details.page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +23,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/topup" />
+        <entry key="$PROJECT_DIR$" value="new-branch" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -33,6 +33,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
@@ -71,6 +74,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="JavaScript Debug.index.html" />
       </list>
@@ -269,7 +273,23 @@
       <option name="project" value="LOCAL" />
       <updated>1722875082003</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="fix: fix lost commit">
+      <option name="closed" value="true" />
+      <created>1723198258007</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1723198258007</updated>
+    </task>
+    <task id="LOCAL-00022" summary="feat: adding leaving tips and make payment feature">
+      <option name="closed" value="true" />
+      <created>1723213472384</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1723213472384</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -296,7 +316,9 @@
     <MESSAGE value="update: update style to fit responsiveness" />
     <MESSAGE value="refactor: move geolocation button to shared ui components" />
     <MESSAGE value="wip: payement details" />
-    <option name="LAST_COMMIT_MESSAGE" value="wip: payement details" />
+    <MESSAGE value="fix: fix lost commit" />
+    <MESSAGE value="feat: adding leaving tips and make payment feature" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: adding leaving tips and make payment feature" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

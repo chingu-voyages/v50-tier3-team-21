@@ -1,6 +1,6 @@
 import { ReactNode, useState } from "react";
 import { useAuth } from "../../hooks/auth.hook.ts";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 export interface HeaderNavProps {
     isLoggedIn?: boolean;
     onLogout?: boolean;
@@ -9,6 +9,8 @@ export interface HeaderNavProps {
 export default function HeaderNav() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const { isAuthenticated, data, logout } = useAuth();
+  
+    const navigate = useNavigate();
     const mobileLinks = [
         { name: 'Home', href: '/', icon: 'icon-[lets-icons--home-duotone]' },
         { name: 'Recent Orders', href: '/orders', icon: 'icon-[solar--history-line-duotone]' },
@@ -55,6 +57,7 @@ export default function HeaderNav() {
                 {isAuthenticated ? (
                     <>
                         <button
+                            onClick={() => navigate("/profile")}
                             type="button"
                             className="hidden md:inline-flex items-center justify-center  p-2.5 text-dark"
                         >

@@ -13,3 +13,23 @@
   background-color: #ffffff;
   background-image: linear-gradient(rgba(247, 0, 0, 0.1), rgba(247, 0, 0, 0.1));
 }
+
+
+.slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #8C63EE;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background:#8C63EE;
+  cursor: pointer;
+}
+
+

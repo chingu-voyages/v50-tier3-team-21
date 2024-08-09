@@ -6,7 +6,7 @@ class AccountCreditor{
 
   perform = async () => {
     try {
-     this.account.balance = Number(this.account.balance) + (Number(this.amount)*100);
+     this.account.balance = Number(this.account.balance) + (Number(this.amount));
    
      await this.account.save();
       return true;

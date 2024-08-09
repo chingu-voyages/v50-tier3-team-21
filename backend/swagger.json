@@ -8,12 +8,17 @@
     },
     "servers": [
       {
-        "url": "https://hungryhippo.onrender.com/"
+        "url": "https://hungryhippo.onrender.com/api/",
+        "description": "Production server"
+      },
+      {
+        "url": "http://localhost:3000/api/",
+        "description": "Local development server"
       }
     ],
     "tags": [
       {
-        "name": "Auth",
+        "name": "Authentication",
         "description": "Authentication routes"
       },
       {
@@ -21,8 +26,32 @@
         "description": "Password reset routes"
       },
       {
+        "name": "Profile",
+        "description": "Profile routes"
+      },
+      {
+        "name": "Nearby Restaurants",
+        "description": "Nearby restaurants routes"
+      },
+      {
         "name": "Order",
         "description": "Order routes"
+      },
+      {
+        "name": "Food Categories",
+        "description": "Food category routes"
+      },
+      {
+        "name": "Food Items",
+        "description": "Food item routes"
+      },
+      {
+        "name": "Wallet",
+        "description": "Wallet routes"
+      },
+      {
+        "name": "Transactions",
+        "description": "Transaction routes"
       }
     ],
     "paths": {
@@ -31,7 +60,7 @@
           "summary": "Signup a new user",
           "description": "Fields required: `username, email, password, confirmPassword`",
           "tags": [
-            "Auth"
+            "Authentication"
           ],
           "requestBody": {
             "required": true,
@@ -165,7 +194,7 @@
           "summary": "Login a user",
           "description": "Fields required: `username`, or `email`, and `password`",
           "tags": [
-            "Auth"
+            "Authentication"
           ],
           "requestBody": {
             "required": true,
@@ -236,7 +265,7 @@
         "post": {
           "summary": "Logout a user",
           "tags": [
-            "Auth"
+            "Authentication"
           ],
           "responses": {
             "200": {
@@ -269,7 +298,7 @@
         "get": {
           "summary": "Refresh the access token",
           "tags": [
-            "Auth"
+            "Authentication"
           ],
           "responses": {
             "200": {
@@ -600,6 +629,215 @@
                       "message": {
                         "type": "string",
                         "example": "Failed to reset password"
+                      },
+                      "error": {
+                        "type": "string",
+                        "example": "error.message"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/profile": {
+        "get": {
+          "summary": "Get user profile",
+          "description": "Retrieve the profile information of the authenticated user.",
+          "tags": [
+            "Profile"
+          ],
+          "responses": {
+            "200": {
+              "description": "User profile retrieved successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "success"
+                      },
+                      "data": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 1
+                          },
+                          "username": {
+                            "type": "string",
+                            "example": "johndoe"
+                          },
+                          "email": {
+                            "type": "string",
+                            "example": "johndoe@example.com"
+                          },
+                          "firstName": {
+                            "type": "string",
+                            "example": "John"
+                          },
+                          "lastName": {
+                            "type": "string",
+                            "example": "Doe"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2024-07-30T07:36:19.605Z"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2024-07-30T07:41:30.884Z"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "User not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "User not found"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Failed to fetch user profile"
+                      },
+                      "error": {
+                        "type": "string",
+                        "example": "error.message"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "summary": "Update user profile",
+          "description": "Update the profile information of the authenticated user.",
+          "tags": [
+            "Profile"
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string",
+                      "description": "The new username for the user."
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "The new email address for the user."
+                    },
+                    "firstName": {
+                      "type": "string",
+                      "description": "The new first name for the user."
+                    },
+                    "lastName": {
+                      "type": "string",
+                      "description": "The new last name for the user."
+                    }
+                  },
+                  "example": {
+                    "username": "johndoe",
+                    "email": "johndoe@example.com",
+                    "firstName": "John",
+                    "lastName": "Doe"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "User updated successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean",
+                        "example": true
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "User updated successfully"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "User not found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "User not found"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "success": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Failed to update user profile"
                       },
                       "error": {
                         "type": "string",
@@ -1467,6 +1705,668 @@
                       "error": {
                         "type": "string",
                         "example": "error.message"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/nearbyrestaurants": {
+        "get": {
+          "summary": "Get nearby restaurants",
+          "description": "Retrieve a list of nearby restaurants based on latitude and longitude.",
+          "tags": [
+            "Nearby Restaurants"
+          ],
+          "parameters": [
+            {
+              "name": "latitude",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "number",
+                "example": 40.650002
+              },
+              "description": "The latitude coordinate."
+            },
+            {
+              "name": "longitude",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "number",
+                "example": -73.949997
+              },
+              "description": "The longitude coordinate."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "List of nearby restaurants",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "Joe's Diner"
+                        },
+                        "country": {
+                          "type": "string",
+                          "example": "United States"
+                        },
+                        "latitude": {
+                          "type": "number",
+                          "example": 40.6782
+                        },
+                        "longitude": {
+                          "type": "number",
+                          "example": -73.9442
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Missing latitude or longitude"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "No nearby restaurants found",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "No nearby restaurants found"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Internal Server Error"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/foodCategories": {
+        "get": {
+          "summary": "Get all food categories",
+          "description": "Retrieve a list of all food categories available in the system.",
+          "tags": [
+            "Food Categories"
+          ],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "List of food categories retrieved successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "success"
+                      },
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "Beverages"
+                            },
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-07-30T07:36:19.605Z"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-07-30T07:36:19.605Z"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Failed to fetch food items"
+                      },
+                      "error": {
+                        "type": "string",
+                        "example": "error.message"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/fooditems/items": {
+        "get": {
+          "summary": "Get food items",
+          "description": "Retrieve a list of food items based on optional query parameters such as food item ID, category ID, restaurant ID, and country.",
+          "tags": [
+            "Food Items"
+          ],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "parameters": [
+            {
+              "name": "foodItemId",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "integer"
+              },
+              "description": "Filter by specific food item ID."
+            },
+            {
+              "name": "categoryId",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "integer"
+              },
+              "description": "Filter by specific category ID."
+            },
+            {
+              "name": "restaurantId",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "integer"
+              },
+              "description": "Filter by specific restaurant ID."
+            },
+            {
+              "name": "country",
+              "in": "query",
+              "required": false,
+              "schema": {
+                "type": "string"
+              },
+              "description": "Filter by country of the restaurant."
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "List of food items retrieved successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "success"
+                      },
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "Spaghetti Bolognese"
+                            },
+                            "price": {
+                              "type": "number",
+                              "format": "float",
+                              "example": 12.99
+                            },
+                            "restaurant": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer",
+                                  "example": 1
+                                },
+                                "name": {
+                                  "type": "string",
+                                  "example": "Italian Bistro"
+                                },
+                                "country": {
+                                  "type": "string",
+                                  "example": "United States"
+                                }
+                              }
+                            },
+                            "categories": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "integer",
+                                    "example": 1
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "example": "Pasta"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Failed to fetch food items"
+                      },
+                      "error": {
+                        "type": "string",
+                        "example": "error.message"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/wallets/requestAccountTopup": {
+        "post": {
+          "summary": "Request account top-up",
+          "description": "Initiates a Stripe payment session for topping up the user's wallet.",
+          "tags": [
+            "Wallet"
+          ],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "amount": {
+                      "type": "number",
+                      "description": "The amount to top up the wallet, in USD.",
+                      "example": 50
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Stripe session created successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "url": {
+                        "type": "string",
+                        "example": "https://checkout.stripe.com/pay/cs_test_a1b2c3d4e5"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Internal server error"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/wallets/makePayment": {
+        "post": {
+          "summary": "Make a payment",
+          "description": "Debits the user's account and records a transaction for a specified order.",
+          "tags": [
+            "Wallet"
+          ],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "amount": {
+                      "type": "number",
+                      "description": "The payment amount, in USD.",
+                      "example": 30
+                    },
+                    "orderId": {
+                      "type": "string",
+                      "description": "The ID of the order being paid for.",
+                      "example": "order_123456"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Payment made successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "success"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Payment successful"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Insufficient funds"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/wallets": {
+        "get": {
+          "summary": "Get account details",
+          "description": "Retrieves the account details for the authenticated user.",
+          "tags": [
+            "Wallet"
+          ],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Account details retrieved successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 1
+                      },
+                      "userId": {
+                        "type": "integer",
+                        "example": 7
+                      },
+                      "balance": {
+                        "type": "number",
+                        "example": 100.00
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-07-30T07:36:19.605Z"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2024-07-30T07:36:19.605Z"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Account not found"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/transactions": {
+        "get": {
+          "summary": "Get transactions",
+          "description": "Retrieve a list of all transactions for the authenticated user's account.",
+          "tags": [
+            "Transactions"
+          ],
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "List of transactions retrieved successfully",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "success"
+                      },
+                      "data": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "example": 1
+                            },
+                            "amount": {
+                              "type": "number",
+                              "format": "float",
+                              "example": 100.00
+                            },
+                            "type": {
+                              "type": "string",
+                              "example": "credit"
+                            },
+                            "status": {
+                              "type": "string",
+                              "example": "completed"
+                            },
+                            "paymentIntentId": {
+                              "type": "string",
+                              "example": "pi_1A2B3C4D"
+                            },
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-07-30T07:36:19.605Z"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-07-30T07:36:19.605Z"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "status": {
+                        "type": "string",
+                        "example": "fail"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Account not found"
                       }
                     }
                   }

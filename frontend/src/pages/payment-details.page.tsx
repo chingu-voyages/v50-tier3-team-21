@@ -1,6 +1,7 @@
-import {Detail , PaymentFooter} from "../components/payment/detail.tsx";
+import {Detail } from "../components/payment/detail.tsx";
 import {PaymentProvider} from "../provider/payment.provider.tsx";
 import {PaymentInformation} from "../components/payment/info.tsx";
+import {PaymentFooter} from "../components/payment/payment-footer.tsx";
 
 
 export const PaymentDetailsPage = () => {

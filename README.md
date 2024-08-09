@@ -16,7 +16,133 @@ It is a Full Stack Web Application made as a part of 50th Voyage organised by [C
   - [Chingu: Voyage Guide](https://github.com/chingu-voyages/Handbook/blob/main/docs/guides/voyage/voyage.md)
   - [Chingu: Voyage 50 - Tier 3 Project Requirements and Specifications](https://github.com/chingu-voyages/voyage-project-tier3-restaurantsim)
 
+## Project Details
 
+### Features
+
+
+### API
+
+## API Endpoints
+
+For the testing purposes, we've included the API endpoints in the `readme`.
+
+- local URL: `http://localhost:3000/api`
+- deployed URL: `https://hungryhippo.onrender.com/api`
+
+
+**Authentication**
+- Signup: /auth/signup` - <font style="color:green">POST</font> - raw/json data
+  > { 
+  >   "username": "testuser",
+  >   "email": "3JFJt@example.com",
+  >   "password": "testpassword",
+  >   "confirmPassword": "testpassword",
+  >   *"firstName": "test",*
+  >   *"lastName": "test",*
+  >   *"contact": "1234567890"*
+  > }
+- Login: `/auth/login` - <font style="color:green">POST</font> - raw/json data
+  > {
+  >   "username": "testuser", // or "email": "3JFJt@example.com"
+  >   "password": "testpassword"
+  > }
+- Logout: `/auth/logout` - <font style="color:green">POST</font>
+- Refresh Token: `/api/auth/refresh-token` - <font style="color:red">GET</font>
+  **Reset Password**
+- Reset Password email: `/resetpassword/send-password-reset-email` - <font style="color:green">POST</font> - raw/json data
+  > {
+  >   "email": "john.doe@example.com"
+  > }
+- Reset link: `/resetpassword/reset-link/{token}` - <font style="color:red">GET</font>
+  - it will redirect to the reset password page
+- Reset Password: `/resetpassword/reset-password` - <font style="color:green">POST</font> - raw/json data
+  > {
+  "password": "newpassword123",
+  "confirmPassword": "newpassword123"
+ }
+
+**Profile**
+- Profile: `/api/auth/profile` - <font style="color:red">GET</font>
+  **Food Items Search**
+- Get All: `/api/fooditems/items` - <font style="color:red">GET</font> - raw/json data
+  > {
+  "password": "newpassword123",
+  "confirmPassword": "newpassword123"
+  }
+- Update Profile: `/api/profile` - <font style="color:green">PUT</font> - raw/json data
+  > {
+  "username": "johndoe",
+  "email": "johndoe@example.com",
+  "firstName": "John",
+  "lastName": "Doe"
+  }
+
+**Nearby Restaurants**
+
+- Get all Nearby Restaurants (5km distance): `/api/nearbyrestaurants` - <font style="color:red">GET</font>
+  > {
+  > "longitude": 40.6782,
+  > "latitude": -73.9442
+  > }
+
+**Order**
+
+- Create Order: `/order/create-order` - <font style="color:green">POST</font> - raw/json data
+  ```json 
+  {
+  "deliveryAddress": "whatever4",
+  "deliveryDate": "2024-08-05",
+  "deliveryTime": "14:00",
+  "foodItems": [
+    {
+      "itemId": "1",
+      "quantity": 1
+    },
+    {
+      "itemId": 200,
+      "quantity": 5
+    },
+    {
+      "itemId": 4,
+      "quantity": 2
+    }
+  ]
+  }```
+
+- Get Order by Id: `/order/get-order/{orderId}` - <font style="color:red">GET</font>
+
+- Get Orders by User: `/order/get-orders` - <font style="color:red">GET</font>
+
+- Cancel Order: `/order/cancel/{orderId}` - <font style="color:green">PUT</font> - raw/json data
+
+**Food Categories**
+- Get all Food Categories: `/foodcategories` - <font style="color:red">GET</font>
+
+**Food Items**
+- Get Food Items: `?[foodItemId={id}&][categoryId={id}&][restaurantId={id}&country={country string}]` - <font style="color:red">GET</font>
+
+**Wallet**
+- Request Account Topup: `/wallets/requestAccountTopup` - <font style="color:green">POST</font> - raw/json data
+  > {
+  "amount": 50
+}
+- Make Payment: `/wallets/makePayment` - <font style="color:green">POST</font> - raw/json data
+  > {
+  "amount": 30,
+  "orderId": "order_123456"
+}
+- Get Account Details: `/wallets` - <font style="color:red">GET</font>
+
+**Transactions**
+- Get Transactions: `/transactions` - <font style="color:red">GET</font>
+
+
+### Database
+
+## Deployment
+
+## Testing
 
 ## Technology Used
  
@@ -80,62 +206,15 @@ It is a Full Stack Web Application made as a part of 50th Voyage organised by [C
 - [Microsoft Designer](https://www.microsoft.com/en-us/designer/) - UI design and prototyping
 - Lucidchart for DB design - [Lucidchart](https://www.lucidchart.com/)
 
-## API Endpoints
-
-For the testing purposes, we've included the API endpoints in the `readme`.
-
-- Base URL: `http://localhost:3000`
-  **Authentication**
-- Signup: `/api/auth/signup` - <font style="color:green">POST</font> - raw/json data
-  > { 
-  >   "username": "testuser",
-  >   "email": "3JFJt@example.com",
-  >   "password": "testpassword",
-  >   "confirmPassword": "testpassword",
-  >   *"firstName": "test",*
-  >   *"lastName": "test",*
-  >   *"contact": "1234567890"*
-  > }
-- Login: `/api/auth/login` - <font style="color:green">POST</font> - raw/json data
-  > {
-  >   "username": "testuser", // or "email": "3JFJt@example.com"
-  >   "password": "testpassword"
-  > }
-- Logout: `/api/auth/logout` - <font style="color:green">POST</font>
-- Refresh Token: `/api/auth/refresh-token` - <font style="color:red">GET</font>
-- Profile: `/api/auth/profile` - <font style="color:red">GET</font>
-  **Food Items Search**
-- Get All: `/api/fooditems/items` - <font style="color:red">GET</font>
-  **Nearby Restaurants**
-- Get all Nearby Restaurants (5km distance): `/api/nearbyrestaurants` - <font style="color:red">GET</font>
-  > {
-  > "longitude": 40.6782,
-  > "latitude": -73.9442
-  > }
 
 ## Team Documents
 
 - TODO: Add contents of the Google Docs Team Document here
-You may find these helpful as you work together to organize your project.
-
-- [Team Project Ideas](./docs/team_project_ideas.md)
-- [Team Decision Log](./docs/team_decision_log.md)
-
-Meeting Agenda templates (located in the `/docs` directory in this repo):
-
-- Meeting - Voyage Kickoff --> ./docs/meeting-voyage_kickoff.docx
-- Meeting - App Vision & Feature Planning --> ./docs/meeting-vision_and_feature_planning.docx
-- Meeting - Sprint Retrospective, Review, and Planning --> ./docs/meeting-sprint_retrospective_review_and_planning.docx
-- Meeting - Sprint Open Topic Session --> ./docs/meeting-sprint_open_topic_session.docx
 
 
 
-## Our Team
+## Our Team: T-grams
 
-Everyone on your team should add their name along with a link to their GitHub
-& optionally their LinkedIn profiles below. Do this in Sprint #1 to validate
-your repo access and to practice PR'ing with your team _before_ you start
-coding!
 
 - Martha Mwangi #1: [GitHub](https://github.com/marthamwangi) / [LinkedIn](https://linkedin.com/in/martymwangi)
 

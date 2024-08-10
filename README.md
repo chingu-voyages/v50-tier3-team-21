@@ -21,10 +21,11 @@ It is a Full Stack Web Application made as a part of 50th Voyage organised by [C
 ## Project Details
 ![Project Summary](./docs/ProjectSummary.png)
 
-### Team Document
+### Team Documents
 
 In order not to block the creative and innovative work of the project, the team has adopted the idea to use the Google Docs document as a team document in a very free fashion. We were sharing the ideas, adding details and minutes of the meetings in that document that was more of a brainstorming tool. The said document is accessible in the [Google Docs](https://docs.google.com/document/d/15vURBkOasLmq5THwEN9E6Dexm1B_NtrjHpaKKm70jZI).
 
+For the Project Management, the team has used the [Github Projects' Kanban Board](https://github.com/orgs/chingu-voyages/projects/248)
 
 ### Design and Prototyping
 
@@ -239,6 +240,10 @@ By analyzing the proposed food items API from the deployed API [https://menus-ap
    - open http://localhost:5173 in your browser
 
 ## Testing
+
+- Some of the automated tests were written in [Jest](https://jestjs.io/) and can be executed with `npm run test` in backend directory.
+- Because of the time constraint, and because the developers had decided to work with the tecnologies that weren't used by them before, a lot of time was spent into studying, learning and discussing the solutions and implementing them.
+
 
 ## Technologies Used
  

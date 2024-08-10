@@ -42,7 +42,7 @@ On the other hand, some excerps are exported to the `docs` folder in `pdf` forma
 
 ### Features
 
-- TODO: Frontend guys fill this out :)
+- TODO: Frontend guys, fill this out :)
 
 
 ### API
@@ -241,8 +241,11 @@ By analyzing the proposed food items API from the deployed API [https://menus-ap
 
 ## Testing
 
-- Some of the automated tests were written in [Jest](https://jestjs.io/) and can be executed with `npm run test` in backend directory.
-- Because of the time constraint, and because the developers had decided to work with the tecnologies that weren't used by them before, a lot of time was spent into studying, learning and discussing the solutions and implementing them.
+Some of the automated tests were written in [Jest](https://jestjs.io/) and can be executed with `npm run test` in backend directory.
+
+Because of the time constraint, and because the developers had decided to work with the tecnologies that weren't used by them before, a lot of time was spent into studying, learning and discussing the solutions and implementing them.
+
+Having all that in mind, the team has decided to implement more tests in the future versions of the app. Nevertheless, the manual tests were performed by the team. Backend functionalities were tested with [Postman](https://www.postman.com/) and [Beekeeper Studio](https://www.beekeeperstudio.io/), and frontend functionalities were tested with the browsers on various devices.
 
 
 ## Technologies Used

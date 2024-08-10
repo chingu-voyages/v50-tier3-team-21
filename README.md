@@ -176,11 +176,13 @@ SwaggerUI Documentation can be found [here](https://hungryhippo.onrender.com/api
 <summary><strong>Wallet</strong></summary>
 
 - Request Account Topup: `/wallets/requestAccountTopup` - <font style="color:green">POST</font> - raw/json data
-  ```json {
+  ```json
+  {
     "amount": 50
   }
 - Make Payment: `/wallets/makePayment` - <font style="color:green">POST</font> - raw/json data
-  ```json {
+  ```json
+  {
     "amount": 30,
     "orderId": "order_123456"
   }

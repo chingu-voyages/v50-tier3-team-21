@@ -18,14 +18,16 @@ export class HttpClient {
             }
         )
         //add a response interceptor
-         axiosInstance.interceptors.response.use(
+         /*axiosInstance.interceptors.response.use(
              (response) => {
                       return response;
                       },
              async (error) => {
                  if(error.response  && error.response.status === 401){
+                     if (error.config.url.includes('/auth')) {
+                         return Promise.reject(error);
+                     }
                      try{
-                         await authService.refreshAccessToken();
                          return axiosInstance(error.config);
                      }catch(refreshTokenError){
                          return Promise.reject(refreshTokenError);
@@ -34,7 +36,7 @@ export class HttpClient {
                      return  Promise.reject(error);
                  }
              }
-         )
+         )*/
         return axiosInstance
     }
     public  get<T>(url: string): Promise<AxiosResponse<T>>{

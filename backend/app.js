@@ -6,7 +6,6 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 
-
 dotenv.config();
 
 const swaggerOptions = require('./swagger.json');
@@ -32,24 +31,22 @@ const { protect } = require('./middlewares/authorization');
 
 const orderRouter = require('./routes/orderRoutes');
 
-
 const PORT = process.env.PORT || 3000;
 
-app.use('/api/webhook', express.raw({type: 'application/json'}), handleStripeWebhook)
+// Handle Stripe Webhook
+app.use('/api/webhook', express.raw({ type: 'application/json' }), handleStripeWebhook);
+
+// Parse JSON and cookies
 app.use(express.json());
 app.use(cookieParser());
 
-// CORS Middleware with debugging headers
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', process.env.FRONTEND_URL);
-  res.header('Access-Control-Allow-Credentials', 'true');
-  res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  console.log('CORS headers set for request');
-  next();
-});
-
-app.use(cors({ credentials: true, origin: process.env.FRONTEND_URL }));
+// CORS Middleware
+app.use(cors({
+  credentials: true,
+  origin: process.env.FRONTEND_URL,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
+}));
 
 // Routes
 app.use('/api/auth', authRouter);

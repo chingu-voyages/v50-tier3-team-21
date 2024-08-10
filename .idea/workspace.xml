@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="update: update geolocation button style and add tooltip">
-      <change afterPath="$PROJECT_DIR$/frontend/src/utils/localstorage.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/interactive-map/filter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/interactive-map/filter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/provider/auth.provider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/provider/auth.provider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/utils/helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/helpers.ts" afterDir="false" />
-    </list>
+    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="feat: adding permanent auth tracking" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -107,7 +101,7 @@
       <workItem from="1722614726629" duration="3882000" />
       <workItem from="1722855514990" duration="20502000" />
       <workItem from="1723137035405" duration="2358000" />
-      <workItem from="1723282751874" duration="11831000" />
+      <workItem from="1723282751874" duration="12013000" />
     </task>
     <task id="LOCAL-00001" summary="chore: add axios">
       <option name="closed" value="true" />
@@ -309,7 +303,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723293953800</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="feat: adding permanent auth tracking">
+      <option name="closed" value="true" />
+      <created>1723294750312</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1723294750312</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -351,7 +353,8 @@
     <MESSAGE value="fix: fix type issue that triggers deployment errors" />
     <MESSAGE value="fix: fix type issue &amp;&amp; add cancel order feature" />
     <MESSAGE value="update: update geolocation button style and add tooltip" />
-    <option name="LAST_COMMIT_MESSAGE" value="update: update geolocation button style and add tooltip" />
+    <MESSAGE value="feat: adding permanent auth tracking" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: adding permanent auth tracking" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

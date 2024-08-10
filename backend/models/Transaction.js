@@ -10,10 +10,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.ENUM('credit', 'debit'),
         allowNull: false
       },
-      // accountId: {
-      //   type: DataTypes.INTEGER,
-      //   allowNull: false,
-      // },
       accountId: {
         type: DataTypes.INTEGER,
         allowNull: false,

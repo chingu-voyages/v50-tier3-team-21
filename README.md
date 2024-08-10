@@ -6,7 +6,7 @@
 
 
 ## Introduction
-<img src="https://www.chingu.io/logo-with-text-192.png" alt="Chingu Image" style="width:200px; float:right; background-color:white"/>
+<img src="https://www.chingu.io/logo-with-text-192.png" alt="Chingu Image" style="width:200px; float:right; background-color:white;"/>
 
 **Frontend**: React, Tailwind, TypeScript
 **Backend**: NodeJS, Express, PostgreSQL, JavaScript|
@@ -208,13 +208,13 @@ By analyzing the proposed food items API from the deployed API [https://menus-ap
 
 ## Technologies Used
  
-## Programming Languages
+### Programming Languages
 - [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) - Hypertext Markup Language
 - [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) - Cascading Style Sheets
 - [TypeScript](https://www.typescriptlang.org/) was used for frontend
 - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) was used for backend
 
-## Dependencies and Technologies
+### Dependencies and Technologies
 
 *Frontend*:
   - [React](https://reactjs.org/) Frontend framework
@@ -254,7 +254,7 @@ By analyzing the proposed food items API from the deployed API [https://menus-ap
   - [Jest](https://jestjs.io/) for testing
   - [Stripe](https://stripe.com/) for payment processing
 
-## Tools
+### Tools
 
 **Hosting Platforms**
 - [Render](https://render.com/) - Hosting and Live App deployment

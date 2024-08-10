@@ -1,5 +1,12 @@
 import {useMemo} from "react";
 
+
+type PickItemType = {
+    amount: number,
+    onClick: () => void,
+    currentPick: number,
+    total: number
+}
 export const PickItem = ({amount, onClick, currentPick, total}) => {
     const isCurrentPick = useMemo(() => {
         return currentPick === amount

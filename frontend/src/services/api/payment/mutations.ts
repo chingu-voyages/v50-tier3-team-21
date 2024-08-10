@@ -1,5 +1,6 @@
 import {useMutation} from "@tanstack/react-query";
-import {MakePaymentDto , paymentService} from "./payment.service.ts";
+import {paymentService} from "./payment.service.ts";
+import {MakePaymentDto} from "./interface.ts";
 
 
 export const useMakePayment = () => {

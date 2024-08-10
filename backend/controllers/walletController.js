@@ -34,7 +34,6 @@ const handleStripeTopup = async (req, res) => {
       success_url: `${process.env.FRONTEND_URL}${successUrl}?success=true`,
       cancel_url: `${process.env.FRONTEND_URL}${cancelUrl}?success=false`,
     });
-
     res.json({ url: session.url });
   } catch (error) {
     res.status(500).send({ error: error.message });

@@ -1,4 +1,4 @@
-interface OrderItem {
+export interface OrderItem {
     id: number;
     orderId: number;
     itemId: number;
@@ -12,7 +12,7 @@ interface OrderItem {
     };
 }
 
-interface OrderData {
+export interface OrderData {
     id: number;
     userId: number;
     deliveryAddress: string;

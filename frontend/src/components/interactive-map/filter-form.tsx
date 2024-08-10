@@ -43,7 +43,7 @@ export const FilterForm = () => {
             </div>
             <div className="w-full flex justify-between items-center gap-2">
                 <div className="w-full flex flex-col justify-center">
-                    <SingleSelectLabel htmlFor="category-select" label="Food Category:" />
+                    <SingleSelectLabel id="category-select" label="Food Category:" />
                     <SingleSelect<FilterOptions['categoryId']>
                         value={filterOptions.categoryId}
                         onChange={handleFilterChange('categoryId')}

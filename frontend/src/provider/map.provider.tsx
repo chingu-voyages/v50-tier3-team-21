@@ -1,10 +1,11 @@
 import React , {createContext , useCallback , useContext , useMemo , useState} from "react";
-import {Category , FilterOptions , RestaurantWithImage} from "../services/api/interctive-map/interface.ts";
+import {Category , FilterOptions , FoodItem , RestaurantWithImage} from "../services/api/interctive-map/interface.ts";
 import {useGetFoodItemsWithRestaurants} from "../services/api/interctive-map/queries.ts";
 import {useGeoLocation} from "../hooks";
 import {useModal} from "../hooks/modal.hook.ts";
 import {haversineDistance} from "../utils/geospatial.ts";
 import {useAddressSearch} from "../components/interactive-map/address-search-provider.tsx";
+
 
 
 
@@ -34,7 +35,10 @@ interface AppMapContextType {
 
 }
 
-export const AppMapProvider = ({ children }) => {
+type AppMapProviderType = {
+    children: React.ReactNode
+}
+export const AppMapProvider = ({ children }: AppMapProviderType) => {
     const [filterOptions, setFilterOptions] = useState<FilterOptions>({
         foodItemId: undefined,
         categoryId: undefined,
@@ -59,8 +63,8 @@ export const AppMapProvider = ({ children }) => {
         }
 
         const userCoords = [
-            selectedLocation?.coordinates?.latitude,
-            selectedLocation?.coordinates?.longitude
+            selectedLocation?.coordinates?.latitude ?? 48.00,
+            selectedLocation?.coordinates?.longitude ?? -78.00
         ];
 
         const uniqueRestaurants: { [key: number]: RestaurantWithImage } = {};
@@ -98,9 +102,9 @@ export const AppMapProvider = ({ children }) => {
         if (!isSuccess || !foodItemsWithRestaurants?.data) return [];
         const categoriesSet = new Map<number, Category>();
 
-        foodItemsWithRestaurants.data.data.forEach(item => {
+        foodItemsWithRestaurants.data.data.forEach((item: Omit<FoodItem, 'categories'> & { Categories: Category[]}) => {
             if(item.Categories.length > 0){
-                item.Categories.forEach(cat => {
+                item.Categories.forEach((cat: Category) => {
                     if (!categoriesSet.has(cat.id)) {
                         categoriesSet.set(cat.id, cat);
                     }

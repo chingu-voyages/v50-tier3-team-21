@@ -4,7 +4,6 @@ import {AddressSearchProvider} from "../../components/interactive-map/address-se
 import {AppMapProvider} from "../../provider/map.provider.tsx";
 import {MapProvider} from "react-map-gl";
 import Modal from "../../components/ui/modal.tsx";
-import React from "react";
 import {FilterSection} from "../../components/interactive-map/filter.tsx";
 import {FilterForm} from "../../components/interactive-map/filter-form.tsx";
 

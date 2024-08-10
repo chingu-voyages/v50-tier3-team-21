@@ -1,6 +1,8 @@
 // Haversine Distance Function
-export const haversineDistance = (coords1, coords2) => {
-    const toRadians = degrees => degrees * (Math.PI / 180);
+
+type Coordinate = number[] | undefined
+export const haversineDistance = (coords1: Coordinate, coords2: Coordinate) => {
+    const toRadians = (degrees: number) => degrees * (Math.PI / 180);
 
     const [lat1, lon1] = coords1;
     const [lat2, lon2] = coords2;
@@ -20,8 +22,12 @@ export const haversineDistance = (coords1, coords2) => {
     return R * c; // Distance in kilometers
 };
 
+interface GeoLocation {
+    latitude: number,
+    longitude: number
+}
 // Create Circle GeoJSON
-export const createGeoJSONCircle = (center, radiusInKm, points = 64) => {
+export const createGeoJSONCircle = (center: GeoLocation, radiusInKm: number, points: number = 64) => {
     const coords = {
         latitude: center.latitude,
         longitude: center.longitude
@@ -57,7 +63,6 @@ export const layerStyle = {
     type: 'fill',
     paint: {
         'fill-color': '#43ff64',
-        'fill-opacity': 0.8
     }
 };
 

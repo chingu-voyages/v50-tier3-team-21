@@ -54,7 +54,7 @@ export const CartPage = () => {
     //make API call to POST order in database
     try {
       const response = await httpClient.post("/order/create-order", order);
-      const orderId: number = response.data.id
+      const orderId: number = response.data.orderId;
       navigate(`/checkout/order/payment/${orderId}`)
     } catch (error) {
       console.log(error);

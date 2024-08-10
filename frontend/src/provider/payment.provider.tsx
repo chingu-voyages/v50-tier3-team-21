@@ -20,7 +20,7 @@ export interface PaymentContextType {
     orderInfo: OrderInfo;
     isFetchingAccount: boolean;
     isFetchingOrder: boolean;
-    total: number
+    total: number | undefined;
     updateOrderInfo: <K extends keyof OrderInfo>(
         key: K,
         value: OrderInfo[K]
@@ -48,7 +48,7 @@ export const PaymentProvider = ({ children, orderId }: PaymentProviderProps) => 
 
     useEffect(() => {
         if (accountData) {
-            setAccount(accountData.data);
+            setAccount(accountData?.data);
         }
     }, [accountData]);
 
@@ -76,7 +76,7 @@ export const PaymentProvider = ({ children, orderId }: PaymentProviderProps) => 
 
     const updateOrderInfo = <K extends keyof OrderInfo>(
         key: K,
-        value: OrderInfo[K] = 0
+        value: OrderInfo[K]
     ) => {
         setOrderInfo((prevOrderInfo) => {
             if (!prevOrderInfo) return prevOrderInfo;

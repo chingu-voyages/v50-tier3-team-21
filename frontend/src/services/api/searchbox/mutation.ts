@@ -1,4 +1,4 @@
-import {useMutation , useQuery} from "@tanstack/react-query";
+import {useMutation} from "@tanstack/react-query";
 const getSelectedLocation = async ( id: string) => {
     const response = await fetch(`https://api.mapbox.com/search/searchbox/v1/retrieve?${id}&access_token=${import.meta.env.VITE_MAPBOX_TOKEN}` );
     return response.json();

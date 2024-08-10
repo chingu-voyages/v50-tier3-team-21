@@ -4,13 +4,14 @@ import {useDebounce} from "../../hooks/debounce.hook.ts";
 import {FormLabel} from "../authentication/form-label.tsx";
 import PrimaryButton from "../ui/button.tsx";
 import {GeolocationBtn} from "../ui/geolocation-btn.tsx";
+import React from "react";
 
 export const AddressSearchInput = () => {
     const { query, handleSearchQuery, isOpen, flyTo, } = useAddressSearch();
     const debouncedLocation = useDebounce(query);
     const {isLoading,data, isSuccess} = useGetLocation(debouncedLocation);
 
-    const handleSearchChange = (e) => {
+    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
        handleSearchQuery(e.target.value)
     };
 
@@ -54,15 +55,28 @@ export const LocationResults = ({isLoading, data}: { isLoading: boolean, data: I
                         key={index}
                         name={feature.properties.name}
                         full_formatted={feature.properties.place_formatted}
-                        coordinates={feature.properties.coordinates}
-                        full_address={feature.properties.full_address}
+                        coordinates={
+                          {
+                              longitude: parseInt(feature.properties.coordinates.longitude),
+                              latitude: parseInt(feature.properties.coordinates.latitude)
+                          }
+                        }
                     />
                 ))
             }
         </ul>
     )
 }
-export const LocationItem = ({name, full_formatted, coordinates} ) => {
+
+type LocationItemType = {
+    name: string,
+    full_formatted: string,
+    coordinates: {
+        longitude: number,
+        latitude: number
+    }
+}
+export const LocationItem = ({name, full_formatted, coordinates}: LocationItemType ) => {
   const { handleSelectLocation } = useAddressSearch();
 
   const handleClick = () => {

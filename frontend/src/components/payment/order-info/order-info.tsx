@@ -2,7 +2,13 @@ import {OrderInfoItem} from "./order-info-item.tsx";
 import {usePaymentContext} from "../../../hooks/payment.hook.ts";
 
 
-export const OrderInfo = ({ deliveryAddress, price , deliveryFee}) => {
+type OrderInfoProps = {
+    deliveryAddress: string,
+    price: number,
+    deliveryFee: number
+}
+
+export const OrderInfo = ({ deliveryAddress, price , deliveryFee}: OrderInfoProps) => {
     const { total} = usePaymentContext()
     return(
         <div className="text-dark">

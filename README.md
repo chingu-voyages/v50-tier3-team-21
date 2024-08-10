@@ -28,6 +28,8 @@ In order not to block the creative and innovative work of the project, the team 
 
 ### Design and Prototyping
 
+<img src="./docs/design-preview.png" alt="Design Preview" style="object-fit: cover; width: 100%; height: 50%;">
+
 The main design and prototyping is done by `Figma` and the file can be accessed [here](https://www.figma.com/design/jO2jiYuSf1iA3Eh3d0gbgb/Hungry-Hippo?node-id=1-172&t=0XKynAkPYrcUWODA-0).
 
 On the other hand, some excerps are exported to the `docs` folder in `pdf` format.
@@ -198,9 +200,9 @@ SwaggerUI Documentation can be found [here](https://hungryhippo.onrender.com/api
 </details>
 
 ### Database
-- It was decided to use [PostgreSQL](https://www.postgresql.org/) relational database for this project.
+[PostgreSQL](https://www.postgresql.org/) relational database has been chosenfor this project. The database was created using [Sequelize](https://sequelize.org/) ORM and deployed on [Neon](https://neon.tech/).
 
-By analyzing the proposed food items API from the deployed API [https://menus-api.vercel.app/](https://menus-api.vercel.app/), we have noticed that only the general list of all food items was obtainable. On the other hand, the repo [free-food-menus-api](https://github.com/igdev116/free-food-menus-api) was lacking the geo-coordinates of the food items (restaurants) that were available on the deployed API. Therefore, instead of relying on the deployed API, we decided to make a seeder script that would populate the database with the output of the deployed API: [`backend/seeders/API2db.js`](backend/seeders/API2db.js).
+By analyzing the proposed food items API from the deployed API [https://menus-api.vercel.app/](https://menus-api.vercel.app/), we have noticed that only the general list of all food items was obtainable. On the other hand, the repo [free-food-menus-api](https://github.com/igdev116/free-food-menus-api) was lacking the geo-coordinates of the food items (restaurants) that were available on the deployed API. Therefore, instead of relying on the deployed API, we have decided to make a seeder script that would populate the database with the output of the deployed API: [`backend/seeders/API2db.js`](backend/seeders/API2db.js).
 
 <details>
 <summary>Database Schema Design</summary>

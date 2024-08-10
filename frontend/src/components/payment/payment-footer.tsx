@@ -87,16 +87,20 @@ export const CancelOrderBtn = () => {
         }
     }
     useEffect(() => {
+        let timer: NodeJS.Timeout | undefined;
         if (isSuccess) {
             notify({
                 message: data?.data.message
             }, 'success')
+             timer = setTimeout(() => {
+                navigate('/');
+            }, 2000);
         }
-        const timer = setTimeout(() => {
-            navigate('/');
-        }, 2000);
+
         return () => {
-            clearTimeout(timer)
+            if(timer){
+                clearTimeout(timer)
+            }
         }
     }, [isSuccess])
     useEffect(() => {

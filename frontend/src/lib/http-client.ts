@@ -1,5 +1,5 @@
 import axios , {AxiosInstance ,AxiosResponse} from "axios";
-import {authService} from "../services/api/authentication/auth.service.ts";
+
 
 export class HttpClient {
     //private static readonly  baseUrl  = process.env.REACT_API_REMOTE_BASE_URL || process.env.REACT_API_LOCAL_BASE_URL;

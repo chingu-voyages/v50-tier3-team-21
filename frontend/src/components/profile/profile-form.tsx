@@ -29,7 +29,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user, setUser }) => {
     try {
       await httpClient.put("/profile", editedUser);
       setUser(editedUser);
-      notify({ message: "Your profile has been changed successfully" }, "success");
+      notify({ message: "Your profile has been updated successfully" }, "success");
     } catch (error) {
       notify({message: "An error occurred. Please try again later"}, "error");
     }
@@ -99,7 +99,6 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user, setUser }) => {
               type="button"
               className="bg-white border rounded-md p-3 font-bold border-primary text-primary uppercase"
               onClick={() => reset(user)}
-              isLoading={isSubmitting}
             >
               Discard Changes
             </PrimaryButton>

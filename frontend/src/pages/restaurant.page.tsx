@@ -120,8 +120,7 @@ export const RestaurantPage = () => {
               </div>
             )}
           </div>
-          <h2 className="p-5">Your Orders</h2>
-          <hr />
+
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 my-5 p-3 justify-items-center">
             {filteredMenuItems.map((item: MenuItemType) => (
               <FoodCard
@@ -137,8 +136,14 @@ export const RestaurantPage = () => {
       ) : (
         <div className="mt-36">Loading...</div>
       )}
-      <Orders cart={cart} setCart={setCart} setStorage={setStorage}/>
-      <CheckoutFooter cart={cart} handleCheckout={handleCheckout}/>
+
+      <div className="md:px-32">
+        <h2 className="p-5">Your Orders</h2>
+        <hr />
+        <Orders cart={cart} setCart={setCart} setStorage={setStorage}/>
+        <CheckoutFooter cart={cart} handleCheckout={handleCheckout}/>
+      </div>
+
     </>
   );
 };

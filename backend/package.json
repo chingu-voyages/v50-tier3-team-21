@@ -32,8 +32,8 @@
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
-    "body-parser": "^1.20.2",
     "@flydotio/dockerfile": "^0.5.8",
+    "body-parser": "^1.20.2",
     "chai": "^5.1.1",
     "jest": "^29.7.0",
     "mocha": "^10.6.0",

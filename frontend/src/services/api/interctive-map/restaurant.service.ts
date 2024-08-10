@@ -1,6 +1,6 @@
 import {httpClient} from "../../../lib/http-client.ts";
-import {FilterOptions , FoodItem} from "./interface.ts";
-import {AxiosResponse} from "axios";
+import {FilterOptions} from "./interface.ts";
+import {ApiResponse} from "./queries.ts";
 
 
 
@@ -11,7 +11,7 @@ class RestaurantService {
         return httpClient.get(`/nearbyrestaurants?latitude=${latitude}&longitude=${longitude}`)
     }
 
-    public getFoodItems(filterOptions: FilterOptions): Promise<AxiosResponse<FoodItem[]>> {
+    public getFoodItems(filterOptions: FilterOptions): Promise<ApiResponse> {
         const searchParams: Record<string, any> = new URLSearchParams();
         Object.keys(filterOptions).forEach(key => {
             const value = filterOptions[key as keyof FilterOptions];
@@ -19,8 +19,8 @@ class RestaurantService {
                 searchParams.append(key, value.toString());
             }
         });
-        console.log(searchParams)
-        return httpClient.get<FoodItem[]>('/fooditems/items?' + searchParams.toString())
+
+        return httpClient.get('/fooditems/items?' + searchParams.toString())
     }
 }
 

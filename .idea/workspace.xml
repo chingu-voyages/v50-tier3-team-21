@@ -4,50 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="feat: adding permanent auth tracking">
+    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="update: add horizontal padding to order section">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/@hookform_resolvers_zod.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/@hookform_resolvers_zod.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/@tanstack_react-query-devtools.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/@tanstack_react-query-devtools.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/@tanstack_react-query.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/@tanstack_react-query.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/Q436JGP5-3DGTF2IX.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/Q436JGP5-3DGTF2IX.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/_metadata.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/axios.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/axios.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/chunk-2CLD7BNN.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/chunk-2CLD7BNN.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/chunk-4OPMFYWI.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/chunk-4OPMFYWI.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/chunk-E7XDJDBK.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/chunk-E7XDJDBK.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/chunk-EZ3ZPTV7.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/chunk-EZ3ZPTV7.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/chunk-PV7ZWGTI.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/chunk-PV7ZWGTI.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/chunk-WOOG5QLI.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/chunk-WOOG5QLI.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/class-variance-authority.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/class-variance-authority.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/clsx.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/clsx.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/react-dom_client.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/react-dom_client.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/react-hook-form.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/react-hook-form.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/react-router-dom.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/react-router-dom.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/react.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/react.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/tailwind-merge.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/tailwind-merge.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/zod.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/.vite/deps/zod.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/payment/payment-footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/payment/payment-footer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/provider/map.provider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/provider/map.provider.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/provider/payment.provider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/provider/payment.provider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/interctive-map/queries.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/interctive-map/queries.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/interctive-map/restaurant.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/interctive-map/restaurant.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/orders/order.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/orders/order.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/orders/queries.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/orders/queries.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +31,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/frontend/package.json" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -356,7 +323,23 @@
       <option name="project" value="LOCAL" />
       <updated>1723294750312</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="update: update toast message">
+      <option name="closed" value="true" />
+      <created>1723306453373</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1723306453373</updated>
+    </task>
+    <task id="LOCAL-00028" summary="update: add horizontal padding to order section">
+      <option name="closed" value="true" />
+      <created>1723307562020</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1723307562020</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -374,8 +357,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="chore: add axios" />
-    <MESSAGE value="wip: implementing auth logic" />
     <MESSAGE value="feat: auth logic implemented" />
     <MESSAGE value="wip: reset password features" />
     <MESSAGE value="fix: fix null check error" />
@@ -399,7 +380,9 @@
     <MESSAGE value="fix: fix type issue &amp;&amp; add cancel order feature" />
     <MESSAGE value="update: update geolocation button style and add tooltip" />
     <MESSAGE value="feat: adding permanent auth tracking" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: adding permanent auth tracking" />
+    <MESSAGE value="update: update toast message" />
+    <MESSAGE value="update: add horizontal padding to order section" />
+    <option name="LAST_COMMIT_MESSAGE" value="update: add horizontal padding to order section" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

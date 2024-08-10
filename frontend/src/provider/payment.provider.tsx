@@ -51,8 +51,8 @@ export const PaymentProvider = ({ children, orderId }: PaymentProviderProps) => 
     }, [accountData]);
 
     useEffect(() => {
-        if (orderData?.data) {
-            const order = orderData.data.data as OrderData;
+        if (orderData ) {
+            const order = orderData?.data?.data as OrderData;
             setOrderInfo({
                 deliveryAddress: order.deliveryAddress,
                 deliveryFee: 20,

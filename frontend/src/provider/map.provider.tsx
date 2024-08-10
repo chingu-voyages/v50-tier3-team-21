@@ -50,29 +50,30 @@ export const AppMapProvider = ({ children }: AppMapProviderType) => {
     });
 
     const [selectedRestaurantId, setSelectedRestaurantId] = useState<number>(-1);
-    const { data: foodItemsWithRestaurants , isSuccess } = useGetFoodItemsWithRestaurants(filterOptions);
+    const { data: foodItemsWithRestaurants, isSuccess } = useGetFoodItemsWithRestaurants(filterOptions);
     const { location } = useGeoLocation();
     const { selectedLocation } = useAddressSearch();
     const { handleOnOpenModal, modal, handleOnCloseModal } = useModal();
 
     const restaurants = useMemo(() => {
-        if (!isSuccess || !foodItemsWithRestaurants.data) {
+        if (!isSuccess || !foodItemsWithRestaurants) {
             return [];
         }
 
         const userCoords = [
             selectedLocation?.coordinates?.latitude ?? 48.00,
             selectedLocation?.coordinates?.longitude ?? -78.00
-        ] as [ number, number];
+        ] as [number, number];
 
         const uniqueRestaurants: { [key: number]: RestaurantWithImage } = {};
-        foodItemsWithRestaurants.data['data'].forEach(item => {
+
+        foodItemsWithRestaurants.data.data.forEach((item: FoodItem) => {
             const { latitude, longitude } = item.restaurant;
-            const restaurantCoords = [latitude, longitude] as [ number, number];
+            const restaurantCoords = [latitude, longitude] as [number, number];
             const distance = haversineDistance(restaurantCoords, userCoords) ?? Infinity;
 
             const meetsPriceCriteria = distancePriceFilters.price === undefined || item.price <= distancePriceFilters.price;
-            const meetsDistanceCriteria = distancePriceFilters.distance === undefined  || distance <= distancePriceFilters.distance;
+            const meetsDistanceCriteria = distancePriceFilters.distance === undefined || distance <= distancePriceFilters.distance;
 
             if (meetsPriceCriteria && meetsDistanceCriteria) {
                 if (!uniqueRestaurants[item.restaurant.id]) {
@@ -89,15 +90,16 @@ export const AppMapProvider = ({ children }: AppMapProviderType) => {
     }, [foodItemsWithRestaurants, isSuccess, distancePriceFilters.price, distancePriceFilters.distance, selectedLocation?.coordinates]);
 
     const uniqueCountries = useMemo(() => {
-        if (!isSuccess || !foodItemsWithRestaurants?.data) return [];
-        const countriesSet = new Set(foodItemsWithRestaurants.data['data'].map((item: FoodItem) => item.restaurant.country));
+        if (!isSuccess || !foodItemsWithRestaurants) return [] as string[];
+        const countriesSet = new Set(foodItemsWithRestaurants.data.data.map((item: FoodItem) => item.restaurant.country));
         return Array.from(countriesSet);
     }, [foodItemsWithRestaurants, isSuccess]);
 
     const uniqueCategories = useMemo(() => {
-        if (!isSuccess || !foodItemsWithRestaurants?.data) return [];
+        if (!isSuccess || !foodItemsWithRestaurants) return [];
         const categoriesSet = new Map<number, Category>();
-        foodItemsWithRestaurants.data['data'].forEach((item) => {
+
+        foodItemsWithRestaurants.data.data.forEach((item: FoodItem) => {
             const categories = (item as any).Categories as Category[];
 
             if (categories && categories.length > 0) {
@@ -153,3 +155,5 @@ export const AppMapProvider = ({ children }: AppMapProviderType) => {
 };
 
 export const useAppMapContext = () => useContext(AppMapContext);
+
+

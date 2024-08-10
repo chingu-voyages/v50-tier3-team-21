@@ -5,7 +5,8 @@
   "scripts": {
     "test": "jest --verbose --coverage",
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "seed": "node seeders/API2db.js"
   },
   "author": "",
   "license": "ISC",

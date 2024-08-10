@@ -21,10 +21,15 @@ It is a Full Stack Web Application made as a part of 50th Voyage organised by [C
 ## Project Details
 ![Project Summary](./docs/ProjectSummary.png)
 
+### Team Documents
+
 In order not to block the creative and innovative work of the project, the team has adopted the idea to use the Google Docs document as a team document in a very free fashion. We were sharing the ideas, adding details and minutes of the meetings in that document that was more of a brainstorming tool. The said document is accessible in the [Google Docs](https://docs.google.com/document/d/15vURBkOasLmq5THwEN9E6Dexm1B_NtrjHpaKKm70jZI).
 
+For the Project Management, the team has used the [Github Projects' Kanban Board](https://github.com/orgs/chingu-voyages/projects/248)
 
 ### Design and Prototyping
+
+<img src="./docs/design-preview.png" alt="Design Preview" style="object-fit: cover; width: 100%; height: 50%;">
 
 The main design and prototyping is done by `Figma` and the file can be accessed [here](https://www.figma.com/design/jO2jiYuSf1iA3Eh3d0gbgb/Hungry-Hippo?node-id=1-172&t=0XKynAkPYrcUWODA-0).
 
@@ -37,7 +42,7 @@ On the other hand, some excerps are exported to the `docs` folder in `pdf` forma
 
 ### Features
 
-- TODO: Frontend guys fill this out :)
+- TODO: Frontend guys, fill this out :)
 
 
 ### API
@@ -196,9 +201,9 @@ SwaggerUI Documentation can be found [here](https://hungryhippo.onrender.com/api
 </details>
 
 ### Database
-- It was decided to use [PostgreSQL](https://www.postgresql.org/) relational database for this project.
+[PostgreSQL](https://www.postgresql.org/) relational database has been chosenfor this project. The database was created using [Sequelize](https://sequelize.org/) ORM and deployed on [Neon](https://neon.tech/).
 
-By analyzing the proposed food items API from the deployed API [https://menus-api.vercel.app/](https://menus-api.vercel.app/), we have noticed that only the general list of all food items was obtainable. On the other hand, the repo [free-food-menus-api](https://github.com/igdev116/free-food-menus-api) was lacking the geo-coordinates of the food items (restaurants) that were available on the deployed API. Therefore, instead of relying on the deployed API, we decided to make a seeder script that would populate the database with the output of the deployed API: [`backend/seeders/API2db.js`](backend/seeders/API2db.js).
+By analyzing the proposed food items API from the deployed API [https://menus-api.vercel.app/](https://menus-api.vercel.app/), we have noticed that only the general list of all food items was obtainable. On the other hand, the repo [free-food-menus-api](https://github.com/igdev116/free-food-menus-api) was lacking the geo-coordinates of the food items (restaurants) that were available on the deployed API. Therefore, instead of relying on the deployed API, we have decided to make a seeder script that would populate the database with the output of the deployed API: [`backend/seeders/API2db.js`](backend/seeders/API2db.js).
 
 <details>
 <summary>Database Schema Design</summary>
@@ -208,7 +213,40 @@ By analyzing the proposed food items API from the deployed API [https://menus-ap
 
 ## Deployment
 
+### Deploying on Render
+
+- Render was used as the hosting platform for the live project deployment.
+  - backend: [https://hungryhippo.onrender.com/](https://hungryhippo.onrender.com/)
+  - frontend: [https://hungryhippo-tgrams.onrender.com/](https://hungryhippo-tgrams.onrender.com/)
+
+### Deploying on local machine
+
+1. Clone the repository
+   `git clone https://github.com/chingu-voyages/v50-tier3-team-21/`
+2. Backend
+   - Install dependencies
+   from the root directory:
+   `cd backend && npm install`
+   - add necessary details to `.env` file, details in [env-sample](./backend/env-sample)
+   - if the PostgreSQL database is empty, run `npm run seed`
+   - run `npm run dev`
+   - open http://localhost:3000 in your browser
+3. Frontend
+   - Install dependencies
+   from the root directory:
+   `cd frontend && npm install` 
+   - add necessary details to `.env` file, details in [env-sample](./frontendbackend/env-sample)
+   - run `npm run dev`
+   - open http://localhost:5173 in your browser
+
 ## Testing
+
+Some of the automated tests were written in [Jest](https://jestjs.io/) and can be executed with `npm run test` in backend directory.
+
+Because of the time constraint, and because the developers had decided to work with the tecnologies that weren't used by them before, a lot of time was spent into studying, learning and discussing the solutions and implementing them.
+
+Having all that in mind, the team has decided to implement more tests in the future versions of the app. Nevertheless, the manual tests were performed by the team. Backend functionalities were tested with [Postman](https://www.postman.com/) and [Beekeeper Studio](https://www.beekeeperstudio.io/), and frontend functionalities were tested with the browsers on various devices.
+
 
 ## Technologies Used
  
@@ -273,23 +311,26 @@ By analyzing the proposed food items API from the deployed API [https://menus-ap
 - [Lucidchart](https://www.lucidchart.com/) for DB design
 
 
-## Team Documents
-
-- TODO: Add contents of the Google Docs Team Document here
-
-
-
 ## Our Team: T-grams
 
+![avatar](https://images.weserv.nl/?url=avatars.githubusercontent.com/marthamwangi?v=4&h=200&w=200&fit=cover&mask=circle&maxage=7d
+)
+1. Martha Mwangi - [GitHub](https://github.com/marthamwangi) / [LinkedIn](https://linkedin.com/in/martymwangi)
 
-- Martha Mwangi #1: [GitHub](https://github.com/marthamwangi) / [LinkedIn](https://linkedin.com/in/martymwangi)
+![avatar](https://images.weserv.nl/?url=avatars.githubusercontent.com/frugalcodes?v=4&h=200&w=200&fit=cover&mask=circle&maxage=7d
+)
+2. King Samuel - [GitHub](https://github.com/frugalcodes) / [LinkedIn](https://www.linkedin.com/in/samuel-igwe-031152226/)
 
-- King Samuel #2: [GitHub](https://github.com/frugalcodes) / [LinkedIn](https://www.linkedin.com/in/samuel-igwe-031152226/)
+![avatar](https://images.weserv.nl/?url=avatars.githubusercontent.com/minezzig?v=4&h=200&w=200&fit=cover&mask=circle&maxage=7d
+)
+3. Greg Minezzi (Scrum Master) - [GitHub](https://github.com/minezzig) / [LinkedIn](https://linkedin.com/in/gregminezzi)
 
-- Greg Minezzi #3: [GitHub](https://github.com/minezzig) / [LinkedIn](https://linkedin.com/in/gregminezzi)
+![avatar](https://images.weserv.nl/?url=avatars.githubusercontent.com/tomdu3?v=4&h=200&w=200&fit=cover&mask=circle&maxage=7d
+)
+4. Tomislav Dukez (Product Owner) - [GitHub](https://github.com/tomdu3) / [LinkedIn](https://www.linkedin.com/in/tomislav-dukez-bb2349231/)
 
-- Tomislav Dukez #4: [GitHub](https://github.com/tomdu3) / [LinkedIn](https://www.linkedin.com/in/tomislav-dukez-bb2349231/)
+![avatar](https://images.weserv.nl/?url=avatars.githubusercontent.com/TiaDev7474?v=4&h=200&w=200&fit=cover&mask=circle&maxage=7d)
+5. Riry Nomenjanahary - [GitHub](https://github.com/TiaDev7474) / [LinkedIn](https://linkedin.com/in/riry-nomenjanahary-a47a85264)
 
-- Riry Nomenjanahary  #5: [GitHub](https://github.com/TiaDev7474) / [LinkedIn](https://linkedin.com/in/riry-nomenjanahary-a47a85264)
-
-- Albert Ngodi  #6: [GitHub](https://github.com/ngodi) / [LinkedIn](https://linkedin.com/in/albertngodi)
+![avatar](https://images.weserv.nl/?url=avatars.githubusercontent.com/ngodi?v=4&h=200&w=200&fit=cover&mask=circle&maxage=7d)
+6. Albert Ngodi - [GitHub](https://github.com/ngodi) / [LinkedIn](https://linkedin.com/in/albertngodi)

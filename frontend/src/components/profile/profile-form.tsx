@@ -5,6 +5,7 @@ import { FormField } from "./form-field";
 import { PasswordModal } from "./password-modal";
 import { httpClient } from "../../lib/http-client";
 import { UserType, ProfileFormProps } from "./types/profile-types";
+import { notify, ToastMessages } from "../ui/toast";
 
 export const ProfileForm: React.FC<ProfileFormProps> = ({ user, setUser }) => {
   const [viewPasswordModal, setViewPasswordModal] = useState(false);
@@ -19,7 +20,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user, setUser }) => {
   useEffect(() => {
     reset(user);
   }, [user, reset]);
-
+  
   // on submit, edited profile will be saved in database
   const handleSave: SubmitHandler<UserType> = async (data) => {
     console.log(data);
@@ -27,23 +28,19 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user, setUser }) => {
 
     //make API call to PUT edited user in database...something like: editUser(userId, editedUser)
     try {
-      const response = await httpClient.put(
-        "/profile",
-        editedUser
-      );
-      const { data } = response.data;
-      console.log(data);
-      setUser(editedUser)
-      alert("Profile edited");
+      await httpClient.put("/profile", editedUser);
+      setUser(editedUser);
+      notify({ message: "Your profile has been changed successfully" }, "success");
     } catch (error) {
-      console.log(error);
+      notify({message: "An error occurred. Please try again later"}, "error");
     }
   };
 
   return (
     <>
+      <ToastMessages />
       <div className="w-full">
-      <p className="text-primary text-lg mb-5">Personal Information</p>
+        <p className="text-primary text-lg mb-5">Personal Information</p>
         <form onSubmit={handleSubmit(handleSave)}>
           <div className="flex flex-col md:flex-row md:gap-3">
             <FormField

@@ -301,19 +301,26 @@ By analyzing the proposed food items API from the deployed API [https://menus-ap
 - [Lucidchart](https://www.lucidchart.com/) for DB design
 
 
-
-
 ## Our Team: T-grams
 
+![avatar](https://images.weserv.nl/?url=avatars.githubusercontent.com/marthamwangi?v=4&h=200&w=200&fit=cover&mask=circle&maxage=7d
+)
+1. Martha Mwangi - [GitHub](https://github.com/marthamwangi) / [LinkedIn](https://linkedin.com/in/martymwangi)
 
-- Martha Mwangi #1: [GitHub](https://github.com/marthamwangi) / [LinkedIn](https://linkedin.com/in/martymwangi)
+![avatar](https://images.weserv.nl/?url=avatars.githubusercontent.com/frugalcodes?v=4&h=200&w=200&fit=cover&mask=circle&maxage=7d
+)
+2. King Samuel - [GitHub](https://github.com/frugalcodes) / [LinkedIn](https://www.linkedin.com/in/samuel-igwe-031152226/)
 
-- King Samuel #2: [GitHub](https://github.com/frugalcodes) / [LinkedIn](https://www.linkedin.com/in/samuel-igwe-031152226/)
+![avatar](https://images.weserv.nl/?url=avatars.githubusercontent.com/minezzig?v=4&h=200&w=200&fit=cover&mask=circle&maxage=7d
+)
+3. Greg Minezzi (Scrum Master) - [GitHub](https://github.com/minezzig) / [LinkedIn](https://linkedin.com/in/gregminezzi)
 
-- Greg Minezzi #3: [GitHub](https://github.com/minezzig) / [LinkedIn](https://linkedin.com/in/gregminezzi)
+![avatar](https://images.weserv.nl/?url=avatars.githubusercontent.com/tomdu3?v=4&h=200&w=200&fit=cover&mask=circle&maxage=7d
+)
+4. Tomislav Dukez (Product Owner) - [GitHub](https://github.com/tomdu3) / [LinkedIn](https://www.linkedin.com/in/tomislav-dukez-bb2349231/)
 
-- Tomislav Dukez #4: [GitHub](https://github.com/tomdu3) / [LinkedIn](https://www.linkedin.com/in/tomislav-dukez-bb2349231/)
+![avatar](https://images.weserv.nl/?url=avatars.githubusercontent.com/TiaDev7474?v=4&h=200&w=200&fit=cover&mask=circle&maxage=7d)
+5. Riry Nomenjanahary - [GitHub](https://github.com/TiaDev7474) / [LinkedIn](https://linkedin.com/in/riry-nomenjanahary-a47a85264)
 
-- Riry Nomenjanahary  #5: [GitHub](https://github.com/TiaDev7474) / [LinkedIn](https://linkedin.com/in/riry-nomenjanahary-a47a85264)
-
-- Albert Ngodi  #6: [GitHub](https://github.com/ngodi) / [LinkedIn](https://linkedin.com/in/albertngodi)
+![avatar](https://images.weserv.nl/?url=avatars.githubusercontent.com/ngodi?v=4&h=200&w=200&fit=cover&mask=circle&maxage=7d)
+6. Albert Ngodi - [GitHub](https://github.com/ngodi) / [LinkedIn](https://linkedin.com/in/albertngodi)

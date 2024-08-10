@@ -5,11 +5,11 @@ export class HttpClient {
     //private static readonly  baseUrl  = process.env.REACT_API_REMOTE_BASE_URL || process.env.REACT_API_LOCAL_BASE_URL;
     private client(): AxiosInstance {
         const axiosConfig = {
-            baseURL: import.meta.env.VITE_NODE_ENV !== 'production' ? import.meta.env.VITE_LOCAL_API_BASE_URL : import.meta.env.VITE_REMOTE_API_BASE_URL,
+            baseURL: import.meta.env.VITE_NODE_ENV === 'development' ? import.meta.env.VITE_LOCAL_API_BASE_URL : import.meta.env.VITE_REMOTE_API_BASE_URL,
             withCredentials: true
         }
         let axiosInstance = axios.create(axiosConfig);
-
+        axiosInstance.defaults.withCredentials = true;
         //add a request interceptor
         axiosInstance.interceptors.request.use((config) => {
                 return config
@@ -23,10 +23,9 @@ export class HttpClient {
                       return response;
                       },
              async (error) => {
-                 if(error.response  && error.response.status === '401'){
+                 if(error.response  && error.response.status === 401){
                      try{
                          await authService.refreshAccessToken();
-
                          return axiosInstance(error.config);
                      }catch(refreshTokenError){
                          return Promise.reject(refreshTokenError);

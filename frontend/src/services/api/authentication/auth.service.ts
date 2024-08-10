@@ -15,7 +15,7 @@ class AuthService {
         return httpClient.post<SignUpSchemaType>('/auth/signup', signupData);
     }
     public  refreshAccessToken() {
-        return httpClient.post<any>('/auth/refresh-token', {});
+        return httpClient.get('/auth/refresh-token');
     }
     public  logout() {
         return httpClient.post<any>('/auth/logout', {});

@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="fix: update spacing style on header nav">
-      <change beforePath="$PROJECT_DIR$/frontend/public/vite.svg" beforeDir="false" />
+    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="add: response interceptor that refresh token when it expired">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/lib/http-client.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/lib/http-client.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -341,7 +342,31 @@
       <option name="project" value="LOCAL" />
       <updated>1723312077144</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="update: update favicon">
+      <option name="closed" value="true" />
+      <created>1723312807835</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1723312807835</updated>
+    </task>
+    <task id="LOCAL-00031" summary="update: update favicon">
+      <option name="closed" value="true" />
+      <created>1723312931683</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1723312931683</updated>
+    </task>
+    <task id="LOCAL-00032" summary="add: response interceptor that refresh token when it expired">
+      <option name="closed" value="true" />
+      <created>1723313450408</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1723313450408</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -359,8 +384,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="wip: reset password features" />
-    <MESSAGE value="fix: fix null check error" />
     <MESSAGE value="chore: add dotenv" />
     <MESSAGE value="refactor: refactor pages import" />
     <MESSAGE value="fix: add withCredentials options in axios to allow token to be injected into req  cookies" />
@@ -384,7 +407,9 @@
     <MESSAGE value="update: update toast message" />
     <MESSAGE value="update: add horizontal padding to order section" />
     <MESSAGE value="fix: update spacing style on header nav" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: update spacing style on header nav" />
+    <MESSAGE value="update: update favicon" />
+    <MESSAGE value="add: response interceptor that refresh token when it expired" />
+    <option name="LAST_COMMIT_MESSAGE" value="add: response interceptor that refresh token when it expired" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

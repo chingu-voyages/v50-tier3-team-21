@@ -1,12 +1,14 @@
 # Hungry Hippo
 
-![Hungry Hippo image](./frontend/src/assets/hippo-server-mobile.png)
+![Hungry Hippo image](./docs/Title.png)
 
 [Link to the Hungry Hippo website](https://hungryhippo-tgrams.onrender.com/)
 
 
 ## Introduction
-<img src="https://www.chingu.io/logo-with-text-192.png" alt="Chingu Image" style="width:200px; float:right"/>
+<div style="text-align: right;">
+  <img src="https://www.chingu.io/logo-with-text-192.png" alt="Chingu Image" style="width:200px; background-color:white;"/>
+</div>
 
 **Frontend**: React, Tailwind, TypeScript
 **Backend**: NodeJS, Express, PostgreSQL, JavaScript|
@@ -17,10 +19,26 @@ It is a Full Stack Web Application made as a part of 50th Voyage organised by [C
   - [Chingu: Voyage 50 - Tier 3 Project Requirements and Specifications](https://github.com/chingu-voyages/voyage-project-tier3-restaurantsim)
 
 ## Project Details
+![Project Summary](./docs/ProjectSummary.png)
+
+In order not to block the creative and innovative work of the project, the team has adopted the idea to use the Google Docs document as a team document in a very free fashion. We were sharing the ideas, adding details and minutes of the meetings in that document that was more of a brainstorming tool. The said document is accessible in the [Google Docs](https://docs.google.com/document/d/15vURBkOasLmq5THwEN9E6Dexm1B_NtrjHpaKKm70jZI).
+
+
+### Design and Prototyping
+
+The main design and prototyping is done by `Figma` and the file can be accessed [here](https://www.figma.com/design/jO2jiYuSf1iA3Eh3d0gbgb/Hungry-Hippo?node-id=1-172&t=0XKynAkPYrcUWODA-0).
+
+On the other hand, some excerps are exported to the `docs` folder in `pdf` format.
+
+- [Project Summary](./docs/wireframes/ProjectSummary.png)
+- [Components](./docs/wireframes/components.pdf)
+- [Overall Website Design](./docs/wireframes/website.pdf)
+
 
 ### Features
 
 - TODO: Frontend guys fill this out :)
+
 
 ### API
 
@@ -35,8 +53,9 @@ SwaggerUI Documentation can be found [here](https://hungryhippo.onrender.com/api
 
 ![SwaggerUI Image](./docs/swaggerUI.png)
 
+<details>
+<summary><strong>Authentication</strong></summary>
 
-**Authentication**
 - Signup: /auth/signup` - <font style="color:green">POST</font> - raw/json data
   ```json
   {
@@ -56,7 +75,11 @@ SwaggerUI Documentation can be found [here](https://hungryhippo.onrender.com/api
   }
 - Logout: `/auth/logout` - <font style="color:green">POST</font>
 - Refresh Token: `/api/auth/refresh-token` - <font style="color:red">GET</font>
-  **Reset Password**
+</details>
+
+<details>
+<summary><strong>Reset Password</strong></summary>
+
 - Reset Password email: `/resetpassword/send-password-reset-email` - <font style="color:green">POST</font> - raw/json data
   ```json
   {
@@ -70,8 +93,11 @@ SwaggerUI Documentation can be found [here](https://hungryhippo.onrender.com/api
   "password": "newpassword123",
   "confirmPassword": "newpassword123"
     }
+</details>
 
-**Profile**
+<details>
+<summary><strong>Profile</strong></summary>
+
 - Profile: `/api/auth/profile` - <font style="color:red">GET</font>
   **Food Items Search**
 - Get All: `/api/fooditems/items` - <font style="color:red">GET</font> - raw/json data
@@ -88,8 +114,10 @@ SwaggerUI Documentation can be found [here](https://hungryhippo.onrender.com/api
   "firstName": "John",
   "lastName": "Doe"
   }
+</details>
 
-**Nearby Restaurants**
+<details>
+<summary><strong>Restaurants</strong></summary>
 
 - Get all Nearby Restaurants (5km distance): `/api/nearbyrestaurants` - <font style="color:red">GET</font>
   ```json
@@ -97,8 +125,10 @@ SwaggerUI Documentation can be found [here](https://hungryhippo.onrender.com/api
   "longitude": 40.6782,
   "latitude": -73.9442
   }
+</details>
 
-**Order**
+<details>
+<summary><strong>Orders</strong></summary>
 
 - Create Order: `/order/create-order` - <font style="color:green">POST</font> - raw/json data
   ```json 
@@ -127,31 +157,54 @@ SwaggerUI Documentation can be found [here](https://hungryhippo.onrender.com/api
 - Get Orders by User: `/order/get-orders` - <font style="color:red">GET</font>
 
 - Cancel Order: `/order/cancel/{orderId}` - <font style="color:green">PUT</font> - raw/json data
+</details>
 
-**Food Categories**
+<details>
+<summary><strong>Food Categories</strong></summary>
+
 - Get all Food Categories: `/foodcategories` - <font style="color:red">GET</font>
+</details>
 
-**Food Items**
+<details>
+<summary><strong>Food Items</strong></summary>
+
 - Get Food Items: `?[foodItemId={id}&][categoryId={id}&][restaurantId={id}&country={country string}]` - <font style="color:red">GET</font>
 
-**Wallet**
+</details>
+
+<details>
+<summary><strong>Wallet</strong></summary>
+
 - Request Account Topup: `/wallets/requestAccountTopup` - <font style="color:green">POST</font> - raw/json data
-  ```json {
+  ```json
+  {
     "amount": 50
   }
 - Make Payment: `/wallets/makePayment` - <font style="color:green">POST</font> - raw/json data
-  ```json {
+  ```json
+  {
     "amount": 30,
     "orderId": "order_123456"
   }
 - Get Account Details: `/wallets` - <font style="color:red">GET</font>
+</details>
 
-**Transactions**
+<details>
+<summary><strong>Transactions</strong></summary>
+
 - Get Transactions: `/transactions` - <font style="color:red">GET</font>
-
+</details>
 
 ### Database
-- [PostgreSQL](https://www.postgresql.org/) PostgreSQL relational database
+- It was decided to use [PostgreSQL](https://www.postgresql.org/) relational database for this project.
+
+By analyzing the proposed food items API from the deployed API [https://menus-api.vercel.app/](https://menus-api.vercel.app/), we have noticed that only the general list of all food items was obtainable. On the other hand, the repo [free-food-menus-api](https://github.com/igdev116/free-food-menus-api) was lacking the geo-coordinates of the food items (restaurants) that were available on the deployed API. Therefore, instead of relying on the deployed API, we decided to make a seeder script that would populate the database with the output of the deployed API: [`backend/seeders/API2db.js`](backend/seeders/API2db.js).
+
+<details>
+<summary>Database Schema Design</summary>
+
+![Database Schema](./docs/Restaurant%20ERD.png)
+</details>
 
 ## Deployment
 
@@ -159,13 +212,13 @@ SwaggerUI Documentation can be found [here](https://hungryhippo.onrender.com/api
 
 ## Technologies Used
  
-## Programming Languages
+### Programming Languages
 - [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) - Hypertext Markup Language
 - [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) - Cascading Style Sheets
 - [TypeScript](https://www.typescriptlang.org/) was used for frontend
 - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) was used for backend
 
-## Dependencies and Technologies
+### Dependencies and Technologies
 
 *Frontend*:
   - [React](https://reactjs.org/) Frontend framework
@@ -205,7 +258,7 @@ SwaggerUI Documentation can be found [here](https://hungryhippo.onrender.com/api
   - [Jest](https://jestjs.io/) for testing
   - [Stripe](https://stripe.com/) for payment processing
 
-## Tools
+### Tools
 
 **Hosting Platforms**
 - [Render](https://render.com/) - Hosting and Live App deployment

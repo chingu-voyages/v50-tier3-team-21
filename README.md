@@ -314,24 +314,34 @@ Having all that in mind, the team has decided to implement more tests in the fut
 
 ## Our Team: T-grams
 
+1. Martha Mwangi - [GitHub](https://github.com/marthamwangi) / [LinkedIn](https://linkedin.com/in/martymwangi)
 ![avatar](https://images.weserv.nl/?url=avatars.githubusercontent.com/marthamwangi?v=4&h=200&w=200&fit=cover&mask=circle&maxage=7d
 )
-1. Martha Mwangi - [GitHub](https://github.com/marthamwangi) / [LinkedIn](https://linkedin.com/in/martymwangi)
+  - Frontend Developer and Wireframe Designer
 
+2. King Samuel - [GitHub](https://github.com/frugalcodes) / [LinkedIn](https://www.linkedin.com/in/samuel-igwe-031152226/)
 ![avatar](https://images.weserv.nl/?url=avatars.githubusercontent.com/frugalcodes?v=4&h=200&w=200&fit=cover&mask=circle&maxage=7d
 )
-2. King Samuel - [GitHub](https://github.com/frugalcodes) / [LinkedIn](https://www.linkedin.com/in/samuel-igwe-031152226/)
+  - Backend Developer
 
+3. Greg Minezzi - [GitHub](https://github.com/minezzig) / [LinkedIn](https://linkedin.com/in/gregminezzi)
 ![avatar](https://images.weserv.nl/?url=avatars.githubusercontent.com/minezzig?v=4&h=200&w=200&fit=cover&mask=circle&maxage=7d
 )
-3. Greg Minezzi (Scrum Master) - [GitHub](https://github.com/minezzig) / [LinkedIn](https://linkedin.com/in/gregminezzi)
+  - Frontend Developer and Scrum Master
 
+4. Tomislav Dukez (Product Owner) - [GitHub](https://github.com/tomdu3) / [LinkedIn](https://www.linkedin.com/in/tomislav-dukez-bb2349231/)
 ![avatar](https://images.weserv.nl/?url=avatars.githubusercontent.com/tomdu3?v=4&h=200&w=200&fit=cover&mask=circle&maxage=7d
 )
-4. Tomislav Dukez (Product Owner) - [GitHub](https://github.com/tomdu3) / [LinkedIn](https://www.linkedin.com/in/tomislav-dukez-bb2349231/)
+  - Backend Developer and Product Owner
 
+1. Riry Nomenjanahary - [GitHub](https://github.com/TiaDev7474) / [LinkedIn](https://linkedin.com/in/riry-nomenjanahary-a47a85264)
 ![avatar](https://images.weserv.nl/?url=avatars.githubusercontent.com/TiaDev7474?v=4&h=200&w=200&fit=cover&mask=circle&maxage=7d)
-5. Riry Nomenjanahary - [GitHub](https://github.com/TiaDev7474) / [LinkedIn](https://linkedin.com/in/riry-nomenjanahary-a47a85264)
+  - Frontend Developer (Wizard)
 
-![avatar](https://images.weserv.nl/?url=avatars.githubusercontent.com/ngodi?v=4&h=200&w=200&fit=cover&mask=circle&maxage=7d)
+
 6. Albert Ngodi - [GitHub](https://github.com/ngodi) / [LinkedIn](https://linkedin.com/in/albertngodi)
+![avatar](https://images.weserv.nl/?url=avatars.githubusercontent.com/ngodi?v=4&h=200&w=200&fit=cover&mask=circle&maxage=7d)
+  - Backend Developer
+
+---
+&copy; 2024 T-grams - The Hungry Hippo Team. _MIT License_. All rights reserved

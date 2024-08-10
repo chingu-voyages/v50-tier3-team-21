@@ -12,6 +12,14 @@ const swaggerOptions = require('./swagger.json');
 const app = express();
 const db = require('./models');
 
+// CORS Middleware
+app.use(cors({
+  credentials: true,
+  origin: process.env.FRONTEND_URL,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
+}));
+
 // Swagger
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
@@ -33,20 +41,13 @@ const orderRouter = require('./routes/orderRoutes');
 
 const PORT = process.env.PORT || 3000;
 
+
 // Handle Stripe Webhook
 app.use('/api/webhook', express.raw({ type: 'application/json' }), handleStripeWebhook);
 
 // Parse JSON and cookies
 app.use(express.json());
 app.use(cookieParser());
-
-// CORS Middleware
-app.use(cors({
-  credentials: true,
-  origin: process.env.FRONTEND_URL,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
-}));
 
 // Routes
 app.use('/api/auth', authRouter);

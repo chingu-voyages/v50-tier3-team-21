@@ -6,7 +6,7 @@ interface MultiSelectContextType<T> {
     onChange: (value: T) => void;
 }
 
-const MultiSelectContext = createContext<MultiSelectContextType<any> | undefined>(undefined);
+const MultiSelectContext = createContext<MultiSelectContextType<any> >({} as MultiSelectContextType<any>);
 
 type MultiSelectPropsType<T> = {
     value: T;
@@ -22,7 +22,14 @@ export const SingleSelect = <T,>({ children, value, onChange }: MultiSelectProps
         </MultiSelectContext.Provider>
     );
 };
-export const SingleSelectLabel = ({ id , label}) => {
+
+
+
+type SingleSelectLabelType = {
+    id: string,
+    label: string
+}
+export const SingleSelectLabel = ({ id , label}: SingleSelectLabelType) => {
     return (
         <label htmlFor={id} className="block text-gray-700 font-medium">
             { label }
@@ -30,8 +37,13 @@ export const SingleSelectLabel = ({ id , label}) => {
     )
 }
 
-export const Select = ({children, name}) => {
-    const { value, onChange} = useContext(MultiSelectContext);
+
+type SelectType = {
+    children: React.ReactNode,
+    name: string
+}
+export const Select = ({children, name}: SelectType) => {
+    const { value, onChange} = useContext<MultiSelectContextType<string>>(MultiSelectContext);
     return (
         <select className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none"
                 name={name} onChange={(e) => onChange(e.target.value)} value={value}  >
@@ -39,9 +51,14 @@ export const Select = ({children, name}) => {
         </select>
     )
 }
-export  const SingleSelectOption = ({value, name }) => {
+
+type SingleSelectOptionType = {
+    value: unknown,
+    name: string
+}
+export  const SingleSelectOption = ({value, name }: SingleSelectOptionType) => {
     return (
-        <option value={value} className="text-gray-900">
+        <option value={value as string} className="text-gray-900">
             { name }
         </option>
     )

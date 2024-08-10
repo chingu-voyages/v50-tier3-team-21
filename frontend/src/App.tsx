@@ -8,11 +8,13 @@ import {
     SignupPage , SuccessResetEmailPage
 } from "./pages";
 import {AppProvider} from "./provider/app.provider.tsx";
-import {MainLayout} from "./layouts/main.layout.tsx";
+import {MainLayout} from "./layouts";
 import {HomePage} from "./pages/home/home.page.tsx";
-import {ProfilePage} from "./pages/profile.page.tsx"
+import {ProfilePage} from "./pages"
 import { RestaurantPage } from "./pages/restaurant.page.tsx";
 import { CartPage } from "./pages/cart.page.tsx";
+import {PaymentDetailsPage} from "./pages/payment-details.page.tsx";
+import {CheckoutPage} from "./pages/checkout.page.tsx";
 
 //Todo: define routes in separate file
 export default function App() {
@@ -24,7 +26,10 @@ export default function App() {
                         <Route index element={<HomePage />}/>
                         <Route path="/profile" element={<ProfilePage />} />
                         <Route path="/restaurants/:restaurantId" element={<RestaurantPage />} />
-                        <Route path="/cart" element={<CartPage />} />
+                        <Route path="/checkout" element={<CheckoutPage />} >
+                            <Route path="order/confirm" element={<CartPage />} />
+                            <Route path="order/payment/:id"  element={<PaymentDetailsPage />}/>
+                        </Route>
                     </Route>
                     <Route  element={<AuthLayout />} >
                         <Route path='/auth/signup' element={<SignupPage />} />

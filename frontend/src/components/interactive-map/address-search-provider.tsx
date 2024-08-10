@@ -33,7 +33,11 @@ interface ISuggestion {
         }
     }
 }
-export const AddressSearchProvider = ({ children }) => {
+
+type AddressSearchProviderType = {
+    children: React.ReactNode
+}
+export const AddressSearchProvider = ({ children }: AddressSearchProviderType) => {
     const [selectedLocation, setSelectedLocation] = useState({} as ISelectedLocation);
     const [query, setQuery] = useState("");
     const [isOpen, setIsOpen ] = useState<boolean>(true);

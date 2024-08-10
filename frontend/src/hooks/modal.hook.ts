@@ -9,6 +9,9 @@ export const useModal = () => {
     const handleOnOpenModal = useCallback((() => {
         setModal(true)
     }),[])
+    const toggleModal = () => {
+        setModal(prevState => !prevState)
+    }
 
-    return { modal , handleOnCloseModal, handleOnOpenModal }
+    return { modal , handleOnCloseModal, handleOnOpenModal , toggleModal}
 }

@@ -10,8 +10,8 @@
   <img src="https://www.chingu.io/logo-with-text-192.png" alt="Chingu Image" style="width:200px; background-color:white;"/>
 </div>
 
-**Frontend**: React, Tailwind, TypeScript
-**Backend**: NodeJS, Express, PostgreSQL, JavaScript|
+**Frontend**: React, Tailwind, TypeScript<br>
+**Backend**: NodeJS, Express, PostgreSQL, JavaScript
 
 T-grams Development Team presents the [Hungry Hippo](https://hungryhippo-tgrams.onrender.com/) project. This project is a web application that allows users to order food from the best restaurants in the vicinity and track their order status at affordable delivery prices.
 It is a Full Stack Web Application made as a part of 50th Voyage organised by [Chingu](https://www.chingu.io/). More about Voyage 50 and the project requirements can be found:

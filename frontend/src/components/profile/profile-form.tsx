@@ -12,7 +12,7 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user, setUser }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     reset,
   } = useForm<UserType>();
 
@@ -23,7 +23,6 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user, setUser }) => {
   
   // on submit, edited profile will be saved in database
   const handleSave: SubmitHandler<UserType> = async (data) => {
-    console.log(data);
     const editedUser = data;
 
     //make API call to PUT edited user in database...something like: editUser(userId, editedUser)
@@ -100,11 +99,11 @@ export const ProfileForm: React.FC<ProfileFormProps> = ({ user, setUser }) => {
               type="button"
               className="bg-white border rounded-md p-3 font-bold border-primary text-primary uppercase"
               onClick={() => reset(user)}
+              isLoading={isSubmitting}
             >
               Discard Changes
             </PrimaryButton>
-            {/* //? why does className="uppercase" break button classes? */}
-            <PrimaryButton type="submit">SAVE CHANGES</PrimaryButton>
+            <PrimaryButton type="submit" isLoading={isSubmitting}>SAVE CHANGES</PrimaryButton>
           </div>
         </form>
         {viewPasswordModal && (

@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
 
+
 dotenv.config();
 
 const swaggerOptions = require('./swagger.json');
@@ -31,10 +32,10 @@ const { protect } = require('./middlewares/authorization');
 
 const orderRouter = require('./routes/orderRoutes');
 
+
 const PORT = process.env.PORT || 3000;
 
 app.use('/api/webhook', express.raw({type: 'application/json'}), handleStripeWebhook)
-
 app.use(express.json());
 app.use(cookieParser());
 

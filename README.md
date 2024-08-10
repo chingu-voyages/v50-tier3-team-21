@@ -60,7 +60,7 @@ On the other hand, some excerps are exported to the `docs` folder in `pdf` forma
 
 - [ ] **Payment Integration**:
   - [ ] Top-up wallet 
-  - [ ]make payments for orders.
+  - [ ] make payments for orders.
 
 - [ ] **Food Categories**:
   - [ ] Browse and search food items by categories.

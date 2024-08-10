@@ -48,7 +48,7 @@ On the other hand, some excerps are exported to the `docs` folder in `pdf` forma
 
 - [ ] **Restaurant Discovery**:
   - [ ] Search for nearby restaurants based on user location.
-  - [ ] Filter restaurants by distance , price , food categories and country
+  - [ ] Filter restaurants by distance , food price , food categories and country
 
 - [ ] **Food Ordering**:
   - [ ] Browse food items from various restaurants.

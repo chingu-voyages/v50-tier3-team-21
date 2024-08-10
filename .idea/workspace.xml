@@ -4,8 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="feat: adding permanent auth tracking">
+    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="update: add horizontal padding to order section">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/provider/map.provider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/provider/map.provider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/provider/payment.provider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/provider/payment.provider.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/interctive-map/queries.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/interctive-map/queries.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/interctive-map/restaurant.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/interctive-map/restaurant.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/orders/order.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/orders/order.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/orders/queries.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/orders/queries.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +32,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/frontend/package.json" />
+  </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -42,7 +51,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "development",
+    "git-widget-placeholder": "50-us-42-make-a-payment",
     "last_opened_file_path": "/mnt/mydata/Archive/WebstormProjects/voyage",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -66,6 +75,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="JavaScript Debug.index.html" />
         <item itemvalue="JavaScript Debug.index.html" />
@@ -313,7 +323,23 @@
       <option name="project" value="LOCAL" />
       <updated>1723294750312</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="update: update toast message">
+      <option name="closed" value="true" />
+      <created>1723306453373</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1723306453373</updated>
+    </task>
+    <task id="LOCAL-00028" summary="update: add horizontal padding to order section">
+      <option name="closed" value="true" />
+      <created>1723307562020</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1723307562020</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -331,8 +357,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="chore: add axios" />
-    <MESSAGE value="wip: implementing auth logic" />
     <MESSAGE value="feat: auth logic implemented" />
     <MESSAGE value="wip: reset password features" />
     <MESSAGE value="fix: fix null check error" />
@@ -356,7 +380,9 @@
     <MESSAGE value="fix: fix type issue &amp;&amp; add cancel order feature" />
     <MESSAGE value="update: update geolocation button style and add tooltip" />
     <MESSAGE value="feat: adding permanent auth tracking" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: adding permanent auth tracking" />
+    <MESSAGE value="update: update toast message" />
+    <MESSAGE value="update: add horizontal padding to order section" />
+    <option name="LAST_COMMIT_MESSAGE" value="update: add horizontal padding to order section" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -375,11 +401,6 @@
           <url>file://$PROJECT_DIR$/frontend/src/components/authentication/reset-password-form.tsx</url>
           <line>25</line>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/frontend/src/components/ui/geolocation-btn.tsx</url>
-          <line>13</line>
-          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

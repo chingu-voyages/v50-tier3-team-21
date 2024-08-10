@@ -6,5 +6,4 @@ const router = express.Router();
 router.post('/requestAccountTopup', protect, handleStripeTopup);
 router.get('/', protect, getAccount);
 router.post('/makePayment', protect, makePayment);
-
 module.exports = router;

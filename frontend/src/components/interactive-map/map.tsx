@@ -1,4 +1,3 @@
-import React  from "react";
 import {FullscreenControl , Layer , Map , Marker , NavigationControl , Source} from "react-map-gl";
 import {useAddressSearch} from "./address-search-provider.tsx";
 import {createGeoJSONCircle , layerStyle} from "../../utils/geospatial.ts";

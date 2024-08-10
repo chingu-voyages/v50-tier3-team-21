@@ -2,6 +2,8 @@
 
 import {AxiosError} from "axios";
 import {RestaurantWithImage} from "../services/api/interctive-map/interface.ts";
+import {OrderData , OrderItem} from "../services/api/orders/interface.ts";
+import {getItem} from "./localstorage.ts";
 
 interface CustomErrorResponse {
     message: string;
@@ -19,5 +21,16 @@ export const getMaxPrice = (restaurants: RestaurantWithImage[]): number => {
     return Math.max(...restaurants.map(restaurant => restaurant.price));
 };
 
+
+export const calculateTotalPrice = (orderData: OrderData): number => {
+    const itemTotal = orderData.orderFoodItems.reduce((total: number, orderItem: OrderItem) => {
+        return total + orderItem.item.price * orderItem.quantity;
+    }, 0);
+
+    return itemTotal + orderData.deliveryCost + orderData.tip;
+};
+
+
+export const isAuthenticatedFn = () => getItem("isAuth") == "1"
 
 

@@ -7,8 +7,8 @@ export  interface FormFieldProps<T extends  FieldValues>{
     placeholder: string,
     label?: string,
     name: Path<T>,
-    register: UseFormRegister<any>
-    error: FieldError | undefined,
+    register?: UseFormRegister<any>
+    error?: FieldError | undefined,
     className?: string,
 }
 export const FormField = <T extends FieldValues> ({
@@ -30,7 +30,7 @@ export const FormField = <T extends FieldValues> ({
                 id={name as string}
                 type={type}
                 placeholder={placeholder}
-                {...register(name)}
+                {...(register && register(name))}
                 className={`${className}  px-3 py-2 border-2 rounded-lg placeholder:font-light placeholder:text-[0.8em] focus:outline-0`}
             />
             {

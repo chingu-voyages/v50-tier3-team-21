@@ -27,9 +27,9 @@ export const CheckoutFooter = ({
         <div className="text-xl font-bold">
           Total Cost: $<span>{calculateTotal()}</span>
         </div>
-        <PrimaryButton onClick={handleCheckout} className={`${location.pathname === "/cart" && !address && "bg-opacity-30 pointer-events-none"}`}>
+        <PrimaryButton onClick={handleCheckout} className={`${location.pathname === "/checkout/order/confirm" && !address && "bg-opacity-30 pointer-events-none"}`}>
           <span className="icon-[solar--bag-smile-bold-duotone] mr-1"></span>
-          {location.pathname === "/cart" ? "CONTINUE" : "CHECKOUT"}
+          {location.pathname === "/checkout/order/confirm" ? "CONTINUE" : "CHECKOUT"}
         </PrimaryButton>
       </div>
     </div>

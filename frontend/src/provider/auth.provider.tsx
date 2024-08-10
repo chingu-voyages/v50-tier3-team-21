@@ -1,4 +1,6 @@
 import {createContext , PropsWithChildren , useState} from "react";
+import {isAuthenticatedFn} from "../utils";
+import {setItem} from "../utils/localstorage.ts";
 
 
 export interface IAuthContext {
@@ -25,10 +27,11 @@ interface AuthProviderProps extends  PropsWithChildren {}
 export  const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-   const [ isAuthenticated, setIsAuthenticated ] = useState<boolean>(false);
+   const [ isAuthenticated, setIsAuthenticated ] = useState<boolean>(isAuthenticatedFn());
    const [userData, setUserData ] = useState<IUser | undefined>(undefined);
 
    const handleLoggedIn = () => {
+       setItem("isAuth", "1")
        setIsAuthenticated(true);
    }
    const storeUserData = (userData: IUser) => {
@@ -36,6 +39,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
    }
    const handleLogout = () => {
        setUserData(undefined)
+       setItem("isAuth", "0")
        setIsAuthenticated(false)
    }
    return (

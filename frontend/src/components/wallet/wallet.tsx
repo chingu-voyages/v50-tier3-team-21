@@ -23,7 +23,6 @@ export const Wallet = () => {
         const response = await httpClient.get<WalletResponse>("/wallets");
         const balanceCents = response.data.balance;
         const formattedBalance = formatBalance(balanceCents);
-        
         setBalance(formattedBalance);
       } catch (error) {
         console.log(error);

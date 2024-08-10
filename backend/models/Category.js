@@ -4,7 +4,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        // make a Virtual name from the name (slug)
         displayName: {
             type: DataTypes.VIRTUAL,
             get() {

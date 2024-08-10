@@ -1,12 +1,17 @@
 import {useQuery} from "@tanstack/react-query";
 import {FilterOptions , FoodItem} from "./interface.ts";
 import {restaurantService} from "./restaurant.service.ts";
-import {AxiosResponse} from "axios";
+import {AxiosError} from "axios";
 
 
+export interface ApiResponse {
+    data: {
+        data: FoodItem[]
+    }
+}
 
 export const useGetFoodItemsWithRestaurants = (filterOptions: FilterOptions) => {
-   return useQuery<AxiosResponse<FoodItem[]>>({
+   return useQuery<ApiResponse, AxiosError>({
        queryKey: ['food_items_restaurants', filterOptions],
        queryFn: () => restaurantService.getFoodItems(filterOptions)
    })

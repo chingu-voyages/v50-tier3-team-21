@@ -23,7 +23,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, VariantPr
 
 export default function PrimaryButton({ isLoading = false, children, className, variant, ...props }: ButtonProps) {
     return (
-        <button type="button" className={cn(buttonVariants({ variant, className }))} {...props} disabled={isLoading}>
+        <button type="button" className={cn(buttonVariants({ variant, className }))} {...props} disabled={isLoading && props.disabled}>
             {
                 isLoading ? (
                     <>

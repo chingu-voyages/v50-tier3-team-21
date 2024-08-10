@@ -1,15 +1,17 @@
 # Hungry Hippo
 
-![Hungry Hippo image](./frontend/src/assets/hippo-server-mobile.png)
+![Hungry Hippo image](./docs/Title.png)
 
 [Link to the Hungry Hippo website](https://hungryhippo-tgrams.onrender.com/)
 
 
 ## Introduction
-<img src="https://www.chingu.io/logo-with-text-192.png" alt="Chingu Image" style="width:200px; float:right"/>
+<div style="text-align: right;">
+  <img src="https://www.chingu.io/logo-with-text-192.png" alt="Chingu Image" style="width:200px; background-color:white;"/>
+</div>
 
-**Frontend**: React, Tailwind, TypeScript
-**Backend**: NodeJS, Express, PostgreSQL, JavaScript|
+**Frontend**: React, Tailwind, TypeScript<br>
+**Backend**: NodeJS, Express, PostgreSQL, JavaScript
 
 T-grams Development Team presents the [Hungry Hippo](https://hungryhippo-tgrams.onrender.com/) project. This project is a web application that allows users to order food from the best restaurants in the vicinity and track their order status at affordable delivery prices.
 It is a Full Stack Web Application made as a part of 50th Voyage organised by [Chingu](https://www.chingu.io/). More about Voyage 50 and the project requirements can be found:
@@ -17,10 +19,31 @@ It is a Full Stack Web Application made as a part of 50th Voyage organised by [C
   - [Chingu: Voyage 50 - Tier 3 Project Requirements and Specifications](https://github.com/chingu-voyages/voyage-project-tier3-restaurantsim)
 
 ## Project Details
+![Project Summary](./docs/ProjectSummary.png)
+
+### Team Documents
+
+In order not to block the creative and innovative work of the project, the team has adopted the idea to use the Google Docs document as a team document in a very free fashion. We were sharing the ideas, adding details and minutes of the meetings in that document that was more of a brainstorming tool. The said document is accessible in the [Google Docs](https://docs.google.com/document/d/15vURBkOasLmq5THwEN9E6Dexm1B_NtrjHpaKKm70jZI).
+
+For the Project Management, the team has used the [Github Projects' Kanban Board](https://github.com/orgs/chingu-voyages/projects/248)
+
+### Design and Prototyping
+
+<img src="./docs/design-preview.png" alt="Design Preview" style="object-fit: cover; width: 100%; height: 50%;">
+
+The main design and prototyping is done by `Figma` and the file can be accessed [here](https://www.figma.com/design/jO2jiYuSf1iA3Eh3d0gbgb/Hungry-Hippo?node-id=1-172&t=0XKynAkPYrcUWODA-0).
+
+On the other hand, some excerps are exported to the `docs` folder in `pdf` format.
+
+- [Project Summary](./docs/wireframes/ProjectSummary.png)
+- [Components](./docs/wireframes/components.pdf)
+- [Overall Website Design](./docs/wireframes/website.pdf)
+
 
 ### Features
 
-- TODO: Frontend guys fill this out :)
+- TODO: Frontend guys, fill this out :)
+
 
 ### API
 
@@ -35,8 +58,9 @@ SwaggerUI Documentation can be found [here](https://hungryhippo.onrender.com/api
 
 ![SwaggerUI Image](./docs/swaggerUI.png)
 
+<details>
+<summary><strong>Authentication</strong></summary>
 
-**Authentication**
 - Signup: /auth/signup` - <font style="color:green">POST</font> - raw/json data
   ```json
   {
@@ -56,7 +80,11 @@ SwaggerUI Documentation can be found [here](https://hungryhippo.onrender.com/api
   }
 - Logout: `/auth/logout` - <font style="color:green">POST</font>
 - Refresh Token: `/api/auth/refresh-token` - <font style="color:red">GET</font>
-  **Reset Password**
+</details>
+
+<details>
+<summary><strong>Reset Password</strong></summary>
+
 - Reset Password email: `/resetpassword/send-password-reset-email` - <font style="color:green">POST</font> - raw/json data
   ```json
   {
@@ -70,8 +98,11 @@ SwaggerUI Documentation can be found [here](https://hungryhippo.onrender.com/api
   "password": "newpassword123",
   "confirmPassword": "newpassword123"
     }
+</details>
 
-**Profile**
+<details>
+<summary><strong>Profile</strong></summary>
+
 - Profile: `/api/auth/profile` - <font style="color:red">GET</font>
   **Food Items Search**
 - Get All: `/api/fooditems/items` - <font style="color:red">GET</font> - raw/json data
@@ -88,8 +119,10 @@ SwaggerUI Documentation can be found [here](https://hungryhippo.onrender.com/api
   "firstName": "John",
   "lastName": "Doe"
   }
+</details>
 
-**Nearby Restaurants**
+<details>
+<summary><strong>Restaurants</strong></summary>
 
 - Get all Nearby Restaurants (5km distance): `/api/nearbyrestaurants` - <font style="color:red">GET</font>
   ```json
@@ -97,8 +130,10 @@ SwaggerUI Documentation can be found [here](https://hungryhippo.onrender.com/api
   "longitude": 40.6782,
   "latitude": -73.9442
   }
+</details>
 
-**Order**
+<details>
+<summary><strong>Orders</strong></summary>
 
 - Create Order: `/order/create-order` - <font style="color:green">POST</font> - raw/json data
   ```json 
@@ -127,45 +162,101 @@ SwaggerUI Documentation can be found [here](https://hungryhippo.onrender.com/api
 - Get Orders by User: `/order/get-orders` - <font style="color:red">GET</font>
 
 - Cancel Order: `/order/cancel/{orderId}` - <font style="color:green">PUT</font> - raw/json data
+</details>
 
-**Food Categories**
+<details>
+<summary><strong>Food Categories</strong></summary>
+
 - Get all Food Categories: `/foodcategories` - <font style="color:red">GET</font>
+</details>
 
-**Food Items**
+<details>
+<summary><strong>Food Items</strong></summary>
+
 - Get Food Items: `?[foodItemId={id}&][categoryId={id}&][restaurantId={id}&country={country string}]` - <font style="color:red">GET</font>
 
-**Wallet**
+</details>
+
+<details>
+<summary><strong>Wallet</strong></summary>
+
 - Request Account Topup: `/wallets/requestAccountTopup` - <font style="color:green">POST</font> - raw/json data
-  ```json {
+  ```json
+  {
     "amount": 50
   }
 - Make Payment: `/wallets/makePayment` - <font style="color:green">POST</font> - raw/json data
-  ```json {
+  ```json
+  {
     "amount": 30,
     "orderId": "order_123456"
   }
 - Get Account Details: `/wallets` - <font style="color:red">GET</font>
+</details>
 
-**Transactions**
+<details>
+<summary><strong>Transactions</strong></summary>
+
 - Get Transactions: `/transactions` - <font style="color:red">GET</font>
-
+</details>
 
 ### Database
-- [PostgreSQL](https://www.postgresql.org/) PostgreSQL relational database
+[PostgreSQL](https://www.postgresql.org/) relational database has been chosenfor this project. The database was created using [Sequelize](https://sequelize.org/) ORM and deployed on [Neon](https://neon.tech/).
+
+By analyzing the proposed food items API from the deployed API [https://menus-api.vercel.app/](https://menus-api.vercel.app/), we have noticed that only the general list of all food items was obtainable. On the other hand, the repo [free-food-menus-api](https://github.com/igdev116/free-food-menus-api) was lacking the geo-coordinates of the food items (restaurants) that were available on the deployed API. Therefore, instead of relying on the deployed API, we have decided to make a seeder script that would populate the database with the output of the deployed API: [`backend/seeders/API2db.js`](backend/seeders/API2db.js).
+
+<details>
+<summary>Database Schema Design</summary>
+
+![Database Schema](./docs/Restaurant%20ERD.png)
+</details>
 
 ## Deployment
 
+### Deploying on Render
+
+- Render was used as the hosting platform for the live project deployment.
+  - backend: [https://hungryhippo.onrender.com/](https://hungryhippo.onrender.com/)
+  - frontend: [https://hungryhippo-tgrams.onrender.com/](https://hungryhippo-tgrams.onrender.com/)
+
+### Deploying on local machine
+
+1. Clone the repository
+   `git clone https://github.com/chingu-voyages/v50-tier3-team-21/`
+2. Backend
+   - Install dependencies
+   from the root directory:
+   `cd backend && npm install`
+   - add necessary details to `.env` file, details in [env-sample](./backend/env-sample)
+   - if the PostgreSQL database is empty, run `npm run seed`
+   - run `npm run dev`
+   - open http://localhost:3000 in your browser
+3. Frontend
+   - Install dependencies
+   from the root directory:
+   `cd frontend && npm install` 
+   - add necessary details to `.env` file, details in [env-sample](./frontendbackend/env-sample)
+   - run `npm run dev`
+   - open http://localhost:5173 in your browser
+
 ## Testing
+
+Some of the automated tests were written in [Jest](https://jestjs.io/) and can be executed with `npm run test` in backend directory.
+
+Because of the time constraint, and because the developers had decided to work with the tecnologies that weren't used by them before, a lot of time was spent into studying, learning and discussing the solutions and implementing them.
+
+Having all that in mind, the team has decided to implement more tests in the future versions of the app. Nevertheless, the manual tests were performed by the team. Backend functionalities were tested with [Postman](https://www.postman.com/) and [Beekeeper Studio](https://www.beekeeperstudio.io/), and frontend functionalities were tested with the browsers on various devices.
+
 
 ## Technologies Used
  
-## Programming Languages
+### Programming Languages
 - [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) - Hypertext Markup Language
 - [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) - Cascading Style Sheets
 - [TypeScript](https://www.typescriptlang.org/) was used for frontend
 - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) was used for backend
 
-## Dependencies and Technologies
+### Dependencies and Technologies
 
 *Frontend*:
   - [React](https://reactjs.org/) Frontend framework
@@ -205,7 +296,7 @@ SwaggerUI Documentation can be found [here](https://hungryhippo.onrender.com/api
   - [Jest](https://jestjs.io/) for testing
   - [Stripe](https://stripe.com/) for payment processing
 
-## Tools
+### Tools
 
 **Hosting Platforms**
 - [Render](https://render.com/) - Hosting and Live App deployment
@@ -214,29 +305,43 @@ SwaggerUI Documentation can be found [here](https://hungryhippo.onrender.com/api
 
 **Development and Design Tools**
 - [Postman](https://www.postman.com/) - API testing
+- [Beekeeper Studio](https://www.beekeeperstudio.io/) - Database testing and accessing
 - [Visual Studio Code](https://code.visualstudio.com/) - Develompent code editor
 - [Microsoft Designer](https://www.microsoft.com/en-us/designer/) - UI design and prototyping
 - [Figma](https://www.figma.com/) - for wireframing and prototyping
 - [Lucidchart](https://www.lucidchart.com/) for DB design
 
 
-## Team Documents
-
-- TODO: Add contents of the Google Docs Team Document here
-
-
-
 ## Our Team: T-grams
 
+1. Martha Mwangi - [GitHub](https://github.com/marthamwangi) / [LinkedIn](https://linkedin.com/in/martymwangi)
+![avatar](https://images.weserv.nl/?url=avatars.githubusercontent.com/marthamwangi?v=4&h=200&w=200&fit=cover&mask=circle&maxage=7d
+)
+  - Frontend Developer and Wireframe Designer
 
-- Martha Mwangi #1: [GitHub](https://github.com/marthamwangi) / [LinkedIn](https://linkedin.com/in/martymwangi)
+2. King Samuel - [GitHub](https://github.com/frugalcodes) / [LinkedIn](https://www.linkedin.com/in/samuel-igwe-031152226/)
+![avatar](https://images.weserv.nl/?url=avatars.githubusercontent.com/frugalcodes?v=4&h=200&w=200&fit=cover&mask=circle&maxage=7d
+)
+  - Backend Developer
 
-- King Samuel #2: [GitHub](https://github.com/frugalcodes) / [LinkedIn](https://www.linkedin.com/in/samuel-igwe-031152226/)
+3. Greg Minezzi - [GitHub](https://github.com/minezzig) / [LinkedIn](https://linkedin.com/in/gregminezzi)
+![avatar](https://images.weserv.nl/?url=avatars.githubusercontent.com/minezzig?v=4&h=200&w=200&fit=cover&mask=circle&maxage=7d
+)
+  - Frontend Developer and Scrum Master
 
-- Greg Minezzi #3: [GitHub](https://github.com/minezzig) / [LinkedIn](https://linkedin.com/in/gregminezzi)
+4. Tomislav Dukez (Product Owner) - [GitHub](https://github.com/tomdu3) / [LinkedIn](https://www.linkedin.com/in/tomislav-dukez-bb2349231/)
+![avatar](https://images.weserv.nl/?url=avatars.githubusercontent.com/tomdu3?v=4&h=200&w=200&fit=cover&mask=circle&maxage=7d
+)
+  - Backend Developer and Product Owner
 
-- Tomislav Dukez #4: [GitHub](https://github.com/tomdu3) / [LinkedIn](https://www.linkedin.com/in/tomislav-dukez-bb2349231/)
+1. Riry Nomenjanahary - [GitHub](https://github.com/TiaDev7474) / [LinkedIn](https://linkedin.com/in/riry-nomenjanahary-a47a85264)
+![avatar](https://images.weserv.nl/?url=avatars.githubusercontent.com/TiaDev7474?v=4&h=200&w=200&fit=cover&mask=circle&maxage=7d)
+  - Frontend Developer (Wizard)
 
-- Riry Nomenjanahary  #5: [GitHub](https://github.com/TiaDev7474) / [LinkedIn](https://linkedin.com/in/riry-nomenjanahary-a47a85264)
 
-- Albert Ngodi  #6: [GitHub](https://github.com/ngodi) / [LinkedIn](https://linkedin.com/in/albertngodi)
+6. Albert Ngodi - [GitHub](https://github.com/ngodi) / [LinkedIn](https://linkedin.com/in/albertngodi)
+![avatar](https://images.weserv.nl/?url=avatars.githubusercontent.com/ngodi?v=4&h=200&w=200&fit=cover&mask=circle&maxage=7d)
+  - Backend Developer
+
+---
+&copy; 2024 T-grams - The Hungry Hippo Team. _MIT License_. All rights reserved

@@ -49,7 +49,7 @@ export const DeliveryAddress = ({
       );
 
       const data = await response.json();
-      const { full_address } = data.batch[0].features[0].properties;
+      const { full_address } = data.batch[0].features[0]?.properties;
 
       // dispay street address in field and save in state
       const addressElement = document.getElementById("address") as HTMLInputElement;

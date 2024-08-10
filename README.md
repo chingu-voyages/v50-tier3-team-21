@@ -6,7 +6,9 @@
 
 
 ## Introduction
-<img src="https://www.chingu.io/logo-with-text-192.png" alt="Chingu Image" style="width:200px; float:right; background-color:white;"/>
+<div style="text-align: right;">
+  <img src="https://www.chingu.io/logo-with-text-192.png" alt="Chingu Image" style="width:200px; background-color:white;"/>
+</div>
 
 **Frontend**: React, Tailwind, TypeScript
 **Backend**: NodeJS, Express, PostgreSQL, JavaScript|

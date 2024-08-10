@@ -42,7 +42,33 @@ On the other hand, some excerps are exported to the `docs` folder in `pdf` forma
 
 ### Features
 
-- TODO: Frontend guys, fill this out :)
+- [ ] **User Authentication**:
+  - [ ] Sign up, log in, and log out functionalities.
+  - [ ] Password reset
+
+- [ ] **Restaurant Discovery**:
+  - [ ] Search for nearby restaurants based on user location.
+  - [ ] Filter restaurants by distance , price , food categories and country
+
+- [ ] **Food Ordering**:
+  - [ ] Browse food items from various restaurants.
+  - [ ] Add items to cart and place orders.
+ 
+- [ ] **User Profiles**:
+  - [ ] Manage personal details and view account balance.
+  - [ ] Update profile information.
+
+- [ ] **Payment Integration**:
+  - [ ] Top-up wallet 
+  - [ ]make payments for orders.
+
+- [ ] **Food Categories**:
+  - [ ] Browse and search food items by categories.
+
+- [ ] **Map Integration**:
+  - [ ] Interactive maps to view restaurant locations and delivery areas.
+  - [ ] Address search functionality for delivery.
+
 
 
 ### API

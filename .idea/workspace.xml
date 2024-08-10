@@ -4,33 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="update">
+    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="fix: fix type issue that triggers deployment errors">
+      <change afterPath="$PROJECT_DIR$/frontend/src/services/api/orders/mutations.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/controllers/walletController.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/walletController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/interactive-map/address-search-input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/interactive-map/address-search-input.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/interactive-map/address-search-provider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/interactive-map/address-search-provider.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/interactive-map/filter-form.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/interactive-map/filter-form.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/interactive-map/map.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/interactive-map/map.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/payment/order-info/order-info-item.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/payment/order-info/order-info-item.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/payment/detail.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/payment/detail.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/payment/order-info/order-info.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/payment/order-info/order-info.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/payment/payment-footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/payment/payment-footer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/payment/picks/pick-item.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/payment/picks/pick-item.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/ui/single-select/select.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ui/single-select/select.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/hooks/debounce.hook.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/hooks/debounce.hook.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/hooks/geocode-query.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/cart.page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/cart.page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/home/home.page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/home/home.page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/payment/picks/picks.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/payment/picks/picks.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/pages/payment-details.page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/payment-details.page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/provider/map.provider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/provider/map.provider.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/provider/payment.provider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/provider/payment.provider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/authentication/api.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/services/api/interctive-map/queries.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/interctive-map/queries.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/orders/interface.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/orders/interface.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/orders/order.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/orders/order.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/services/api/orders/queries.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/orders/queries.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/services/api/payment/mutations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/payment/mutations.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/searchbox/mutation.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/searchbox/mutation.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/searchbox/queries.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/searchbox/queries.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/payment/queries.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/payment/queries.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/utils/geospatial.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/geospatial.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/utils/helpers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/utils/helpers.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +119,7 @@
       <workItem from="1722614726629" duration="3882000" />
       <workItem from="1722855514990" duration="20502000" />
       <workItem from="1723137035405" duration="2358000" />
-      <workItem from="1723282751874" duration="3286000" />
+      <workItem from="1723282751874" duration="10153000" />
     </task>
     <task id="LOCAL-00001" summary="chore: add axios">
       <option name="closed" value="true" />
@@ -298,7 +289,23 @@
       <option name="project" value="LOCAL" />
       <updated>1723217755032</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="fix: fix type issue that triggers deployment erros">
+      <option name="closed" value="true" />
+      <created>1723286065397</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1723286065397</updated>
+    </task>
+    <task id="LOCAL-00023" summary="fix: fix type issue that triggers deployment errors">
+      <option name="closed" value="true" />
+      <created>1723286076318</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1723286076318</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -336,7 +343,9 @@
     <MESSAGE value="update: update style to fit responsiveness" />
     <MESSAGE value="refactor: move geolocation button to shared ui components" />
     <MESSAGE value="add deliver food image" />
-    <option name="LAST_COMMIT_MESSAGE" value="add deliver food image" />
+    <MESSAGE value="fix: fix type issue that triggers deployment erros" />
+    <MESSAGE value="fix: fix type issue that triggers deployment errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: fix type issue that triggers deployment errors" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

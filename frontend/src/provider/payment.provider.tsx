@@ -1,18 +1,16 @@
-import React , {createContext , useEffect , useMemo , useState} from "react";
-import {Account} from "../services/api/payment/interface.ts";
-import {useGetAccount} from "../services/api/payment/queries.ts";
-import {useGetOrder} from "../services/api/orders/queries.ts";
-import {calculateTotalPrice} from "../utils";
-
-
-
+import React, { createContext, useEffect, useMemo, useState } from "react";
+import { Account } from "../services/api/payment/interface.ts";
+import { useGetAccount } from "../services/api/payment/queries.ts";
+import { useGetOrder } from "../services/api/orders/queries.ts";
+import { calculateTotalPrice } from "../utils";
+import {OrderData} from "../services/api/orders/interface.ts";
 
 export interface OrderInfo {
     deliveryAddress?: string;
     deliveryFee: number;
     price?: number;
     tip: number;
-    orderId: number
+    orderId: number;
 }
 
 export interface PaymentContextType {
@@ -40,51 +38,48 @@ export const PaymentProvider = ({ children, orderId }: PaymentProviderProps) => 
         deliveryFee: 20,
         price: undefined,
         tip: 0,
-        orderId: orderId
+        orderId: orderId,
     });
 
     const { data: accountData, isLoading: isFetchingAccount } = useGetAccount();
     const { data: orderData, isLoading: isFetchingOrder } = useGetOrder(orderId);
 
     useEffect(() => {
-        if (accountData) {
-            setAccount(accountData?.data);
+        if (accountData?.data) {
+            setAccount(accountData.data as Account);
         }
     }, [accountData]);
 
     useEffect(() => {
-        if (orderData && orderData.data && orderData.data.data) {
+        if (orderData?.data) {
+            const order = orderData.data.data as OrderData;
             setOrderInfo({
-                deliveryAddress: orderData.data.data.deliveryAddress,
-                deliveryFee: 20,
-                price: calculateTotalPrice(orderData.data.data),
-                tip: orderData.data.data.tip != null ? orderData.data.data.tip : 0,
-                orderId: orderData.data.data.orderId
+                deliveryAddress: order.deliveryAddress,
+                deliveryFee: order.deliveryCost,
+                price: calculateTotalPrice(order),
+                tip: order.tip ?? 0,
+                orderId: order.id,
             });
         }
     }, [orderData]);
 
     const total = useMemo(() => {
-        if(orderInfo?.price && orderInfo.tip){
-            return orderInfo.price + orderInfo.deliveryFee + orderInfo.tip
+        if (orderInfo?.price && orderInfo.tip) {
+            return orderInfo.price + orderInfo.deliveryFee + orderInfo.tip;
         }
-        if(orderInfo.price){
-            return orderInfo.price + orderInfo.deliveryFee
+        if (orderInfo.price) {
+            return orderInfo.price + orderInfo.deliveryFee;
         }
-
-    }, [orderInfo.price, orderInfo.deliveryFee, orderInfo.tip])
+    }, [orderInfo.price, orderInfo.deliveryFee, orderInfo.tip]);
 
     const updateOrderInfo = <K extends keyof OrderInfo>(
         key: K,
         value: OrderInfo[K]
     ) => {
-        setOrderInfo((prevOrderInfo) => {
-            if (!prevOrderInfo) return prevOrderInfo;
-            return {
-                ...prevOrderInfo,
-                [key]: value,
-            };
-        });
+        setOrderInfo((prevOrderInfo) => ({
+            ...prevOrderInfo,
+            [key]: value,
+        }));
     };
 
     return (
@@ -95,7 +90,7 @@ export const PaymentProvider = ({ children, orderId }: PaymentProviderProps) => 
                 isFetchingAccount,
                 isFetchingOrder,
                 updateOrderInfo,
-                total
+                total,
             }}
         >
             {children}

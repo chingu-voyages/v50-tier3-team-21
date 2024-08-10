@@ -1,5 +1,5 @@
 import {useQuery} from "@tanstack/react-query";
-import {FilterOptions , FoodItem} from "./interface.ts";
+import {FilterOptions } from "./interface.ts";
 import {restaurantService} from "./restaurant.service.ts";
 
 
@@ -9,7 +9,7 @@ import {restaurantService} from "./restaurant.service.ts";
 //}
 
 export const useGetFoodItemsWithRestaurants = (filterOptions: FilterOptions) => {
-   return useQuery>({
+   return useQuery({
        queryKey: ['food_items_restaurants', filterOptions],
        queryFn: () => restaurantService.getFoodItems(filterOptions)
    })

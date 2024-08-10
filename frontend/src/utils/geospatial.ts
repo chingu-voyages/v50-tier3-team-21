@@ -1,11 +1,26 @@
-// Haversine Distance Function
+import { LayerProps } from "react-map-gl";
 
-type Coordinate = number[] | undefined
-export const haversineDistance = (coords1: Coordinate, coords2: Coordinate) => {
+type Coordinate = [number, number] | [undefined, undefined];
+
+/**
+ * Calculates the Haversine distance between two geographic coordinates.
+ * @param coords1 - The first set of coordinates.
+ * @param coords2 - The second set of coordinates.
+ * @returns The distance in kilometers.
+ */
+export const haversineDistance = (coords1: Coordinate, coords2: Coordinate): number | undefined => {
+    if (!coords1 || !coords2) {
+        return undefined;
+    }
+
+
     const toRadians = (degrees: number) => degrees * (Math.PI / 180);
 
     const [lat1, lon1] = coords1;
     const [lat2, lon2] = coords2;
+    if (lat1 === undefined || lon1 === undefined || lat2 === undefined || lon2 === undefined) {
+        return undefined;
+    }
 
     const R = 6371; // Earth's radius in kilometers
 
@@ -14,7 +29,7 @@ export const haversineDistance = (coords1: Coordinate, coords2: Coordinate) => {
 
     const a =
         Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
+        Math.cos(toRadians(lat1!)) * Math.cos(toRadians(lat2!)) *
         Math.sin(dLon / 2) * Math.sin(dLon / 2);
 
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
@@ -23,10 +38,17 @@ export const haversineDistance = (coords1: Coordinate, coords2: Coordinate) => {
 };
 
 interface GeoLocation {
-    latitude: number,
-    longitude: number
+    latitude: number;
+    longitude: number;
 }
-// Create Circle GeoJSON
+
+/**
+ * Creates a GeoJSON circle.
+ * @param center - The center point of the circle.
+ * @param radiusInKm - The radius of the circle in kilometers.
+ * @param points - The number of points to define the circle.
+ * @returns The GeoJSON object representing the circle.
+ */
 export const createGeoJSONCircle = (center: GeoLocation, radiusInKm: number, points: number = 64) => {
     const coords = {
         latitude: center.latitude,
@@ -35,7 +57,7 @@ export const createGeoJSONCircle = (center: GeoLocation, radiusInKm: number, poi
 
     const km = radiusInKm;
 
-    const ret = [];
+    const ret: [number, number][] = [];
     const distanceX = km / (111.32 * Math.cos(coords.latitude * Math.PI / 180));
     const distanceY = km / 110.574;
 
@@ -46,7 +68,7 @@ export const createGeoJSONCircle = (center: GeoLocation, radiusInKm: number, poi
 
         ret.push([coords.longitude + x, coords.latitude + y]);
     }
-    ret.push(ret[0]);
+    ret.push(ret[0]); // Close the circle
 
     return {
         type: 'Feature',
@@ -58,11 +80,11 @@ export const createGeoJSONCircle = (center: GeoLocation, radiusInKm: number, poi
 };
 
 // Layer style
-export const layerStyle = {
+export const layerStyle: LayerProps = {
     id: 'circle-layer',
     type: 'fill',
     paint: {
-        'fill-color': '#43ff64',
+        'fill-color': 'rgba(67,255,100,0.36)',
     }
 };
 

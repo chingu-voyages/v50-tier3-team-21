@@ -39,9 +39,9 @@ export const Detail = () => {
               {
                   orderInfo &&
                   <OrderInfo
-                      deliveryAddress={orderInfo?.deliveryAddress}
-                      price={subtotal}
-                      deliveryFee={orderInfo?.deliveryFee}
+                      deliveryAddress={orderInfo?.deliveryAddress ?? ""}
+                      price={subtotal ?? 0}
+                      deliveryFee={orderInfo?.deliveryFee ?? 20}
                   />
               }
           </div>

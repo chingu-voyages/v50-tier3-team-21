@@ -8,6 +8,8 @@ type OrderInfoProps = {
     deliveryFee: number
 }
 
+
+
 export const OrderInfo = ({ deliveryAddress, price , deliveryFee}: OrderInfoProps) => {
     const { total} = usePaymentContext()
     return(
@@ -16,7 +18,7 @@ export const OrderInfo = ({ deliveryAddress, price , deliveryFee}: OrderInfoProp
             <p className="font-bold mb-4">{deliveryAddress}</p>
             <OrderInfoItem title="Subtotal" value={price}/>
             <OrderInfoItem title="Delivery fee" value={deliveryFee} />
-            <OrderInfoItem title="Total" value={total} isStrong={true}/>
+            <OrderInfoItem title="Total" value={total ?? 0} isStrong={true}/>
         </div>
     )
 }

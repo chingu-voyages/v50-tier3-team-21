@@ -5,6 +5,10 @@ import {useEffect , useMemo} from "react";
 import PrimaryButton from "../ui/button.tsx";
 import Modal from "./modal.tsx";
 import {SuccessMessage} from "./success-message.tsx";
+import {notify} from "../ui/toast.tsx";
+import {isAxiosError} from "../../utils";
+import {useCancelOrder} from "../../services/api/orders/mutations.ts";
+
 
 export const PaymentFooter = () => {
     const { total} = usePaymentContext();
@@ -20,9 +24,9 @@ export const PaymentFooter = () => {
 }
 
 export const PaymentAction = () => {
-    const { total, account} = usePaymentContext();
-    const {mutate: makePayment, isPending, isSuccess } = useMakePayment();
-    const {modal, handleOnCloseModal, handleOnOpenModal} = useModal()
+    const { total, account, orderInfo} = usePaymentContext();
+    const {mutate: makePayment, isPending, isSuccess , isError, error} = useMakePayment();
+    const {modal, handleOnCloseModal, handleOnOpenModal} = useModal();
     const isDisable = useMemo(() => {
         if(total && account) {
             return account.balance < total
@@ -30,23 +34,37 @@ export const PaymentAction = () => {
         return  true
     }, [total, account])
     const handleProcessPayment = () => {
-        makePayment(
-            {
-                amount: total,
-                orderId: 29
-            }
-        )
+        if(total && orderInfo.orderId){
+            makePayment(
+                {
+                    amount: total,
+                    orderId: orderInfo.orderId
+                }
+            )
+        }
+
     }
     useEffect(() => {
         if(isSuccess) {
             handleOnOpenModal()
         }
     }, [isSuccess])
+    useEffect(() => {
+        if (isError) {
+            notify({
+                message:
+                    isAxiosError(error)
+                        ? error.response?.data?.message ?? "An error occurred. Please try again later"
+                        : "An unexpected error occurred."
+            }, 'error')
+        }
+        if (isSuccess) {
+            notify({ message: 'You are logged in successfully' }, 'success')
+        }
+    }, [isError, isSuccess])
     return(
-        <div className="flex items-center gap-3">
-            <PrimaryButton variant="outline">
-                CANCEL ORDER
-            </PrimaryButton>
+        <div className="flex items-center gap-3 ">
+            <CancelOrderBtn />
             <PrimaryButton
                 isLoading={isPending}
                 onClick={handleProcessPayment}
@@ -58,4 +76,33 @@ export const PaymentAction = () => {
             </Modal>
         </div>
     )
+}
+
+
+export const CancelOrderBtn = () => {
+    const { orderInfo} = usePaymentContext();
+    const {mutate: cancelOrder, isError, error, isPending, isSuccess} = useCancelOrder()
+    const handleCancelOrder = () => {
+        if(orderInfo.orderId){
+             cancelOrder(orderInfo.orderId)
+        }
+    }
+    useEffect(() => {
+        if (isError) {
+            notify({
+                message:
+                    isAxiosError(error)
+                        ? error.response?.data?.message ?? "An error occurred. Please try again later"
+                        : "An unexpected error occurred."
+            }, 'error')
+        }
+        if (isSuccess) {
+            notify({ message: 'You are logged in successfully' }, 'success')
+        }
+    }, [isError])
+  return(
+      <PrimaryButton isLoading={isPending} variant="outline" onClick={handleCancelOrder}>
+          CANCEL ORDER
+      </PrimaryButton>
+  )
 }

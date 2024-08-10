@@ -3,11 +3,11 @@ import {useMemo} from "react";
 
 type PickItemType = {
     amount: number,
-    onClick: () => void,
+    onClick: (value: number) => void,
     currentPick: number,
     total: number
 }
-export const PickItem = ({amount, onClick, currentPick, total}) => {
+export const PickItem = ({amount, onClick, currentPick, total}: PickItemType) => {
     const isCurrentPick = useMemo(() => {
         return currentPick === amount
     },[currentPick, amount])

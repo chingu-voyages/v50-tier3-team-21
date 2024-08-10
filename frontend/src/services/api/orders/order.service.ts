@@ -4,6 +4,9 @@ class OrderService {
     public getOrder(orderId: number) {
         return httpClient.get(`/order/get-order/${orderId}`)
     }
+    public cancelOrder(orderId: number) {
+        return httpClient.put<number>(`/order/cancel/${orderId}`, orderId)
+    }
 }
 
 

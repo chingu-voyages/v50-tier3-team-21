@@ -1,6 +1,6 @@
 import {Select , SingleSelect , SingleSelectLabel , SingleSelectOption} from "../ui/single-select/select.tsx";
 import {FilterOptions} from "../../services/api/interctive-map/interface.ts";
-import React , {useMemo} from "react";
+import {useMemo} from "react";
 import {DistancePriceFilters , useAppMapContext} from "../../provider/map.provider.tsx";
 import {Slider} from "../ui/slider.tsx";
 import {getMaxPrice} from "../../utils";
@@ -62,7 +62,7 @@ export const FilterForm = () => {
 
             <div className="w-full flex justify-center items-center gap-2">
                 <div className="w-full flex flex-col justify-center">
-                    <SingleSelectLabel htmlFor="country-select" label="Country:" />
+                    <SingleSelectLabel id="country-select" label="Country:" />
                     <SingleSelect<FilterOptions['country']>
                         value={filterOptions.country}
                         onChange={handleFilterChange('country')}

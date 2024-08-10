@@ -28,7 +28,7 @@ export const Picks = () => {
         <ul className="flex h-fit justify-between items-center gap-2 ">
             {
                 picksItems.map(item => (
-                    <PickItem amount={item.amount} key={item.amount} onClick={handleChoosePick} currentPick={selectedPick} total={orderInfo?.price} />
+                    <PickItem amount={item.amount} key={item.amount} onClick={handleChoosePick} currentPick={selectedPick} total={orderInfo?.price ?? 0} />
                 ))
             }
         </ul>

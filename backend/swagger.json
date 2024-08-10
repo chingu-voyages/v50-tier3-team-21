@@ -18,7 +18,7 @@
     ],
     "tags": [
       {
-        "name": "Auth",
+        "name": "Authentication",
         "description": "Authentication routes"
       },
       {
@@ -60,7 +60,7 @@
           "summary": "Signup a new user",
           "description": "Fields required: `username, email, password, confirmPassword`",
           "tags": [
-            "Auth"
+            "Authentication"
           ],
           "requestBody": {
             "required": true,
@@ -194,7 +194,7 @@
           "summary": "Login a user",
           "description": "Fields required: `username`, or `email`, and `password`",
           "tags": [
-            "Auth"
+            "Authentication"
           ],
           "requestBody": {
             "required": true,
@@ -265,7 +265,7 @@
         "post": {
           "summary": "Logout a user",
           "tags": [
-            "Auth"
+            "Authentication"
           ],
           "responses": {
             "200": {
@@ -298,7 +298,7 @@
         "get": {
           "summary": "Refresh the access token",
           "tags": [
-            "Auth"
+            "Authentication"
           ],
           "responses": {
             "200": {

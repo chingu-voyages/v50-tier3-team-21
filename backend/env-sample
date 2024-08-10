@@ -25,3 +25,8 @@ BACKEND_URL='http://localhost:3000'
 
 MAIL_USER='user@mail.com'
 MAIL_PASSWORD='some real password'
+
+# STRIPE SETTINGS
+
+STRIPE_PUBLISHABLE_KEY='some-key-here'
+STRIPE_SECRET_KEY='some-other-key-here'

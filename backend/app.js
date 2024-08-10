@@ -66,7 +66,7 @@ db.sequelize.sync().then(() => {
   app.get('/', (req, res) => {
     res.status(200).json({
       status: 'success',
-      message: 'Hello World',
+      message: 'Welcome to Hungry Hippo API. To see the documentation, go to http://localhost:3000/api/docs . To see it on the deployed server, go to https://hungryhippo.onrender.com/api/docs',
     });
   });
 

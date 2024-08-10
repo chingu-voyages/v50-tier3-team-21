@@ -8,6 +8,7 @@ import {SuccessMessage} from "./success-message.tsx";
 import {notify} from "../ui/toast.tsx";
 import {isAxiosError} from "../../utils";
 import {useCancelOrder} from "../../services/api/orders/mutations.ts";
+import {useNavigate} from "react-router-dom";
 
 
 export const PaymentFooter = () => {
@@ -58,10 +59,7 @@ export const PaymentAction = () => {
                         : "An unexpected error occurred."
             }, 'error')
         }
-        if (isSuccess) {
-            notify({ message: 'You are logged in successfully' }, 'success')
-        }
-    }, [isError, isSuccess])
+    }, [isError])
     return(
         <div className="flex items-center gap-3 ">
             <CancelOrderBtn />
@@ -81,12 +79,26 @@ export const PaymentAction = () => {
 
 export const CancelOrderBtn = () => {
     const { orderInfo} = usePaymentContext();
-    const {mutate: cancelOrder, isError, error, isPending, isSuccess} = useCancelOrder()
+    const navigate = useNavigate()
+    const {mutate: cancelOrder, isError, error,data, isPending, isSuccess} = useCancelOrder()
     const handleCancelOrder = () => {
         if(orderInfo.orderId){
              cancelOrder(orderInfo.orderId)
         }
     }
+    useEffect(() => {
+        if (isSuccess) {
+            notify({
+                message: data?.data.message
+            }, 'success')
+        }
+        const timer = setTimeout(() => {
+            navigate('/');
+        }, 2000);
+        return () => {
+            clearTimeout(timer)
+        }
+    }, [isSuccess])
     useEffect(() => {
         if (isError) {
             notify({
@@ -95,9 +107,6 @@ export const CancelOrderBtn = () => {
                         ? error.response?.data?.message ?? "An error occurred. Please try again later"
                         : "An unexpected error occurred."
             }, 'error')
-        }
-        if (isSuccess) {
-            notify({ message: 'You are logged in successfully' }, 'success')
         }
     }, [isError])
   return(

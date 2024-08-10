@@ -55,7 +55,7 @@ export const PaymentProvider = ({ children, orderId }: PaymentProviderProps) => 
             const order = orderData.data.data as OrderData;
             setOrderInfo({
                 deliveryAddress: order.deliveryAddress,
-                deliveryFee: order.deliveryCost,
+                deliveryFee: 20,
                 price: calculateTotalPrice(order),
                 tip: order.tip ?? 0,
                 orderId: order.id,

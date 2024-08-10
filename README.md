@@ -21,6 +21,8 @@ It is a Full Stack Web Application made as a part of 50th Voyage organised by [C
 ## Project Details
 ![Project Summary](./docs/ProjectSummary.png)
 
+### Team Document
+
 In order not to block the creative and innovative work of the project, the team has adopted the idea to use the Google Docs document as a team document in a very free fashion. We were sharing the ideas, adding details and minutes of the meetings in that document that was more of a brainstorming tool. The said document is accessible in the [Google Docs](https://docs.google.com/document/d/15vURBkOasLmq5THwEN9E6Dexm1B_NtrjHpaKKm70jZI).
 
 
@@ -208,6 +210,32 @@ By analyzing the proposed food items API from the deployed API [https://menus-ap
 
 ## Deployment
 
+### Deploying on Render
+
+- Render was used as the hosting platform for the live project deployment.
+  - backend: [https://hungryhippo.onrender.com/](https://hungryhippo.onrender.com/)
+  - frontend: [https://hungryhippo-tgrams.onrender.com/](https://hungryhippo-tgrams.onrender.com/)
+
+### Deploying on local machine
+
+1. Clone the repository
+   `git clone https://github.com/chingu-voyages/v50-tier3-team-21/`
+2. Backend
+   - Install dependencies
+   from the root directory:
+   `cd backend && npm install`
+   - add necessary details to `.env` file, details in [env-sample](./backend/env-sample)
+   - if the PostgreSQL database is empty, run `npm run seed`
+   - run `npm run dev`
+   - open http://localhost:3000 in your browser
+3. Frontend
+   - Install dependencies
+   from the root directory:
+   `cd frontend && npm install` 
+   - add necessary details to `.env` file, details in [env-sample](./frontendbackend/env-sample)
+   - run `npm run dev`
+   - open http://localhost:5173 in your browser
+
 ## Testing
 
 ## Technologies Used
@@ -272,10 +300,6 @@ By analyzing the proposed food items API from the deployed API [https://menus-ap
 - [Figma](https://www.figma.com/) - for wireframing and prototyping
 - [Lucidchart](https://www.lucidchart.com/) for DB design
 
-
-## Team Documents
-
-- TODO: Add contents of the Google Docs Team Document here
 
 
 

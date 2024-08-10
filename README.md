@@ -1,12 +1,12 @@
 # Hungry Hippo
 
-![Hungry Hippo image](./frontend/src/assets/hippo-server-mobile.png)
+![Hungry Hippo image](./docs/Title.png)
 
 [Link to the Hungry Hippo website](https://hungryhippo-tgrams.onrender.com/)
 
 
 ## Introduction
-<img src="https://www.chingu.io/logo-with-text-192.png" alt="Chingu Image" style="width:200px; float:right"/>
+<img src="https://www.chingu.io/logo-with-text-192.png" alt="Chingu Image" style="width:200px; float:right; background-color:white"/>
 
 **Frontend**: React, Tailwind, TypeScript
 **Backend**: NodeJS, Express, PostgreSQL, JavaScript|
@@ -17,10 +17,23 @@ It is a Full Stack Web Application made as a part of 50th Voyage organised by [C
   - [Chingu: Voyage 50 - Tier 3 Project Requirements and Specifications](https://github.com/chingu-voyages/voyage-project-tier3-restaurantsim)
 
 ## Project Details
+![Project Summary](./docs/ProjectSummary.png)
+
+### Design and Prototyping
+
+The main design and prototyping is done by `Figma` and the file can be accessed [here](https://www.figma.com/design/jO2jiYuSf1iA3Eh3d0gbgb/Hungry-Hippo?node-id=1-172&t=0XKynAkPYrcUWODA-0).
+
+On the other hand, some excerps are exported to the `docs` folder in `pdf` format.
+
+- [Project Summary](./docs/wireframes/ProjectSummary.png)
+- [Components](./docs/wireframes/components.pdf)
+- [Overall Website Design](./docs/wireframes/website.pdf)
+
 
 ### Features
 
 - TODO: Frontend guys fill this out :)
+
 
 ### API
 

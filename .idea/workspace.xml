@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="update: add horizontal padding to order section">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/provider/map.provider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/provider/map.provider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/provider/payment.provider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/provider/payment.provider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/interctive-map/queries.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/interctive-map/queries.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/interctive-map/restaurant.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/interctive-map/restaurant.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/orders/order.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/orders/order.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/orders/queries.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/orders/queries.ts" afterDir="false" />
+    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="fix: update spacing style on header nav">
+      <change beforePath="$PROJECT_DIR$/frontend/public/vite.svg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +45,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "50-us-42-make-a-payment",
+    "git-widget-placeholder": "fix/layout-issue",
     "last_opened_file_path": "/mnt/mydata/Archive/WebstormProjects/voyage",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -339,7 +333,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723307562020</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="fix: update spacing style on header nav">
+      <option name="closed" value="true" />
+      <created>1723312077144</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1723312077144</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -357,7 +359,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat: auth logic implemented" />
     <MESSAGE value="wip: reset password features" />
     <MESSAGE value="fix: fix null check error" />
     <MESSAGE value="chore: add dotenv" />
@@ -382,7 +383,8 @@
     <MESSAGE value="feat: adding permanent auth tracking" />
     <MESSAGE value="update: update toast message" />
     <MESSAGE value="update: add horizontal padding to order section" />
-    <option name="LAST_COMMIT_MESSAGE" value="update: add horizontal padding to order section" />
+    <MESSAGE value="fix: update spacing style on header nav" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: update spacing style on header nav" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

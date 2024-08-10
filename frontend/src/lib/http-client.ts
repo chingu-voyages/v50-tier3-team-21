@@ -23,10 +23,9 @@ export class HttpClient {
                       return response;
                       },
              async (error) => {
-                 if(error.response  && error.response.status === '401'){
+                 if(error.response  && error.response.status === 401){
                      try{
                          await authService.refreshAccessToken();
-
                          return axiosInstance(error.config);
                      }catch(refreshTokenError){
                          return Promise.reject(refreshTokenError);

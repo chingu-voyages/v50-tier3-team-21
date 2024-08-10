@@ -305,6 +305,7 @@ Having all that in mind, the team has decided to implement more tests in the fut
 
 **Development and Design Tools**
 - [Postman](https://www.postman.com/) - API testing
+- [Beekeeper Studio](https://www.beekeeperstudio.io/) - Database testing and accessing
 - [Visual Studio Code](https://code.visualstudio.com/) - Develompent code editor
 - [Microsoft Designer](https://www.microsoft.com/en-us/designer/) - UI design and prototyping
 - [Figma](https://www.figma.com/) - for wireframing and prototyping

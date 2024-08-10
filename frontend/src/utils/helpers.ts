@@ -3,6 +3,7 @@
 import {AxiosError} from "axios";
 import {RestaurantWithImage} from "../services/api/interctive-map/interface.ts";
 import {OrderData , OrderItem} from "../services/api/orders/interface.ts";
+import {getItem} from "./localstorage.ts";
 
 interface CustomErrorResponse {
     message: string;
@@ -28,5 +29,8 @@ export const calculateTotalPrice = (orderData: OrderData): number => {
 
     return itemTotal + orderData.deliveryCost + orderData.tip;
 };
+
+
+export const isAuthenticatedFn = () => getItem("isAuth") == "1"
 
 

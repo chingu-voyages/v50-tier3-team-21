@@ -5,6 +5,7 @@ import {FormLabel} from "../authentication/form-label.tsx";
 import PrimaryButton from "../ui/button.tsx";
 import {GeolocationBtn} from "../ui/geolocation-btn.tsx";
 import React from "react";
+import {useModal} from "../../hooks/modal.hook.ts";
 
 export const AddressSearchInput = () => {
     const { query, handleSearchQuery, isOpen, flyTo, } = useAddressSearch();
@@ -14,7 +15,7 @@ export const AddressSearchInput = () => {
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
        handleSearchQuery(e.target.value)
     };
-
+    const {modal, toggleModal} = useModal()
 
     return (
         <form className="w-full flex flex-col gap-5  p-6 bg-white border rounded-lg">
@@ -29,9 +30,14 @@ export const AddressSearchInput = () => {
                         placeholder="Search for an address"
                         className="w-full px-3 py-2 z-10  rounded-lg placeholder:font-light placeholder:text-[0.8em] focus:outline-0"
                     />
-                    <div className="absolute right-2 top-1/2 -translate-y-1/2">
-                        <GeolocationBtn onClick={handleSearchQuery} />
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2 pt-1">
+                        <GeolocationBtn onClick={handleSearchQuery} toggleModal={toggleModal} />
                     </div>
+                    {
+                        modal &&  <div className="absolute shadow-[0_0_20px_0px_rgba(0,0,0,0.2)] rounded-lg w-fit p-3 -top-full right-0 md:-right-12 bg-secondary text-xs text-white after:content-[''] after:h-3 after:w-3 after:bg-secondary after:rotate-45 after:absolute after:top-8 after:left-1/2 after:translate-x-12 md:after:translate-x-0 after:shadow-[0_0_20px_0px_rgba(0,0,0,0.2)]">
+                            Use my current location
+                        </div>
+                    }
 
                 </div>
                 {isSuccess && isOpen && <LocationResults isLoading={isLoading} data={data} />}

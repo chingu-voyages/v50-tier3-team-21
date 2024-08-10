@@ -4,7 +4,7 @@ import PrimaryButton from "./button.tsx";
 import {useEffect} from "react";
 
 
-export const GeolocationBtn = ({ onClick }: { onClick: (value: string) => void }) => {
+export const GeolocationBtn = ({ onClick, toggleModal }: { onClick: (value: string) => void, toggleModal: () => void }) => {
   const { getUserLocation , location, setLocationEmpty } = useGeoLocation();
   const { data, isSuccess,isLoading  } = useReverseGeoCoding(location.long, location.lat);
 
@@ -19,9 +19,12 @@ export const GeolocationBtn = ({ onClick }: { onClick: (value: string) => void }
       <PrimaryButton variant={"ghost"} onClick={getUserLocation} className="p-0" isLoading={isLoading}>
           {
               !isLoading &&<span
+                  onMouseEnter={toggleModal}
+                  onMouseLeave={toggleModal}
                onClick={getUserLocation}
-               className="icon-[solar--gps-bold-duotone]"
-           />}
+               className="icon-[solar--gps-bold-duotone] text-secondary text-2xl bg-secondary"
+               />
+          }
       </PrimaryButton>
 
   )

@@ -1,0 +1,5 @@
+VITE_NODE_ENV="development" // development or production
+VITE_LOCAL_API_BASE_URL="http://localhost:3000/api"
+VITE_REMOTE_API_BASE_URL="https://deployed-api-url.com/api"
+VITE_MAPBOX_TOKEN='mapbox-token'
+VITE_MAPBOX_SESSION_TOKEN='mapbox-session-token'

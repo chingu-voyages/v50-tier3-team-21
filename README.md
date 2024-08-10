@@ -42,32 +42,32 @@ On the other hand, some excerps are exported to the `docs` folder in `pdf` forma
 
 ### Features
 
-- [ ] **User Authentication**:
-  - [ ] Sign up, log in, and log out functionalities.
-  - [ ] Password reset
+- [x] **User Authentication**:
+  - [x] Sign up, log in, and log out functionalities.
+  - [x] Password reset
 
-- [ ] **Restaurant Discovery**:
-  - [ ] Search for nearby restaurants based on user location.
-  - [ ] Filter restaurants by distance , food price , food categories and country
+- [x] **Restaurant Discovery**:
+  - [x] Search for nearby restaurants based on user location.
+  - [x] Filter restaurants by distance , food price , food categories and country
 
-- [ ] **Food Ordering**:
-  - [ ] Browse food items from various restaurants.
-  - [ ] Add items to cart and place orders.
+- [x] **Food Ordering**:
+  - [x] Browse food items from various restaurants.
+  - [x] Add items to cart and place orders.
  
-- [ ] **User Profiles**:
-  - [ ] Manage personal details and view account balance.
-  - [ ] Update profile information.
+- [x] **User Profiles**:
+  - [x] Manage personal details and view account balance.
+  - [x] Update profile information.
 
-- [ ] **Payment Integration**:
-  - [ ] Top-up wallet 
-  - [ ] make payments for orders.
+- [x] **Payment Integration**:
+  - [x] Top-up wallet 
+  - [x] make payments for orders.
 
-- [ ] **Food Categories**:
-  - [ ] Browse and search food items by categories.
+- [x] **Food Categories**:
+  - [x] Browse and search food items by categories.
 
-- [ ] **Map Integration**:
-  - [ ] Interactive maps to view restaurant locations and delivery areas.
-  - [ ] Address search functionality for delivery.
+- [x] **Map Integration**:
+  - [x] Interactive maps to view restaurant locations and delivery areas.
+  - [x] Address search functionality for delivery.
 
 
 

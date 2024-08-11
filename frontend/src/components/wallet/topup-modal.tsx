@@ -19,7 +19,7 @@ export const TopupModal = ({
 
   useEffect(() => {
     // everytime the topUp amount changes, recalculate the new total
-    const total = (+balance + +topupAmount).toFixed(2);
+    const total = (+balance + +topupAmount).toFixed(2)
     setNewTotal(total);
   }, [topupAmount]);
 
@@ -87,6 +87,7 @@ export const TopupModal = ({
                 <div className="mb-1 text-xs">Your new balance will be:</div>
                 <div className="bg-secondary/10 text-secondary p-3 rounded-lg">
                   $ {newTotal}
+
                 </div>
               </div>
             </div>

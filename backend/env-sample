@@ -30,3 +30,4 @@ MAIL_PASSWORD='some real password'
 
 STRIPE_PUBLISHABLE_KEY='some-key-here'
 STRIPE_SECRET_KEY='some-other-key-here'
+STRIPE_ENDPOINT_SECRET="something-else-here"

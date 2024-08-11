@@ -41,7 +41,7 @@ const handleStripeTopup = async (req, res) => {
 };
 
 const handleStripeWebhook = async (request, response) => {
-  const endpointSecret = "whsec_82c74664903b2ca97be54f6b0c7ad71e22f579d3f2e6d5d7c71f7b7bd5078f53";
+  const endpointSecret = process.env.STRIPE_ENDPOINT_SECRET;
   let event = request.body;
   // Only verify the event if you have an endpoint secret defined.
   // Otherwise use the basic event deserialized with JSON.parse

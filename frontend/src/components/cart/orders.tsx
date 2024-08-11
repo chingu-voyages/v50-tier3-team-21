@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { OrderItem } from "./orderItem";
 import { OrderType, OrdersProps } from "../restaurant/types/restaurant-types";
+import { notify } from "../ui/toast";
 
 export const Orders = ({ cart, setCart, setStorage }: OrdersProps) => {
   useEffect(() => {
@@ -33,6 +34,8 @@ export const Orders = ({ cart, setCart, setStorage }: OrdersProps) => {
   const subtractQuantity = (item: OrderType) => {
     // if item is already at 1, confirm that they want to remove item from cart
     if (item.quantity === 1) {
+      if (!confirm(`If you remove a single quantity the item will be removed from your card.  Are you srue you'd like to remove ${item.name} from your order?`))
+        return;
       handleDelete(item.id);
       return;
     }
@@ -49,15 +52,10 @@ export const Orders = ({ cart, setCart, setStorage }: OrdersProps) => {
   // delete the item from the cart
   const handleDelete = (id: number) => {
     const foundItem = cart.find((cartItem) => cartItem.id === id);
-    let message;
-    if (foundItem?.quantity === 1)
-      message = `If you remove a single quantity the item will be removed from your card.  Are you srue you'd like to remove ${foundItem.name} from your order?`;
-    else message = `Are you sure you want to remove  from your cart?`;
-    if (!confirm(message)) return;
-
     const filteredCart = cart.filter((item) => item.id !== id);
     setCart(filteredCart);
     setStorage && setStorage(filteredCart);
+    notify({message: `${foundItem?.name} has been removed from your cart successfully`,},"success");
   };
 
   return (

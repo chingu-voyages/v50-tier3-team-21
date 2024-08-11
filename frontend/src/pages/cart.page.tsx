@@ -9,6 +9,8 @@ import {useCheckPathname} from "../hooks/check-pathname.hook.ts";
 export const CartPage = () => {
   const [cart, setCart] = useState<OrderType[]>([]);
   const [address, setAddress] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
   const navigate = useNavigate();
   const activePath = useCheckPathname('/checkout/order/confirm');
   if(activePath === null){
@@ -30,6 +32,8 @@ export const CartPage = () => {
   }, []);
 
   const handleCheckout = async () => {
+    // set Loading to true
+    setIsLoading(true);
     // reformat to make an order for the database
     // create an array of just necessary data for each food item
     const cartData = cart.map((item) => ({
@@ -55,10 +59,13 @@ export const CartPage = () => {
     try {
       const response = await httpClient.post("/order/create-order", order);
       const orderId: number = response.data.orderId;
+      // clear localStorage now that order in database
+      localStorage.removeItem("shoppingCart");
       navigate(`/checkout/order/payment/${orderId}`)
     } catch (error) {
       console.log(error);
     }
+    setIsLoading(false)
   };
 
   return (
@@ -70,7 +77,7 @@ export const CartPage = () => {
           </h1>
           <Orders cart={cart} setCart={setCart} />
           <DeliveryAddress address={address} setAddress={setAddress} />
-          <CheckoutFooter cart={cart} handleCheckout={handleCheckout} address={address}/>
+          <CheckoutFooter cart={cart} handleCheckout={handleCheckout} address={address} isLoading={isLoading}/>
         </div>
       ) : (
         <div className="spacing-x">You have no added anything to you cart yet...</div>

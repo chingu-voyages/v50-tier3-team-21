@@ -99,7 +99,7 @@ export const DeliveryAddress = ({
       <div>Delivery location</div>
       {/* <div>1906 Market St. San Francisc, CA 94102, USA</div> */}
       <div>{address !== "getting address..." && address}</div>
-      <PrimaryButton className={`${!address && "bg-opacity-30"}`} onClick={handleChangeAddress}>
+      <PrimaryButton onClick={handleChangeAddress}>
         CHANGE
       </PrimaryButton>
     </div>

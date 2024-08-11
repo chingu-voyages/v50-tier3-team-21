@@ -46,4 +46,5 @@ export interface MenuItemType {
     cart: OrderType[];
     handleCheckout: () => void;
     address?: string;
+    isLoading?: boolean
   }

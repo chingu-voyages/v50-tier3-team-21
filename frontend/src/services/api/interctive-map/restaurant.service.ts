@@ -1,6 +1,6 @@
 import {httpClient} from "../../../lib/http-client.ts";
-import {FilterOptions} from "./interface.ts";
-import {ApiResponse} from "./queries.ts";
+import {FilterOptions , FoodItem} from "./interface.ts";
+import {IResponseWithData} from "../../../types/api-response.types.ts";
 
 
 
@@ -11,7 +11,7 @@ class RestaurantService {
         return httpClient.get(`/nearbyrestaurants?latitude=${latitude}&longitude=${longitude}`)
     }
 
-    public getFoodItems(filterOptions: FilterOptions): Promise<ApiResponse> {
+    public getFoodItems(filterOptions: FilterOptions): Promise<IResponseWithData<FoodItem[]>> {
         const searchParams: Record<string, any> = new URLSearchParams();
         Object.keys(filterOptions).forEach(key => {
             const value = filterOptions[key as keyof FilterOptions];

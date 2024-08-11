@@ -1,5 +1,6 @@
 import {httpClient} from "../../../lib/http-client.ts";
-import {MakePaymentDto} from "./interface.ts";
+import {Account , MakePaymentDto} from "./interface.ts";
+import {IResponseWithData} from "../../../types/api-response.types.ts";
 
 
 
@@ -8,7 +9,7 @@ import {MakePaymentDto} from "./interface.ts";
        return httpClient.post<MakePaymentDto>('/wallets/makePayment', data)
     }
 
-    public getAccount() {
+    public getAccount(): Promise<IResponseWithData<Account>> {
         return httpClient.get('/wallets')
     }
 }

@@ -1,9 +1,10 @@
-import { useState } from "react";
-import { FormPasswordField } from "./form-password-field";
+import React , {useState} from "react";
+import {FormPasswordField} from "./form-password-field";
 import PrimaryButton from "../ui/button";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { httpClient } from "../../lib/http-client";
-import { PasswordInputs, PasswordModalProps } from "./types/profile-types";
+import {SubmitHandler , useForm} from "react-hook-form";
+import {httpClient} from "../../lib/http-client";
+import {PasswordInputs , PasswordModalProps} from "./types/profile-types";
+import {notify} from "../ui/toast";
 
 export const PasswordModal: React.FC<PasswordModalProps> = ({
   setViewPasswordModal,
@@ -12,7 +13,7 @@ export const PasswordModal: React.FC<PasswordModalProps> = ({
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     reset,
     getValues,
   } = useForm<PasswordInputs>();
@@ -26,6 +27,7 @@ export const PasswordModal: React.FC<PasswordModalProps> = ({
   const handleCancel = () => {
     setError("");
     reset()
+    setViewPasswordModal(false)
   }
 
   // submit change of password request
@@ -37,16 +39,13 @@ export const PasswordModal: React.FC<PasswordModalProps> = ({
       return;
     }
 
-    const editedPassword = data;
     try {
-      const response = await httpClient.put("http://localhost:3000/api/profile", editedPassword);
-      const {data} = response.data;
-      console.log(data);
-      alert("Password Changed!");
+      await httpClient.put("/profile", data);
+      notify({ message: "Your password has been changed successfully" }, "success");
+      setViewPasswordModal(false)
     } catch (error){
-      console.log(error)
+      notify({message: "An error occurred. Please try again later"}, "error");
     }
-
   };
 
   return (
@@ -97,6 +96,7 @@ export const PasswordModal: React.FC<PasswordModalProps> = ({
               <PrimaryButton
                 type="submit"
                 className="md:flex-none md:px-10 flex-1"
+                isLoading={isSubmitting}
               >
                 Confirm
               </PrimaryButton>

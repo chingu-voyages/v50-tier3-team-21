@@ -26,7 +26,7 @@ export const AppMap = () => {
         distancePriceFilters.distance ?? 5
     );
    return(
-       <section className="w-full h-full">
+       <section className="w-full h-full md:spacing-x">
            <Map
                id="mapA"
                mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN}

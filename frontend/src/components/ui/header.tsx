@@ -3,7 +3,7 @@ import { useAuth } from "../../hooks/auth.hook.ts";
 import { Link, useNavigate } from "react-router-dom";
 import { httpClient } from "../../lib/http-client.ts";
 import { UserType, ProfileResponse } from "../profile/types/profile-types.ts";
-import { MenuItemType, OrderType } from "../restaurant/types/restaurant-types.ts";
+import {  OrderType } from "../restaurant/types/restaurant-types.ts";
 
 export interface HeaderNavProps {
     isLoggedIn?: boolean;
@@ -38,14 +38,14 @@ export default function HeaderNav() {
         const cart = localStorage.getItem("shoppingCart");
         if(cart) {
             const formattedCart = JSON.parse(cart);
-            const total = formattedCart.reduce((sum: number, item: OrderType) => sum = sum + (item.quantity ?? 0), 0);
+            const total = formattedCart.reduce((sum: number, item: OrderType) => sum + (item.quantity ?? 0), 0);
             setCartCount(total);
         }
     }, [localStorage.getItem("shoppingCart")])
 
     return (
         <header className="bg-white fixed w-full z-50">
-            <nav aria-label="Global" className="relative mx-auto flex md:gap-3 w-full md:px-24 items-center justify-between  p-8">
+            <nav aria-label="Global" className="relative mx-auto flex md:gap-3 w-full spacing-x items-center justify-between  py-8">
                 <div className="hidden md:flex">
                     <a href="/" className="-m-1.5 p-1.5 flex items-end gap-2">
                         <span className="sr-only">Hungry Hippo</span>

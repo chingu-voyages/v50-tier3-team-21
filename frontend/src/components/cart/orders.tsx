@@ -79,7 +79,7 @@ export const Orders = ({ cart, setCart, setStorage }: OrdersProps) => {
           </div>
         </div>
       ) : (
-        <div>Your shopping cart is currently empty</div>
+        <div className="spacing-x">Your shopping cart is currently empty</div>
       )}
     </div>
   );

@@ -66,8 +66,8 @@ export const PaymentAction = () => {
             <PrimaryButton
                 isLoading={isPending}
                 onClick={handleProcessPayment}
-                className={`${isDisable ? "bg-opacity-30 pointer-events-none": "" }`}>
-                PAY NOW
+                className={`${isDisable || orderInfo.finalized || orderInfo.canceled ? "bg-opacity-30 pointer-events-none": "" }`}>
+                { orderInfo.finalized ? "ORDER FINALIZED": "PAY NOW"}
             </PrimaryButton>
             <Modal handleOnCloseModal={handleOnCloseModal} isOpen={modal} >
                 <SuccessMessage />
@@ -114,8 +114,13 @@ export const CancelOrderBtn = () => {
         }
     }, [isError])
   return(
-      <PrimaryButton isLoading={isPending} variant="outline" onClick={handleCancelOrder}>
-          CANCEL ORDER
+      <PrimaryButton
+          isLoading={isPending}
+          variant="outline"
+          onClick={handleCancelOrder}
+          className={`${orderInfo.canceled ? "bg-opacity-30 pointer-events-none": "" }`}
+      >
+          { orderInfo.canceled ? "ORDER CANCELED": "CANCEL ORDER"}
       </PrimaryButton>
   )
 }

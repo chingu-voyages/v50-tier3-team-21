@@ -1,8 +1,9 @@
 import {httpClient} from "../../../lib/http-client.ts";
-import {OrderResponse} from "./queries.ts";
+import {IResponseWithData} from "../../../types/api-response.types.ts";
+import {OrderData} from "./interface.ts";
 
 class OrderService {
-    public  getOrder(orderId: number): Promise<OrderResponse> {
+    public  getOrder(orderId: number): Promise<IResponseWithData<OrderData>> {
         return  httpClient.get(`/order/get-order/${orderId}`)
     }
     public cancelOrder(orderId: number) {

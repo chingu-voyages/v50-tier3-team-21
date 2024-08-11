@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { FormPasswordField } from "./form-password-field";
+import React , {useState} from "react";
+import {FormPasswordField} from "./form-password-field";
 import PrimaryButton from "../ui/button";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { httpClient } from "../../lib/http-client";
-import { PasswordInputs, PasswordModalProps } from "./types/profile-types";
-import { notify, ToastMessages } from "../ui/toast";
+import {SubmitHandler , useForm} from "react-hook-form";
+import {httpClient} from "../../lib/http-client";
+import {PasswordInputs , PasswordModalProps} from "./types/profile-types";
+import {notify} from "../ui/toast";
 
 export const PasswordModal: React.FC<PasswordModalProps> = ({
   setViewPasswordModal,
@@ -39,10 +39,8 @@ export const PasswordModal: React.FC<PasswordModalProps> = ({
       return;
     }
 
-    const editedPassword = data;
     try {
-      const response = await httpClient.put("/profile", editedPassword);
-      const {data} = response.data;
+      await httpClient.put("/profile", data);
       notify({ message: "Your password has been changed successfully" }, "success");
       setViewPasswordModal(false)
     } catch (error){

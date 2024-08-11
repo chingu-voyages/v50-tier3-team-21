@@ -73,7 +73,7 @@ export const CartPage = () => {
           <CheckoutFooter cart={cart} handleCheckout={handleCheckout} address={address}/>
         </div>
       ) : (
-        <div>You have no added anything to you cart yet...</div>
+        <div className="spacing-x">You have no added anything to you cart yet...</div>
       )}
     </>
   );

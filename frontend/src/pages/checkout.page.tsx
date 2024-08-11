@@ -4,7 +4,7 @@ import {Outlet} from "react-router-dom";
 
 export const CheckoutPage = () => {
   return(
-      <section className="px-6 md:px-36">
+      <section className="spacing-x">
           <CheckoutHeader />
           <Outlet />
       </section>

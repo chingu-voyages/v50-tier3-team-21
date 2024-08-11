@@ -54,7 +54,7 @@ export const Orders = ({ cart, setCart, setStorage }: OrdersProps) => {
     const foundItem = cart.find((cartItem) => cartItem.id === id);
     const filteredCart = cart.filter((item) => item.id !== id);
     setCart(filteredCart);
-    setStorage && setStorage(filteredCart);
+    localStorage.setItem("shoppingCart", JSON.stringify(filteredCart));
     notify({message: `${foundItem?.name} has been removed from your cart successfully`,},"success");
   };
 
@@ -79,7 +79,7 @@ export const Orders = ({ cart, setCart, setStorage }: OrdersProps) => {
           </div>
         </div>
       ) : (
-        <div className="spacing-x">Your shopping cart is currently empty</div>
+        <div className="px-5">Your shopping cart is currently empty</div>
       )}
     </div>
   );

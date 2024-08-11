@@ -4,19 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="fix: add consistent horizontal spacing">
-      <change afterPath="$PROJECT_DIR$/frontend/src/types/api-response.types.ts" afterDir="false" />
+    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="refactor: refactor api response type and remove unused variable">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/payment/payment-footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/payment/payment-footer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/profile/password-modal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/profile/password-modal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/ui/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ui/header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/payment/inssuficient-message.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/payment/inssuficient-message.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/provider/payment.provider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/provider/payment.provider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/interctive-map/queries.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/interctive-map/queries.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/interctive-map/restaurant.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/interctive-map/restaurant.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/orders/order.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/orders/order.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/orders/queries.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/orders/queries.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/services/api/payment/payment.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/payment/payment.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/services/api/payment/queries.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/payment/queries.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/types/api-response.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/types/api-response.types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +113,7 @@
       <workItem from="1722855514990" duration="20502000" />
       <workItem from="1723137035405" duration="2358000" />
       <workItem from="1723282751874" duration="12013000" />
-      <workItem from="1723362338787" duration="5074000" />
+      <workItem from="1723362338787" duration="7994000" />
     </task>
     <task id="LOCAL-00001" summary="chore: add axios">
       <option name="closed" value="true" />
@@ -409,7 +403,23 @@
       <option name="project" value="LOCAL" />
       <updated>1723375192489</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="refactor: refactor api response type and remove unused variable">
+      <option name="closed" value="true" />
+      <created>1723381664019</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1723381664019</updated>
+    </task>
+    <task id="LOCAL-00038" summary="refactor: refactor api response type and remove unused variable">
+      <option name="closed" value="true" />
+      <created>1723381730026</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1723381730026</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -427,7 +437,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="wip: work in progress implementing interactive map" />
     <MESSAGE value="update: remove unnecessary dependencies" />
     <MESSAGE value="wip: adding circle layer to the nearby restaurants" />
     <MESSAGE value="feat: add circle layer into the map surrounding with radius distance from user location" />
@@ -452,7 +461,8 @@
     <MESSAGE value="fix: remove the axios response interceptor" />
     <MESSAGE value="fix: remove unused authservice" />
     <MESSAGE value="fix: add consistent horizontal spacing" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: add consistent horizontal spacing" />
+    <MESSAGE value="refactor: refactor api response type and remove unused variable" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor: refactor api response type and remove unused variable" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -471,6 +481,12 @@
           <url>file://$PROJECT_DIR$/frontend/src/components/authentication/reset-password-form.tsx</url>
           <line>25</line>
           <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/services/api/payment/queries.ts</url>
+          <line>3</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

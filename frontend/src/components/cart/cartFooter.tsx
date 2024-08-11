@@ -6,7 +6,8 @@ import { useLocation } from "react-router-dom";
 export const CheckoutFooter = ({
   cart,
   handleCheckout,
-  address
+  address,
+  isLoading
 }: CheckoutFooterTypes) => {
   const location = useLocation()
 
@@ -27,7 +28,7 @@ export const CheckoutFooter = ({
         <div className="text-xl font-bold">
           Total Cost: $<span>{calculateTotal()}</span>
         </div>
-        <PrimaryButton onClick={handleCheckout} className={`${location.pathname === "/checkout/order/confirm" && !address && "bg-opacity-30 pointer-events-none"}`}>
+        <PrimaryButton onClick={handleCheckout} isLoading={isLoading} className={`${location.pathname === "/checkout/order/confirm" && !address && "bg-opacity-30 pointer-events-none"}`}>
           <span className="icon-[solar--bag-smile-bold-duotone] mr-1"></span>
           {location.pathname === "/checkout/order/confirm" ? "CONTINUE" : "CHECKOUT"}
         </PrimaryButton>

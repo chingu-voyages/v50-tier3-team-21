@@ -55,6 +55,8 @@ export const CartPage = () => {
     try {
       const response = await httpClient.post("/order/create-order", order);
       const orderId: number = response.data.orderId;
+      // clear localStorage now that order in database
+      localStorage.removeItem("shoppingCart");
       navigate(`/checkout/order/payment/${orderId}`)
     } catch (error) {
       console.log(error);

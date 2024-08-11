@@ -11,6 +11,8 @@ export interface OrderInfo {
     price?: number;
     tip: number;
     orderId: number;
+    canceled: boolean;
+    finalized: boolean
 }
 
 export interface PaymentContextType {
@@ -39,6 +41,8 @@ export const PaymentProvider = ({ children, orderId }: PaymentProviderProps) => 
         price: undefined,
         tip: 0,
         orderId: orderId,
+        canceled: false,
+        finalized: false
     });
 
     const { data: accountData, isLoading: isFetchingAccount } = useGetAccount();
@@ -46,7 +50,7 @@ export const PaymentProvider = ({ children, orderId }: PaymentProviderProps) => 
 
     useEffect(() => {
         if (accountData?.data) {
-            setAccount(accountData.data as Account);
+            setAccount(accountData.data.data);
         }
     }, [accountData]);
 
@@ -59,6 +63,8 @@ export const PaymentProvider = ({ children, orderId }: PaymentProviderProps) => 
                 price: calculateTotalPrice(order),
                 tip: order.tip ?? 0,
                 orderId: order.id,
+                finalized: order.finalized,
+                canceled: order.cancelled
             });
         }
     }, [orderData]);

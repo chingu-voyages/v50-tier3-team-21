@@ -3,7 +3,7 @@ import { useAuth } from "../../hooks/auth.hook.ts";
 import { Link, useNavigate } from "react-router-dom";
 import { httpClient } from "../../lib/http-client.ts";
 import { UserType, ProfileResponse } from "../profile/types/profile-types.ts";
-import { MenuItemType, OrderType } from "../restaurant/types/restaurant-types.ts";
+import {  OrderType } from "../restaurant/types/restaurant-types.ts";
 
 export interface HeaderNavProps {
     isLoggedIn?: boolean;

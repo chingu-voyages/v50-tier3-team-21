@@ -13,6 +13,7 @@ export const TopupModal = ({
 }: TopupModalPropsTypes) => {
   const [topupAmount, setTopupAmount] = useState<string>("");
   const [newTotal, setNewTotal] = useState<string>("0");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const location = useLocation();
 
@@ -37,6 +38,7 @@ export const TopupModal = ({
     }
     // send API request to add amount (will also send origin/return path ie /profile or /cart)
     try {
+      setIsLoading(true);
       const response = await httpClient.post(`/wallets/requestAccountTopup`, {
         amount: +topupAmount,
         successUrl: location.pathname,
@@ -45,6 +47,7 @@ export const TopupModal = ({
       const {url} = response.data
       // redirect user to response URL to complete payment on stripe website
       window.location.href = url;
+      setIsLoading(false)
     } catch (error) {
       console.log(error);
       setError((error as Error).message);
@@ -88,7 +91,7 @@ export const TopupModal = ({
               </div>
             </div>
             <div className="self-end mb-5">
-              <PrimaryButton className="px-10" onClick={handleTopup}>
+              <PrimaryButton className="px-10" isLoading={isLoading} onClick={handleTopup}>
                 TOP UP
               </PrimaryButton>
             </div>

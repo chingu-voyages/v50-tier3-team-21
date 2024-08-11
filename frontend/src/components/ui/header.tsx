@@ -1,6 +1,10 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useAuth } from "../../hooks/auth.hook.ts";
 import { Link, useNavigate } from "react-router-dom";
+import { httpClient } from "../../lib/http-client.ts";
+import { UserType, ProfileResponse } from "../profile/types/profile-types.ts";
+import { MenuItemType, OrderType } from "../restaurant/types/restaurant-types.ts";
+
 export interface HeaderNavProps {
     isLoggedIn?: boolean;
     onLogout?: boolean;
@@ -8,15 +12,36 @@ export interface HeaderNavProps {
 }
 export default function HeaderNav() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const { isAuthenticated, data, logout } = useAuth();
+    const { isAuthenticated, logout } = useAuth();
+    const [user, setUser] = useState<UserType>();
+    const [cartCount, setCartCount] = useState<number>(0)
   
     const navigate = useNavigate();
     const mobileLinks = [
         { name: 'Home', href: '/', icon: 'icon-[lets-icons--home-duotone]' },
-        { name: 'Recent Orders', href: '/orders', icon: 'icon-[solar--history-line-duotone]' },
-        { name: 'Location', href: '#', icon: 'icon-[solar--map-point-wave-bold-duotone]' },
         { name: 'Profile', href: '/profile', icon: 'icon-[ph--user-duotone]' },
+        { name: 'Wallet', href: '/profile?success', icon: 'icon-[solar--wallet-money-bold-duotone]' },
+        { name: 'Cart', href: '/checkout/order/confirm', icon: 'icon-[solar--cart-large-4-bold-duotone]' },
+        { name: 'Recent Orders (Soon!) ', href: '#', icon: 'icon-[solar--history-line-duotone]' },
     ]
+
+    useEffect(() => {
+        async function getUser() {
+            const response = await httpClient.get<ProfileResponse>("/profile");
+            const { data } = response.data;
+            setUser(data);
+        }
+        getUser();
+    }, []);
+
+    useEffect(() => {
+        const cart = localStorage.getItem("shoppingCart");
+        if(cart) {
+            const formattedCart = JSON.parse(cart);
+            const total = formattedCart.reduce((sum: number, item: OrderType) => sum = sum + (item.quantity ?? 0), 0);
+            setCartCount(total);
+        }
+    }, [localStorage.getItem("shoppingCart")])
 
     return (
         <header className="bg-white fixed w-full z-50">
@@ -52,7 +77,7 @@ export default function HeaderNav() {
                     }
                 </div>
                 <div className="hidden md:flex flex-1 justify-end">
-                    <div className="text-lg text-dark/60">{isAuthenticated ? 'Order & Log Out' : 'Sign In & Order'}</div>
+                    {/* <div className="text-lg text-dark/60">{isAuthenticated ? 'Order & Log Out' : 'Sign In & Order'}</div> */}
                 </div>
                 {isAuthenticated ? (
                     <>
@@ -62,8 +87,8 @@ export default function HeaderNav() {
                             className="hidden md:inline-flex items-center justify-center  p-2.5 text-dark"
                         >
                             <span className="sr-only">My Profile</span>
-                            <span className="icon-[ph--user-duotone] h-8 w-8" style={{ color: "#49CC76" }}></span>
-                            <span>{isAuthenticated ? data && data?.firstName : ''}</span>
+                            <span className="icon-[ph--user-duotone] h-8 w-8 mr-3" style={{ color: "#49CC76" }}></span>
+                            <span>{isAuthenticated ? user && user?.firstName : ''}</span>
                         </button>
                         <button
                             type="button"
@@ -75,12 +100,13 @@ export default function HeaderNav() {
                         </button>
                         <button
                             type="button"
+                            onClick={() => navigate("/checkout/order/confirm")}
                             className="relative rounded-full bg-primary  inline-flex items-center justify-center  p-2.5 text-white "
                         >
                             <span className="sr-only">Go to Cart</span>
                             <span className="icon-[solar--bag-smile-bold-duotone] h-[30px] w-[30px] md:h-6 md:w-6" style={{ color: "white" }}></span>
                             <span className="sr-only">Notifications</span>
-                            <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-dark  rounded-full -top-2 -end-2">0</div>
+                            <div className="absolute inline-flex items-center justify-center w-6 h-6 text-xs font-bold text-white bg-dark  rounded-full -top-2 -end-2">{cartCount}</div>
                         </button>
 
                     </>
@@ -98,19 +124,19 @@ export default function HeaderNav() {
                         <ul className="font-medium flex flex-col gap-y-5 p-6  text-dark/60 pt-24">
                             {mobileLinks.map((item) => (
                                 <li key={item.name}
-                                    className="flex items-center gap-2">
-                                    <span className={` h-6 w-6  ${item.icon}`} style={{ color: "#291E43" }}></span>
+                                    className="flex items-center gap-2 hover:scale-105 transition cursor-pointer group">
+                                    <span className={` h-6 w-6  ${item.icon} group-hover:bg-primary`} style={{ color: "#291E43" }}></span>
                                     <span className="sr-only">{item.name}</span>
-                                    <a href="#" className="block py-2 px-3 text-sm whitespace-nowrap">{item.name}</a>
+                                    <a href={item.href} className="block py-2 px-3 text-sm whitespace-nowrap">{item.name}</a>
                                 </li>
                             ))}
                             {
                                 isAuthenticated ? (
                                     <li
-                                        className="flex items-center gap-2">
-                                        <span className=" h-6 w-6 icon-[solar--logout-3-line-duotone]" style={{ color: "#291E43" }}></span>
+                                        className="flex items-center gap-2 hover:scale-105 transition cursor-pointer group">
+                                        <span className=" h-6 w-6 icon-[solar--logout-3-line-duotone] group-hover:bg-secondary" style={{ color: "#291E43" }}></span>
                                         <span className="sr-only">Logout</span>
-                                        <a onClick={() => logout()} className="block py-2 px-3 text-sm whitespace-nowrap">Logout</a>
+                                        <a onClick={() => logout()} className="block py-2 px-3 text-sm whitespace-nowra">Logout</a>
                                     </li>
                                 ) : (
                                     <li

@@ -3,7 +3,7 @@ import { httpClient } from "../lib/http-client";
 import { useNavigate, useParams } from "react-router-dom";
 import { FoodCard, RestaurantHeader, CategoryFilter, Orders, CheckoutFooter} from "../components/restaurant/";
 import { MenuItemType, MenuItemResponse, OrderType } from "../components/restaurant/types/restaurant-types";
-const BASE_URL = import.meta.env.VITE_LOCAL_API_BASE_URL;
+import { notify, ToastMessages } from "../components/ui/toast";
 
 // types
 type CategoryListType = {
@@ -26,7 +26,7 @@ export const RestaurantPage = () => {
   useEffect(() => {
     async function getMenu() {
       try {
-        const url = `${BASE_URL}/foodItems/items?restaurantId=${restaurantId}`;
+        const url = `/foodItems/items?restaurantId=${restaurantId}`;
         const response = await httpClient.get<MenuItemResponse>(url);
         const { data } = response.data;
         setRestaurantData(data);
@@ -86,8 +86,8 @@ export const RestaurantPage = () => {
     setCart(storedCart);
     setStorage(storedCart);
 
-    // alert that item was added successful
-    alert(`${item.name} added to cart successfully`);
+    // toast alert that item was added successful
+    notify({ message: `${item.name} has been added to cart successfully` }, "success");
   };
 
     // on clicking checkout, all items are saved to local Storage and user is sent to the shopping cart page
@@ -98,6 +98,7 @@ export const RestaurantPage = () => {
 
   return (
     <>
+    <ToastMessages />
       {restaurantData.length ? (
         <div className="spacing-x  m-auto">
           <RestaurantHeader restaurantData={restaurantData} />

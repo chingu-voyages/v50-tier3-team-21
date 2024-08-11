@@ -50,7 +50,8 @@ export const PaymentProvider = ({ children, orderId }: PaymentProviderProps) => 
 
     useEffect(() => {
         if (accountData?.data) {
-            setAccount(accountData.data.data);
+            const account = accountData.data as Account
+            setAccount(account);
         }
     }, [accountData]);
 

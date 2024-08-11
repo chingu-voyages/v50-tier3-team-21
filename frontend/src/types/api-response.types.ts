@@ -4,7 +4,7 @@ interface ApiResponse {
     message: string,
 }
 
-interface ResponseWithData<T> extends ApiResponse{
+export interface ResponseWithData<T> extends ApiResponse{
     data: T
 }
 
@@ -12,6 +12,7 @@ interface ResponseWithData<T> extends ApiResponse{
 export interface IResponseWithData<T> {
     data: ResponseWithData<T>
 }
+
 export interface IResponse {
     data: {
         data: ApiResponse

@@ -5,7 +5,7 @@ export const InsufficientMessage = () => {
     const {account, total} = usePaymentContext();
     const isBalanceSufficient = useMemo(() => {
         if(total && account) {
-            return account.balance > total
+            return (account.balance) / 100 > total
         }
         return  true
     }, [total, account])

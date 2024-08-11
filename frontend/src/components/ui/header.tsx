@@ -38,7 +38,7 @@ export default function HeaderNav() {
         const cart = localStorage.getItem("shoppingCart");
         if(cart) {
             const formattedCart = JSON.parse(cart);
-            const total = formattedCart.reduce((sum: number, item: OrderType) => sum = sum + (item.quantity ?? 0), 0);
+            const total = formattedCart.reduce((sum: number, item: OrderType) => sum + (item.quantity ?? 0), 0);
             setCartCount(total);
         }
     }, [localStorage.getItem("shoppingCart")])

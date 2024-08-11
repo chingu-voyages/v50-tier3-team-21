@@ -72,7 +72,7 @@ export const CartPage = () => {
     <>
       {cart ? (
         <div>
-          <h1 className="p-3 font-bold md:text-xl">
+          <h1 className="p-5 font-bold md:text-xl">
             Please Confirm your Order Summary
           </h1>
           <Orders cart={cart} setCart={setCart} />

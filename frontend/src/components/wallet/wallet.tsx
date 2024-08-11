@@ -41,7 +41,7 @@ export const Wallet = () => {
   }, [searchParams]);
   // format blanace from cents to dollar/cents with necessary 0s
   const formatBalance = (balanceCents: number) => {
-    return (balanceCents / 100).toFixed(2);
+    return (balanceCents / 100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
   // initiate modal to topof wallet

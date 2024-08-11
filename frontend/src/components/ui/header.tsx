@@ -20,7 +20,7 @@ export default function HeaderNav() {
 
     return (
         <header className="bg-white fixed w-full z-50">
-            <nav aria-label="Global" className="relative mx-auto flex md:gap-3 w-full md:px-24 items-center justify-between  p-8">
+            <nav aria-label="Global" className="relative mx-auto flex md:gap-3 w-full spacing-x items-center justify-between  py-8">
                 <div className="hidden md:flex">
                     <a href="/" className="-m-1.5 p-1.5 flex items-end gap-2">
                         <span className="sr-only">Hungry Hippo</span>

@@ -8,7 +8,6 @@ class AccountDebitor{
   perform = async () => {
     const currentBalance = Number(this.account.balance);
     const debitAmount = (Number(this.amount)*100);
-     
      if (currentBalance < debitAmount) {
       throw new Error("Account balance is less that requested amount");
      }
@@ -17,7 +16,6 @@ class AccountDebitor{
    
      await this.account.save();
 
-     return true;
   }
 }
 

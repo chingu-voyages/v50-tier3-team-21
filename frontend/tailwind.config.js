@@ -9,6 +9,8 @@ module.exports = {
         logo: "url('./assets/logo.svg')",
         notFoundPage: "url('./assets/404.png')",
         menuExpand: "url('./assets/menu-expand.png')",
+        hippoHero: "url('./assets/hippo-image-hero.png')",
+
       },
       colors: {
         primary: "#49CC76",

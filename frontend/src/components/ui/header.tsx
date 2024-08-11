@@ -3,6 +3,7 @@ import { useAuth } from "../../hooks/auth.hook.ts";
 import { Link, useNavigate } from "react-router-dom";
 import { httpClient } from "../../lib/http-client.ts";
 import { UserType, ProfileResponse } from "../profile/types/profile-types.ts";
+import { MenuItemType, OrderType } from "../restaurant/types/restaurant-types.ts";
 
 export interface HeaderNavProps {
     isLoggedIn?: boolean;
@@ -37,7 +38,7 @@ export default function HeaderNav() {
         const cart = localStorage.getItem("shoppingCart");
         if(cart) {
             const formattedCart = JSON.parse(cart);
-            const total = formattedCart.reduce((sum, item) => sum = sum + item.quantity, 0);
+            const total = formattedCart.reduce((sum: number, item: OrderType) => sum = sum + (item.quantity ?? 0), 0);
             setCartCount(total);
         }
     }, [localStorage.getItem("shoppingCart")])

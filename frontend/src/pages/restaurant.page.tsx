@@ -142,7 +142,7 @@ export const RestaurantPage = () => {
         <h2 className="p-5">Your Orders</h2>
         <hr />
         <Orders cart={cart} setCart={setCart} setStorage={setStorage}/>
-        <CheckoutFooter cart={cart} handleCheckout={handleCheckout}/>
+        <CheckoutFooter cart={cart} handleCheckout={handleCheckout} />
       </div>
 
     </>

@@ -41,7 +41,7 @@ export const Wallet = () => {
   }, [searchParams]);
   // format blanace from cents to dollar/cents with necessary 0s
   const formatBalance = (balanceCents: number) => {
-    return (balanceCents / 100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return (balanceCents / 100).toFixed(2);
   };
 
   // initiate modal to topof wallet
@@ -56,7 +56,7 @@ export const Wallet = () => {
           Balance from your wallet{" "}
           <span className="text-primary">(Top up wallet balance)</span>
         </div>
-        <div className="font-bold text-2xl font tracking-wider">${balance}</div>
+        <div className="font-bold text-2xl font tracking-wider">${balance.replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
         <PrimaryButton className="px-20" onClick={handleTopup}>
           <span className="icon-[solar--wallet-money-bold-duotone] mr-2"></span>
           TOP UP

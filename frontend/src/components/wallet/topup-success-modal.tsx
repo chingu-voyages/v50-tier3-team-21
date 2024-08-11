@@ -19,7 +19,7 @@ export const TopupSuccessModal = ({setShowSuccess}: TopupSuccessPropsTypes) => {
     navigate(newUrl, { replace: true });
   };
   return (
-    <div className="absolute inset-0 bg-[#291E43]/10 flex items-center justify-center">
+    <div className="absolute inset-0 bg-[#291E43]/10 flex items-center justify-center z-50">
       <div className="bg-white p-5 rounded-2xl min-w-[350px]">
         <div
           id="container"

@@ -38,20 +38,20 @@ const handleStripeTopup = async (req, res) => {
   }
 };
 
-const handleStripeWebhook = async (request, response) => {
+const handleStripeWebhook = async (req, res) => {
   const endpointSecret = process.env.STRIPE_ENDPOINT_SECRET;
-  let event = request.body;
+  let event = req.body;
   if (endpointSecret) {
-    const signature = request.headers['stripe-signature'];
+    const signature = req.headers['stripe-signature'];
     try {
       event = stripe.webhooks.constructEvent(
-        request.body,
+        req.body,
         signature,
         endpointSecret
       );
     } catch (err) {
       console.log(`⚠️  Webhook signature verification failed.`, err.message);
-      return response.sendStatus(400);
+      return res.sendStatus(400);
     }
   }
 
@@ -68,7 +68,7 @@ const handleStripeWebhook = async (request, response) => {
     const account = await db.Account.findOne({ where: { userId } });
     await new AccountCreditor(amount, account).perform();
   } 
-  response.send();
+  res.send();
  } catch (error) {
   return res.status(400).json({
     status: "fail",

@@ -25,7 +25,6 @@ export const HomePage = () => {
                               </div>
                           </AppMapProvider>
                   </AddressSearchProvider>
-
               </MapProvider>
           </section>
       </div>

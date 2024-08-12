@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 const db = require("../models");
 const { AccountCreditor } = require("../services/accounts/AccountCreditor");
 const { AccountDebitor } = require("../services/accounts/AccountDebitor");
-const { TransactionCreator } = require("../services/transactions/TransactionCreator");
+
 
 const handleStripeTopup = async (req, res) => {
   const { amount, successUrl, cancelUrl } = req.body;
@@ -67,11 +67,9 @@ const handleStripeWebhook = async (request, response) => {
     const customerId = data.customer;
     const paymentIntentId = data.payment_intent;
     const amount = data.amount_total;
-    const status = data.payment_status; 
-    
+    const status = data.payment_status;
     const customer = await stripe.customers.retrieve(data.customer);
     const userId = customer.metadata.userId;
-    console.log(paymentIntentId, account.id, amount, status, "status") 
     const account = await db.Account.findOne({ where: { userId } });
     await new AccountCreditor(amount, account).perform();
     await new TransactionCreator({
@@ -100,16 +98,19 @@ const makePayment = async(req, res) => {
   const { amount, orderId } = req.body;
   try {
     const userId = req.user.id;
+    console.log("userid", userId);
     const account = await db.Account.findOne({ where: { userId } });
+    console.log("account", account);
     await new AccountDebitor(amount, account, db).perform();
-    await new TransactionCreator({
+
+    /*await new TransactionCreator({
       db,
       paymentIntentId: orderId, 
-      type: 'credit', 
+      type: 'debit',
       accountId: account.id, 
       amount, 
       status: 'completed'
-    }).perform();
+    }).perform();*/
 
    return res.status(200).json({
     "status": "success",

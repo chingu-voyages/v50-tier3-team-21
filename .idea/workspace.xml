@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="refactor: refactor api response type and remove unused variable">
+    <list default="true" id="40c482bd-ec28-48dc-8f63-37a17d928e1b" name="Changes" comment="fix: fix account didn't set up correctly">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/payment/inssuficient-message.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/payment/inssuficient-message.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/provider/payment.provider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/provider/payment.provider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/payment/payment.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/payment/payment.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/services/api/payment/queries.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/services/api/payment/queries.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/types/api-response.types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/types/api-response.types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/walletController.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/walletController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/services/accounts/AccountDebitor.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/accounts/AccountDebitor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/services/transactions/TransactionCreator.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/transactions/TransactionCreator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/interactive-map/address-search.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/interactive-map/address-search.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/home/home.page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/home/home.page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,7 +20,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="development" />
+        <entry key="$PROJECT_DIR$" value="fix/layout-issue" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -50,7 +50,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;fix/layout-issue&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;development&quot;,
     &quot;last_opened_file_path&quot;: &quot;/mnt/mydata/Archive/WebstormProjects/voyage&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -114,6 +114,7 @@
       <workItem from="1723137035405" duration="2358000" />
       <workItem from="1723282751874" duration="12013000" />
       <workItem from="1723362338787" duration="7994000" />
+      <workItem from="1723398637475" duration="3486000" />
     </task>
     <task id="LOCAL-00001" summary="chore: add axios">
       <option name="closed" value="true" />
@@ -481,12 +482,6 @@
           <url>file://$PROJECT_DIR$/frontend/src/components/authentication/reset-password-form.tsx</url>
           <line>25</line>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/frontend/src/services/api/payment/queries.ts</url>
-          <line>3</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

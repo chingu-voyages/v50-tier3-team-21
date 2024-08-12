@@ -16,7 +16,6 @@ class TransactionCreator{
     let transaction = await this.transactionExist();
     if (transaction) {
       transaction.status = this.data.status;
-
       await transaction.save();
     } else {
       transaction = await this.data.db.Transaction.create({
@@ -25,12 +24,12 @@ class TransactionCreator{
           accountId: this.data.accountId, 
           status: transactionStatus,
           paymentIntentId: this.data.paymentIntentId,
-        }); 
+        });
     }
    
     return transaction;
   }
-};
+}
 
   module.exports = {
     TransactionCreator,

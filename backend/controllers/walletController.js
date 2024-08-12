@@ -43,10 +43,7 @@ const handleStripeTopup = async (req, res) => {
 const handleStripeWebhook = async (request, response) => {
   const endpointSecret = process.env.STRIPE_ENDPOINT_SECRET;
   let event = request.body;
-  // Only verify the event if you have an endpoint secret defined.
-  // Otherwise use the basic event deserialized with JSON.parse
   if (endpointSecret) {
-    // Get the signature sent by Stripe
     const signature = request.headers['stripe-signature'];
     try {
       event = stripe.webhooks.constructEvent(
@@ -62,7 +59,6 @@ const handleStripeWebhook = async (request, response) => {
 
   const data = event.data.object;
   const eventType = event.type;
-  // Handle the event
   if (eventType === 'checkout.session.completed') {
     const customerId = data.customer;
     const paymentIntentId = data.payment_intent;
@@ -72,25 +68,7 @@ const handleStripeWebhook = async (request, response) => {
     const userId = customer.metadata.userId;
     const account = await db.Account.findOne({ where: { userId } });
     await new AccountCreditor(amount, account).perform();
-    await new TransactionCreator({
-      db,
-      paymentIntentId, 
-      type: 'credit', 
-      accountId: account.id, 
-      amount, 
-      status
-    }).perform();
   } 
-  // else {
-  //   await new TransactionCreator({
-  //     db,
-  //     paymentIntentId: data.paymentIntent, 
-  //     type: 'credit', 
-  //     accountId: account.id, 
-  //     amount: data.amount_total, 
-  //     status: data.payment_status
-  //   }).perform();
-  // }
   response.send();
 }
 
@@ -98,19 +76,8 @@ const makePayment = async(req, res) => {
   const { amount, orderId } = req.body;
   try {
     const userId = req.user.id;
-    console.log("userid", userId);
     const account = await db.Account.findOne({ where: { userId } });
-    console.log("account", account);
     await new AccountDebitor(amount, account, db).perform();
-
-    /*await new TransactionCreator({
-      db,
-      paymentIntentId: orderId, 
-      type: 'debit',
-      accountId: account.id, 
-      amount, 
-      status: 'completed'
-    }).perform();*/
 
    return res.status(200).json({
     "status": "success",

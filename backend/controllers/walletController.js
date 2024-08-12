@@ -4,15 +4,13 @@ const db = require("../models");
 const { AccountCreditor } = require("../services/accounts/AccountCreditor");
 const { AccountDebitor } = require("../services/accounts/AccountDebitor");
 
-
 const handleStripeTopup = async (req, res) => {
-  const { amount, successUrl, cancelUrl } = req.body;
-  const userId = req.user.id;
-  const customer = await stripe.customers.create({
-    metadata: { userId: `${userId}` }
-   });
-  
   try {
+    const { amount, successUrl, cancelUrl } = req.body;
+    const userId = req.user.id;
+    const customer = await stripe.customers.create({
+      metadata: { userId: `${userId}` }
+    });
     const sessionId = uuidv4();
 
     const session = await stripe.checkout.sessions.create({
@@ -57,6 +55,7 @@ const handleStripeWebhook = async (request, response) => {
     }
   }
 
+ try {
   const data = event.data.object;
   const eventType = event.type;
   if (eventType === 'checkout.session.completed') {
@@ -70,6 +69,12 @@ const handleStripeWebhook = async (request, response) => {
     await new AccountCreditor(amount, account).perform();
   } 
   response.send();
+ } catch (error) {
+  return res.status(400).json({
+    status: "fail",
+    message: error.message,
+  });
+ }
 }
 
 const makePayment = async(req, res) => {

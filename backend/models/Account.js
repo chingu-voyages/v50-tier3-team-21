@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
                 msg: 'Balance must be a non-negative number.'
             },
             max: {
-                args: [999999],
+                args: [99999999],
                 msg: 'Balance cannot exceed 999,999.99'
             }
         }

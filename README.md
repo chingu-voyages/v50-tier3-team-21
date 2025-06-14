@@ -367,7 +367,7 @@ Having all that in mind, the team has decided to implement more tests in the fut
 
 6. Albert Ngodi - [GitHub](https://github.com/ngodi) / [LinkedIn](https://linkedin.com/in/albertngodi)
 ![avatar](https://images.weserv.nl/?url=avatars.githubusercontent.com/ngodi?v=4&h=200&w=200&fit=cover&mask=circle&maxage=7d)
-  - Backend Developer
+  - Fullstack Developer
 
 ---
 &copy; 2024 T-grams - The Hungry Hippo Team. _MIT License_. All rights reserved
